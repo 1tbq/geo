@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Function Quest — Sustainability &amp; Environmental Functions | Year 10 Geography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#1F3A2E; --forest-deep:#142A21; --teal:#3E6C64; --gold:#C9A227; --gold-soft:#E4C766;
+    --sage:#8CA37D; --purple:#8E6E93; --ink:#202821; --paper:#FCFAF4; --line:#DAD3BE;
+    --good:#3E8E5A; --bad:#B5453C;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  body{
+    margin:0; background: var(--paper); color: var(--ink);
+    font-family:'Source Sans 3', sans-serif; line-height:1.5; min-height:100vh;
+  }
+  .topbar{
+    position:sticky; top:0; z-index:30; background: var(--forest); color:#fff;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 0.7rem 1.4rem;
+  }
+  .topbar .back{ color:#D7D9CC; text-decoration:none; font-size:0.85rem; font-weight:600; }
+  .topbar .back:hover{ color:#fff; }
+  .score-badge{
+    background: var(--gold); color: var(--forest-deep); font-weight:700; font-size:0.95rem;
+    padding:0.4rem 0.9rem; border-radius:999px; display:flex; align-items:center; gap:0.4rem;
+  }
+  .progress-dots{ display:flex; gap:0.5rem; }
+  .progress-dots span{
+    width:9px; height:9px; border-radius:50%; background: rgba(255,255,255,0.25); display:inline-block;
+  }
+  .progress-dots span.done{ background: var(--gold); }
+  .progress-dots span.current{ background:#fff; }
+
+  .stage{ max-width: 880px; margin: 0 auto; padding: 2rem 1.4rem 4rem; }
+  .screen{ display:none; animation: fadeIn .3s ease; }
+  .screen.active{ display:block; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .eyebrow{ font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; color: var(--teal); font-weight:700; margin-bottom:0.4rem; }
+  h1{ font-family:'Fraunces', serif; font-weight:700; font-size: clamp(1.6rem,4vw,2.3rem); margin:0 0 0.6rem 0; color: var(--forest); }
+  h2{ font-family:'Fraunces', serif; font-weight:600; font-size: clamp(1.3rem,3vw,1.7rem); margin:0 0 0.7rem 0; color: var(--forest); }
+  p.lead{ font-size:1.02rem; color:#3d4a41; max-width:620px; }
+
+  .name-row{ margin: 1.4rem 0; }
+  .name-row label{ font-weight:600; display:block; margin-bottom:0.4rem; }
+  .name-row input{
+    font-family:'Source Sans 3', sans-serif; font-size:1rem; padding:0.6rem 0.8rem;
+    border:1px solid var(--line); border-radius:6px; width:100%; max-width:320px;
+  }
+  .btn{
+    font-family:'Source Sans 3', sans-serif; font-size:0.95rem; font-weight:700;
+    border-radius:8px; padding:0.7rem 1.5rem; cursor:pointer; border:none;
+    background: var(--forest); color:#fff; transition: transform .1s ease, background .15s ease;
+  }
+  .btn:hover{ background:#16291F; }
+  .btn:active{ transform: scale(0.97); }
+  .btn:disabled{ background:#c9c4b3; cursor:not-allowed; }
+  .btn.secondary{ background:#fff; color: var(--teal); border:1px solid var(--teal); }
+  .btn.secondary:hover{ background:#EFEADA; }
+  .btn-row{ margin-top:1.6rem; display:flex; gap:0.8rem; }
+
+  /* Level 1 & 3 — match / sort game */
+  .pool{ display:flex; flex-wrap:wrap; gap:0.7rem; margin: 1.2rem 0 1.8rem 0; min-height: 3.2rem; }
+  .card{
+    background:#fff; border:2px solid var(--line); border-radius:10px; padding:0.7rem 1rem;
+    cursor:pointer; font-size:0.92rem; max-width: 260px; transition: all .15s ease;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.04);
+  }
+  .card:hover{ border-color: var(--teal); transform: translateY(-2px); }
+  .card.selected{ border-color: var(--gold); background:#FBF4DE; box-shadow: 0 0 0 3px rgba(201,162,39,0.25); }
+  .card.placed{ display:none; }
+  .card.shake{ animation: shake .35s ease; }
+  @keyframes shake{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-6px);} 75%{transform:translateX(6px);} }
+
+  .targets{ display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:1rem; }
+  .target{
+    border:2px dashed var(--line); border-radius:12px; padding:1rem; min-height:110px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+    cursor:pointer; transition: all .15s ease; background:#fff;
+  }
+  .target:hover{ border-color: var(--teal); }
+  .target .icon{ font-size:1.8rem; margin-bottom:0.3rem; }
+  .target .label{ font-family:'Fraunces', serif; font-weight:700; color: var(--forest); font-size:1.05rem; }
+  .target .filled-content{ font-size:0.82rem; color:#3d4a41; margin-top:0.4rem; display:none; }
+  .target.correct{ border-style:solid; border-color: var(--good); background:#EAF5EC; }
+  .target.correct .filled-content{ display:block; }
+  .target.wrong-flash{ animation: flashRed .4s ease; }
+  @keyframes flashRed{ 0%,100%{ border-color: var(--line);} 50%{ border-color: var(--bad); background:#FBEBEA; } }
+
+  .hint{ font-size:0.85rem; color:#5b5b52; font-style:italic; margin-bottom:0.6rem; }
+
+  /* Level 2 & 4 — MCQ */
+  .scenario{
+    background:#F2F0E6; border-left:4px solid var(--gold); border-radius:6px;
+    padding:1rem 1.2rem; margin-bottom:1.4rem; font-size:0.98rem;
+  }
+  .question{ font-family:'Fraunces', serif; font-weight:600; font-size:1.2rem; color: var(--forest); margin-bottom:1rem; }
+  .options{ display:flex; flex-direction:column; gap:0.7rem; }
+  .option{
+    background:#fff; border:2px solid var(--line); border-radius:10px; padding:0.8rem 1.1rem;
+    cursor:pointer; font-size:0.98rem; text-align:left; transition: all .15s ease;
+  }
+  .option:hover:not(.locked){ border-color: var(--teal); }
+  .option.correct{ border-color: var(--good); background:#EAF5EC; font-weight:700; }
+  .option.incorrect{ border-color: var(--bad); background:#FBEBEA; }
+  .option.locked{ cursor:default; }
+
+  .feedback{ margin-top:1rem; font-weight:700; min-height:1.4rem; }
+  .feedback.good{ color: var(--good); }
+  .feedback.bad{ color: var(--bad); }
+
+  /* Results screen */
+  .result-hero{ text-align:center; padding: 1.5rem 0; }
+  .result-score{ font-family:'Fraunces', serif; font-weight:700; font-size: clamp(3rem,10vw,5rem); color: var(--forest); }
+  .result-pct{ font-size:1.3rem; color: var(--teal); font-weight:700; margin-bottom:0.6rem; }
+  .result-tier{ font-size:1.15rem; margin-bottom:1.6rem; }
+  .stars{ font-size:2rem; margin-bottom:1rem; }
+  .show-teacher{
+    background: var(--forest); color:#fff; border-radius:14px; padding:2rem; text-align:center; margin-top:1.5rem;
+  }
+  .show-teacher .big{ font-family:'Fraunces', serif; font-size:3.2rem; font-weight:700; color: var(--gold-soft); }
+
+  @media (max-width:600px){
+    .stage{ padding:1.4rem 1rem 3rem; }
+    .btn-row{ flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="back" href="index.html">← Back to slides</a>
+  <div class="progress-dots" id="progressDots"></div>
+  <div class="score-badge">⭐ <span id="liveScore">0</span> pts</div>
+</div>
+
+<div class="stage">
+
+  <!-- Screen 0: Welcome -->
+  <section class="screen active" data-screen="0">
+    <div class="eyebrow">Year 10 Geography · Lesson 7 · VCGGK145</div>
+    <h1>Function Quest</h1>
+    <p class="lead">Four rounds. Match, sort and answer your way through sustainability and environmental functions. Rack up points as you go — your final score is one you can show your teacher at the end.</p>
+    <div class="name-row">
+      <label for="playerName">What's your name?</label>
+      <input type="text" id="playerName" placeholder="Type your name">
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="startGame()">Start Quest →</button>
+    </div>
+  </section>
+
+  <!-- Screen 1: Level 1 - Function Match -->
+  <section class="screen" data-screen="1">
+    <div class="eyebrow">Round 1 of 4</div>
+    <h2>Match the function to its role</h2>
+    <p class="hint">Tap a definition card, then tap the function it belongs to.</p>
+    <div class="pool" id="l1-pool"></div>
+    <div class="targets" id="l1-targets"></div>
+    <div class="btn-row">
+      <button class="btn" id="l1-next" disabled onclick="goToScreen(2)">Next round →</button>
+    </div>
+  </section>
+
+  <!-- Screen 2: Level 2 - Case study MCQ -->
+  <section class="screen" data-screen="2">
+    <div class="eyebrow">Round 2 of 4</div>
+    <h2>Case study: overfishing</h2>
+    <div class="scenario">A fishing fleet has been catching fish faster than the population can reproduce. Answer each question about what happens next.</div>
+    <div id="l2-question-wrap"></div>
+    <div class="feedback" id="l2-feedback"></div>
+    <div class="btn-row">
+      <button class="btn" id="l2-next" disabled onclick="nextL2Question()">Next question →</button>
+    </div>
+  </section>
+
+  <!-- Screen 3: Level 3 - Sort the impact -->
+  <section class="screen" data-screen="3">
+    <div class="eyebrow">Round 3 of 4</div>
+    <h2>Sort the impact</h2>
+    <p class="hint">Tap an issue card, then tap the function it affects first.</p>
+    <div class="pool" id="l3-pool"></div>
+    <div class="targets" id="l3-targets"></div>
+    <div class="btn-row">
+      <button class="btn" id="l3-next" disabled onclick="goToScreen(4)">Next round →</button>
+    </div>
+  </section>
+
+  <!-- Screen 4: Level 4 - final MCQ -->
+  <section class="screen" data-screen="4">
+    <div class="eyebrow">Round 4 of 4 · Exit challenge</div>
+    <h2>Final question</h2>
+    <div class="question">If a Source function (like a fish stock) is overused, what usually happens to the ecosystem's other functions?</div>
+    <div class="options" id="l4-options"></div>
+    <div class="feedback" id="l4-feedback"></div>
+    <div class="btn-row">
+      <button class="btn" id="l4-next" disabled onclick="goToScreen(5)">See my results →</button>
+    </div>
+  </section>
+
+  <!-- Screen 5: Results -->
+  <section class="screen" data-screen="5">
+    <div class="eyebrow">Quest complete</div>
+    <h2 id="resultsName">Nice work!</h2>
+    <div class="result-hero">
+      <div class="stars" id="resultStars"></div>
+      <div class="result-score"><span id="finalScore">0</span> / <span id="maxScoreLabel">150</span></div>
+      <div class="result-pct" id="finalPct"></div>
+      <div class="result-tier" id="resultTier"></div>
+    </div>
+    <div class="show-teacher">
+      <div>Show this screen to your teacher</div>
+      <div class="big"><span id="teacherScore">0</span> pts</div>
+    </div>
+    <div class="btn-row">
+      <button class="btn secondary" onclick="resetGame()">Play again</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const FUNCTIONS = [
+    { id: 'source', label: 'Source', icon: '🌲', color: '#C9A227',
+      def: 'Provides raw materials for human use — timber, fish, minerals, fresh water.' },
+    { id: 'sink', label: 'Sink', icon: '🌊', color: '#3E6C64',
+      def: 'Absorbs or breaks down waste and by-products — carbon, pollutants, run-off.' },
+    { id: 'service', label: 'Service', icon: '🛡️', color: '#8CA37D',
+      def: 'Performs a natural process we rely on — flood control, pollination, climate regulation.' },
+    { id: 'spiritual', label: 'Spiritual', icon: '⛰️', color: '#8E6E93',
+      def: 'Holds cultural or spiritual meaning — sacred sites, ancestral Country.' },
+  ];
+
+  const SORT_ITEMS = [
+    { id: 'deforestation', label: 'Deforestation', fn: 'source' },
+    { id: 'landfill', label: 'Landfill overflow', fn: 'sink' },
+    { id: 'wetland', label: 'Wetland drainage', fn: 'service' },
+    { id: 'sacred', label: 'Sacred site development', fn: 'spiritual' },
+    { id: 'groundwater', label: 'Groundwater extraction', fn: 'source' },
+  ];
+
+  const L2_QUESTIONS = [
+    {
+      q: 'Which function is affected first when a fish stock is overfished?',
+      options: ['Source', 'Sink', 'Service', 'Spiritual'],
+      correct: 'Source',
+      points: 10,
+    },
+    {
+      q: "Fewer fish disrupts the marine food web's balance, reducing the ocean's capacity to regulate itself. Which function does this describe?",
+      options: ['Source', 'Sink', 'Service', 'Spiritual'],
+      correct: 'Sink',
+      points: 10,
+    },
+    {
+      q: 'Reef and seabed ecosystems that fish help maintain (e.g. controlling algae) start to degrade. Which function is this?',
+      options: ['Source', 'Sink', 'Service', 'Spiritual'],
+      correct: 'Service',
+      points: 10,
+    },
+    {
+      q: 'Fishing communities lose a livelihood and cultural practice tied to the resource. Which function is this?',
+      options: ['Source', 'Sink', 'Service', 'Spiritual'],
+      correct: 'Spiritual',
+      points: 10,
+    },
+  ];
+
+  const L4_OPTIONS = [
+    { text: 'Nothing changes — other functions stay fine', correct: false },
+    { text: 'Other functions like Sink and Service often start to break down too', correct: true },
+    { text: 'Only the Spiritual function is ever affected', correct: false },
+    { text: 'The function fixes itself immediately', correct: false },
+  ];
+
+  const POINTS = { l1: 10, l3: 10, l4: 20 };
+  const MAX_SCORE = FUNCTIONS.length * POINTS.l1 + L2_QUESTIONS.reduce((a,q)=>a+q.points,0) + SORT_ITEMS.length * POINTS.l3 + POINTS.l4;
+
+  let score = 0;
+  let l1Selected = null;
+  let l1Remaining = FUNCTIONS.length;
+  let l3Selected = null;
+  let l3Remaining = SORT_ITEMS.length;
+  let l2Index = 0;
+  let l2Answered = false;
+  let l4Answered = false;
+
+  function shuffle(arr){
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function updateScore(delta){
+    score += delta;
+    document.getElementById('liveScore').textContent = score;
+  }
+
+  function updateProgressDots(activeIndex){
+    const dots = document.getElementById('progressDots');
+    dots.innerHTML = '';
+    for (let i = 0; i <= 5; i++){
+      const d = document.createElement('span');
+      if (i < activeIndex) d.classList.add('done');
+      if (i === activeIndex) d.classList.add('current');
+      dots.appendChild(d);
+    }
+  }
+
+  function goToScreen(n){
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelector(`.screen[data-screen="${n}"]`).classList.add('active');
+    updateProgressDots(n);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function startGame(){
+    goToScreen(1);
+    buildLevel1();
+  }
+
+  /* ---------------- Level 1: Function Match ---------------- */
+  function buildLevel1(){
+    const pool = document.getElementById('l1-pool');
+    const targets = document.getElementById('l1-targets');
+    pool.innerHTML = '';
+    targets.innerHTML = '';
+    l1Selected = null;
+    l1Remaining = FUNCTIONS.length;
+    document.getElementById('l1-next').disabled = true;
+
+    shuffle(FUNCTIONS).forEach(fn => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.textContent = fn.def;
+      card.dataset.fn = fn.id;
+      card.dataset.erred = 'false';
+      card.addEventListener('click', () => selectL1Card(card));
+      pool.appendChild(card);
+    });
+
+    FUNCTIONS.forEach(fn => {
+      const t = document.createElement('div');
+      t.className = 'target';
+      t.dataset.fn = fn.id;
+      t.innerHTML = `<div class="icon">${fn.icon}</div><div class="label">${fn.label}</div><div class="filled-content"></div>`;
+      t.addEventListener('click', () => selectL1Target(t));
+      targets.appendChild(t);
+    });
+  }
+
+  function selectL1Card(card){
+    if (card.classList.contains('placed')) return;
+    document.querySelectorAll('#l1-pool .card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    l1Selected = card;
+  }
+
+  function selectL1Target(target){
+    if (!l1Selected || target.classList.contains('correct')) return;
+    const correct = target.dataset.fn === l1Selected.dataset.fn;
+    if (correct){
+      target.classList.add('correct');
+      target.querySelector('.filled-content').textContent = l1Selected.textContent;
+      l1Selected.classList.add('placed');
+      if (l1Selected.dataset.erred === 'false') updateScore(POINTS.l1);
+      l1Selected = null;
+      l1Remaining--;
+      if (l1Remaining === 0) document.getElementById('l1-next').disabled = false;
+    } else {
+      l1Selected.dataset.erred = 'true';
+      target.classList.remove('wrong-flash');
+      void target.offsetWidth;
+      target.classList.add('wrong-flash');
+      l1Selected.classList.add('shake');
+      setTimeout(() => l1Selected && l1Selected.classList.remove('shake'), 350);
+    }
+  }
+
+  /* ---------------- Level 2: Case study MCQ ---------------- */
+  function renderL2Question(){
+    const wrap = document.getElementById('l2-question-wrap');
+    const fb = document.getElementById('l2-feedback');
+    fb.textContent = '';
+    document.getElementById('l2-next').disabled = true;
+    l2Answered = false;
+
+    if (l2Index >= L2_QUESTIONS.length){
+      goToScreen(3);
+      buildLevel3();
+      return;
+    }
+    const q = L2_QUESTIONS[l2Index];
+    wrap.innerHTML = `<div class="question">${l2Index + 1}. ${q.q}</div><div class="options" id="l2-options"></div>`;
+    const optWrap = document.getElementById('l2-options');
+    shuffle(q.options).forEach(optText => {
+      const btn = document.createElement('div');
+      btn.className = 'option';
+      btn.textContent = optText;
+      btn.addEventListener('click', () => answerL2(btn, optText, q));
+      optWrap.appendChild(btn);
+    });
+  }
+
+  function answerL2(btn, chosen, q){
+    if (l2Answered) return;
+    l2Answered = true;
+    const fb = document.getElementById('l2-feedback');
+    document.querySelectorAll('#l2-options .option').forEach(o => {
+      o.classList.add('locked');
+      if (o.textContent === q.correct) o.classList.add('correct');
+    });
+    if (chosen === q.correct){
+      btn.classList.add('correct');
+      updateScore(q.points);
+      fb.textContent = 'Correct!';
+      fb.className = 'feedback good';
+    } else {
+      btn.classList.add('incorrect');
+      fb.textContent = `Not quite — the answer is ${q.correct}.`;
+      fb.className = 'feedback bad';
+    }
+    document.getElementById('l2-next').disabled = false;
+  }
+
+  function nextL2Question(){
+    l2Index++;
+    renderL2Question();
+  }
+
+  /* ---------------- Level 3: Sort the impact ---------------- */
+  function buildLevel3(){
+    const pool = document.getElementById('l3-pool');
+    const targets = document.getElementById('l3-targets');
+    pool.innerHTML = '';
+    targets.innerHTML = '';
+    l3Selected = null;
+    l3Remaining = SORT_ITEMS.length;
+    document.getElementById('l3-next').disabled = true;
+
+    shuffle(SORT_ITEMS).forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.textContent = item.label;
+      card.dataset.fn = item.fn;
+      card.dataset.erred = 'false';
+      card.addEventListener('click', () => selectL3Card(card));
+      pool.appendChild(card);
+    });
+
+    FUNCTIONS.forEach(fn => {
+      const t = document.createElement('div');
+      t.className = 'target';
+      t.dataset.fn = fn.id;
+      t.innerHTML = `<div class="icon">${fn.icon}</div><div class="label">${fn.label}</div><div class="filled-content"></div>`;
+      t.addEventListener('click', () => selectL3Target(t));
+      targets.appendChild(t);
+    });
+  }
+
+  function selectL3Card(card){
+    if (card.classList.contains('placed')) return;
+    document.querySelectorAll('#l3-pool .card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    l3Selected = card;
+  }
+
+  function selectL3Target(target){
+    if (!l3Selected) return;
+    const correct = target.dataset.fn === l3Selected.dataset.fn;
+    if (correct){
+      target.classList.remove('correct');
+      void target.offsetWidth;
+      target.classList.add('correct');
+      const existing = target.querySelector('.filled-content');
+      existing.textContent = existing.textContent ? existing.textContent + ', ' + l3Selected.textContent : l3Selected.textContent;
+      l3Selected.classList.add('placed');
+      if (l3Selected.dataset.erred === 'false') updateScore(POINTS.l3);
+      l3Selected = null;
+      l3Remaining--;
+      if (l3Remaining === 0) document.getElementById('l3-next').disabled = false;
+    } else {
+      l3Selected.dataset.erred = 'true';
+      target.classList.remove('wrong-flash');
+      void target.offsetWidth;
+      target.classList.add('wrong-flash');
+      l3Selected.classList.add('shake');
+      setTimeout(() => l3Selected && l3Selected.classList.remove('shake'), 350);
+    }
+  }
+
+  /* ---------------- Level 4: Final MCQ ---------------- */
+  function buildLevel4(){
+    const wrap = document.getElementById('l4-options');
+    wrap.innerHTML = '';
+    l4Answered = false;
+    document.getElementById('l4-next').disabled = true;
+    document.getElementById('l4-feedback').textContent = '';
+
+    shuffle(L4_OPTIONS).forEach(opt => {
+      const btn = document.createElement('div');
+      btn.className = 'option';
+      btn.textContent = opt.text;
+      btn.addEventListener('click', () => answerL4(btn, opt));
+      wrap.appendChild(btn);
+    });
+  }
+
+  function answerL4(btn, opt){
+    if (l4Answered) return;
+    l4Answered = true;
+    const fb = document.getElementById('l4-feedback');
+    document.querySelectorAll('#l4-options .option').forEach(o => o.classList.add('locked'));
+    if (opt.correct){
+      btn.classList.add('correct');
+      updateScore(POINTS.l4);
+      fb.textContent = 'Correct — functions rarely fail alone!';
+      fb.className = 'feedback good';
+    } else {
+      btn.classList.add('incorrect');
+      L4_OPTIONS.filter(o => o.correct).forEach(correctOpt => {
+        [...wrap_l4()].forEach(el => { if (el.textContent === correctOpt.text) el.classList.add('correct'); });
+      });
+      fb.textContent = 'Not quite — see the highlighted answer.';
+      fb.className = 'feedback bad';
+    }
+    document.getElementById('l4-next').disabled = false;
+  }
+  function wrap_l4(){ return document.querySelectorAll('#l4-options .option'); }
+
+  /* ---------------- Results ---------------- */
+  function showResults(){
+    const name = document.getElementById('playerName').value.trim();
+    document.getElementById('resultsName').textContent = name ? `Nice work, ${name}!` : 'Nice work!';
+    document.getElementById('finalScore').textContent = score;
+    document.getElementById('teacherScore').textContent = score;
+    document.getElementById('maxScoreLabel').textContent = MAX_SCORE;
+    const pct = Math.round((score / MAX_SCORE) * 100);
+    document.getElementById('finalPct').textContent = pct + '%';
+
+    let tier, stars;
+    if (pct >= 90){ tier = 'Legendary Geographer — outstanding understanding!'; stars = '⭐⭐⭐⭐⭐'; }
+    else if (pct >= 75){ tier = 'Strong grasp of environmental functions and sustainability.'; stars = '⭐⭐⭐⭐'; }
+    else if (pct >= 50){ tier = "Solid start — a bit more practice and you'll have this locked in."; stars = '⭐⭐⭐'; }
+    else { tier = "Good effort — worth another go through the rounds to build this up."; stars = '⭐⭐'; }
+    document.getElementById('resultTier').textContent = tier;
+    document.getElementById('resultStars').textContent = stars;
+  }
+
+  function resetGame(){
+    score = 0;
+    updateScore(0);
+    l2Index = 0;
+    document.getElementById('playerName').value = '';
+    goToScreen(0);
+  }
+
+  // Hook screen transitions that need setup
+  const originalGoToScreen = goToScreen;
+  goToScreen = function(n){
+    originalGoToScreen(n);
+    if (n === 2) renderL2Question();
+    if (n === 4) buildLevel4();
+    if (n === 5) showResults();
+  };
+
+  updateProgressDots(0);
+</script>
+
+</body>
+</html>
