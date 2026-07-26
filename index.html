@@ -3,616 +3,996 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web of Life — Human Dependence on Natural Systems</title>
+<title>Change Files: Environmental Change Investigator</title>
 <style>
-  :root{
-    --forest:#1F4D2E;
-    --forest-dk:#163A22;
-    --slate:#3A6B71;
-    --gold:#C99A2E;
-    --cream:#F4F1EA;
-    --white:#FFFFFF;
-    --ink:#23301F;
-    --grey:#5C6B5E;
-    --red:#B3402C;
-    --green:#2E7D4F;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family:-apple-system,Segoe UI,Calibri,Arial,sans-serif;
-    background:linear-gradient(160deg,var(--forest-dk),var(--forest) 60%);
-    min-height:100vh;
-    color:var(--ink);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-  }
-  .app{
-    width:100%;
-    max-width:720px;
-    background:var(--cream);
-    border-radius:20px;
-    box-shadow:0 20px 50px rgba(0,0,0,0.35);
-    overflow:hidden;
-  }
-  .topbar{
-    background:var(--forest-dk);
-    color:var(--white);
-    padding:16px 24px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-  }
-  .topbar .brand{
-    font-weight:700;
-    letter-spacing:0.5px;
-    font-size:15px;
-  }
-  .topbar .brand span{color:var(--gold);}
-  .score-pill{
-    background:var(--forest);
-    border-radius:999px;
-    padding:6px 14px;
-    font-weight:700;
-    font-size:14px;
-    display:flex;
-    align-items:center;
-    gap:6px;
-  }
-  .streak{
-    font-size:13px;
-    color:var(--gold);
-    font-weight:700;
-  }
-  .progress-wrap{
-    height:6px;
-    background:#DCD6C4;
-  }
-  .progress-bar{
-    height:100%;
-    background:var(--gold);
-    width:0%;
-    transition:width 0.35s ease;
-  }
-  .screen{
-    padding:32px 28px 28px;
-    min-height:420px;
-    display:flex;
-    flex-direction:column;
-  }
-  .hidden{display:none !important;}
-
-  h1{
-    font-family:Georgia,'Times New Roman',serif;
-    font-size:30px;
-    margin:0 0 8px;
-    color:var(--forest);
-  }
-  h2{
-    font-family:Georgia,'Times New Roman',serif;
-    font-size:22px;
-    margin:0 0 10px;
-    color:var(--forest);
-  }
-  p.lead{font-size:15.5px;color:var(--grey);line-height:1.5;margin:0 0 18px;}
-
-  .instructions{
-    background:var(--white);
-    border:1px solid #E1DBC7;
-    border-radius:14px;
-    padding:18px 20px;
-    margin-bottom:20px;
-  }
-  .instructions li{margin-bottom:8px;font-size:14.5px;line-height:1.4;}
-
-  .btn{
-    border:none;
-    border-radius:12px;
-    padding:14px 22px;
-    font-size:16px;
-    font-weight:700;
-    cursor:pointer;
-    transition:transform 0.12s ease, box-shadow 0.12s ease;
-  }
-  .btn:active{transform:scale(0.97);}
-  .btn-primary{
-    background:var(--gold);
-    color:var(--forest-dk);
-  }
-  .btn-primary:hover{box-shadow:0 6px 16px rgba(201,154,46,0.45);}
-  .btn-outline{
-    background:transparent;
-    border:2px solid var(--forest);
-    color:var(--forest);
+  :root {
+    --slate: #2F4550;
+    --slate-dark: #1F2F36;
+    --slate-light: #45606D;
+    --ember: #C1502F;
+    --ember-dark: #9C3F24;
+    --sage: #7A9E9F;
+    --sage-dark: #5E8182;
+    --cream: #F4F1EA;
+    --ink: #232323;
+    --white: #FFFFFF;
+    --good: #3E7A47;
+    --bad: #B23A2E;
+    --shadow: 0 8px 24px rgba(15, 25, 30, 0.18);
   }
 
-  .round-label{
-    display:inline-block;
-    background:var(--forest);
-    color:var(--white);
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:0.5px;
-    padding:5px 12px;
-    border-radius:999px;
-    margin-bottom:14px;
-    width:fit-content;
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Calibri, Roboto, Helvetica, Arial, sans-serif;
+    background: var(--slate-dark);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(122,158,159,0.12) 0%, transparent 45%),
+      radial-gradient(circle at 85% 90%, rgba(193,80,47,0.12) 0%, transparent 45%);
+    color: var(--ink);
+    min-height: 100vh;
   }
 
-  .item-card{
-    background:var(--white);
-    border-radius:16px;
-    padding:26px 22px;
-    text-align:center;
-    font-size:19px;
-    font-weight:600;
-    color:var(--ink);
-    box-shadow:0 4px 14px rgba(0,0,0,0.08);
-    margin-bottom:22px;
-    min-height:80px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  h1, h2, h3, .display {
+    font-family: Cambria, Georgia, 'Times New Roman', serif;
+    margin: 0;
   }
 
-  .cat-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-  }
-  @media (max-width:480px){
-    .cat-grid{grid-template-columns:repeat(2,1fr);}
-  }
-  .cat-btn{
-    background:var(--white);
-    border:2px solid #E1DBC7;
-    border-radius:12px;
-    padding:14px 8px;
-    font-size:14px;
-    font-weight:700;
-    color:var(--forest);
-    cursor:pointer;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:6px;
-    transition:all 0.15s ease;
-  }
-  .cat-btn:hover{border-color:var(--forest);background:#FBFAF6;}
-  .cat-btn .emoji{font-size:26px;}
-  .cat-btn.correct{background:var(--green);border-color:var(--green);color:var(--white);}
-  .cat-btn.wrong{background:var(--red);border-color:var(--red);color:var(--white);}
-  .cat-btn:disabled{cursor:default;opacity:0.55;}
-  .cat-btn.correct:disabled,.cat-btn.wrong:disabled{opacity:1;}
-
-  .scenario-card{
-    background:var(--white);
-    border-radius:16px;
-    padding:22px;
-    box-shadow:0 4px 14px rgba(0,0,0,0.08);
-    margin-bottom:18px;
-  }
-  .scenario-card .quote{
-    font-family:Georgia,'Times New Roman',serif;
-    font-style:italic;
-    font-size:18px;
-    color:var(--ink);
-    margin:0 0 6px;
-  }
-  .scenario-card .ask{
-    font-size:13.5px;
-    color:var(--grey);
-    font-weight:600;
+  .app {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
   }
 
-  .option-list{display:flex;flex-direction:column;gap:10px;}
-  .option-btn{
-    background:var(--white);
-    border:2px solid #E1DBC7;
-    border-radius:12px;
-    padding:13px 16px;
-    font-size:14.5px;
-    font-weight:600;
-    color:var(--ink);
-    text-align:left;
-    cursor:pointer;
+  /* ---------- HEADER / HUD ---------- */
+  .hud {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--slate);
+    color: var(--white);
+    border-radius: 14px;
+    padding: 14px 20px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow);
+    flex-wrap: wrap;
+    gap: 10px;
   }
-  .option-btn:hover{border-color:var(--forest);}
-  .option-btn.correct{background:var(--green);border-color:var(--green);color:var(--white);}
-  .option-btn.wrong{background:var(--red);border-color:var(--red);color:var(--white);}
-  .option-btn:disabled{cursor:default;}
-
-  .feedback{
-    margin-top:16px;
-    padding:14px 16px;
-    border-radius:12px;
-    font-size:14px;
-    line-height:1.5;
-    display:none;
+  .hud .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
-  .feedback.show{display:block;}
-  .feedback.ok{background:#E4F2E9;color:var(--green);border:1px solid #BFE1CC;}
-  .feedback.bad{background:#F7E6E1;color:var(--red);border:1px solid #EAC3B7;}
-
-  .next-row{margin-top:18px;display:flex;justify-content:flex-end;}
-
-  .spacer{flex:1;}
-
-  .end-badge{
-    text-align:center;
-    padding:10px 0 4px;
+  .hud .brand .badge-icon {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--ember);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
   }
-  .end-badge .medal{font-size:56px;}
-  .end-badge h2{font-size:26px;margin-top:6px;}
-  .end-score{
-    font-size:44px;
-    font-weight:800;
-    color:var(--forest);
-    text-align:center;
-    margin:6px 0 2px;
-  }
-  .end-score span{font-size:18px;color:var(--grey);font-weight:600;}
-  .best{text-align:center;font-size:13px;color:var(--gold);font-weight:700;margin-bottom:18px;}
-  .end-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-  .reflect{
-    margin-top:20px;
-    background:var(--white);
-    border:1px solid #E1DBC7;
-    border-radius:14px;
-    padding:16px 18px;
-    font-size:13.5px;
-    color:var(--grey);
-    line-height:1.5;
-  }
-  .reflect strong{color:var(--forest);}
+  .hud .brand-text { font-size: 14px; letter-spacing: 0.5px; color: var(--sage); font-weight: 700; text-transform: uppercase; }
+  .hud .brand-title { font-family: Cambria, Georgia, serif; font-size: 19px; font-weight: 700; }
+  .hud .stats { display: flex; gap: 18px; }
+  .hud .stat { text-align: center; }
+  .hud .stat .num { font-size: 20px; font-weight: 700; font-family: Cambria, Georgia, serif; }
+  .hud .stat .lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--sage); }
 
-  footer.credit{
-    text-align:center;
-    font-size:11.5px;
-    color:#9AA79C;
-    padding:10px 0 0;
+  .progress-track {
+    height: 8px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 26px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--sage), var(--ember));
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .card-panel {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ember);
+    margin-bottom: 6px;
+  }
+
+  .screen-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--slate-dark);
+    margin-bottom: 10px;
+  }
+
+  .lede { font-size: 15.5px; line-height: 1.55; color: #444; margin-bottom: 18px; }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--ember);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px 26px;
+    border-radius: 10px;
+    transition: transform 0.12s ease, background 0.12s ease;
+  }
+  .btn-primary:hover { background: var(--ember-dark); transform: translateY(-1px); }
+  .btn-primary:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--slate);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 11px 20px;
+    border-radius: 10px;
+    border: 2px solid var(--slate);
+  }
+  .btn-secondary:hover { background: var(--slate); color: var(--white); }
+
+  /* ---------- INTRO SCREEN ---------- */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0 24px;
+  }
+  .intro-round {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 14px;
+    border-left: 5px solid var(--sage);
+  }
+  .intro-round:nth-child(2) { border-left-color: var(--ember); }
+  .intro-round:nth-child(3) { border-left-color: var(--slate); }
+  .intro-round .num { font-family: Cambria, Georgia, serif; font-size: 22px; font-weight: 700; color: var(--slate-dark); }
+  .intro-round h3 { font-size: 14.5px; margin: 4px 0 6px; }
+  .intro-round p { font-size: 12.5px; color: #555; line-height: 1.4; margin: 0; }
+
+  .briefing-box {
+    background: var(--slate-dark);
+    color: var(--cream);
+    border-radius: 12px;
+    padding: 18px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+  .briefing-box strong { color: var(--sage); }
+
+  /* ---------- MATRIX (Round 1) ---------- */
+  .matrix-wrap {
+    display: grid;
+    grid-template-columns: 40px 1fr 1fr;
+    grid-template-rows: 30px 1fr 1fr;
+    gap: 6px;
+    margin: 18px 0;
+  }
+  .axis-label {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--slate);
+  }
+  .axis-label.top { grid-row: 1; }
+  .axis-label.side {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    grid-column: 1;
+  }
+  .quad {
+    min-height: 110px;
+    border-radius: 10px;
+    background: var(--cream);
+    border: 2px dashed #cfc9ba;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px;
+    transition: background 0.15s ease, border-color 0.15s ease;
+    position: relative;
+  }
+  .quad .quad-label { font-size: 11px; font-weight: 700; color: #8a8272; text-align: center; }
+  .quad.drophover { background: #eae4d2; border-color: var(--ember); }
+  .quad .placed-chip {
+    background: var(--slate);
+    color: white;
+    font-size: 11.5px;
+    padding: 5px 8px;
+    border-radius: 7px;
+    max-width: 95%;
+    text-align: center;
+  }
+  .quad .placed-chip.correct { background: var(--good); }
+  .quad .placed-chip.incorrect { background: var(--bad); }
+
+  .card-tray {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 16px 0;
+    min-height: 54px;
+  }
+  .sort-card {
+    background: var(--white);
+    border: 2px solid var(--slate);
+    color: var(--slate-dark);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: all 0.12s ease;
+  }
+  .sort-card:hover { background: var(--slate); color: white; transform: translateY(-2px); }
+  .sort-card.selected { background: var(--ember); border-color: var(--ember); color: white; }
+  .sort-card.used { display: none; }
+
+  .helper-note {
+    font-size: 12.5px;
+    color: #777;
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* ---------- CASE FILES (Round 2) ---------- */
+  .case-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .case-num {
+    background: var(--slate-dark);
+    color: var(--sage);
+    font-family: Cambria, Georgia, serif;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+  .case-story {
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 16px 18px;
+    font-size: 14.5px;
+    line-height: 1.55;
+    margin-bottom: 18px;
+    border-left: 4px solid var(--slate);
+  }
+  .choice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .choice-btn {
+    background: var(--white);
+    border: 2px solid #ddd6c6;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--slate-dark);
+    text-align: left;
+    transition: all 0.12s ease;
+  }
+  .choice-btn:hover { border-color: var(--slate); }
+  .choice-btn.picked { border-color: var(--ember); background: #fdf0ea; }
+  .choice-btn.reveal-correct { border-color: var(--good); background: #eaf5ec; }
+  .choice-btn.reveal-wrong { border-color: var(--bad); background: #fbeae8; opacity: 0.75; }
+
+  .justify-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+  .justify-btn {
+    background: var(--white);
+    border: 2px solid #ddd6c6;
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: 13px;
+    text-align: left;
+    color: #333;
+  }
+  .justify-btn.picked { border-color: var(--sage-dark); background: #eef4f4; }
+  .justify-btn.reveal-correct { border-color: var(--good); background: #eaf5ec; font-weight: 600; }
+  .justify-btn.reveal-wrong { border-color: var(--bad); background: #fbeae8; opacity: 0.7; }
+
+  .feedback-box {
+    display: none;
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .feedback-box.good { background: #eaf5ec; border-left: 4px solid var(--good); display: block; }
+  .feedback-box.bad { background: #fbeae8; border-left: 4px solid var(--bad); display: block; }
+
+  /* ---------- TIMELINE (Round 3) ---------- */
+  .timeline-track {
+    position: relative;
+    background: linear-gradient(90deg, var(--ember) 0%, var(--cream) 50%, var(--sage) 100%);
+    border-radius: 10px;
+    height: 14px;
+    margin: 40px 6px 8px;
+  }
+  .timeline-ends {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin: 0 6px 22px;
+  }
+  .rank-slots {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .rank-slot {
+    min-height: 78px;
+    border: 2px dashed #cfc9ba;
+    border-radius: 10px;
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    font-size: 10.5px;
+    color: #8a8272;
+    text-align: center;
+    gap: 4px;
+  }
+  .rank-slot .rank-num { font-family: Cambria, Georgia, serif; font-weight: 700; font-size: 15px; color: var(--slate); }
+  .rank-slot .placed { background: var(--slate); color: white; border-radius: 7px; padding: 5px 6px; font-size: 11px; font-weight: 600; }
+  .rank-slot .placed.correct { background: var(--good); }
+  .rank-slot .placed.incorrect { background: var(--bad); }
+  .event-pool { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 10px; }
+
+  /* ---------- RESULTS ---------- */
+  .results-hero {
+    text-align: center;
+    padding: 10px 0 24px;
+  }
+  .rank-badge {
+    width: 96px; height: 96px;
+    border-radius: 50%;
+    background: var(--ember);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+    margin: 0 auto 14px;
+    box-shadow: 0 6px 18px rgba(193,80,47,0.4);
+  }
+  .rank-title { font-size: 24px; font-weight: 700; color: var(--slate-dark); margin-bottom: 6px; }
+  .rank-sub { font-size: 14px; color: #666; margin-bottom: 20px; }
+  .score-strip {
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+    margin-bottom: 24px;
+  }
+  .score-strip .s-item { text-align: center; }
+  .score-strip .s-item .n { font-size: 26px; font-weight: 700; font-family: Cambria, Georgia, serif; color: var(--slate); }
+  .score-strip .s-item .l { font-size: 11px; text-transform: uppercase; color: #888; }
+
+  .reflection-box {
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+  }
+  .reflection-box textarea {
+    width: 100%;
+    min-height: 80px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-family: inherit;
+    font-size: 13.5px;
+    resize: vertical;
+    margin-top: 8px;
+  }
+
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 22px;
+    gap: 10px;
+  }
+  .nav-row.end { justify-content: flex-end; }
+  .hidden { display: none !important; }
+
+  @media (max-width: 640px) {
+    .intro-grid { grid-template-columns: 1fr; }
+    .choice-grid { grid-template-columns: 1fr; }
+    .rank-slots { grid-template-columns: repeat(3, 1fr); }
+    .hud { flex-direction: column; align-items: flex-start; }
+    .card-panel { padding: 20px 16px; }
   }
 </style>
 </head>
 <body>
-
 <div class="app">
-  <div class="topbar">
-    <div class="brand">WEB OF LIFE <span>· Year 10 Geography</span></div>
-    <div style="display:flex;align-items:center;gap:14px;">
-      <div class="streak" id="streakDisplay"></div>
-      <div class="score-pill">⭐ <span id="scoreDisplay">0</span> pts</div>
+
+  <div class="hud">
+    <div class="brand">
+      <div class="badge-icon">\u{1F9ED}</div>
+      <div>
+        <div class="brand-text">Case File Active</div>
+        <div class="brand-title">Change Files: Environmental Change Investigator</div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num" id="hud-score">0</div><div class="lbl">Score</div></div>
+      <div class="stat"><div class="num" id="hud-streak">0</div><div class="lbl">Streak</div></div>
+      <div class="stat"><div class="num" id="hud-round">0/3</div><div class="lbl">Round</div></div>
     </div>
   </div>
-  <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
 
-  <!-- START SCREEN -->
-  <div class="screen" id="screen-start">
-    <h1>How much do you depend on nature?</h1>
-    <p class="lead">Play through two quick rounds. Sort daily moments, then predict what breaks when a natural system is disrupted. Beat your score, then bring your total to class.</p>
-    <div class="instructions">
-      <ul>
-        <li><strong>Round 1 — Daily Dependence Sort:</strong> 10 everyday moments. Sort each into Food, Water, Air, Materials or Wellbeing. Build a streak for bonus points.</li>
-        <li><strong>Round 2 — Vulnerability Challenge:</strong> 5 real Australian scenarios. Choose what's most affected when a natural system is disrupted.</li>
-        <li>Read the feedback after each answer — it explains the reasoning, not just right or wrong.</li>
-      </ul>
+  <!-- ================= INTRO SCREEN ================= -->
+  <div class="card-panel" id="screen-intro">
+    <div class="eyebrow">Briefing</div>
+    <h1 class="screen-title">Welcome, Investigator</h1>
+    <div class="briefing-box">
+      Environmental agencies across Victoria need help. Every case that lands on your desk is an environmental change with two unanswered questions: <strong>how fast did it happen</strong>, and <strong>can it be undone</strong>? Your job is to classify each case correctly, back up your call with evidence, and build a case-closing streak. Three rounds. One case board. Let's get to work.
     </div>
-    <button class="btn btn-primary" onclick="startGame()">Start playing</button>
+    <div class="intro-grid">
+      <div class="intro-round">
+        <div class="num">01</div>
+        <h3>Quadrant Sort</h3>
+        <p>Place 8 real examples onto the case board: gradual/sudden by reversible/irreversible.</p>
+      </div>
+      <div class="intro-round">
+        <div class="num">02</div>
+        <h3>Case Files</h3>
+        <p>Read 5 short case reports, classify each and choose the strongest justification.</p>
+      </div>
+      <div class="intro-round">
+        <div class="num">03</div>
+        <h3>Timeline Challenge</h3>
+        <p>Rank 6 events by rate of change, from the fastest to the slowest.</p>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="goToRound(1)">Open Case File \u2192</button>
   </div>
 
-  <!-- ROUND 1 -->
-  <div class="screen hidden" id="screen-round1">
-    <div class="round-label" id="r1Label">ROUND 1 · ITEM 1 OF 10</div>
-    <div class="item-card" id="r1ItemText"></div>
-    <div class="cat-grid" id="r1CatGrid"></div>
-    <div class="feedback" id="r1Feedback"></div>
-    <div class="spacer"></div>
-    <div class="next-row"><button class="btn btn-primary hidden" id="r1NextBtn" onclick="nextRound1()">Next →</button></div>
-  </div>
+  <!-- ================= ROUND 1: QUADRANT SORT ================= -->
+  <div class="card-panel hidden" id="screen-round1">
+    <div class="eyebrow">Round 1 of 3</div>
+    <h1 class="screen-title">The Case Board</h1>
+    <p class="lede">Select an example below, then tap the quadrant of the case board where it belongs. Every example gets one placement, watch the board fill up.</p>
 
-  <!-- ROUND 1 TO 2 TRANSITION -->
-  <div class="screen hidden" id="screen-transition">
-    <h2>Round 1 complete</h2>
-    <p class="lead">Nice work. Now let's see what happens when one of these systems is disrupted.</p>
-    <div class="instructions">
-      <ul>
-        <li>Read each real Australian scenario carefully.</li>
-        <li>Pick the option that is <strong>most directly and immediately</strong> affected.</li>
-        <li>Each correct answer is worth 20 points — no streak bonus this round, so take your time.</li>
-      </ul>
+    <div class="matrix-wrap">
+      <div class="axis-label top" style="grid-column:2;">Gradual</div>
+      <div class="axis-label top" style="grid-column:3;">Sudden</div>
+      <div class="axis-label side" style="grid-row:2;">Reversible</div>
+      <div class="quad" data-quad="GR" style="grid-column:2; grid-row:2;"><span class="quad-label">Gradual + Reversible</span></div>
+      <div class="quad" data-quad="SR" style="grid-column:3; grid-row:2;"><span class="quad-label">Sudden + Reversible</span></div>
+      <div class="axis-label side" style="grid-row:3;">Irreversible</div>
+      <div class="quad" data-quad="GI" style="grid-column:2; grid-row:3;"><span class="quad-label">Gradual + Irreversible</span></div>
+      <div class="quad" data-quad="SI" style="grid-column:3; grid-row:3;"><span class="quad-label">Sudden + Irreversible</span></div>
     </div>
-    <button class="btn btn-primary" onclick="startRound2()">Start Round 2</button>
-  </div>
 
-  <!-- ROUND 2 -->
-  <div class="screen hidden" id="screen-round2">
-    <div class="round-label" id="r2Label">ROUND 2 · SCENARIO 1 OF 5</div>
-    <div class="scenario-card">
-      <p class="quote" id="r2Quote"></p>
-      <p class="ask">Which is most directly and immediately affected?</p>
-    </div>
-    <div class="option-list" id="r2Options"></div>
-    <div class="feedback" id="r2Feedback"></div>
-    <div class="spacer"></div>
-    <div class="next-row"><button class="btn btn-primary hidden" id="r2NextBtn" onclick="nextRound2()">Next →</button></div>
-  </div>
+    <div class="card-tray" id="r1-tray"></div>
+    <div class="helper-note" id="r1-hint">Tap an example card, then tap the quadrant you think it belongs in.</div>
+    <div class="feedback-box" id="r1-feedback"></div>
 
-  <!-- END SCREEN -->
-  <div class="screen hidden" id="screen-end">
-    <div class="end-badge">
-      <div class="medal" id="endMedal">🌱</div>
-      <h2 id="endTitle">Nature Novice</h2>
-    </div>
-    <div class="end-score" id="endScore">0<span> / 200 pts</span></div>
-    <div class="best" id="endBest"></div>
-    <div class="end-actions">
-      <button class="btn btn-outline" onclick="resetGame()">Play again</button>
-    </div>
-    <div class="reflect">
-      <strong>Before you close this tab:</strong> write your score on your exit ticket, and think about which category (food, water, air, materials or wellbeing) would be hardest for your household to live without.
+    <div class="nav-row end">
+      <button class="btn-primary" id="r1-next" disabled onclick="goToRound(2)">Continue to Case Files \u2192</button>
     </div>
   </div>
 
-  <footer class="credit">Year 10 Geography · Environmental Change and Management · Lesson 8</footer>
+  <!-- ================= ROUND 2: CASE FILES ================= -->
+  <div class="card-panel hidden" id="screen-round2">
+    <div class="eyebrow">Round 2 of 3</div>
+    <div class="case-header">
+      <div class="case-num" id="r2-casenum">CASE 001</div>
+      <h1 class="screen-title" id="r2-title" style="font-size:19px;"></h1>
+    </div>
+    <div class="case-story" id="r2-story"></div>
+
+    <p class="lede" style="margin-bottom:8px; font-weight:700; color:var(--slate);">Step 1: Classify this case</p>
+    <div class="choice-grid" id="r2-choices"></div>
+
+    <p class="lede" style="margin-bottom:8px; font-weight:700; color:var(--slate);">Step 2: Pick the strongest justification</p>
+    <div class="justify-list" id="r2-justify"></div>
+
+    <div class="feedback-box" id="r2-feedback"></div>
+
+    <div class="nav-row">
+      <div style="font-size:12.5px; color:#888; align-self:center;" id="r2-progress">Case 1 of 5</div>
+      <button class="btn-primary" id="r2-next" disabled onclick="nextCase()">Submit Case \u2192</button>
+    </div>
+  </div>
+
+  <!-- ================= ROUND 3: TIMELINE ================= -->
+  <div class="card-panel hidden" id="screen-round3">
+    <div class="eyebrow">Round 3 of 3</div>
+    <h1 class="screen-title">Timeline Challenge</h1>
+    <p class="lede">Tap the events below in order, from the <strong>fastest</strong> rate of change to the <strong>slowest</strong>. Watch them fill the timeline slots left to right.</p>
+
+    <div class="timeline-track"></div>
+    <div class="timeline-ends"><span>\u26a1 Instant</span><span>\u23f3 Millennia</span></div>
+
+    <div class="rank-slots" id="r3-slots"></div>
+    <div class="event-pool" id="r3-pool"></div>
+    <div class="feedback-box" id="r3-feedback"></div>
+
+    <div class="nav-row end">
+      <button class="btn-primary" id="r3-next" disabled onclick="goToRound(4)">See Final Report \u2192</button>
+    </div>
+  </div>
+
+  <!-- ================= RESULTS ================= -->
+  <div class="card-panel hidden" id="screen-results">
+    <div class="results-hero">
+      <div class="rank-badge" id="res-badge-icon">\u{1F3C5}</div>
+      <div class="rank-title" id="res-rank-title">Field Assistant</div>
+      <div class="rank-sub" id="res-rank-sub">Case closed. Nice work, Investigator.</div>
+    </div>
+    <div class="score-strip">
+      <div class="s-item"><div class="n" id="res-score">0</div><div class="l">Points</div></div>
+      <div class="s-item"><div class="n" id="res-pct">0%</div><div class="l">Accuracy</div></div>
+      <div class="s-item"><div class="n" id="res-streak">0</div><div class="l">Best Streak</div></div>
+    </div>
+    <div class="reflection-box">
+      <strong style="font-size:13.5px; color:var(--slate-dark);">Investigator's notebook (not scored)</strong>
+      <p style="font-size:12.5px; color:#666; margin:6px 0 0;">Which case was hardest to classify, and why? Jot a sentence or two before you compare answers as a class.</p>
+      <textarea placeholder="Type your reflection here..."></textarea>
+    </div>
+    <div class="nav-row end">
+      <button class="btn-secondary" onclick="restartGame()">Restart Investigation</button>
+    </div>
+  </div>
+
 </div>
 
 <script>
-const CATS = [
-  {key:"food", label:"Food", emoji:"🍎"},
-  {key:"water", label:"Water", emoji:"💧"},
-  {key:"air", label:"Air", emoji:"🌬️"},
-  {key:"materials", label:"Materials", emoji:"🧰"},
-  {key:"wellbeing", label:"Wellbeing", emoji:"❤️"}
+/* ============================================================
+   STATE
+   ============================================================ */
+let state = {
+  score: 0,
+  streak: 0,
+  bestStreak: 0,
+  round: 0,
+  r1: { placed: 0, correct: 0 },
+  r2: { caseIndex: 0, correct: 0, classPicked: null, justPicked: null },
+  r3: { placedCount: 0, correct: 0 },
+};
+
+/* ============================================================
+   ROUND 1 DATA: Quadrant Sort
+   quad codes: GR = gradual+reversible, SR = sudden+reversible,
+               GI = gradual+irreversible, SI = sudden+irreversible
+   ============================================================ */
+const r1Cards = [
+  { id: 'c1', label: 'Coastal cliff erosion at the Twelve Apostles', quad: 'GI',
+    why: 'The wave action is gradual, and once the limestone is worn away and collapses, the landform cannot naturally reform.' },
+  { id: 'c2', label: 'Volcanic eruption reshaping a valley', quad: 'SI',
+    why: 'The eruption itself takes hours, and the reshaped landform (crater, ash deposits) is permanent, even though plants and animals gradually recolonise.' },
+  { id: 'c3', label: 'Bulldozer land clearing for a new estate', quad: 'SR',
+    why: 'Clearing with machinery happens quickly, and cleared land can be revegetated or rehabilitated later.' },
+  { id: 'c4', label: 'Selective logging with a replanting program', quad: 'GR',
+    why: 'Trees are removed gradually over a harvesting cycle, and active replanting allows the forest to recover.' },
+  { id: 'c5', label: 'Extinction of the thylacine (Tasmanian tiger)', quad: 'GI',
+    why: 'Population decline happened gradually over decades, and once the last individual died in 1936, the loss became permanent.' },
+  { id: 'c6', label: 'Flash flood after a severe storm', quad: 'SR',
+    why: 'Flooding rises and recedes within hours to days, and floodplains typically recover their prior state.' },
+  { id: 'c7', label: 'Desertification from long-term overgrazing', quad: 'GI',
+    why: 'Soil degrades gradually over years of grazing pressure, and past a certain point the land cannot regenerate without major intervention.' },
+  { id: 'c8', label: 'Earthquake-triggered landslide', quad: 'SI',
+    why: 'The slope fails within seconds to minutes, and the altered slope profile does not return to its original shape.' },
+];
+const quadLabels = { GR: 'Gradual + Reversible', SR: 'Sudden + Reversible', GI: 'Gradual + Irreversible', SI: 'Sudden + Irreversible' };
+
+/* ============================================================
+   ROUND 2 DATA: Case Files
+   ============================================================ */
+const r2Cases = [
+  {
+    title: 'The Bleaching Reef',
+    story: 'Marine heatwaves have struck a Great Barrier Reef system in three of the last five summers. Corals whiten as their algae partners are expelled under heat stress. In cooler years, some colour has returned, but this year, large sections of the reef show no recovery at all, the coral skeletons are bare and covered in algae.',
+    classChoices: ['Sudden + Reversible', 'Gradual + Reversible', 'Gradual + Irreversible', 'Sudden + Irreversible'],
+    classCorrect: 2,
+    justOptions: [
+      'Repeated heat stress built up gradually across summers, and this year\u2019s bare coral shows the reef has now crossed a threshold into permanent loss.',
+      'Coral bleaching always happens in a single day, so the change must be sudden.',
+      'Because coral can sometimes recover its colour, the reef will always fully recover no matter how many heatwaves occur.',
+    ],
+    justCorrect: 0,
+  },
+  {
+    title: 'The Black Summer Regrowth',
+    story: 'A eucalypt forest in south-eastern Australia burned through in a single fire season. Twelve months later, epicormic shoots are bursting from blackened trunks, and seedlings are emerging from fire-triggered seed pods across the forest floor.',
+    classChoices: ['Gradual + Reversible', 'Sudden + Reversible', 'Sudden + Irreversible', 'Gradual + Irreversible'],
+    classCorrect: 1,
+    justOptions: [
+      'The fire burned through in days or weeks, and many Australian eucalypt species have fire-adapted regeneration strategies, so recovery is underway.',
+      'Any bushfire is automatically irreversible because trees are destroyed.',
+      'Because regrowth takes more than a year, the fire itself must be classified as gradual.',
+    ],
+    justCorrect: 0,
+  },
+  {
+    title: 'The Drained Wetland',
+    story: 'A coastal wetland was drained for agriculture across three years in the 1990s. Two decades later, a council-led restoration project reintroduced tidal flow, and shorebird numbers have slowly climbed back toward historic levels over the following ten years.',
+    classChoices: ['Sudden + Irreversible', 'Gradual + Reversible', 'Sudden + Reversible', 'Gradual + Irreversible'],
+    classCorrect: 1,
+    justOptions: [
+      'Both the draining and the restoration unfolded over multiple years, and active management has allowed the ecosystem to partially return.',
+      'Wetlands can never be restored once drained, so this must be irreversible.',
+      'Draining took three years, which counts as a sudden event by any definition.',
+    ],
+    justCorrect: 0,
+  },
+  {
+    title: 'The Island That Vanished',
+    story: 'In 1883, the volcanic island of Krakatoa was largely destroyed in a catastrophic eruption that was heard thousands of kilometres away. Decades later, volcanic activity built a new island, Anak Krakatau, nearby, but it is not the same landform that existed before 1883.',
+    classChoices: ['Gradual + Reversible', 'Sudden + Reversible', 'Sudden + Irreversible', 'Gradual + Irreversible'],
+    classCorrect: 2,
+    justOptions: [
+      'The eruption destroyed the island within hours, and the original landform is gone forever, even though a new island later formed in the area.',
+      'Because a new island eventually formed, the original destruction should count as reversible.',
+      'Volcanic islands always reform exactly as they were, so this is a reversible change.',
+    ],
+    justCorrect: 0,
+  },
+  {
+    title: 'The Retreating Ice',
+    story: 'Satellite records spanning 40 years show Arctic sea ice extent shrinking most summers, driven by rising ocean and atmospheric temperatures. Scientists warn that once ice-free summers become the norm, the region\u2019s reflective ice cover, and the cooling effect it provides, may not return even if warming later slows.',
+    classChoices: ['Sudden + Reversible', 'Gradual + Irreversible', 'Sudden + Irreversible', 'Gradual + Reversible'],
+    classCorrect: 1,
+    justOptions: [
+      'The decline has unfolded gradually over four decades, and scientists warn the loss of reflective ice cover may pass a threshold beyond which it cannot recover.',
+      'Sea ice melts and refreezes every year, so long-term ice loss must always be reversible too.',
+      '40 years is a short enough period that this counts as a sudden change.',
+    ],
+    justCorrect: 0,
+  },
 ];
 
-const ROUND1 = [
-  {text:"Cereal and milk for breakfast", cat:"food", why:"Milk and grain both come from farmed land and livestock — a food system."},
-  {text:"A hot shower before school", cat:"water", why:"Showering draws directly on a town or catchment water supply."},
-  {text:"Stepping outside for a deep breath of fresh air", cat:"air", why:"Clean air is produced and filtered by natural systems like forests and oceans."},
-  {text:"Your cotton school jumper", cat:"materials", why:"Cotton is a natural fibre grown as a crop — a raw material from nature."},
-  {text:"Sitting under a tree at lunch to relax", cat:"wellbeing", why:"Time in green space supports mental health — a wellbeing benefit of nature."},
-  {text:"Tap water for a cup of tea", cat:"water", why:"Tap water is sourced from rivers, dams or groundwater systems."},
-  {text:"Vegetables from the backyard garden", cat:"food", why:"Home-grown vegetables still depend on soil, sunlight and water — natural systems."},
-  {text:"A wooden desk in your classroom", cat:"materials", why:"Timber is harvested from forests — a material resource from nature."},
-  {text:"A walk along the beach on the weekend", cat:"wellbeing", why:"Coastal environments support recreation and wellbeing, not just resources."},
-  {text:"Opening the window for a cool breeze", cat:"air", why:"Natural air movement and quality depend on healthy atmospheric systems."}
+/* ============================================================
+   ROUND 3 DATA: Timeline ranking (fastest -> slowest)
+   ============================================================ */
+const r3EventsCorrectOrder = [
+  { id: 'e1', label: 'Volcanic eruption burying a valley' },
+  { id: 'e2', label: 'Flash flood after a storm' },
+  { id: 'e3', label: 'A single bushfire season' },
+  { id: 'e4', label: 'Machine land clearing for development' },
+  { id: 'e5', label: 'A species declining to extinction' },
+  { id: 'e6', label: 'Formation of the Twelve Apostles limestone stacks' },
 ];
 
-const ROUND2 = [
-  {
-    quote:"A prolonged drought severely reduces water flow into the Murray-Darling Basin.",
-    options:[
-      {label:"Water supply for towns and farms along the river", correct:true},
-      {label:"Air quality in capital cities", correct:false},
-      {label:"Timber supply from plantation forests", correct:false},
-      {label:"Weekend recreation at the beach", correct:false}
-    ],
-    why:"Reduced river flow hits water supply first and most directly — for drinking, irrigation and stock. Food production is a flow-on effect, but water is the immediate system disrupted."
-  },
-  {
-    quote:"Bushfire smoke blankets a major Australian city for weeks, pushing air quality to hazardous levels.",
-    options:[
-      {label:"Air quality and outdoor activity", correct:true},
-      {label:"Timber and material supply", correct:false},
-      {label:"River fishing catches", correct:false},
-      {label:"Backyard vegetable gardens", correct:false}
-    ],
-    why:"Smoke directly disrupts the air system people breathe — schools, sport and outdoor work are affected immediately, as seen in the 2019-20 Black Summer fires."
-  },
-  {
-    quote:"Overfishing collapses a coastal fish population.",
-    options:[
-      {label:"Food supply from fishing", correct:true},
-      {label:"Housing construction", correct:false},
-      {label:"Drinking water supply", correct:false},
-      {label:"Air quality", correct:false}
-    ],
-    why:"A collapsed fish stock is a direct hit to a food system — both commercial catches and local food security are affected."
-  },
-  {
-    quote:"A regional national park closes indefinitely after major storm damage.",
-    options:[
-      {label:"Wellbeing, recreation and tourism", correct:true},
-      {label:"Food supply", correct:false},
-      {label:"Drinking water treatment", correct:false},
-      {label:"Building material supply", correct:false}
-    ],
-    why:"National parks are a key wellbeing resource — recreation, mental health and tourism income all rely on access to them."
-  },
-  {
-    quote:"An extended heatwave dries out plantation forests earmarked for timber harvest.",
-    options:[
-      {label:"Timber and material supply", correct:true},
-      {label:"Air quality", correct:false},
-      {label:"Fishing industry catches", correct:false},
-      {label:"Drinking water supply", correct:false}
-    ],
-    why:"Dried-out, heat-stressed plantations reduce usable timber yield — a direct hit to the materials system, before any other flow-on effects."
-  }
-];
-
-let score = 0;
-let streak = 0;
-let r1Index = 0;
-let r2Index = 0;
-let r1Answered = false;
-let r2Answered = false;
-
-function show(id){
-  document.querySelectorAll('.screen').forEach(el => el.classList.add('hidden'));
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function showScreen(id) {
+  document.querySelectorAll('.card-panel').forEach(el => el.classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
 }
 
-function updateScoreDisplay(){
-  document.getElementById('scoreDisplay').textContent = score;
-  document.getElementById('streakDisplay').textContent = streak >= 3 ? "🔥 streak x2" : "";
+function updateHud() {
+  document.getElementById('hud-score').textContent = state.score;
+  document.getElementById('hud-streak').textContent = state.streak;
+  document.getElementById('hud-round').textContent = Math.min(state.round, 3) + '/3';
+  const pct = Math.min(100, (state.round / 3) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
 }
 
-function updateProgress(pct){
-  document.getElementById('progressBar').style.width = pct + "%";
+function goToRound(n) {
+  state.round = n;
+  updateHud();
+  if (n === 1) { showScreen('screen-round1'); initRound1(); }
+  else if (n === 2) { showScreen('screen-round2'); initRound2(); }
+  else if (n === 3) { showScreen('screen-round3'); initRound3(); }
+  else if (n === 4) { showScreen('screen-results'); showResults(); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function startGame(){
-  score = 0; streak = 0; r1Index = 0; r2Index = 0;
-  updateScoreDisplay();
-  show('screen-round1');
-  renderRound1();
-}
-
-function renderRound1(){
-  r1Answered = false;
-  const item = ROUND1[r1Index];
-  document.getElementById('r1Label').textContent = `ROUND 1 · ITEM ${r1Index+1} OF ${ROUND1.length}`;
-  document.getElementById('r1ItemText').textContent = item.text;
-  document.getElementById('r1Feedback').className = 'feedback';
-  document.getElementById('r1Feedback').textContent = '';
-  document.getElementById('r1NextBtn').classList.add('hidden');
-  updateProgress((r1Index / (ROUND1.length + ROUND2.length)) * 100);
-
-  const grid = document.getElementById('r1CatGrid');
-  grid.innerHTML = '';
-  CATS.forEach(c => {
-    const btn = document.createElement('button');
-    btn.className = 'cat-btn';
-    btn.innerHTML = `<span class="emoji">${c.emoji}</span>${c.label}`;
-    btn.onclick = () => answerRound1(c.key, btn);
-    grid.appendChild(btn);
-  });
-}
-
-function answerRound1(chosenKey, btnEl){
-  if(r1Answered) return;
-  r1Answered = true;
-  const item = ROUND1[r1Index];
-  const correct = chosenKey === item.cat;
-  const buttons = document.querySelectorAll('#r1CatGrid .cat-btn');
-  buttons.forEach(b => b.disabled = true);
-  btnEl.classList.add(correct ? 'correct' : 'wrong');
-
-  if(correct){
-    streak++;
-    const pts = streak >= 3 ? 20 : 10;
-    score += pts;
-    const fb = document.getElementById('r1Feedback');
-    fb.className = 'feedback ok show';
-    fb.textContent = (streak >= 3 ? `🔥 Streak bonus! +${pts} points. ` : `Correct! +${pts} points. `) + item.why;
+function bump(correct, points) {
+  if (correct) {
+    state.streak += 1;
+    state.bestStreak = Math.max(state.bestStreak, state.streak);
+    let bonus = state.streak >= 3 ? Math.floor(points * 0.5) : 0;
+    state.score += points + bonus;
   } else {
-    streak = 0;
-    buttons.forEach(b => {
-      if(b.textContent.includes(CATS.find(c=>c.key===item.cat).label)) b.classList.add('correct');
+    state.streak = 0;
+  }
+  updateHud();
+}
+
+/* ============================================================
+   ROUND 1: Quadrant Sort
+   ============================================================ */
+let r1Selected = null;
+
+function initRound1() {
+  const tray = document.getElementById('r1-tray');
+  tray.innerHTML = '';
+  document.querySelectorAll('.quad').forEach(q => { q.innerHTML = '<span class="quad-label">' + quadLabels[q.dataset.quad] + '</span>'; q.classList.remove('drophover'); });
+  r1Cards.forEach(card => {
+    const btn = document.createElement('button');
+    btn.className = 'sort-card';
+    btn.textContent = card.label;
+    btn.id = 'card-' + card.id;
+    btn.onclick = () => selectR1Card(card, btn);
+    tray.appendChild(btn);
+  });
+  document.querySelectorAll('.quad').forEach(q => {
+    q.onclick = () => placeR1Card(q.dataset.quad, q);
+  });
+  document.getElementById('r1-feedback').style.display = 'none';
+  document.getElementById('r1-feedback').className = 'feedback-box';
+  document.getElementById('r1-next').disabled = true;
+  state.r1 = { placed: 0, correct: 0 };
+  r1Selected = null;
+}
+
+function selectR1Card(card, btn) {
+  document.querySelectorAll('.sort-card').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  r1Selected = { card, btn };
+  document.getElementById('r1-hint').textContent = 'Now tap the quadrant where "' + card.label + '" belongs.';
+}
+
+function placeR1Card(quadCode, quadEl) {
+  if (!r1Selected) {
+    document.getElementById('r1-hint').textContent = 'Select an example card first, then tap a quadrant.';
+    return;
+  }
+  const { card, btn } = r1Selected;
+  const correct = quadCode === card.quad;
+  const chip = document.createElement('div');
+  chip.className = 'placed-chip ' + (correct ? 'correct' : 'incorrect');
+  chip.textContent = card.label;
+  quadEl.appendChild(chip);
+  btn.classList.add('used');
+
+  const fb = document.getElementById('r1-feedback');
+  fb.style.display = 'block';
+  fb.className = 'feedback-box ' + (correct ? 'good' : 'bad');
+  fb.innerHTML = (correct ? '\u2713 Correct placement. ' : '\u2717 Not quite, this belongs in ' + quadLabels[card.quad] + '. ') + card.why;
+
+  state.r1.placed += 1;
+  if (correct) state.r1.correct += 1;
+  bump(correct, 10);
+
+  r1Selected = null;
+  document.getElementById('r1-hint').textContent = 'Select the next example card.';
+
+  if (state.r1.placed === r1Cards.length) {
+    document.getElementById('r1-next').disabled = false;
+    document.getElementById('r1-hint').textContent = 'Case board complete: ' + state.r1.correct + ' of ' + r1Cards.length + ' correctly placed on first try.';
+  }
+}
+
+/* ============================================================
+   ROUND 2: Case Files
+   ============================================================ */
+function initRound2() {
+  state.r2.caseIndex = 0;
+  state.r2.correct = 0;
+  loadCase();
+}
+
+function loadCase() {
+  const idx = state.r2.caseIndex;
+  const c = r2Cases[idx];
+  document.getElementById('r2-casenum').textContent = 'CASE ' + String(idx + 1).padStart(3, '0');
+  document.getElementById('r2-title').textContent = c.title;
+  document.getElementById('r2-story').textContent = c.story;
+  document.getElementById('r2-progress').textContent = 'Case ' + (idx + 1) + ' of ' + r2Cases.length;
+
+  const choicesEl = document.getElementById('r2-choices');
+  choicesEl.innerHTML = '';
+  c.classChoices.forEach((choice, i) => {
+    const b = document.createElement('button');
+    b.className = 'choice-btn';
+    b.textContent = choice;
+    b.onclick = () => pickClass(i, b);
+    choicesEl.appendChild(b);
+  });
+
+  const justEl = document.getElementById('r2-justify');
+  justEl.innerHTML = '';
+  c.justOptions.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'justify-btn';
+    b.textContent = opt;
+    b.onclick = () => pickJustify(i, b);
+    justEl.appendChild(b);
+  });
+
+  state.r2.classPicked = null;
+  state.r2.justPicked = null;
+  document.getElementById('r2-feedback').style.display = 'none';
+  document.getElementById('r2-feedback').className = 'feedback-box';
+  document.getElementById('r2-next').disabled = true;
+  document.getElementById('r2-next').textContent = 'Submit Case \u2192';
+}
+
+function pickClass(i, btn) {
+  if (state.r2.classPicked !== null && document.getElementById('r2-feedback').style.display === 'block') return;
+  document.querySelectorAll('#r2-choices .choice-btn').forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+  state.r2.classPicked = i;
+  checkCaseReady();
+}
+function pickJustify(i, btn) {
+  if (document.getElementById('r2-feedback').style.display === 'block') return;
+  document.querySelectorAll('#r2-justify .justify-btn').forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+  state.r2.justPicked = i;
+  checkCaseReady();
+}
+function checkCaseReady() {
+  if (state.r2.classPicked !== null && state.r2.justPicked !== null) {
+    document.getElementById('r2-next').disabled = false;
+  }
+}
+
+function nextCase() {
+  const idx = state.r2.caseIndex;
+  const c = r2Cases[idx];
+  const fb = document.getElementById('r2-feedback');
+  if (fb.style.display !== 'block') {
+    // Grading phase
+    const classRight = state.r2.classPicked === c.classCorrect;
+    const justRight = state.r2.justPicked === c.justCorrect;
+    document.querySelectorAll('#r2-choices .choice-btn').forEach((b, i) => {
+      if (i === c.classCorrect) b.classList.add('reveal-correct');
+      else if (i === state.r2.classPicked) b.classList.add('reveal-wrong');
     });
-    const fb = document.getElementById('r1Feedback');
-    fb.className = 'feedback bad show';
-    fb.textContent = `Not quite — this one is ${CATS.find(c=>c.key===item.cat).label}. ${item.why}`;
+    document.querySelectorAll('#r2-justify .justify-btn').forEach((b, i) => {
+      if (i === c.justCorrect) b.classList.add('reveal-correct');
+      else if (i === state.r2.justPicked) b.classList.add('reveal-wrong');
+    });
+    const bothRight = classRight && justRight;
+    fb.style.display = 'block';
+    fb.className = 'feedback-box ' + (bothRight ? 'good' : 'bad');
+    fb.innerHTML = (bothRight ? '\u2713 Case closed correctly.' : (classRight ? '\u2713 Classification correct, but check the justification.' : '\u2717 Reconsider the classification.')) + ' ' + c.justOptions[c.justCorrect];
+    if (bothRight) state.r2.correct += 1;
+    bump(bothRight, 15);
+    document.getElementById('r2-next').textContent = (idx === r2Cases.length - 1) ? 'See Timeline Challenge \u2192' : 'Next Case \u2192';
+    return;
   }
-  updateScoreDisplay();
-  document.getElementById('r1NextBtn').classList.remove('hidden');
-}
-
-function nextRound1(){
-  r1Index++;
-  if(r1Index >= ROUND1.length){
-    show('screen-transition');
+  // Advance
+  if (idx === r2Cases.length - 1) {
+    goToRound(3);
   } else {
-    renderRound1();
+    state.r2.caseIndex += 1;
+    loadCase();
   }
 }
 
-function startRound2(){
-  show('screen-round2');
-  renderRound2();
+/* ============================================================
+   ROUND 3: Timeline ranking
+   ============================================================ */
+let r3Pool = [];
+let r3Selected = null;
+let r3Placements = [];
+
+function initRound3() {
+  r3Pool = shuffle([...r3EventsCorrectOrder]);
+  r3Placements = new Array(r3EventsCorrectOrder.length).fill(null);
+  r3Selected = null;
+  state.r3 = { placedCount: 0, correct: 0 };
+
+  const slotsEl = document.getElementById('r3-slots');
+  slotsEl.innerHTML = '';
+  for (let i = 0; i < r3EventsCorrectOrder.length; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'rank-slot';
+    slot.innerHTML = '<span class="rank-num">' + (i + 1) + '</span><span class="slot-hint">' + (i === 0 ? 'fastest' : (i === r3EventsCorrectOrder.length - 1 ? 'slowest' : '')) + '</span>';
+    slot.dataset.pos = i;
+    slot.onclick = () => placeR3(i, slot);
+    slotsEl.appendChild(slot);
+  }
+  renderR3Pool();
+  document.getElementById('r3-feedback').style.display = 'none';
+  document.getElementById('r3-next').disabled = true;
 }
 
-function renderRound2(){
-  r2Answered = false;
-  const s = ROUND2[r2Index];
-  document.getElementById('r2Label').textContent = `ROUND 2 · SCENARIO ${r2Index+1} OF ${ROUND2.length}`;
-  document.getElementById('r2Quote').textContent = `“${s.quote}”`;
-  document.getElementById('r2Feedback').className = 'feedback';
-  document.getElementById('r2Feedback').textContent = '';
-  document.getElementById('r2NextBtn').classList.add('hidden');
-  updateProgress(((ROUND1.length + r2Index) / (ROUND1.length + ROUND2.length)) * 100);
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
-  const list = document.getElementById('r2Options');
-  list.innerHTML = '';
-  s.options.forEach(opt => {
-    const btn = document.createElement('button');
-    btn.className = 'option-btn';
-    btn.textContent = opt.label;
-    btn.onclick = () => answerRound2(opt, btn);
-    list.appendChild(btn);
+function renderR3Pool() {
+  const poolEl = document.getElementById('r3-pool');
+  poolEl.innerHTML = '';
+  r3Pool.forEach(ev => {
+    const b = document.createElement('button');
+    b.className = 'sort-card';
+    b.textContent = ev.label;
+    if (r3Selected && r3Selected.id === ev.id) b.classList.add('selected');
+    b.onclick = () => { r3Selected = ev; renderR3Pool(); };
+    poolEl.appendChild(b);
   });
 }
 
-function answerRound2(opt, btnEl){
-  if(r2Answered) return;
-  r2Answered = true;
-  const s = ROUND2[r2Index];
-  const buttons = document.querySelectorAll('#r2Options .option-btn');
-  buttons.forEach(b => b.disabled = true);
+function placeR3(pos, slotEl) {
+  if (r3Placements[pos]) return; // already filled
+  if (!r3Selected) return;
+  const ev = r3Selected;
+  const correctIndex = r3EventsCorrectOrder.findIndex(e => e.id === ev.id);
+  const correct = correctIndex === pos;
+  r3Placements[pos] = ev;
+  slotEl.innerHTML += '<div class="placed ' + (correct ? 'correct' : 'incorrect') + '">' + ev.label + '</div>';
 
-  if(opt.correct){
-    score += 20;
-    btnEl.classList.add('correct');
-    const fb = document.getElementById('r2Feedback');
-    fb.className = 'feedback ok show';
-    fb.textContent = `Correct! +20 points. ${s.why}`;
-  } else {
-    btnEl.classList.add('wrong');
-    buttons.forEach((b,i) => { if(s.options[i].correct) b.classList.add('correct'); });
-    const fb = document.getElementById('r2Feedback');
-    fb.className = 'feedback bad show';
-    fb.textContent = `Not quite. ${s.why}`;
-  }
-  updateScoreDisplay();
-  document.getElementById('r2NextBtn').classList.remove('hidden');
-}
+  r3Pool = r3Pool.filter(e => e.id !== ev.id);
+  r3Selected = null;
+  renderR3Pool();
 
-function nextRound2(){
-  r2Index++;
-  if(r2Index >= ROUND2.length){
-    endGame();
-  } else {
-    renderRound2();
+  state.r3.placedCount += 1;
+  if (correct) state.r3.correct += 1;
+  bump(correct, 12);
+
+  if (state.r3.placedCount === r3EventsCorrectOrder.length) {
+    const fb = document.getElementById('r3-feedback');
+    fb.style.display = 'block';
+    fb.className = 'feedback-box ' + (state.r3.correct === r3EventsCorrectOrder.length ? 'good' : 'bad');
+    fb.innerHTML = 'Timeline complete: ' + state.r3.correct + ' of ' + r3EventsCorrectOrder.length + ' placed in the correct position. The full fastest-to-slowest order was: ' + r3EventsCorrectOrder.map(e => e.label).join(' \u2192 ');
+    document.getElementById('r3-next').disabled = false;
   }
 }
 
-function endGame(){
-  updateProgress(100);
-  const maxScore = 200;
-  document.getElementById('endScore').innerHTML = `${score}<span> / ${maxScore} pts</span>`;
+/* ============================================================
+   RESULTS
+   ============================================================ */
+function showResults() {
+  const totalPossible = (r1Cards.length * 10) + (r2Cases.length * 15) + (r3EventsCorrectOrder.length * 12);
+  const totalCorrectItems = state.r1.correct + state.r2.correct + state.r3.correct;
+  const totalItems = r1Cards.length + r2Cases.length + r3EventsCorrectOrder.length;
+  const pct = Math.round((totalCorrectItems / totalItems) * 100);
 
-  let title = "Nature Novice", medal = "🌱";
-  if(score >= 160){ title = "Sustainability Champion"; medal = "🏆"; }
-  else if(score >= 100){ title = "Systems Thinker"; medal = "🌿"; }
-  document.getElementById('endTitle').textContent = title;
-  document.getElementById('endMedal').textContent = medal;
+  document.getElementById('res-score').textContent = state.score;
+  document.getElementById('res-pct').textContent = pct + '%';
+  document.getElementById('res-streak').textContent = state.bestStreak;
 
-  let best = 0;
-  try{
-    best = parseInt(localStorage.getItem('webOfLifeHighScore') || '0', 10);
-    if(score > best){
-      localStorage.setItem('webOfLifeHighScore', String(score));
-      document.getElementById('endBest').textContent = best > 0 ? `🎉 New personal best! (Previous: ${best})` : `🎉 First run recorded as your personal best.`;
-    } else {
-      document.getElementById('endBest').textContent = `Personal best: ${best}`;
-    }
-  } catch(e){
-    document.getElementById('endBest').textContent = '';
-  }
+  let rankTitle, rankSub, icon;
+  if (pct >= 90) { rankTitle = 'Master Investigator'; rankSub = 'Outstanding case work. You read the evidence like a pro.'; icon = '\u{1F3C6}'; }
+  else if (pct >= 75) { rankTitle = 'Senior Investigator'; rankSub = 'Strong case record, with a sharp eye for evidence.'; icon = '\u{1F3C5}'; }
+  else if (pct >= 55) { rankTitle = 'Field Assistant'; rankSub = 'Solid progress. A few cases are worth revisiting.'; icon = '\u{1F9ED}'; }
+  else { rankTitle = 'Trainee Investigator'; rankSub = 'Good start. Compare answers with your partner and try again.'; icon = '\u{1F4CB}'; }
 
-  show('screen-end');
+  document.getElementById('res-badge-icon').textContent = icon;
+  document.getElementById('res-rank-title').textContent = rankTitle;
+  document.getElementById('res-rank-sub').textContent = rankSub;
 }
 
-function resetGame(){
-  streak = 0;
-  updateScoreDisplay();
-  show('screen-start');
-  updateProgress(0);
+function restartGame() {
+  state = { score: 0, streak: 0, bestStreak: 0, round: 0, r1: { placed: 0, correct: 0 }, r2: { caseIndex: 0, correct: 0, classPicked: null, justPicked: null }, r3: { placedCount: 0, correct: 0 } };
+  updateHud();
+  showScreen('screen-intro');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+updateHud();
 </script>
-
 </body>
 </html>
