@@ -3,16 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Change Files: Environmental Change Investigator</title>
+<title>Cause Files: The Environmental Detective</title>
 <style>
   :root {
     --slate: #2F4550;
     --slate-dark: #1F2F36;
-    --slate-light: #45606D;
-    --ember: #C1502F;
-    --ember-dark: #9C3F24;
-    --sage: #7A9E9F;
-    --sage-dark: #5E8182;
+    --natural: #5B7B4F;
+    --natural-dark: #435A38;
+    --human: #C98A2C;
+    --human-dark: #9C6B1E;
     --cream: #F4F1EA;
     --ink: #232323;
     --white: #FFFFFF;
@@ -28,403 +27,180 @@
     font-family: 'Segoe UI', Calibri, Roboto, Helvetica, Arial, sans-serif;
     background: var(--slate-dark);
     background-image:
-      radial-gradient(circle at 15% 10%, rgba(122,158,159,0.12) 0%, transparent 45%),
-      radial-gradient(circle at 85% 90%, rgba(193,80,47,0.12) 0%, transparent 45%);
+      radial-gradient(circle at 15% 10%, rgba(91,123,79,0.14) 0%, transparent 45%),
+      radial-gradient(circle at 85% 90%, rgba(201,138,44,0.14) 0%, transparent 45%);
     color: var(--ink);
     min-height: 100vh;
   }
 
-  h1, h2, h3, .display {
-    font-family: Cambria, Georgia, 'Times New Roman', serif;
-    margin: 0;
-  }
+  h1, h2, h3, .display { font-family: Cambria, Georgia, 'Times New Roman', serif; margin: 0; }
 
-  .app {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 20px 16px 60px;
-  }
+  .app { max-width: 960px; margin: 0 auto; padding: 20px 16px 60px; }
 
-  /* ---------- HEADER / HUD ---------- */
+  /* ---------- HUD ---------- */
   .hud {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--slate);
-    color: var(--white);
-    border-radius: 14px;
-    padding: 14px 20px;
-    margin-bottom: 18px;
-    box-shadow: var(--shadow);
-    flex-wrap: wrap;
-    gap: 10px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--slate); color: var(--white);
+    border-radius: 14px; padding: 14px 20px; margin-bottom: 18px;
+    box-shadow: var(--shadow); flex-wrap: wrap; gap: 10px;
   }
-  .hud .brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  .hud .brand { display: flex; align-items: center; gap: 10px; }
   .hud .brand .badge-icon {
     width: 34px; height: 34px; border-radius: 50%;
-    background: var(--ember);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
+    background: var(--human); display: flex; align-items: center; justify-content: center; font-size: 18px;
   }
-  .hud .brand-text { font-size: 14px; letter-spacing: 0.5px; color: var(--sage); font-weight: 700; text-transform: uppercase; }
-  .hud .brand-title { font-family: Cambria, Georgia, serif; font-size: 19px; font-weight: 700; }
+  .hud .brand-text { font-size: 14px; letter-spacing: 0.5px; color: #B7CDAF; font-weight: 700; text-transform: uppercase; }
+  .hud .brand-title { font-size: 19px; font-weight: 700; }
   .hud .stats { display: flex; gap: 18px; }
   .hud .stat { text-align: center; }
   .hud .stat .num { font-size: 20px; font-weight: 700; font-family: Cambria, Georgia, serif; }
-  .hud .stat .lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--sage); }
+  .hud .stat .lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; color: #B7CDAF; }
 
-  .progress-track {
-    height: 8px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 5px;
-    overflow: hidden;
-    margin-bottom: 26px;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--sage), var(--ember));
-    width: 0%;
-    transition: width 0.4s ease;
-  }
+  .progress-track { height: 8px; background: rgba(255,255,255,0.15); border-radius: 5px; overflow: hidden; margin-bottom: 26px; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--natural), var(--human)); width: 0%; transition: width 0.4s ease; }
 
-  .card-panel {
-    background: var(--white);
-    border-radius: 16px;
-    padding: 28px;
-    box-shadow: var(--shadow);
-  }
+  .card-panel { background: var(--white); border-radius: 16px; padding: 28px; box-shadow: var(--shadow); }
 
-  .eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--ember);
-    margin-bottom: 6px;
-  }
-
-  .screen-title {
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--slate-dark);
-    margin-bottom: 10px;
-  }
-
+  .eyebrow { text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; font-weight: 700; color: var(--human); margin-bottom: 6px; }
+  .screen-title { font-size: 26px; font-weight: 700; color: var(--slate-dark); margin-bottom: 10px; }
   .lede { font-size: 15.5px; line-height: 1.55; color: #444; margin-bottom: 18px; }
 
-  button {
-    font-family: inherit;
-    cursor: pointer;
-    border: none;
-  }
+  button { font-family: inherit; cursor: pointer; border: none; }
 
   .btn-primary {
-    background: var(--ember);
-    color: var(--white);
-    font-weight: 700;
-    font-size: 15px;
-    padding: 13px 26px;
-    border-radius: 10px;
-    transition: transform 0.12s ease, background 0.12s ease;
+    background: var(--human); color: var(--white); font-weight: 700; font-size: 15px;
+    padding: 13px 26px; border-radius: 10px; transition: transform 0.12s ease, background 0.12s ease;
   }
-  .btn-primary:hover { background: var(--ember-dark); transform: translateY(-1px); }
+  .btn-primary:hover { background: var(--human-dark); transform: translateY(-1px); }
   .btn-primary:disabled { background: #ccc; cursor: not-allowed; transform: none; }
 
   .btn-secondary {
-    background: transparent;
-    color: var(--slate);
-    font-weight: 700;
-    font-size: 14px;
-    padding: 11px 20px;
-    border-radius: 10px;
-    border: 2px solid var(--slate);
+    background: transparent; color: var(--slate); font-weight: 700; font-size: 14px;
+    padding: 11px 20px; border-radius: 10px; border: 2px solid var(--slate);
   }
   .btn-secondary:hover { background: var(--slate); color: var(--white); }
 
-  /* ---------- INTRO SCREEN ---------- */
-  .intro-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin: 20px 0 24px;
-  }
-  .intro-round {
-    background: var(--cream);
-    border-radius: 12px;
-    padding: 14px;
-    border-left: 5px solid var(--sage);
-  }
-  .intro-round:nth-child(2) { border-left-color: var(--ember); }
+  /* ---------- INTRO ---------- */
+  .intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0 24px; }
+  .intro-round { background: var(--cream); border-radius: 12px; padding: 14px; border-left: 5px solid var(--natural); }
+  .intro-round:nth-child(2) { border-left-color: var(--human); }
   .intro-round:nth-child(3) { border-left-color: var(--slate); }
-  .intro-round .num { font-family: Cambria, Georgia, serif; font-size: 22px; font-weight: 700; color: var(--slate-dark); }
+  .intro-round .num { font-size: 22px; font-weight: 700; color: var(--slate-dark); }
   .intro-round h3 { font-size: 14.5px; margin: 4px 0 6px; }
   .intro-round p { font-size: 12.5px; color: #555; line-height: 1.4; margin: 0; }
 
-  .briefing-box {
-    background: var(--slate-dark);
-    color: var(--cream);
-    border-radius: 12px;
-    padding: 18px 20px;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 22px;
-  }
-  .briefing-box strong { color: var(--sage); }
+  .briefing-box { background: var(--slate-dark); color: var(--cream); border-radius: 12px; padding: 18px 20px; font-size: 14px; line-height: 1.6; margin-bottom: 22px; }
+  .briefing-box strong { color: #B7CDAF; }
 
-  /* ---------- MATRIX (Round 1) ---------- */
-  .matrix-wrap {
-    display: grid;
-    grid-template-columns: 40px 1fr 1fr;
-    grid-template-rows: 30px 1fr 1fr;
-    gap: 6px;
-    margin: 18px 0;
-  }
-  .axis-label {
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
-    color: var(--slate);
-  }
-  .axis-label.top { grid-row: 1; }
-  .axis-label.side {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    grid-column: 1;
-  }
-  .quad {
-    min-height: 110px;
-    border-radius: 10px;
-    background: var(--cream);
-    border: 2px dashed #cfc9ba;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    padding: 8px;
-    transition: background 0.15s ease, border-color 0.15s ease;
-    position: relative;
-  }
-  .quad .quad-label { font-size: 11px; font-weight: 700; color: #8a8272; text-align: center; }
-  .quad.drophover { background: #eae4d2; border-color: var(--ember); }
-  .quad .placed-chip {
-    background: var(--slate);
-    color: white;
-    font-size: 11.5px;
-    padding: 5px 8px;
-    border-radius: 7px;
-    max-width: 95%;
-    text-align: center;
-  }
-  .quad .placed-chip.correct { background: var(--good); }
-  .quad .placed-chip.incorrect { background: var(--bad); }
+  /* ---------- ROUND 1: Cause Sort ---------- */
+  .sort-board { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0; }
+  .sort-col { border-radius: 12px; padding: 12px; min-height: 220px; border: 2px dashed #cfc9ba; background: var(--cream); }
+  .sort-col.natural { border-color: var(--natural); }
+  .sort-col.human { border-color: var(--human); }
+  .sort-col h3 { font-size: 14px; text-align: center; margin-bottom: 10px; }
+  .sort-col.natural h3 { color: var(--natural-dark); }
+  .sort-col.human h3 { color: var(--human-dark); }
+  .sort-col.drophover { background: #eae4d2; }
+  .placed-chip { background: var(--slate); color: white; font-size: 11.5px; padding: 6px 9px; border-radius: 7px; margin-bottom: 6px; text-align: center; }
+  .placed-chip.correct { background: var(--good); }
+  .placed-chip.incorrect { background: var(--bad); }
 
-  .card-tray {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 16px 0;
-    min-height: 54px;
-  }
+  .card-tray { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; min-height: 54px; }
   .sort-card {
-    background: var(--white);
-    border: 2px solid var(--slate);
-    color: var(--slate-dark);
-    font-size: 13px;
-    font-weight: 600;
-    padding: 10px 14px;
-    border-radius: 9px;
-    cursor: pointer;
-    transition: all 0.12s ease;
+    background: var(--white); border: 2px solid var(--slate); color: var(--slate-dark);
+    font-size: 13px; font-weight: 600; padding: 10px 14px; border-radius: 9px;
+    cursor: pointer; transition: all 0.12s ease;
   }
   .sort-card:hover { background: var(--slate); color: white; transform: translateY(-2px); }
-  .sort-card.selected { background: var(--ember); border-color: var(--ember); color: white; }
+  .sort-card.selected { background: var(--human); border-color: var(--human); color: white; }
   .sort-card.used { display: none; }
 
-  .helper-note {
-    font-size: 12.5px;
-    color: #777;
-    font-style: italic;
-    margin-top: 4px;
-  }
-
-  /* ---------- CASE FILES (Round 2) ---------- */
-  .case-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-  }
-  .case-num {
-    background: var(--slate-dark);
-    color: var(--sage);
-    font-family: Cambria, Georgia, serif;
-    font-weight: 700;
-    font-size: 13px;
-    padding: 4px 10px;
-    border-radius: 6px;
-  }
-  .case-story {
-    background: var(--cream);
-    border-radius: 10px;
-    padding: 16px 18px;
-    font-size: 14.5px;
-    line-height: 1.55;
-    margin-bottom: 18px;
-    border-left: 4px solid var(--slate);
-  }
-  .choice-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-  .choice-btn {
-    background: var(--white);
-    border: 2px solid #ddd6c6;
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--slate-dark);
-    text-align: left;
-    transition: all 0.12s ease;
-  }
-  .choice-btn:hover { border-color: var(--slate); }
-  .choice-btn.picked { border-color: var(--ember); background: #fdf0ea; }
-  .choice-btn.reveal-correct { border-color: var(--good); background: #eaf5ec; }
-  .choice-btn.reveal-wrong { border-color: var(--bad); background: #fbeae8; opacity: 0.75; }
-
-  .justify-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-  .justify-btn {
-    background: var(--white);
-    border: 2px solid #ddd6c6;
-    border-radius: 10px;
-    padding: 11px 14px;
-    font-size: 13px;
-    text-align: left;
-    color: #333;
-  }
-  .justify-btn.picked { border-color: var(--sage-dark); background: #eef4f4; }
-  .justify-btn.reveal-correct { border-color: var(--good); background: #eaf5ec; font-weight: 600; }
-  .justify-btn.reveal-wrong { border-color: var(--bad); background: #fbeae8; opacity: 0.7; }
-
-  .feedback-box {
+  .driver-prompt {
     display: none;
-    border-radius: 10px;
-    padding: 14px 16px;
-    font-size: 13.5px;
-    line-height: 1.5;
-    margin-bottom: 16px;
+    background: var(--slate-dark); color: white; border-radius: 12px; padding: 16px 18px; margin: 14px 0;
   }
+  .driver-prompt.show { display: block; }
+  .driver-prompt p { font-size: 13.5px; margin: 0 0 10px; }
+  .driver-chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .driver-chip {
+    background: rgba(255,255,255,0.1); color: white; border: 1.5px solid rgba(255,255,255,0.35);
+    padding: 8px 13px; border-radius: 20px; font-size: 12.5px; font-weight: 600;
+  }
+  .driver-chip:hover { background: rgba(255,255,255,0.22); }
+  .driver-chip.correct { background: var(--good); border-color: var(--good); }
+  .driver-chip.incorrect { background: var(--bad); border-color: var(--bad); }
+
+  .helper-note { font-size: 12.5px; color: #777; font-style: italic; margin-top: 4px; }
+
+  /* ---------- ROUND 2: Mixed Cases ---------- */
+  .case-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .case-num { background: var(--slate-dark); color: #B7CDAF; font-weight: 700; font-size: 13px; padding: 4px 10px; border-radius: 6px; }
+  .case-story { background: var(--cream); border-radius: 10px; padding: 16px 18px; font-size: 14.5px; line-height: 1.55; margin-bottom: 18px; border-left: 4px solid var(--slate); }
+
+  .dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .dual-col h4 { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px; }
+  .dual-col.natural h4 { color: var(--natural-dark); }
+  .dual-col.human h4 { color: var(--human-dark); }
+  .opt-btn {
+    display: block; width: 100%; text-align: left;
+    background: var(--white); border: 2px solid #ddd6c6; border-radius: 10px;
+    padding: 10px 12px; font-size: 12.5px; font-weight: 600; color: var(--slate-dark);
+    margin-bottom: 8px; transition: all 0.12s ease;
+  }
+  .opt-btn:hover { border-color: var(--slate); }
+  .opt-btn.picked { border-color: var(--human); background: #fdf3e6; }
+  .opt-btn.reveal-correct { border-color: var(--good); background: #eaf5ec; }
+  .opt-btn.reveal-wrong { border-color: var(--bad); background: #fbeae8; opacity: 0.75; }
+
+  .feedback-box { display: none; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; line-height: 1.5; margin-bottom: 16px; }
   .feedback-box.good { background: #eaf5ec; border-left: 4px solid var(--good); display: block; }
   .feedback-box.bad { background: #fbeae8; border-left: 4px solid var(--bad); display: block; }
 
-  /* ---------- TIMELINE (Round 3) ---------- */
-  .timeline-track {
-    position: relative;
-    background: linear-gradient(90deg, var(--ember) 0%, var(--cream) 50%, var(--sage) 100%);
-    border-radius: 10px;
-    height: 14px;
-    margin: 40px 6px 8px;
+  /* ---------- ROUND 3: Driver Match-Up ---------- */
+  .timer-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .timer-badge {
+    background: var(--slate-dark); color: white; font-weight: 700; font-size: 15px;
+    padding: 8px 16px; border-radius: 20px; display: flex; align-items: center; gap: 8px;
   }
-  .timeline-ends {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--slate);
-    margin: 0 6px 22px;
+  .timer-badge.urgent { background: var(--bad); }
+  .qcount { font-size: 13px; color: #888; }
+  .scenario-box { background: var(--cream); border-radius: 10px; padding: 18px 20px; font-size: 16px; line-height: 1.5; margin-bottom: 18px; text-align: center; font-weight: 600; color: var(--slate-dark); min-height: 60px; display:flex; align-items:center; justify-content:center; }
+  .driver-answer-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+  .driver-answer-btn {
+    background: var(--white); border: 2px solid var(--slate); border-radius: 10px;
+    padding: 16px 10px; font-size: 14px; font-weight: 700; color: var(--slate-dark); text-align: center;
   }
-  .rank-slots {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 8px;
-    margin-bottom: 18px;
-  }
-  .rank-slot {
-    min-height: 78px;
-    border: 2px dashed #cfc9ba;
-    border-radius: 10px;
-    background: var(--cream);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 6px;
-    font-size: 10.5px;
-    color: #8a8272;
-    text-align: center;
-    gap: 4px;
-  }
-  .rank-slot .rank-num { font-family: Cambria, Georgia, serif; font-weight: 700; font-size: 15px; color: var(--slate); }
-  .rank-slot .placed { background: var(--slate); color: white; border-radius: 7px; padding: 5px 6px; font-size: 11px; font-weight: 600; }
-  .rank-slot .placed.correct { background: var(--good); }
-  .rank-slot .placed.incorrect { background: var(--bad); }
-  .event-pool { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 10px; }
+  .driver-answer-btn:hover { background: var(--slate); color: white; }
+  .driver-answer-btn.correct { background: var(--good); border-color: var(--good); color: white; }
+  .driver-answer-btn.incorrect { background: var(--bad); border-color: var(--bad); color: white; }
+  .r3-result-line { text-align: center; font-size: 13px; color: #777; min-height: 20px; margin-bottom: 6px; }
 
   /* ---------- RESULTS ---------- */
-  .results-hero {
-    text-align: center;
-    padding: 10px 0 24px;
-  }
+  .results-hero { text-align: center; padding: 10px 0 24px; }
   .rank-badge {
-    width: 96px; height: 96px;
-    border-radius: 50%;
-    background: var(--ember);
-    color: white;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 36px;
-    margin: 0 auto 14px;
-    box-shadow: 0 6px 18px rgba(193,80,47,0.4);
+    width: 96px; height: 96px; border-radius: 50%; background: var(--human); color: white;
+    display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 14px;
+    box-shadow: 0 6px 18px rgba(201,138,44,0.4);
   }
   .rank-title { font-size: 24px; font-weight: 700; color: var(--slate-dark); margin-bottom: 6px; }
   .rank-sub { font-size: 14px; color: #666; margin-bottom: 20px; }
-  .score-strip {
-    display: flex;
-    justify-content: center;
-    gap: 26px;
-    margin-bottom: 24px;
-  }
+  .score-strip { display: flex; justify-content: center; gap: 26px; margin-bottom: 24px; }
   .score-strip .s-item { text-align: center; }
   .score-strip .s-item .n { font-size: 26px; font-weight: 700; font-family: Cambria, Georgia, serif; color: var(--slate); }
   .score-strip .s-item .l { font-size: 11px; text-transform: uppercase; color: #888; }
 
-  .reflection-box {
-    background: var(--cream);
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin-bottom: 20px;
-  }
-  .reflection-box textarea {
-    width: 100%;
-    min-height: 80px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    font-family: inherit;
-    font-size: 13.5px;
-    resize: vertical;
-    margin-top: 8px;
-  }
+  .reflection-box { background: var(--cream); border-radius: 10px; padding: 16px 18px; margin-bottom: 20px; }
+  .reflection-box textarea { width: 100%; min-height: 80px; border-radius: 8px; border: 1px solid #ccc; padding: 10px; font-family: inherit; font-size: 13.5px; resize: vertical; margin-top: 8px; }
 
-  .nav-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 22px;
-    gap: 10px;
-  }
+  .nav-row { display: flex; justify-content: space-between; margin-top: 22px; gap: 10px; }
   .nav-row.end { justify-content: flex-end; }
   .hidden { display: none !important; }
 
   @media (max-width: 640px) {
     .intro-grid { grid-template-columns: 1fr; }
-    .choice-grid { grid-template-columns: 1fr; }
-    .rank-slots { grid-template-columns: repeat(3, 1fr); }
+    .dual-grid { grid-template-columns: 1fr; }
+    .sort-board { grid-template-columns: 1fr; }
+    .driver-answer-row { grid-template-columns: 1fr; }
     .hud { flex-direction: column; align-items: flex-start; }
     .card-panel { padding: 20px 16px; }
   }
@@ -435,10 +211,10 @@
 
   <div class="hud">
     <div class="brand">
-      <div class="badge-icon">\u{1F9ED}</div>
+      <div class="badge-icon">\u{1F50E}</div>
       <div>
         <div class="brand-text">Case File Active</div>
-        <div class="brand-title">Change Files: Environmental Change Investigator</div>
+        <div class="brand-title">Cause Files: The Environmental Detective</div>
       </div>
     </div>
     <div class="stats">
@@ -449,60 +225,60 @@
   </div>
   <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
 
-  <!-- ================= INTRO SCREEN ================= -->
+  <!-- ================= INTRO ================= -->
   <div class="card-panel" id="screen-intro">
     <div class="eyebrow">Briefing</div>
-    <h1 class="screen-title">Welcome, Investigator</h1>
+    <h1 class="screen-title">Welcome back, Detective</h1>
     <div class="briefing-box">
-      Environmental agencies across Victoria need help. Every case that lands on your desk is an environmental change with two unanswered questions: <strong>how fast did it happen</strong>, and <strong>can it be undone</strong>? Your job is to classify each case correctly, back up your call with evidence, and build a case-closing streak. Three rounds. One case board. Let's get to work.
+      Every case that lands on your desk has a cause behind it, and today you are hunting for the culprit. Was it <strong>nature</strong> acting alone: a climatic cycle or a geological process? Or was it a <strong>human decision</strong>: agriculture, industry, or urban growth? Some of the trickiest cases involve both working together. Three rounds. Follow the evidence.
     </div>
     <div class="intro-grid">
       <div class="intro-round">
         <div class="num">01</div>
-        <h3>Quadrant Sort</h3>
-        <p>Place 8 real examples onto the case board: gradual/sudden by reversible/irreversible.</p>
+        <h3>Cause Sort</h3>
+        <p>Sort 8 examples as natural or human, then name the specific driver behind each.</p>
       </div>
       <div class="intro-round">
         <div class="num">02</div>
-        <h3>Case Files</h3>
-        <p>Read 5 short case reports, classify each and choose the strongest justification.</p>
+        <h3>Mixed Cases</h3>
+        <p>Five real cases where BOTH causes apply. Identify each contribution.</p>
       </div>
       <div class="intro-round">
         <div class="num">03</div>
-        <h3>Timeline Challenge</h3>
-        <p>Rank 6 events by rate of change, from the fastest to the slowest.</p>
+        <h3>Driver Match-Up</h3>
+        <p>Beat the clock, match 6 scenarios to agriculture, industry or urban growth.</p>
       </div>
     </div>
     <button class="btn-primary" onclick="goToRound(1)">Open Case File \u2192</button>
   </div>
 
-  <!-- ================= ROUND 1: QUADRANT SORT ================= -->
+  <!-- ================= ROUND 1 ================= -->
   <div class="card-panel hidden" id="screen-round1">
     <div class="eyebrow">Round 1 of 3</div>
-    <h1 class="screen-title">The Case Board</h1>
-    <p class="lede">Select an example below, then tap the quadrant of the case board where it belongs. Every example gets one placement, watch the board fill up.</p>
+    <h1 class="screen-title">Cause Sort</h1>
+    <p class="lede">Select an example, then tap Natural or Human. You will then be asked to name the specific driver behind it.</p>
 
-    <div class="matrix-wrap">
-      <div class="axis-label top" style="grid-column:2;">Gradual</div>
-      <div class="axis-label top" style="grid-column:3;">Sudden</div>
-      <div class="axis-label side" style="grid-row:2;">Reversible</div>
-      <div class="quad" data-quad="GR" style="grid-column:2; grid-row:2;"><span class="quad-label">Gradual + Reversible</span></div>
-      <div class="quad" data-quad="SR" style="grid-column:3; grid-row:2;"><span class="quad-label">Sudden + Reversible</span></div>
-      <div class="axis-label side" style="grid-row:3;">Irreversible</div>
-      <div class="quad" data-quad="GI" style="grid-column:2; grid-row:3;"><span class="quad-label">Gradual + Irreversible</span></div>
-      <div class="quad" data-quad="SI" style="grid-column:3; grid-row:3;"><span class="quad-label">Sudden + Irreversible</span></div>
+    <div class="sort-board">
+      <div class="sort-col natural" data-col="natural"><h3>NATURAL CAUSE</h3><div class="col-chips"></div></div>
+      <div class="sort-col human" data-col="human"><h3>HUMAN CAUSE</h3><div class="col-chips"></div></div>
     </div>
 
     <div class="card-tray" id="r1-tray"></div>
-    <div class="helper-note" id="r1-hint">Tap an example card, then tap the quadrant you think it belongs in.</div>
+    <div class="helper-note" id="r1-hint">Tap an example card, then tap Natural or Human above.</div>
+
+    <div class="driver-prompt" id="r1-driver-prompt">
+      <p id="r1-driver-text"></p>
+      <div class="driver-chip-row" id="r1-driver-chips"></div>
+    </div>
+
     <div class="feedback-box" id="r1-feedback"></div>
 
     <div class="nav-row end">
-      <button class="btn-primary" id="r1-next" disabled onclick="goToRound(2)">Continue to Case Files \u2192</button>
+      <button class="btn-primary" id="r1-next" disabled onclick="goToRound(2)">Continue to Mixed Cases \u2192</button>
     </div>
   </div>
 
-  <!-- ================= ROUND 2: CASE FILES ================= -->
+  <!-- ================= ROUND 2 ================= -->
   <div class="card-panel hidden" id="screen-round2">
     <div class="eyebrow">Round 2 of 3</div>
     <div class="case-header">
@@ -511,11 +287,11 @@
     </div>
     <div class="case-story" id="r2-story"></div>
 
-    <p class="lede" style="margin-bottom:8px; font-weight:700; color:var(--slate);">Step 1: Classify this case</p>
-    <div class="choice-grid" id="r2-choices"></div>
-
-    <p class="lede" style="margin-bottom:8px; font-weight:700; color:var(--slate);">Step 2: Pick the strongest justification</p>
-    <div class="justify-list" id="r2-justify"></div>
+    <p class="lede" style="margin-bottom:8px; font-weight:700; color:var(--slate);">This case has BOTH causes. Identify each contribution.</p>
+    <div class="dual-grid">
+      <div class="dual-col natural"><h4>Natural contribution</h4><div id="r2-natural-opts"></div></div>
+      <div class="dual-col human"><h4>Human contribution</h4><div id="r2-human-opts"></div></div>
+    </div>
 
     <div class="feedback-box" id="r2-feedback"></div>
 
@@ -525,21 +301,23 @@
     </div>
   </div>
 
-  <!-- ================= ROUND 3: TIMELINE ================= -->
+  <!-- ================= ROUND 3 ================= -->
   <div class="card-panel hidden" id="screen-round3">
     <div class="eyebrow">Round 3 of 3</div>
-    <h1 class="screen-title">Timeline Challenge</h1>
-    <p class="lede">Tap the events below in order, from the <strong>fastest</strong> rate of change to the <strong>slowest</strong>. Watch them fill the timeline slots left to right.</p>
+    <h1 class="screen-title">Driver Match-Up</h1>
+    <p class="lede">All six scenarios below are human-caused. Match each to its driver before the clock runs out.</p>
 
-    <div class="timeline-track"></div>
-    <div class="timeline-ends"><span>\u26a1 Instant</span><span>\u23f3 Millennia</span></div>
+    <div class="timer-row">
+      <div class="timer-badge" id="r3-timer">\u23f1\ufe0f 45s</div>
+      <div class="qcount" id="r3-qcount">Scenario 1 of 6</div>
+    </div>
 
-    <div class="rank-slots" id="r3-slots"></div>
-    <div class="event-pool" id="r3-pool"></div>
-    <div class="feedback-box" id="r3-feedback"></div>
+    <div class="scenario-box" id="r3-scenario"></div>
+    <div class="driver-answer-row" id="r3-answers"></div>
+    <div class="r3-result-line" id="r3-result"></div>
 
     <div class="nav-row end">
-      <button class="btn-primary" id="r3-next" disabled onclick="goToRound(4)">See Final Report \u2192</button>
+      <button class="btn-primary hidden" id="r3-next" onclick="goToRound(4)">See Final Report \u2192</button>
     </div>
   </div>
 
@@ -547,8 +325,8 @@
   <div class="card-panel hidden" id="screen-results">
     <div class="results-hero">
       <div class="rank-badge" id="res-badge-icon">\u{1F3C5}</div>
-      <div class="rank-title" id="res-rank-title">Field Assistant</div>
-      <div class="rank-sub" id="res-rank-sub">Case closed. Nice work, Investigator.</div>
+      <div class="rank-title" id="res-rank-title">Junior Detective</div>
+      <div class="rank-sub" id="res-rank-sub">Case closed. Nice work, Detective.</div>
     </div>
     <div class="score-strip">
       <div class="s-item"><div class="n" id="res-score">0</div><div class="l">Points</div></div>
@@ -556,8 +334,8 @@
       <div class="s-item"><div class="n" id="res-streak">0</div><div class="l">Best Streak</div></div>
     </div>
     <div class="reflection-box">
-      <strong style="font-size:13.5px; color:var(--slate-dark);">Investigator's notebook (not scored)</strong>
-      <p style="font-size:12.5px; color:#666; margin:6px 0 0;">Which case was hardest to classify, and why? Jot a sentence or two before you compare answers as a class.</p>
+      <strong style="font-size:13.5px; color:var(--slate-dark);">Detective's notebook (not scored)</strong>
+      <p style="font-size:12.5px; color:#666; margin:6px 0 0;">Which case was hardest to assign a cause to, and why? Jot a sentence or two before you compare answers as a class.</p>
       <textarea placeholder="Type your reflection here..."></textarea>
     </div>
     <div class="nav-row end">
@@ -572,117 +350,93 @@
    STATE
    ============================================================ */
 let state = {
-  score: 0,
-  streak: 0,
-  bestStreak: 0,
-  round: 0,
-  r1: { placed: 0, correct: 0 },
-  r2: { caseIndex: 0, correct: 0, classPicked: null, justPicked: null },
-  r3: { placedCount: 0, correct: 0 },
+  score: 0, streak: 0, bestStreak: 0, round: 0,
+  r1: { placed: 0, correct: 0, driverCorrect: 0 },
+  r2: { caseIndex: 0, correct: 0, naturalPicked: null, humanPicked: null },
+  r3: { qIndex: 0, correct: 0, timeLeft: 45, timerId: null, answered: false },
 };
 
 /* ============================================================
-   ROUND 1 DATA: Quadrant Sort
-   quad codes: GR = gradual+reversible, SR = sudden+reversible,
-               GI = gradual+irreversible, SI = sudden+irreversible
+   ROUND 1 DATA
    ============================================================ */
+const driverOptions = ['Climatic cycle', 'Geological process', 'Agriculture', 'Industry', 'Urban growth'];
 const r1Cards = [
-  { id: 'c1', label: 'Coastal cliff erosion at the Twelve Apostles', quad: 'GI',
-    why: 'The wave action is gradual, and once the limestone is worn away and collapses, the landform cannot naturally reform.' },
-  { id: 'c2', label: 'Volcanic eruption reshaping a valley', quad: 'SI',
-    why: 'The eruption itself takes hours, and the reshaped landform (crater, ash deposits) is permanent, even though plants and animals gradually recolonise.' },
-  { id: 'c3', label: 'Bulldozer land clearing for a new estate', quad: 'SR',
-    why: 'Clearing with machinery happens quickly, and cleared land can be revegetated or rehabilitated later.' },
-  { id: 'c4', label: 'Selective logging with a replanting program', quad: 'GR',
-    why: 'Trees are removed gradually over a harvesting cycle, and active replanting allows the forest to recover.' },
-  { id: 'c5', label: 'Extinction of the thylacine (Tasmanian tiger)', quad: 'GI',
-    why: 'Population decline happened gradually over decades, and once the last individual died in 1936, the loss became permanent.' },
-  { id: 'c6', label: 'Flash flood after a severe storm', quad: 'SR',
-    why: 'Flooding rises and recedes within hours to days, and floodplains typically recover their prior state.' },
-  { id: 'c7', label: 'Desertification from long-term overgrazing', quad: 'GI',
-    why: 'Soil degrades gradually over years of grazing pressure, and past a certain point the land cannot regenerate without major intervention.' },
-  { id: 'c8', label: 'Earthquake-triggered landslide', quad: 'SI',
-    why: 'The slope fails within seconds to minutes, and the altered slope profile does not return to its original shape.' },
+  { id: 'c1', label: 'Monsoon rains flooding the Ganges floodplain every year', cat: 'natural', driver: 'Climatic cycle',
+    why: 'This is a recurring, predictable seasonal rainfall pattern, a climatic cycle.' },
+  { id: 'c2', label: 'Tectonic plates colliding to build the Himalayas', cat: 'natural', driver: 'Geological process',
+    why: 'Mountain building from plate collision is a geological process operating over millions of years.' },
+  { id: 'c3', label: 'A prolonged La Ni\u00f1a filling Lake Eyre with floodwater', cat: 'natural', driver: 'Climatic cycle',
+    why: 'La Ni\u00f1a is part of the El Ni\u00f1o-Southern Oscillation, a recurring climatic cycle.' },
+  { id: 'c4', label: 'A volcanic eruption blanketing a valley in ash', cat: 'natural', driver: 'Geological process',
+    why: 'Volcanic activity is driven by processes inside the Earth\u2019s crust, a geological process.' },
+  { id: 'c5', label: 'Soviet-era irrigation diverting rivers away from the Aral Sea', cat: 'human', driver: 'Agriculture',
+    why: 'The rivers were diverted specifically to irrigate cotton and rice crops, an agricultural driver.' },
+  { id: 'c6', label: 'Open-cut coal mining reshaping a valley', cat: 'human', driver: 'Industry',
+    why: 'Mining is an industrial activity that directly reshapes land.' },
+  { id: 'c7', label: 'Outer-suburb housing estates replacing paddocks on a city fringe', cat: 'human', driver: 'Urban growth',
+    why: 'Converting farmland to housing is a clear case of urban growth.' },
+  { id: 'c8', label: 'A new freeway cutting through native bushland for a growing city', cat: 'human', driver: 'Urban growth',
+    why: 'Transport infrastructure built to serve an expanding city is part of urban growth.' },
 ];
-const quadLabels = { GR: 'Gradual + Reversible', SR: 'Sudden + Reversible', GI: 'Gradual + Irreversible', SI: 'Sudden + Irreversible' };
 
 /* ============================================================
-   ROUND 2 DATA: Case Files
+   ROUND 2 DATA: Mixed Cases (both causes)
    ============================================================ */
 const r2Cases = [
   {
+    title: 'The Thirsty Basin',
+    story: 'Low water levels and fish kills have hit the Murray-Darling Basin repeatedly. A run of severe drought years has reduced inflows, while heavy irrigation extraction for crops upstream has drawn down what water remains.',
+    naturalOpts: ['A run of severe drought years reducing rainfall', 'A volcanic eruption upstream', 'An earthquake altering the riverbed'],
+    naturalCorrect: 0,
+    humanOpts: ['Heavy irrigation extraction for crops upstream', 'A change in the monsoon cycle', 'Tectonic uplift of the river source'],
+    humanCorrect: 0,
+  },
+  {
+    title: 'The Swelling Delta',
+    story: 'Seasonal monsoon flooding has always shaped the Ganges-Brahmaputra Delta. In recent decades, land clearing for farming in the Himalayan foothills has increased runoff and sediment, making downstream flooding more severe than the monsoon alone would cause.',
+    naturalOpts: ['Seasonal monsoon flooding', 'A new dam built for irrigation', 'Urban expansion along the coast'],
+    naturalCorrect: 0,
+    humanOpts: ['Land clearing for farming in the Himalayan foothills', 'A shift in ocean currents', 'A geological uplift event'],
+    humanCorrect: 0,
+  },
+  {
     title: 'The Bleaching Reef',
-    story: 'Marine heatwaves have struck a Great Barrier Reef system in three of the last five summers. Corals whiten as their algae partners are expelled under heat stress. In cooler years, some colour has returned, but this year, large sections of the reef show no recovery at all, the coral skeletons are bare and covered in algae.',
-    classChoices: ['Sudden + Reversible', 'Gradual + Reversible', 'Gradual + Irreversible', 'Sudden + Irreversible'],
-    classCorrect: 2,
-    justOptions: [
-      'Repeated heat stress built up gradually across summers, and this year\u2019s bare coral shows the reef has now crossed a threshold into permanent loss.',
-      'Coral bleaching always happens in a single day, so the change must be sudden.',
-      'Because coral can sometimes recover its colour, the reef will always fully recover no matter how many heatwaves occur.',
-    ],
-    justCorrect: 0,
+    story: 'A marine heatwave pushed Great Barrier Reef water temperatures well above the seasonal average, stressing coral. Many scientists link the rising frequency of these heatwaves partly to broader industrial emissions warming the region\u2019s oceans over time.',
+    naturalOpts: ['A marine heatwave raising water temperature', 'A new coastal shipping port', 'Land clearing for coastal farms'],
+    naturalCorrect: 0,
+    humanOpts: ['Industrial emissions linked to rising ocean temperatures', 'A tectonic shift on the seafloor', 'A cyclical ocean current pattern'],
+    humanCorrect: 0,
   },
   {
-    title: 'The Black Summer Regrowth',
-    story: 'A eucalypt forest in south-eastern Australia burned through in a single fire season. Twelve months later, epicormic shoots are bursting from blackened trunks, and seedlings are emerging from fire-triggered seed pods across the forest floor.',
-    classChoices: ['Gradual + Reversible', 'Sudden + Reversible', 'Sudden + Irreversible', 'Gradual + Irreversible'],
-    classCorrect: 1,
-    justOptions: [
-      'The fire burned through in days or weeks, and many Australian eucalypt species have fire-adapted regeneration strategies, so recovery is underway.',
-      'Any bushfire is automatically irreversible because trees are destroyed.',
-      'Because regrowth takes more than a year, the fire itself must be classified as gradual.',
-    ],
-    justCorrect: 0,
+    title: 'The Vanishing Sea (Revisited)',
+    story: 'The Aral Sea sits in a naturally arid, low-rainfall region, meaning it always depended heavily on river inflow to stay full. When Soviet-era planners diverted that river water to irrigate cotton fields, the sea had no natural buffer left and collapsed rapidly.',
+    naturalOpts: ['A naturally arid, low-rainfall climate with little direct replenishment', 'A sudden earthquake draining the lakebed', 'A volcanic eruption blocking the rivers'],
+    naturalCorrect: 0,
+    humanOpts: ['River water diverted to irrigate cotton fields', 'A shift in wind patterns', 'Natural evaporation increasing over centuries'],
+    humanCorrect: 0,
   },
   {
-    title: 'The Drained Wetland',
-    story: 'A coastal wetland was drained for agriculture across three years in the 1990s. Two decades later, a council-led restoration project reintroduced tidal flow, and shorebird numbers have slowly climbed back toward historic levels over the following ten years.',
-    classChoices: ['Sudden + Irreversible', 'Gradual + Reversible', 'Sudden + Reversible', 'Gradual + Irreversible'],
-    classCorrect: 1,
-    justOptions: [
-      'Both the draining and the restoration unfolded over multiple years, and active management has allowed the ecosystem to partially return.',
-      'Wetlands can never be restored once drained, so this must be irreversible.',
-      'Draining took three years, which counts as a sudden event by any definition.',
-    ],
-    justCorrect: 0,
-  },
-  {
-    title: 'The Island That Vanished',
-    story: 'In 1883, the volcanic island of Krakatoa was largely destroyed in a catastrophic eruption that was heard thousands of kilometres away. Decades later, volcanic activity built a new island, Anak Krakatau, nearby, but it is not the same landform that existed before 1883.',
-    classChoices: ['Gradual + Reversible', 'Sudden + Reversible', 'Sudden + Irreversible', 'Gradual + Irreversible'],
-    classCorrect: 2,
-    justOptions: [
-      'The eruption destroyed the island within hours, and the original landform is gone forever, even though a new island later formed in the area.',
-      'Because a new island eventually formed, the original destruction should count as reversible.',
-      'Volcanic islands always reform exactly as they were, so this is a reversible change.',
-    ],
-    justCorrect: 0,
-  },
-  {
-    title: 'The Retreating Ice',
-    story: 'Satellite records spanning 40 years show Arctic sea ice extent shrinking most summers, driven by rising ocean and atmospheric temperatures. Scientists warn that once ice-free summers become the norm, the region\u2019s reflective ice cover, and the cooling effect it provides, may not return even if warming later slows.',
-    classChoices: ['Sudden + Reversible', 'Gradual + Irreversible', 'Sudden + Irreversible', 'Gradual + Reversible'],
-    classCorrect: 1,
-    justOptions: [
-      'The decline has unfolded gradually over four decades, and scientists warn the loss of reflective ice cover may pass a threshold beyond which it cannot recover.',
-      'Sea ice melts and refreezes every year, so long-term ice loss must always be reversible too.',
-      '40 years is a short enough period that this counts as a sudden change.',
-    ],
-    justCorrect: 0,
+    title: 'The Hotter City',
+    story: 'A record heatwave pushed regional temperatures to extremes across south-eastern Australia. In the city itself, the heat felt even more intense because decades of urban growth had replaced vegetation and soil with heat-absorbing concrete and asphalt.',
+    naturalOpts: ['A record regional heatwave', 'A new industrial estate on the city fringe', 'Irrigation channels built for farms'],
+    naturalCorrect: 0,
+    humanOpts: ['Urban growth replacing vegetation with concrete and asphalt', 'A shift in the jet stream', 'A prolonged drought cycle'],
+    humanCorrect: 0,
   },
 ];
 
 /* ============================================================
-   ROUND 3 DATA: Timeline ranking (fastest -> slowest)
+   ROUND 3 DATA: Driver Match-Up (all human, 3-way choice)
    ============================================================ */
-const r3EventsCorrectOrder = [
-  { id: 'e1', label: 'Volcanic eruption burying a valley' },
-  { id: 'e2', label: 'Flash flood after a storm' },
-  { id: 'e3', label: 'A single bushfire season' },
-  { id: 'e4', label: 'Machine land clearing for development' },
-  { id: 'e5', label: 'A species declining to extinction' },
-  { id: 'e6', label: 'Formation of the Twelve Apostles limestone stacks' },
+const r3Scenarios = [
+  { text: 'A vineyard clears native grassland to plant new rows of vines.', answer: 'Agriculture' },
+  { text: 'A steel plant expands its site and increases its emissions.', answer: 'Industry' },
+  { text: 'A new train line extension opens up a growth corridor of housing.', answer: 'Urban growth' },
+  { text: 'A cattle feedlot expands to meet rising beef demand.', answer: 'Agriculture' },
+  { text: 'A cement quarry excavates deeper into a hillside.', answer: 'Industry' },
+  { text: 'A new shopping precinct replaces open grassland on a city fringe.', answer: 'Urban growth' },
 ];
+const r3Options = ['Agriculture', 'Industry', 'Urban growth'];
 
 /* ============================================================
    NAVIGATION
@@ -691,15 +445,12 @@ function showScreen(id) {
   document.querySelectorAll('.card-panel').forEach(el => el.classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
 }
-
 function updateHud() {
   document.getElementById('hud-score').textContent = state.score;
   document.getElementById('hud-streak').textContent = state.streak;
   document.getElementById('hud-round').textContent = Math.min(state.round, 3) + '/3';
-  const pct = Math.min(100, (state.round / 3) * 100);
-  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-fill').style.width = Math.min(100, (state.round / 3) * 100) + '%';
 }
-
 function goToRound(n) {
   state.round = n;
   updateHud();
@@ -709,7 +460,6 @@ function goToRound(n) {
   else if (n === 4) { showScreen('screen-results'); showResults(); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 function bump(correct, points) {
   if (correct) {
     state.streak += 1;
@@ -723,14 +473,15 @@ function bump(correct, points) {
 }
 
 /* ============================================================
-   ROUND 1: Quadrant Sort
+   ROUND 1: Cause Sort (two-step: category, then driver)
    ============================================================ */
 let r1Selected = null;
+let r1Pending = null; // card awaiting driver selection
 
 function initRound1() {
   const tray = document.getElementById('r1-tray');
   tray.innerHTML = '';
-  document.querySelectorAll('.quad').forEach(q => { q.innerHTML = '<span class="quad-label">' + quadLabels[q.dataset.quad] + '</span>'; q.classList.remove('drophover'); });
+  document.querySelectorAll('.sort-col .col-chips').forEach(c => c.innerHTML = '');
   r1Cards.forEach(card => {
     const btn = document.createElement('button');
     btn.className = 'sort-card';
@@ -739,63 +490,91 @@ function initRound1() {
     btn.onclick = () => selectR1Card(card, btn);
     tray.appendChild(btn);
   });
-  document.querySelectorAll('.quad').forEach(q => {
-    q.onclick = () => placeR1Card(q.dataset.quad, q);
+  document.querySelectorAll('.sort-col').forEach(col => {
+    col.onclick = (e) => { if (e.target.closest('.placed-chip')) return; placeR1Category(col.dataset.col); };
   });
   document.getElementById('r1-feedback').style.display = 'none';
-  document.getElementById('r1-feedback').className = 'feedback-box';
+  document.getElementById('r1-driver-prompt').classList.remove('show');
   document.getElementById('r1-next').disabled = true;
-  state.r1 = { placed: 0, correct: 0 };
+  state.r1 = { placed: 0, correct: 0, driverCorrect: 0 };
   r1Selected = null;
+  r1Pending = null;
 }
-
 function selectR1Card(card, btn) {
   document.querySelectorAll('.sort-card').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
   r1Selected = { card, btn };
-  document.getElementById('r1-hint').textContent = 'Now tap the quadrant where "' + card.label + '" belongs.';
+  document.getElementById('r1-hint').textContent = 'Now tap Natural or Human for "' + card.label + '".';
 }
-
-function placeR1Card(quadCode, quadEl) {
+function placeR1Category(colCode) {
   if (!r1Selected) {
-    document.getElementById('r1-hint').textContent = 'Select an example card first, then tap a quadrant.';
+    document.getElementById('r1-hint').textContent = 'Select an example card first.';
     return;
   }
   const { card, btn } = r1Selected;
-  const correct = quadCode === card.quad;
+  const correct = colCode === card.cat;
   const chip = document.createElement('div');
   chip.className = 'placed-chip ' + (correct ? 'correct' : 'incorrect');
   chip.textContent = card.label;
-  quadEl.appendChild(chip);
+  document.querySelector('.sort-col[data-col="' + colCode + '"] .col-chips').appendChild(chip);
   btn.classList.add('used');
+
+  if (correct) state.r1.correct += 1;
+  bump(correct, 8);
+
+  // now prompt for driver
+  r1Pending = card;
+  const dp = document.getElementById('r1-driver-prompt');
+  dp.classList.add('show');
+  document.getElementById('r1-driver-text').textContent = (correct ? '\u2713 Correct category. ' : '\u2717 Actually that\u2019s the other category, but let\u2019s name the driver anyway. ') + 'Which specific driver is behind "' + card.label + '"?';
+  const chipsRow = document.getElementById('r1-driver-chips');
+  chipsRow.innerHTML = '';
+  driverOptions.forEach(opt => {
+    const cb = document.createElement('button');
+    cb.className = 'driver-chip';
+    cb.textContent = opt;
+    cb.onclick = () => pickDriver(opt, cb, card);
+    chipsRow.appendChild(cb);
+  });
+
+  r1Selected = null;
+  document.getElementById('r1-hint').textContent = 'Name the driver below, then select the next example.';
+}
+function pickDriver(opt, chipEl, card) {
+  const correct = opt === card.driver;
+  document.querySelectorAll('#r1-driver-chips .driver-chip').forEach(c => c.onclick = null);
+  document.querySelectorAll('#r1-driver-chips .driver-chip').forEach(c => {
+    if (c.textContent === card.driver) c.classList.add('correct');
+    else if (c === chipEl) c.classList.add('incorrect');
+  });
+
+  if (correct) state.r1.driverCorrect += 1;
+  bump(correct, 7);
 
   const fb = document.getElementById('r1-feedback');
   fb.style.display = 'block';
   fb.className = 'feedback-box ' + (correct ? 'good' : 'bad');
-  fb.innerHTML = (correct ? '\u2713 Correct placement. ' : '\u2717 Not quite, this belongs in ' + quadLabels[card.quad] + '. ') + card.why;
+  fb.innerHTML = (correct ? '\u2713 Driver identified correctly. ' : '\u2717 The driver is actually ' + card.driver + '. ') + card.why;
 
   state.r1.placed += 1;
-  if (correct) state.r1.correct += 1;
-  bump(correct, 10);
-
-  r1Selected = null;
-  document.getElementById('r1-hint').textContent = 'Select the next example card.';
+  setTimeout(() => { document.getElementById('r1-driver-prompt').classList.remove('show'); }, 350);
 
   if (state.r1.placed === r1Cards.length) {
     document.getElementById('r1-next').disabled = false;
-    document.getElementById('r1-hint').textContent = 'Case board complete: ' + state.r1.correct + ' of ' + r1Cards.length + ' correctly placed on first try.';
+    document.getElementById('r1-hint').textContent = 'Cause Sort complete: ' + state.r1.correct + '/' + r1Cards.length + ' categories and ' + state.r1.driverCorrect + '/' + r1Cards.length + ' drivers correct.';
+  } else {
+    document.getElementById('r1-hint').textContent = 'Select the next example card.';
   }
 }
 
 /* ============================================================
-   ROUND 2: Case Files
+   ROUND 2: Mixed Cases
    ============================================================ */
 function initRound2() {
   state.r2.caseIndex = 0;
   state.r2.correct = 0;
   loadCase();
 }
-
 function loadCase() {
   const idx = state.r2.caseIndex;
   const c = r2Cases[idx];
@@ -804,80 +583,77 @@ function loadCase() {
   document.getElementById('r2-story').textContent = c.story;
   document.getElementById('r2-progress').textContent = 'Case ' + (idx + 1) + ' of ' + r2Cases.length;
 
-  const choicesEl = document.getElementById('r2-choices');
-  choicesEl.innerHTML = '';
-  c.classChoices.forEach((choice, i) => {
+  const natEl = document.getElementById('r2-natural-opts');
+  natEl.innerHTML = '';
+  c.naturalOpts.forEach((opt, i) => {
     const b = document.createElement('button');
-    b.className = 'choice-btn';
-    b.textContent = choice;
-    b.onclick = () => pickClass(i, b);
-    choicesEl.appendChild(b);
-  });
-
-  const justEl = document.getElementById('r2-justify');
-  justEl.innerHTML = '';
-  c.justOptions.forEach((opt, i) => {
-    const b = document.createElement('button');
-    b.className = 'justify-btn';
+    b.className = 'opt-btn';
     b.textContent = opt;
-    b.onclick = () => pickJustify(i, b);
-    justEl.appendChild(b);
+    b.onclick = () => pickNatural(i, b);
+    natEl.appendChild(b);
+  });
+  const humEl = document.getElementById('r2-human-opts');
+  humEl.innerHTML = '';
+  c.humanOpts.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt-btn';
+    b.textContent = opt;
+    b.onclick = () => pickHuman(i, b);
+    humEl.appendChild(b);
   });
 
-  state.r2.classPicked = null;
-  state.r2.justPicked = null;
+  state.r2.naturalPicked = null;
+  state.r2.humanPicked = null;
   document.getElementById('r2-feedback').style.display = 'none';
   document.getElementById('r2-feedback').className = 'feedback-box';
   document.getElementById('r2-next').disabled = true;
   document.getElementById('r2-next').textContent = 'Submit Case \u2192';
 }
-
-function pickClass(i, btn) {
-  if (state.r2.classPicked !== null && document.getElementById('r2-feedback').style.display === 'block') return;
-  document.querySelectorAll('#r2-choices .choice-btn').forEach(b => b.classList.remove('picked'));
+function pickNatural(i, btn) {
+  if (document.getElementById('r2-feedback').style.display === 'block') return;
+  document.querySelectorAll('#r2-natural-opts .opt-btn').forEach(b => b.classList.remove('picked'));
   btn.classList.add('picked');
-  state.r2.classPicked = i;
+  state.r2.naturalPicked = i;
   checkCaseReady();
 }
-function pickJustify(i, btn) {
+function pickHuman(i, btn) {
   if (document.getElementById('r2-feedback').style.display === 'block') return;
-  document.querySelectorAll('#r2-justify .justify-btn').forEach(b => b.classList.remove('picked'));
+  document.querySelectorAll('#r2-human-opts .opt-btn').forEach(b => b.classList.remove('picked'));
   btn.classList.add('picked');
-  state.r2.justPicked = i;
+  state.r2.humanPicked = i;
   checkCaseReady();
 }
 function checkCaseReady() {
-  if (state.r2.classPicked !== null && state.r2.justPicked !== null) {
+  if (state.r2.naturalPicked !== null && state.r2.humanPicked !== null) {
     document.getElementById('r2-next').disabled = false;
   }
 }
-
 function nextCase() {
   const idx = state.r2.caseIndex;
   const c = r2Cases[idx];
   const fb = document.getElementById('r2-feedback');
   if (fb.style.display !== 'block') {
-    // Grading phase
-    const classRight = state.r2.classPicked === c.classCorrect;
-    const justRight = state.r2.justPicked === c.justCorrect;
-    document.querySelectorAll('#r2-choices .choice-btn').forEach((b, i) => {
-      if (i === c.classCorrect) b.classList.add('reveal-correct');
-      else if (i === state.r2.classPicked) b.classList.add('reveal-wrong');
+    const natRight = state.r2.naturalPicked === c.naturalCorrect;
+    const humRight = state.r2.humanPicked === c.humanCorrect;
+    document.querySelectorAll('#r2-natural-opts .opt-btn').forEach((b, i) => {
+      if (i === c.naturalCorrect) b.classList.add('reveal-correct');
+      else if (i === state.r2.naturalPicked) b.classList.add('reveal-wrong');
     });
-    document.querySelectorAll('#r2-justify .justify-btn').forEach((b, i) => {
-      if (i === c.justCorrect) b.classList.add('reveal-correct');
-      else if (i === state.r2.justPicked) b.classList.add('reveal-wrong');
+    document.querySelectorAll('#r2-human-opts .opt-btn').forEach((b, i) => {
+      if (i === c.humanCorrect) b.classList.add('reveal-correct');
+      else if (i === state.r2.humanPicked) b.classList.add('reveal-wrong');
     });
-    const bothRight = classRight && justRight;
+    const bothRight = natRight && humRight;
     fb.style.display = 'block';
     fb.className = 'feedback-box ' + (bothRight ? 'good' : 'bad');
-    fb.innerHTML = (bothRight ? '\u2713 Case closed correctly.' : (classRight ? '\u2713 Classification correct, but check the justification.' : '\u2717 Reconsider the classification.')) + ' ' + c.justOptions[c.justCorrect];
+    fb.innerHTML = bothRight
+      ? '\u2713 Both contributions correctly identified. This case shows how a natural cause and a human cause can compound each other.'
+      : '\u2717 One contribution was off, review the highlighted correct answers above. Real cases often need both a natural AND a human explanation.';
     if (bothRight) state.r2.correct += 1;
-    bump(bothRight, 15);
-    document.getElementById('r2-next').textContent = (idx === r2Cases.length - 1) ? 'See Timeline Challenge \u2192' : 'Next Case \u2192';
+    bump(bothRight, 16);
+    document.getElementById('r2-next').textContent = (idx === r2Cases.length - 1) ? 'See Driver Match-Up \u2192' : 'Next Case \u2192';
     return;
   }
-  // Advance
   if (idx === r2Cases.length - 1) {
     goToRound(3);
   } else {
@@ -887,33 +663,72 @@ function nextCase() {
 }
 
 /* ============================================================
-   ROUND 3: Timeline ranking
+   ROUND 3: Driver Match-Up (timed)
    ============================================================ */
-let r3Pool = [];
-let r3Selected = null;
-let r3Placements = [];
-
 function initRound3() {
-  r3Pool = shuffle([...r3EventsCorrectOrder]);
-  r3Placements = new Array(r3EventsCorrectOrder.length).fill(null);
-  r3Selected = null;
-  state.r3 = { placedCount: 0, correct: 0 };
-
-  const slotsEl = document.getElementById('r3-slots');
-  slotsEl.innerHTML = '';
-  for (let i = 0; i < r3EventsCorrectOrder.length; i++) {
-    const slot = document.createElement('div');
-    slot.className = 'rank-slot';
-    slot.innerHTML = '<span class="rank-num">' + (i + 1) + '</span><span class="slot-hint">' + (i === 0 ? 'fastest' : (i === r3EventsCorrectOrder.length - 1 ? 'slowest' : '')) + '</span>';
-    slot.dataset.pos = i;
-    slot.onclick = () => placeR3(i, slot);
-    slotsEl.appendChild(slot);
-  }
-  renderR3Pool();
-  document.getElementById('r3-feedback').style.display = 'none';
-  document.getElementById('r3-next').disabled = true;
+  state.r3 = { qIndex: 0, correct: 0, timeLeft: 45, timerId: null, answered: false };
+  document.getElementById('r3-next').classList.add('hidden');
+  startR3Timer();
+  loadScenario();
 }
-
+function startR3Timer() {
+  updateTimerBadge();
+  state.r3.timerId = setInterval(() => {
+    state.r3.timeLeft -= 1;
+    updateTimerBadge();
+    if (state.r3.timeLeft <= 0) {
+      clearInterval(state.r3.timerId);
+      endR3('Time\u2019s up! ');
+    }
+  }, 1000);
+}
+function updateTimerBadge() {
+  const badge = document.getElementById('r3-timer');
+  badge.textContent = '\u23f1\ufe0f ' + Math.max(0, state.r3.timeLeft) + 's';
+  badge.classList.toggle('urgent', state.r3.timeLeft <= 10);
+}
+function loadScenario() {
+  if (state.r3.qIndex >= r3Scenarios.length) { endR3(''); return; }
+  const sc = r3Scenarios[state.r3.qIndex];
+  document.getElementById('r3-qcount').textContent = 'Scenario ' + (state.r3.qIndex + 1) + ' of ' + r3Scenarios.length;
+  document.getElementById('r3-scenario').textContent = sc.text;
+  document.getElementById('r3-result').textContent = '';
+  const answersEl = document.getElementById('r3-answers');
+  answersEl.innerHTML = '';
+  state.r3.answered = false;
+  shuffle([...r3Options]).forEach(opt => {
+    const b = document.createElement('button');
+    b.className = 'driver-answer-btn';
+    b.textContent = opt;
+    b.onclick = () => answerScenario(opt, b, sc);
+    answersEl.appendChild(b);
+  });
+}
+function answerScenario(opt, btn, sc) {
+  if (state.r3.answered) return;
+  state.r3.answered = true;
+  const correct = opt === sc.answer;
+  document.querySelectorAll('#r3-answers .driver-answer-btn').forEach(b => {
+    b.onclick = null;
+    if (b.textContent === sc.answer) b.classList.add('correct');
+    else if (b === btn) b.classList.add('incorrect');
+  });
+  if (correct) state.r3.correct += 1;
+  bump(correct, 9);
+  document.getElementById('r3-result').textContent = correct ? 'Correct!' : ('Not quite, the driver is ' + sc.answer + '.');
+  state.r3.qIndex += 1;
+  setTimeout(() => {
+    if (state.r3.timeLeft > 0) loadScenario();
+    else endR3('Time\u2019s up! ');
+  }, 700);
+}
+function endR3(prefix) {
+  if (state.r3.timerId) clearInterval(state.r3.timerId);
+  document.getElementById('r3-scenario').textContent = prefix + 'Match-up complete: ' + state.r3.correct + ' of ' + r3Scenarios.length + ' scenarios matched correctly.';
+  document.getElementById('r3-answers').innerHTML = '';
+  document.getElementById('r3-result').textContent = '';
+  document.getElementById('r3-next').classList.remove('hidden');
+}
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -922,52 +737,12 @@ function shuffle(arr) {
   return arr;
 }
 
-function renderR3Pool() {
-  const poolEl = document.getElementById('r3-pool');
-  poolEl.innerHTML = '';
-  r3Pool.forEach(ev => {
-    const b = document.createElement('button');
-    b.className = 'sort-card';
-    b.textContent = ev.label;
-    if (r3Selected && r3Selected.id === ev.id) b.classList.add('selected');
-    b.onclick = () => { r3Selected = ev; renderR3Pool(); };
-    poolEl.appendChild(b);
-  });
-}
-
-function placeR3(pos, slotEl) {
-  if (r3Placements[pos]) return; // already filled
-  if (!r3Selected) return;
-  const ev = r3Selected;
-  const correctIndex = r3EventsCorrectOrder.findIndex(e => e.id === ev.id);
-  const correct = correctIndex === pos;
-  r3Placements[pos] = ev;
-  slotEl.innerHTML += '<div class="placed ' + (correct ? 'correct' : 'incorrect') + '">' + ev.label + '</div>';
-
-  r3Pool = r3Pool.filter(e => e.id !== ev.id);
-  r3Selected = null;
-  renderR3Pool();
-
-  state.r3.placedCount += 1;
-  if (correct) state.r3.correct += 1;
-  bump(correct, 12);
-
-  if (state.r3.placedCount === r3EventsCorrectOrder.length) {
-    const fb = document.getElementById('r3-feedback');
-    fb.style.display = 'block';
-    fb.className = 'feedback-box ' + (state.r3.correct === r3EventsCorrectOrder.length ? 'good' : 'bad');
-    fb.innerHTML = 'Timeline complete: ' + state.r3.correct + ' of ' + r3EventsCorrectOrder.length + ' placed in the correct position. The full fastest-to-slowest order was: ' + r3EventsCorrectOrder.map(e => e.label).join(' \u2192 ');
-    document.getElementById('r3-next').disabled = false;
-  }
-}
-
 /* ============================================================
    RESULTS
    ============================================================ */
 function showResults() {
-  const totalPossible = (r1Cards.length * 10) + (r2Cases.length * 15) + (r3EventsCorrectOrder.length * 12);
-  const totalCorrectItems = state.r1.correct + state.r2.correct + state.r3.correct;
-  const totalItems = r1Cards.length + r2Cases.length + r3EventsCorrectOrder.length;
+  const totalCorrectItems = state.r1.correct + state.r1.driverCorrect + state.r2.correct + state.r3.correct;
+  const totalItems = r1Cards.length * 2 + r2Cases.length + r3Scenarios.length;
   const pct = Math.round((totalCorrectItems / totalItems) * 100);
 
   document.getElementById('res-score').textContent = state.score;
@@ -975,10 +750,10 @@ function showResults() {
   document.getElementById('res-streak').textContent = state.bestStreak;
 
   let rankTitle, rankSub, icon;
-  if (pct >= 90) { rankTitle = 'Master Investigator'; rankSub = 'Outstanding case work. You read the evidence like a pro.'; icon = '\u{1F3C6}'; }
-  else if (pct >= 75) { rankTitle = 'Senior Investigator'; rankSub = 'Strong case record, with a sharp eye for evidence.'; icon = '\u{1F3C5}'; }
-  else if (pct >= 55) { rankTitle = 'Field Assistant'; rankSub = 'Solid progress. A few cases are worth revisiting.'; icon = '\u{1F9ED}'; }
-  else { rankTitle = 'Trainee Investigator'; rankSub = 'Good start. Compare answers with your partner and try again.'; icon = '\u{1F4CB}'; }
+  if (pct >= 90) { rankTitle = 'Master Detective'; rankSub = 'Every driver named, every case cracked. Exceptional work.'; icon = '\u{1F3C6}'; }
+  else if (pct >= 75) { rankTitle = 'Senior Detective'; rankSub = 'Sharp instincts for spotting natural and human causes.'; icon = '\u{1F3C5}'; }
+  else if (pct >= 55) { rankTitle = 'Junior Detective'; rankSub = 'Good progress. A few cases are worth a second look.'; icon = '\u{1F50E}'; }
+  else { rankTitle = 'Field Cadet'; rankSub = 'Good start. Compare answers with your partner and try again.'; icon = '\u{1F4CB}'; }
 
   document.getElementById('res-badge-icon').textContent = icon;
   document.getElementById('res-rank-title').textContent = rankTitle;
@@ -986,7 +761,10 @@ function showResults() {
 }
 
 function restartGame() {
-  state = { score: 0, streak: 0, bestStreak: 0, round: 0, r1: { placed: 0, correct: 0 }, r2: { caseIndex: 0, correct: 0, classPicked: null, justPicked: null }, r3: { placedCount: 0, correct: 0 } };
+  state = { score: 0, streak: 0, bestStreak: 0, round: 0,
+    r1: { placed: 0, correct: 0, driverCorrect: 0 },
+    r2: { caseIndex: 0, correct: 0, naturalPicked: null, humanPicked: null },
+    r3: { qIndex: 0, correct: 0, timeLeft: 45, timerId: null, answered: false } };
   updateHud();
   showScreen('screen-intro');
   window.scrollTo({ top: 0, behavior: 'smooth' });
