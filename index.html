@@ -1,776 +1,426 @@
 <!DOCTYPE html>
 <html lang="en-AU">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cause Files: The Environmental Detective</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Climate Check-In &middot; Year 10 Geography Lesson 16</title>
 <style>
-  :root {
-    --slate: #2F4550;
-    --slate-dark: #1F2F36;
-    --natural: #5B7B4F;
-    --natural-dark: #435A38;
-    --human: #C98A2C;
-    --human-dark: #9C6B1E;
-    --cream: #F4F1EA;
-    --ink: #232323;
-    --white: #FFFFFF;
-    --good: #3E7A47;
-    --bad: #B23A2E;
-    --shadow: 0 8px 24px rgba(15, 25, 30, 0.18);
-  }
+:root{
+  --ink:#0B2239; --ink-soft:#153552; --sky:#2E7FA8; --ice:#DDEAF2;
+  --ice-deep:#BBD4E4; --amber:#E29135; --ember:#BF4F2A; --slate:#55697A;
+  --mist:#F2F6F9; --paper:#FFFFFF;
+  --display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --body:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--mist); color:var(--ink); font-family:var(--body);
+  font-size:17px; line-height:1.5; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 72px}
 
-  * { box-sizing: border-box; }
+/* ---------- header / signature ---------- */
+header{background:var(--ink);color:var(--paper);margin-bottom:26px}
+.hd{max-width:860px;margin:0 auto;padding:22px 20px 0;
+    display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.eyebrow{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ice-deep);margin:0 0 6px}
+h1{font-family:var(--display);font-size:clamp(28px,6vw,40px);line-height:1.05;margin:0;font-weight:700}
+.tagline{margin:8px 0 0;font-size:14.5px;color:var(--ice)}
+.score{font-family:var(--mono);text-align:right;flex-shrink:0}
+.score b{display:block;font-size:30px;color:var(--amber);line-height:1}
+.score span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ice-deep)}
+/* the signature: variability jag under a rising trend line */
+.sig{display:block;width:100%;height:74px;margin-top:14px}
+.sig .jag{fill:none;stroke:var(--ink-soft);stroke-width:2.5}
+.sig .trend{fill:none;stroke:var(--amber);stroke-width:3.5;stroke-linecap:round;
+  stroke-dasharray:600;stroke-dashoffset:600;animation:draw 1.6s .2s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.sig .trend{animation:none;stroke-dashoffset:0}}
 
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Calibri, Roboto, Helvetica, Arial, sans-serif;
-    background: var(--slate-dark);
-    background-image:
-      radial-gradient(circle at 15% 10%, rgba(91,123,79,0.14) 0%, transparent 45%),
-      radial-gradient(circle at 85% 90%, rgba(201,138,44,0.14) 0%, transparent 45%);
-    color: var(--ink);
-    min-height: 100vh;
-  }
+/* ---------- rounds ---------- */
+.round{background:var(--paper);border:1px solid var(--ice-deep);border-radius:6px;
+  padding:22px;margin-bottom:20px}
+.round[hidden]{display:none}
+.rlabel{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);
+  font-weight:700;margin:0 0 4px}
+.round h2{font-family:var(--display);font-size:24px;margin:0 0 4px;font-weight:700}
+.rsub{margin:0 0 18px;color:var(--slate);font-size:15px}
+.locked{opacity:.55}
+.locked .rsub{color:var(--slate)}
 
-  h1, h2, h3, .display { font-family: Cambria, Georgia, 'Times New Roman', serif; margin: 0; }
+/* ---------- question ---------- */
+.qmeta{font-family:var(--mono);font-size:12px;color:var(--slate);margin:0 0 6px}
+.qtext{font-size:19px;font-weight:600;margin:0 0 16px;line-height:1.35}
+.opts{display:grid;gap:9px}
+button{font:inherit;cursor:pointer}
+.opt{display:block;width:100%;text-align:left;background:var(--mist);
+  border:1.5px solid var(--ice-deep);border-radius:5px;padding:12px 14px;color:var(--ink);
+  transition:background .12s,border-color .12s}
+.opt:hover:not(:disabled){border-color:var(--sky);background:var(--paper)}
+.opt:disabled{cursor:default}
+.opt.right{background:#E8F2E4;border-color:#4B7F3E;font-weight:600}
+.opt.wrong{background:#FBEAE4;border-color:var(--ember)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 
-  .app { max-width: 960px; margin: 0 auto; padding: 20px 16px 60px; }
+/* ---------- sort rows ---------- */
+.row{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--ice)}
+.row:first-of-type{border-top:0}
+.row p{margin:0;flex:1;font-size:16.5px}
+.pick{display:flex;gap:7px;flex-shrink:0}
+.pick button{background:var(--paper);border:1.5px solid var(--ice-deep);border-radius:4px;
+  padding:7px 12px;font-size:13.5px;font-weight:600;color:var(--slate)}
+.pick button:hover:not(:disabled){border-color:var(--sky);color:var(--ink)}
+.pick button.chosen.right{background:#E8F2E4;border-color:#4B7F3E;color:#2E5A26}
+.pick button.chosen.wrong{background:#FBEAE4;border-color:var(--ember);color:var(--ember)}
+.pick button:disabled{cursor:default}
+.why{margin:6px 0 0;font-size:14px;color:var(--slate);max-width:62ch}
+.why[hidden]{display:none}
 
-  /* ---------- HUD ---------- */
-  .hud {
-    display: flex; align-items: center; justify-content: space-between;
-    background: var(--slate); color: var(--white);
-    border-radius: 14px; padding: 14px 20px; margin-bottom: 18px;
-    box-shadow: var(--shadow); flex-wrap: wrap; gap: 10px;
-  }
-  .hud .brand { display: flex; align-items: center; gap: 10px; }
-  .hud .brand .badge-icon {
-    width: 34px; height: 34px; border-radius: 50%;
-    background: var(--human); display: flex; align-items: center; justify-content: center; font-size: 18px;
-  }
-  .hud .brand-text { font-size: 14px; letter-spacing: 0.5px; color: #B7CDAF; font-weight: 700; text-transform: uppercase; }
-  .hud .brand-title { font-size: 19px; font-weight: 700; }
-  .hud .stats { display: flex; gap: 18px; }
-  .hud .stat { text-align: center; }
-  .hud .stat .num { font-size: 20px; font-weight: 700; font-family: Cambria, Georgia, serif; }
-  .hud .stat .lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; color: #B7CDAF; }
+/* ---------- feedback + nav ---------- */
+.fb{margin:16px 0 0;padding:12px 14px;border-radius:5px;font-size:15.5px;background:var(--mist);
+  border-left:4px solid var(--sky)}
+.fb[hidden]{display:none}
+.fb.ok{border-left-color:#4B7F3E}
+.fb.no{border-left-color:var(--ember)}
+.nav{margin-top:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.go{background:var(--ink);color:var(--paper);border:0;border-radius:5px;padding:12px 22px;
+  font-size:16px;font-weight:600}
+.go:hover{background:var(--ink-soft)}
+.go[hidden]{display:none}
+.ghost{background:transparent;border:1.5px solid var(--ice-deep);color:var(--slate);
+  border-radius:5px;padding:11px 18px;font-size:15px}
+.ghost:hover{border-color:var(--slate);color:var(--ink)}
+.tally{font-family:var(--mono);font-size:13px;color:var(--slate);margin-left:auto}
 
-  .progress-track { height: 8px; background: rgba(255,255,255,0.15); border-radius: 5px; overflow: hidden; margin-bottom: 26px; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--natural), var(--human)); width: 0%; transition: width 0.4s ease; }
-
-  .card-panel { background: var(--white); border-radius: 16px; padding: 28px; box-shadow: var(--shadow); }
-
-  .eyebrow { text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; font-weight: 700; color: var(--human); margin-bottom: 6px; }
-  .screen-title { font-size: 26px; font-weight: 700; color: var(--slate-dark); margin-bottom: 10px; }
-  .lede { font-size: 15.5px; line-height: 1.55; color: #444; margin-bottom: 18px; }
-
-  button { font-family: inherit; cursor: pointer; border: none; }
-
-  .btn-primary {
-    background: var(--human); color: var(--white); font-weight: 700; font-size: 15px;
-    padding: 13px 26px; border-radius: 10px; transition: transform 0.12s ease, background 0.12s ease;
-  }
-  .btn-primary:hover { background: var(--human-dark); transform: translateY(-1px); }
-  .btn-primary:disabled { background: #ccc; cursor: not-allowed; transform: none; }
-
-  .btn-secondary {
-    background: transparent; color: var(--slate); font-weight: 700; font-size: 14px;
-    padding: 11px 20px; border-radius: 10px; border: 2px solid var(--slate);
-  }
-  .btn-secondary:hover { background: var(--slate); color: var(--white); }
-
-  /* ---------- INTRO ---------- */
-  .intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0 24px; }
-  .intro-round { background: var(--cream); border-radius: 12px; padding: 14px; border-left: 5px solid var(--natural); }
-  .intro-round:nth-child(2) { border-left-color: var(--human); }
-  .intro-round:nth-child(3) { border-left-color: var(--slate); }
-  .intro-round .num { font-size: 22px; font-weight: 700; color: var(--slate-dark); }
-  .intro-round h3 { font-size: 14.5px; margin: 4px 0 6px; }
-  .intro-round p { font-size: 12.5px; color: #555; line-height: 1.4; margin: 0; }
-
-  .briefing-box { background: var(--slate-dark); color: var(--cream); border-radius: 12px; padding: 18px 20px; font-size: 14px; line-height: 1.6; margin-bottom: 22px; }
-  .briefing-box strong { color: #B7CDAF; }
-
-  /* ---------- ROUND 1: Cause Sort ---------- */
-  .sort-board { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0; }
-  .sort-col { border-radius: 12px; padding: 12px; min-height: 220px; border: 2px dashed #cfc9ba; background: var(--cream); }
-  .sort-col.natural { border-color: var(--natural); }
-  .sort-col.human { border-color: var(--human); }
-  .sort-col h3 { font-size: 14px; text-align: center; margin-bottom: 10px; }
-  .sort-col.natural h3 { color: var(--natural-dark); }
-  .sort-col.human h3 { color: var(--human-dark); }
-  .sort-col.drophover { background: #eae4d2; }
-  .placed-chip { background: var(--slate); color: white; font-size: 11.5px; padding: 6px 9px; border-radius: 7px; margin-bottom: 6px; text-align: center; }
-  .placed-chip.correct { background: var(--good); }
-  .placed-chip.incorrect { background: var(--bad); }
-
-  .card-tray { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; min-height: 54px; }
-  .sort-card {
-    background: var(--white); border: 2px solid var(--slate); color: var(--slate-dark);
-    font-size: 13px; font-weight: 600; padding: 10px 14px; border-radius: 9px;
-    cursor: pointer; transition: all 0.12s ease;
-  }
-  .sort-card:hover { background: var(--slate); color: white; transform: translateY(-2px); }
-  .sort-card.selected { background: var(--human); border-color: var(--human); color: white; }
-  .sort-card.used { display: none; }
-
-  .driver-prompt {
-    display: none;
-    background: var(--slate-dark); color: white; border-radius: 12px; padding: 16px 18px; margin: 14px 0;
-  }
-  .driver-prompt.show { display: block; }
-  .driver-prompt p { font-size: 13.5px; margin: 0 0 10px; }
-  .driver-chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
-  .driver-chip {
-    background: rgba(255,255,255,0.1); color: white; border: 1.5px solid rgba(255,255,255,0.35);
-    padding: 8px 13px; border-radius: 20px; font-size: 12.5px; font-weight: 600;
-  }
-  .driver-chip:hover { background: rgba(255,255,255,0.22); }
-  .driver-chip.correct { background: var(--good); border-color: var(--good); }
-  .driver-chip.incorrect { background: var(--bad); border-color: var(--bad); }
-
-  .helper-note { font-size: 12.5px; color: #777; font-style: italic; margin-top: 4px; }
-
-  /* ---------- ROUND 2: Mixed Cases ---------- */
-  .case-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-  .case-num { background: var(--slate-dark); color: #B7CDAF; font-weight: 700; font-size: 13px; padding: 4px 10px; border-radius: 6px; }
-  .case-story { background: var(--cream); border-radius: 10px; padding: 16px 18px; font-size: 14.5px; line-height: 1.55; margin-bottom: 18px; border-left: 4px solid var(--slate); }
-
-  .dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-  .dual-col h4 { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px; }
-  .dual-col.natural h4 { color: var(--natural-dark); }
-  .dual-col.human h4 { color: var(--human-dark); }
-  .opt-btn {
-    display: block; width: 100%; text-align: left;
-    background: var(--white); border: 2px solid #ddd6c6; border-radius: 10px;
-    padding: 10px 12px; font-size: 12.5px; font-weight: 600; color: var(--slate-dark);
-    margin-bottom: 8px; transition: all 0.12s ease;
-  }
-  .opt-btn:hover { border-color: var(--slate); }
-  .opt-btn.picked { border-color: var(--human); background: #fdf3e6; }
-  .opt-btn.reveal-correct { border-color: var(--good); background: #eaf5ec; }
-  .opt-btn.reveal-wrong { border-color: var(--bad); background: #fbeae8; opacity: 0.75; }
-
-  .feedback-box { display: none; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; line-height: 1.5; margin-bottom: 16px; }
-  .feedback-box.good { background: #eaf5ec; border-left: 4px solid var(--good); display: block; }
-  .feedback-box.bad { background: #fbeae8; border-left: 4px solid var(--bad); display: block; }
-
-  /* ---------- ROUND 3: Driver Match-Up ---------- */
-  .timer-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-  .timer-badge {
-    background: var(--slate-dark); color: white; font-weight: 700; font-size: 15px;
-    padding: 8px 16px; border-radius: 20px; display: flex; align-items: center; gap: 8px;
-  }
-  .timer-badge.urgent { background: var(--bad); }
-  .qcount { font-size: 13px; color: #888; }
-  .scenario-box { background: var(--cream); border-radius: 10px; padding: 18px 20px; font-size: 16px; line-height: 1.5; margin-bottom: 18px; text-align: center; font-weight: 600; color: var(--slate-dark); min-height: 60px; display:flex; align-items:center; justify-content:center; }
-  .driver-answer-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
-  .driver-answer-btn {
-    background: var(--white); border: 2px solid var(--slate); border-radius: 10px;
-    padding: 16px 10px; font-size: 14px; font-weight: 700; color: var(--slate-dark); text-align: center;
-  }
-  .driver-answer-btn:hover { background: var(--slate); color: white; }
-  .driver-answer-btn.correct { background: var(--good); border-color: var(--good); color: white; }
-  .driver-answer-btn.incorrect { background: var(--bad); border-color: var(--bad); color: white; }
-  .r3-result-line { text-align: center; font-size: 13px; color: #777; min-height: 20px; margin-bottom: 6px; }
-
-  /* ---------- RESULTS ---------- */
-  .results-hero { text-align: center; padding: 10px 0 24px; }
-  .rank-badge {
-    width: 96px; height: 96px; border-radius: 50%; background: var(--human); color: white;
-    display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 14px;
-    box-shadow: 0 6px 18px rgba(201,138,44,0.4);
-  }
-  .rank-title { font-size: 24px; font-weight: 700; color: var(--slate-dark); margin-bottom: 6px; }
-  .rank-sub { font-size: 14px; color: #666; margin-bottom: 20px; }
-  .score-strip { display: flex; justify-content: center; gap: 26px; margin-bottom: 24px; }
-  .score-strip .s-item { text-align: center; }
-  .score-strip .s-item .n { font-size: 26px; font-weight: 700; font-family: Cambria, Georgia, serif; color: var(--slate); }
-  .score-strip .s-item .l { font-size: 11px; text-transform: uppercase; color: #888; }
-
-  .reflection-box { background: var(--cream); border-radius: 10px; padding: 16px 18px; margin-bottom: 20px; }
-  .reflection-box textarea { width: 100%; min-height: 80px; border-radius: 8px; border: 1px solid #ccc; padding: 10px; font-family: inherit; font-size: 13.5px; resize: vertical; margin-top: 8px; }
-
-  .nav-row { display: flex; justify-content: space-between; margin-top: 22px; gap: 10px; }
-  .nav-row.end { justify-content: flex-end; }
-  .hidden { display: none !important; }
-
-  @media (max-width: 640px) {
-    .intro-grid { grid-template-columns: 1fr; }
-    .dual-grid { grid-template-columns: 1fr; }
-    .sort-board { grid-template-columns: 1fr; }
-    .driver-answer-row { grid-template-columns: 1fr; }
-    .hud { flex-direction: column; align-items: flex-start; }
-    .card-panel { padding: 20px 16px; }
-  }
+/* ---------- summary ---------- */
+.sum{background:var(--ink);color:var(--paper);border-radius:6px;padding:26px}
+.sum h2{font-family:var(--display);font-size:26px;margin:0 0 16px;color:var(--paper)}
+.big{font-family:var(--mono);font-size:52px;color:var(--amber);line-height:1;margin:0}
+.big small{font-size:20px;color:var(--ice-deep)}
+.bd{margin:18px 0 0;padding:0;list-style:none;font-size:15.5px}
+.bd li{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid var(--ink-soft)}
+.bd span{font-family:var(--mono);color:var(--amber)}
+.verdict{margin:18px 0 0;font-size:16px;color:var(--ice);max-width:56ch}
+.sum .ghost{border-color:var(--ink-soft);color:var(--ice);margin-top:20px}
+.sum .ghost:hover{border-color:var(--ice);color:var(--paper)}
+footer{max-width:860px;margin:0 auto;padding:26px 20px;font-size:13px;color:var(--slate)}
 </style>
 </head>
 <body>
-<div class="app">
 
-  <div class="hud">
-    <div class="brand">
-      <div class="badge-icon">\u{1F50E}</div>
-      <div>
-        <div class="brand-text">Case File Active</div>
-        <div class="brand-title">Cause Files: The Environmental Detective</div>
-      </div>
+<header>
+  <div class="hd">
+    <div>
+      <p class="eyebrow">Year 10 Geography &middot; Lesson 16 &middot; VCGGK144</p>
+      <h1>Climate Check-In</h1>
+      <p class="tagline">Three rounds. The bars jump around. The line keeps climbing.</p>
     </div>
-    <div class="stats">
-      <div class="stat"><div class="num" id="hud-score">0</div><div class="lbl">Score</div></div>
-      <div class="stat"><div class="num" id="hud-streak">0</div><div class="lbl">Streak</div></div>
-      <div class="stat"><div class="num" id="hud-round">0/3</div><div class="lbl">Round</div></div>
+    <div class="score" aria-live="polite">
+      <b id="scoreNum">0</b>
+      <span>points of 18</span>
     </div>
   </div>
-  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  <svg class="sig" viewBox="0 0 600 74" preserveAspectRatio="none" aria-hidden="true">
+    <polyline class="jag" points="0,58 40,40 80,62 120,34 160,56 200,30 240,52 280,24 320,46 360,20 400,42 440,16 480,38 520,12 560,32 600,8"/>
+    <polyline class="trend" points="0,56 150,44 300,32 450,20 600,10"/>
+  </svg>
+</header>
 
-  <!-- ================= INTRO ================= -->
-  <div class="card-panel" id="screen-intro">
-    <div class="eyebrow">Briefing</div>
-    <h1 class="screen-title">Welcome back, Detective</h1>
-    <div class="briefing-box">
-      Every case that lands on your desk has a cause behind it, and today you are hunting for the culprit. Was it <strong>nature</strong> acting alone: a climatic cycle or a geological process? Or was it a <strong>human decision</strong>: agriculture, industry, or urban growth? Some of the trickiest cases involve both working together. Three rounds. Follow the evidence.
+<div class="wrap">
+
+  <!-- ROUND 1 -->
+  <section class="round" id="r1">
+    <p class="rlabel">Round 1</p>
+    <h2>Rapid Recall</h2>
+    <p class="rsub">Six questions on last week. One attempt each.</p>
+    <p class="qmeta" id="q1meta"></p>
+    <p class="qtext" id="q1text"></p>
+    <div class="opts" id="q1opts"></div>
+    <p class="fb" id="q1fb" hidden></p>
+    <div class="nav">
+      <button class="go" id="q1next" hidden>Next question</button>
+      <span class="tally" id="t1">0 of 6</span>
     </div>
-    <div class="intro-grid">
-      <div class="intro-round">
-        <div class="num">01</div>
-        <h3>Cause Sort</h3>
-        <p>Sort 8 examples as natural or human, then name the specific driver behind each.</p>
-      </div>
-      <div class="intro-round">
-        <div class="num">02</div>
-        <h3>Mixed Cases</h3>
-        <p>Five real cases where BOTH causes apply. Identify each contribution.</p>
-      </div>
-      <div class="intro-round">
-        <div class="num">03</div>
-        <h3>Driver Match-Up</h3>
-        <p>Beat the clock, match 6 scenarios to agriculture, industry or urban growth.</p>
-      </div>
+  </section>
+
+  <!-- ROUND 2 -->
+  <section class="round locked" id="r2">
+    <p class="rlabel">Round 2</p>
+    <h2>Weather or Climate</h2>
+    <p class="rsub" id="r2sub">Finish Round 1 first.</p>
+    <div id="sortRows"></div>
+    <div class="nav">
+      <button class="go" id="r2done" hidden>Go to Round 3</button>
+      <span class="tally" id="t2">0 of 8</span>
     </div>
-    <button class="btn-primary" onclick="goToRound(1)">Open Case File \u2192</button>
-  </div>
+  </section>
 
-  <!-- ================= ROUND 1 ================= -->
-  <div class="card-panel hidden" id="screen-round1">
-    <div class="eyebrow">Round 1 of 3</div>
-    <h1 class="screen-title">Cause Sort</h1>
-    <p class="lede">Select an example, then tap Natural or Human. You will then be asked to name the specific driver behind it.</p>
-
-    <div class="sort-board">
-      <div class="sort-col natural" data-col="natural"><h3>NATURAL CAUSE</h3><div class="col-chips"></div></div>
-      <div class="sort-col human" data-col="human"><h3>HUMAN CAUSE</h3><div class="col-chips"></div></div>
+  <!-- ROUND 3 -->
+  <section class="round locked" id="r3">
+    <p class="rlabel">Round 3</p>
+    <h2>Myth Buster</h2>
+    <p class="rsub" id="r3sub">Finish Round 2 first.</p>
+    <div id="mythRows"></div>
+    <div class="nav">
+      <button class="go" id="r3done" hidden>See my score</button>
+      <span class="tally" id="t3">0 of 4</span>
     </div>
+  </section>
 
-    <div class="card-tray" id="r1-tray"></div>
-    <div class="helper-note" id="r1-hint">Tap an example card, then tap Natural or Human above.</div>
-
-    <div class="driver-prompt" id="r1-driver-prompt">
-      <p id="r1-driver-text"></p>
-      <div class="driver-chip-row" id="r1-driver-chips"></div>
-    </div>
-
-    <div class="feedback-box" id="r1-feedback"></div>
-
-    <div class="nav-row end">
-      <button class="btn-primary" id="r1-next" disabled onclick="goToRound(2)">Continue to Mixed Cases \u2192</button>
-    </div>
-  </div>
-
-  <!-- ================= ROUND 2 ================= -->
-  <div class="card-panel hidden" id="screen-round2">
-    <div class="eyebrow">Round 2 of 3</div>
-    <div class="case-header">
-      <div class="case-num" id="r2-casenum">CASE 001</div>
-      <h1 class="screen-title" id="r2-title" style="font-size:19px;"></h1>
-    </div>
-    <div class="case-story" id="r2-story"></div>
-
-    <p class="lede" style="margin-bottom:8px; font-weight:700; color:var(--slate);">This case has BOTH causes. Identify each contribution.</p>
-    <div class="dual-grid">
-      <div class="dual-col natural"><h4>Natural contribution</h4><div id="r2-natural-opts"></div></div>
-      <div class="dual-col human"><h4>Human contribution</h4><div id="r2-human-opts"></div></div>
-    </div>
-
-    <div class="feedback-box" id="r2-feedback"></div>
-
-    <div class="nav-row">
-      <div style="font-size:12.5px; color:#888; align-self:center;" id="r2-progress">Case 1 of 5</div>
-      <button class="btn-primary" id="r2-next" disabled onclick="nextCase()">Submit Case \u2192</button>
-    </div>
-  </div>
-
-  <!-- ================= ROUND 3 ================= -->
-  <div class="card-panel hidden" id="screen-round3">
-    <div class="eyebrow">Round 3 of 3</div>
-    <h1 class="screen-title">Driver Match-Up</h1>
-    <p class="lede">All six scenarios below are human-caused. Match each to its driver before the clock runs out.</p>
-
-    <div class="timer-row">
-      <div class="timer-badge" id="r3-timer">\u23f1\ufe0f 45s</div>
-      <div class="qcount" id="r3-qcount">Scenario 1 of 6</div>
-    </div>
-
-    <div class="scenario-box" id="r3-scenario"></div>
-    <div class="driver-answer-row" id="r3-answers"></div>
-    <div class="r3-result-line" id="r3-result"></div>
-
-    <div class="nav-row end">
-      <button class="btn-primary hidden" id="r3-next" onclick="goToRound(4)">See Final Report \u2192</button>
-    </div>
-  </div>
-
-  <!-- ================= RESULTS ================= -->
-  <div class="card-panel hidden" id="screen-results">
-    <div class="results-hero">
-      <div class="rank-badge" id="res-badge-icon">\u{1F3C5}</div>
-      <div class="rank-title" id="res-rank-title">Junior Detective</div>
-      <div class="rank-sub" id="res-rank-sub">Case closed. Nice work, Detective.</div>
-    </div>
-    <div class="score-strip">
-      <div class="s-item"><div class="n" id="res-score">0</div><div class="l">Points</div></div>
-      <div class="s-item"><div class="n" id="res-pct">0%</div><div class="l">Accuracy</div></div>
-      <div class="s-item"><div class="n" id="res-streak">0</div><div class="l">Best Streak</div></div>
-    </div>
-    <div class="reflection-box">
-      <strong style="font-size:13.5px; color:var(--slate-dark);">Detective's notebook (not scored)</strong>
-      <p style="font-size:12.5px; color:#666; margin:6px 0 0;">Which case was hardest to assign a cause to, and why? Jot a sentence or two before you compare answers as a class.</p>
-      <textarea placeholder="Type your reflection here..."></textarea>
-    </div>
-    <div class="nav-row end">
-      <button class="btn-secondary" onclick="restartGame()">Restart Investigation</button>
-    </div>
-  </div>
+  <!-- SUMMARY -->
+  <section class="sum" id="sum" hidden>
+    <h2>How you went</h2>
+    <p class="big"><span id="finalNum">0</span><small> / 18</small></p>
+    <ul class="bd">
+      <li>Round 1 &middot; Rapid Recall <span id="b1">0 / 6</span></li>
+      <li>Round 2 &middot; Weather or Climate <span id="b2">0 / 8</span></li>
+      <li>Round 3 &middot; Myth Buster <span id="b3">0 / 4</span></li>
+    </ul>
+    <p class="verdict" id="verdict"></p>
+    <button class="ghost" onclick="location.reload()">Start again</button>
+  </section>
 
 </div>
 
+<footer>Built for Manor Lakes College &middot; Environmental Change and Management &middot; all examples original.</footer>
+
 <script>
-/* ============================================================
-   STATE
-   ============================================================ */
-let state = {
-  score: 0, streak: 0, bestStreak: 0, round: 0,
-  r1: { placed: 0, correct: 0, driverCorrect: 0 },
-  r2: { caseIndex: 0, correct: 0, naturalPicked: null, humanPicked: null },
-  r3: { qIndex: 0, correct: 0, timeLeft: 45, timerId: null, answered: false },
-};
+(function(){
+  "use strict";
 
-/* ============================================================
-   ROUND 1 DATA
-   ============================================================ */
-const driverOptions = ['Climatic cycle', 'Geological process', 'Agriculture', 'Industry', 'Urban growth'];
-const r1Cards = [
-  { id: 'c1', label: 'Monsoon rains flooding the Ganges floodplain every year', cat: 'natural', driver: 'Climatic cycle',
-    why: 'This is a recurring, predictable seasonal rainfall pattern, a climatic cycle.' },
-  { id: 'c2', label: 'Tectonic plates colliding to build the Himalayas', cat: 'natural', driver: 'Geological process',
-    why: 'Mountain building from plate collision is a geological process operating over millions of years.' },
-  { id: 'c3', label: 'A prolonged La Ni\u00f1a filling Lake Eyre with floodwater', cat: 'natural', driver: 'Climatic cycle',
-    why: 'La Ni\u00f1a is part of the El Ni\u00f1o-Southern Oscillation, a recurring climatic cycle.' },
-  { id: 'c4', label: 'A volcanic eruption blanketing a valley in ash', cat: 'natural', driver: 'Geological process',
-    why: 'Volcanic activity is driven by processes inside the Earth\u2019s crust, a geological process.' },
-  { id: 'c5', label: 'Soviet-era irrigation diverting rivers away from the Aral Sea', cat: 'human', driver: 'Agriculture',
-    why: 'The rivers were diverted specifically to irrigate cotton and rice crops, an agricultural driver.' },
-  { id: 'c6', label: 'Open-cut coal mining reshaping a valley', cat: 'human', driver: 'Industry',
-    why: 'Mining is an industrial activity that directly reshapes land.' },
-  { id: 'c7', label: 'Outer-suburb housing estates replacing paddocks on a city fringe', cat: 'human', driver: 'Urban growth',
-    why: 'Converting farmland to housing is a clear case of urban growth.' },
-  { id: 'c8', label: 'A new freeway cutting through native bushland for a growing city', cat: 'human', driver: 'Urban growth',
-    why: 'Transport infrastructure built to serve an expanding city is part of urban growth.' },
-];
+  /* ---------------- data ---------------- */
+  var R1 = [
+    { q:"Which of these is an example of sudden environmental change?",
+      o:["Soil erosion on a hillside","A volcanic eruption","A slow rise in soil salinity","Gradual coastal retreat"], a:1,
+      why:"Sudden change happens over hours or days. Erosion, salinity and coastal retreat all build up over years." },
+    { q:"Species extinction is best described as which kind of change?",
+      o:["Gradual and reversible","Sudden and reversible","Irreversible","Seasonal"], a:2,
+      why:"Once a species is gone it cannot be recovered, which makes extinction the clearest case of irreversible change." },
+    { q:"Which of these is a natural cause of environmental change?",
+      o:["Clearing bushland for housing","A drought driven by climatic cycles","Coal-fired electricity","Fertiliser runoff into a creek"], a:1,
+      why:"Climatic cycles operate without human input. The other three all begin with a human decision." },
+    { q:"The largest driver of land clearing in Australia has been:",
+      o:["Mining","Agriculture","Tourism","Wind farms"], a:1,
+      why:"Agriculture, especially pasture for grazing, accounts for the bulk of land cleared, with urban expansion well behind it." },
+    { q:"Natural and human-induced change differ most clearly in:",
+      o:["Their rate and the scale of their impact","The colour of the landscape","Whether they happen on land or at sea","How much they cost to photograph"], a:0,
+      why:"Human-induced change is usually much faster and can reach a global scale within decades." },
+    { q:"An environmental sink is a part of the environment that:",
+      o:["Supplies raw materials","Absorbs waste","Holds cultural or spiritual value","Provides a flood barrier"], a:1,
+      why:"Source supplies, sink absorbs, service regulates, spiritual holds meaning. The ocean absorbing carbon is a sink." }
+  ];
 
-/* ============================================================
-   ROUND 2 DATA: Mixed Cases (both causes)
-   ============================================================ */
-const r2Cases = [
-  {
-    title: 'The Thirsty Basin',
-    story: 'Low water levels and fish kills have hit the Murray-Darling Basin repeatedly. A run of severe drought years has reduced inflows, while heavy irrigation extraction for crops upstream has drawn down what water remains.',
-    naturalOpts: ['A run of severe drought years reducing rainfall', 'A volcanic eruption upstream', 'An earthquake altering the riverbed'],
-    naturalCorrect: 0,
-    humanOpts: ['Heavy irrigation extraction for crops upstream', 'A change in the monsoon cycle', 'Tectonic uplift of the river source'],
-    humanCorrect: 0,
-  },
-  {
-    title: 'The Swelling Delta',
-    story: 'Seasonal monsoon flooding has always shaped the Ganges-Brahmaputra Delta. In recent decades, land clearing for farming in the Himalayan foothills has increased runoff and sediment, making downstream flooding more severe than the monsoon alone would cause.',
-    naturalOpts: ['Seasonal monsoon flooding', 'A new dam built for irrigation', 'Urban expansion along the coast'],
-    naturalCorrect: 0,
-    humanOpts: ['Land clearing for farming in the Himalayan foothills', 'A shift in ocean currents', 'A geological uplift event'],
-    humanCorrect: 0,
-  },
-  {
-    title: 'The Bleaching Reef',
-    story: 'A marine heatwave pushed Great Barrier Reef water temperatures well above the seasonal average, stressing coral. Many scientists link the rising frequency of these heatwaves partly to broader industrial emissions warming the region\u2019s oceans over time.',
-    naturalOpts: ['A marine heatwave raising water temperature', 'A new coastal shipping port', 'Land clearing for coastal farms'],
-    naturalCorrect: 0,
-    humanOpts: ['Industrial emissions linked to rising ocean temperatures', 'A tectonic shift on the seafloor', 'A cyclical ocean current pattern'],
-    humanCorrect: 0,
-  },
-  {
-    title: 'The Vanishing Sea (Revisited)',
-    story: 'The Aral Sea sits in a naturally arid, low-rainfall region, meaning it always depended heavily on river inflow to stay full. When Soviet-era planners diverted that river water to irrigate cotton fields, the sea had no natural buffer left and collapsed rapidly.',
-    naturalOpts: ['A naturally arid, low-rainfall climate with little direct replenishment', 'A sudden earthquake draining the lakebed', 'A volcanic eruption blocking the rivers'],
-    naturalCorrect: 0,
-    humanOpts: ['River water diverted to irrigate cotton fields', 'A shift in wind patterns', 'Natural evaporation increasing over centuries'],
-    humanCorrect: 0,
-  },
-  {
-    title: 'The Hotter City',
-    story: 'A record heatwave pushed regional temperatures to extremes across south-eastern Australia. In the city itself, the heat felt even more intense because decades of urban growth had replaced vegetation and soil with heat-absorbing concrete and asphalt.',
-    naturalOpts: ['A record regional heatwave', 'A new industrial estate on the city fringe', 'Irrigation channels built for farms'],
-    naturalCorrect: 0,
-    humanOpts: ['Urban growth replacing vegetation with concrete and asphalt', 'A shift in the jet stream', 'A prolonged drought cycle'],
-    humanCorrect: 0,
-  },
-];
+  var R2 = [
+    { t:"It is 34 \u00b0C in Werribee right now.", a:"W" },
+    { t:"Darwin has a wet season from November to April.", a:"C" },
+    { t:"A cold front will arrive on Friday afternoon.", a:"W" },
+    { t:"Melbourne's average annual rainfall is about 600 mm.", a:"C" },
+    { t:"Hail is falling on the school oval.", a:"W" },
+    { t:"Alice Springs has hot dry summers and cold nights.", a:"C" },
+    { t:"Tomorrow's maximum is forecast at 19 \u00b0C.", a:"W" },
+    { t:"South-west Western Australia has become drier since the 1970s.", a:"C" }
+  ];
 
-/* ============================================================
-   ROUND 3 DATA: Driver Match-Up (all human, 3-way choice)
-   ============================================================ */
-const r3Scenarios = [
-  { text: 'A vineyard clears native grassland to plant new rows of vines.', answer: 'Agriculture' },
-  { text: 'A steel plant expands its site and increases its emissions.', answer: 'Industry' },
-  { text: 'A new train line extension opens up a growth corridor of housing.', answer: 'Urban growth' },
-  { text: 'A cattle feedlot expands to meet rising beef demand.', answer: 'Agriculture' },
-  { text: 'A cement quarry excavates deeper into a hillside.', answer: 'Industry' },
-  { text: 'A new shopping precinct replaces open grassland on a city fringe.', answer: 'Urban growth' },
-];
-const r3Options = ['Agriculture', 'Industry', 'Urban growth'];
+  var R3 = [
+    { t:"Climate change only means the world is getting hotter.", a:"M",
+      why:"Rainfall patterns, season length and the intensity of extremes all shift as well. Some regions get wetter, not hotter." },
+    { t:"One cold winter in Melbourne shows the climate is not changing.", a:"M",
+      why:"A single season is weather. A trend is measured across decades, so one cold winter sits inside normal variability." },
+    { t:"Climate is measured using roughly 30 years of records.", a:"F",
+      why:"Thirty years is the standard window. Long enough that one freak year cannot move the average." },
+    { t:"The climate has changed before, so today's change is nothing unusual.", a:"M",
+      why:"The premise is true but the conclusion does not follow. The current rate is far faster than past natural shifts, and the cause can be identified." }
+  ];
 
-/* ============================================================
-   NAVIGATION
-   ============================================================ */
-function showScreen(id) {
-  document.querySelectorAll('.card-panel').forEach(el => el.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
-}
-function updateHud() {
-  document.getElementById('hud-score').textContent = state.score;
-  document.getElementById('hud-streak').textContent = state.streak;
-  document.getElementById('hud-round').textContent = Math.min(state.round, 3) + '/3';
-  document.getElementById('progress-fill').style.width = Math.min(100, (state.round / 3) * 100) + '%';
-}
-function goToRound(n) {
-  state.round = n;
-  updateHud();
-  if (n === 1) { showScreen('screen-round1'); initRound1(); }
-  else if (n === 2) { showScreen('screen-round2'); initRound2(); }
-  else if (n === 3) { showScreen('screen-round3'); initRound3(); }
-  else if (n === 4) { showScreen('screen-results'); showResults(); }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-function bump(correct, points) {
-  if (correct) {
-    state.streak += 1;
-    state.bestStreak = Math.max(state.bestStreak, state.streak);
-    let bonus = state.streak >= 3 ? Math.floor(points * 0.5) : 0;
-    state.score += points + bonus;
-  } else {
-    state.streak = 0;
+  /* ---------------- state ---------------- */
+  var s1=0, s2=0, s3=0, qi=0, done2=0, done3=0;
+  var $ = function(id){ return document.getElementById(id); };
+
+  function bumpScore(){
+    var total = s1+s2+s3;
+    $("scoreNum").textContent = total;
+    return total;
   }
-  updateHud();
-}
 
-/* ============================================================
-   ROUND 1: Cause Sort (two-step: category, then driver)
-   ============================================================ */
-let r1Selected = null;
-let r1Pending = null; // card awaiting driver selection
-
-function initRound1() {
-  const tray = document.getElementById('r1-tray');
-  tray.innerHTML = '';
-  document.querySelectorAll('.sort-col .col-chips').forEach(c => c.innerHTML = '');
-  r1Cards.forEach(card => {
-    const btn = document.createElement('button');
-    btn.className = 'sort-card';
-    btn.textContent = card.label;
-    btn.id = 'card-' + card.id;
-    btn.onclick = () => selectR1Card(card, btn);
-    tray.appendChild(btn);
-  });
-  document.querySelectorAll('.sort-col').forEach(col => {
-    col.onclick = (e) => { if (e.target.closest('.placed-chip')) return; placeR1Category(col.dataset.col); };
-  });
-  document.getElementById('r1-feedback').style.display = 'none';
-  document.getElementById('r1-driver-prompt').classList.remove('show');
-  document.getElementById('r1-next').disabled = true;
-  state.r1 = { placed: 0, correct: 0, driverCorrect: 0 };
-  r1Selected = null;
-  r1Pending = null;
-}
-function selectR1Card(card, btn) {
-  document.querySelectorAll('.sort-card').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  r1Selected = { card, btn };
-  document.getElementById('r1-hint').textContent = 'Now tap Natural or Human for "' + card.label + '".';
-}
-function placeR1Category(colCode) {
-  if (!r1Selected) {
-    document.getElementById('r1-hint').textContent = 'Select an example card first.';
-    return;
-  }
-  const { card, btn } = r1Selected;
-  const correct = colCode === card.cat;
-  const chip = document.createElement('div');
-  chip.className = 'placed-chip ' + (correct ? 'correct' : 'incorrect');
-  chip.textContent = card.label;
-  document.querySelector('.sort-col[data-col="' + colCode + '"] .col-chips').appendChild(chip);
-  btn.classList.add('used');
-
-  if (correct) state.r1.correct += 1;
-  bump(correct, 8);
-
-  // now prompt for driver
-  r1Pending = card;
-  const dp = document.getElementById('r1-driver-prompt');
-  dp.classList.add('show');
-  document.getElementById('r1-driver-text').textContent = (correct ? '\u2713 Correct category. ' : '\u2717 Actually that\u2019s the other category, but let\u2019s name the driver anyway. ') + 'Which specific driver is behind "' + card.label + '"?';
-  const chipsRow = document.getElementById('r1-driver-chips');
-  chipsRow.innerHTML = '';
-  driverOptions.forEach(opt => {
-    const cb = document.createElement('button');
-    cb.className = 'driver-chip';
-    cb.textContent = opt;
-    cb.onclick = () => pickDriver(opt, cb, card);
-    chipsRow.appendChild(cb);
-  });
-
-  r1Selected = null;
-  document.getElementById('r1-hint').textContent = 'Name the driver below, then select the next example.';
-}
-function pickDriver(opt, chipEl, card) {
-  const correct = opt === card.driver;
-  document.querySelectorAll('#r1-driver-chips .driver-chip').forEach(c => c.onclick = null);
-  document.querySelectorAll('#r1-driver-chips .driver-chip').forEach(c => {
-    if (c.textContent === card.driver) c.classList.add('correct');
-    else if (c === chipEl) c.classList.add('incorrect');
-  });
-
-  if (correct) state.r1.driverCorrect += 1;
-  bump(correct, 7);
-
-  const fb = document.getElementById('r1-feedback');
-  fb.style.display = 'block';
-  fb.className = 'feedback-box ' + (correct ? 'good' : 'bad');
-  fb.innerHTML = (correct ? '\u2713 Driver identified correctly. ' : '\u2717 The driver is actually ' + card.driver + '. ') + card.why;
-
-  state.r1.placed += 1;
-  setTimeout(() => { document.getElementById('r1-driver-prompt').classList.remove('show'); }, 350);
-
-  if (state.r1.placed === r1Cards.length) {
-    document.getElementById('r1-next').disabled = false;
-    document.getElementById('r1-hint').textContent = 'Cause Sort complete: ' + state.r1.correct + '/' + r1Cards.length + ' categories and ' + state.r1.driverCorrect + '/' + r1Cards.length + ' drivers correct.';
-  } else {
-    document.getElementById('r1-hint').textContent = 'Select the next example card.';
-  }
-}
-
-/* ============================================================
-   ROUND 2: Mixed Cases
-   ============================================================ */
-function initRound2() {
-  state.r2.caseIndex = 0;
-  state.r2.correct = 0;
-  loadCase();
-}
-function loadCase() {
-  const idx = state.r2.caseIndex;
-  const c = r2Cases[idx];
-  document.getElementById('r2-casenum').textContent = 'CASE ' + String(idx + 1).padStart(3, '0');
-  document.getElementById('r2-title').textContent = c.title;
-  document.getElementById('r2-story').textContent = c.story;
-  document.getElementById('r2-progress').textContent = 'Case ' + (idx + 1) + ' of ' + r2Cases.length;
-
-  const natEl = document.getElementById('r2-natural-opts');
-  natEl.innerHTML = '';
-  c.naturalOpts.forEach((opt, i) => {
-    const b = document.createElement('button');
-    b.className = 'opt-btn';
-    b.textContent = opt;
-    b.onclick = () => pickNatural(i, b);
-    natEl.appendChild(b);
-  });
-  const humEl = document.getElementById('r2-human-opts');
-  humEl.innerHTML = '';
-  c.humanOpts.forEach((opt, i) => {
-    const b = document.createElement('button');
-    b.className = 'opt-btn';
-    b.textContent = opt;
-    b.onclick = () => pickHuman(i, b);
-    humEl.appendChild(b);
-  });
-
-  state.r2.naturalPicked = null;
-  state.r2.humanPicked = null;
-  document.getElementById('r2-feedback').style.display = 'none';
-  document.getElementById('r2-feedback').className = 'feedback-box';
-  document.getElementById('r2-next').disabled = true;
-  document.getElementById('r2-next').textContent = 'Submit Case \u2192';
-}
-function pickNatural(i, btn) {
-  if (document.getElementById('r2-feedback').style.display === 'block') return;
-  document.querySelectorAll('#r2-natural-opts .opt-btn').forEach(b => b.classList.remove('picked'));
-  btn.classList.add('picked');
-  state.r2.naturalPicked = i;
-  checkCaseReady();
-}
-function pickHuman(i, btn) {
-  if (document.getElementById('r2-feedback').style.display === 'block') return;
-  document.querySelectorAll('#r2-human-opts .opt-btn').forEach(b => b.classList.remove('picked'));
-  btn.classList.add('picked');
-  state.r2.humanPicked = i;
-  checkCaseReady();
-}
-function checkCaseReady() {
-  if (state.r2.naturalPicked !== null && state.r2.humanPicked !== null) {
-    document.getElementById('r2-next').disabled = false;
-  }
-}
-function nextCase() {
-  const idx = state.r2.caseIndex;
-  const c = r2Cases[idx];
-  const fb = document.getElementById('r2-feedback');
-  if (fb.style.display !== 'block') {
-    const natRight = state.r2.naturalPicked === c.naturalCorrect;
-    const humRight = state.r2.humanPicked === c.humanCorrect;
-    document.querySelectorAll('#r2-natural-opts .opt-btn').forEach((b, i) => {
-      if (i === c.naturalCorrect) b.classList.add('reveal-correct');
-      else if (i === state.r2.naturalPicked) b.classList.add('reveal-wrong');
+  /* ---------------- round 1 ---------------- */
+  function drawQ(){
+    var q = R1[qi];
+    $("q1meta").textContent = "Question " + (qi+1) + " of " + R1.length;
+    $("q1text").textContent = q.q;
+    var box = $("q1opts");
+    box.innerHTML = "";
+    q.o.forEach(function(text,i){
+      var b = document.createElement("button");
+      b.className = "opt";
+      b.type = "button";
+      b.textContent = text;
+      b.addEventListener("click", function(){ answer(i,b); });
+      box.appendChild(b);
     });
-    document.querySelectorAll('#r2-human-opts .opt-btn').forEach((b, i) => {
-      if (i === c.humanCorrect) b.classList.add('reveal-correct');
-      else if (i === state.r2.humanPicked) b.classList.add('reveal-wrong');
-    });
-    const bothRight = natRight && humRight;
-    fb.style.display = 'block';
-    fb.className = 'feedback-box ' + (bothRight ? 'good' : 'bad');
-    fb.innerHTML = bothRight
-      ? '\u2713 Both contributions correctly identified. This case shows how a natural cause and a human cause can compound each other.'
-      : '\u2717 One contribution was off, review the highlighted correct answers above. Real cases often need both a natural AND a human explanation.';
-    if (bothRight) state.r2.correct += 1;
-    bump(bothRight, 16);
-    document.getElementById('r2-next').textContent = (idx === r2Cases.length - 1) ? 'See Driver Match-Up \u2192' : 'Next Case \u2192';
-    return;
+    $("q1fb").hidden = true;
+    $("q1next").hidden = true;
   }
-  if (idx === r2Cases.length - 1) {
-    goToRound(3);
-  } else {
-    state.r2.caseIndex += 1;
-    loadCase();
-  }
-}
 
-/* ============================================================
-   ROUND 3: Driver Match-Up (timed)
-   ============================================================ */
-function initRound3() {
-  state.r3 = { qIndex: 0, correct: 0, timeLeft: 45, timerId: null, answered: false };
-  document.getElementById('r3-next').classList.add('hidden');
-  startR3Timer();
-  loadScenario();
-}
-function startR3Timer() {
-  updateTimerBadge();
-  state.r3.timerId = setInterval(() => {
-    state.r3.timeLeft -= 1;
-    updateTimerBadge();
-    if (state.r3.timeLeft <= 0) {
-      clearInterval(state.r3.timerId);
-      endR3('Time\u2019s up! ');
+  function answer(i,btn){
+    var q = R1[qi];
+    var all = $("q1opts").querySelectorAll("button");
+    for (var k=0;k<all.length;k++){ all[k].disabled = true; }
+    var fb = $("q1fb");
+    if (i === q.a){
+      btn.classList.add("right");
+      s1++;
+      fb.className = "fb ok";
+      fb.textContent = "Correct. " + q.why;
+    } else {
+      btn.classList.add("wrong");
+      all[q.a].classList.add("right");
+      fb.className = "fb no";
+      fb.textContent = "Not this time. " + q.why;
     }
-  }, 1000);
-}
-function updateTimerBadge() {
-  const badge = document.getElementById('r3-timer');
-  badge.textContent = '\u23f1\ufe0f ' + Math.max(0, state.r3.timeLeft) + 's';
-  badge.classList.toggle('urgent', state.r3.timeLeft <= 10);
-}
-function loadScenario() {
-  if (state.r3.qIndex >= r3Scenarios.length) { endR3(''); return; }
-  const sc = r3Scenarios[state.r3.qIndex];
-  document.getElementById('r3-qcount').textContent = 'Scenario ' + (state.r3.qIndex + 1) + ' of ' + r3Scenarios.length;
-  document.getElementById('r3-scenario').textContent = sc.text;
-  document.getElementById('r3-result').textContent = '';
-  const answersEl = document.getElementById('r3-answers');
-  answersEl.innerHTML = '';
-  state.r3.answered = false;
-  shuffle([...r3Options]).forEach(opt => {
-    const b = document.createElement('button');
-    b.className = 'driver-answer-btn';
-    b.textContent = opt;
-    b.onclick = () => answerScenario(opt, b, sc);
-    answersEl.appendChild(b);
-  });
-}
-function answerScenario(opt, btn, sc) {
-  if (state.r3.answered) return;
-  state.r3.answered = true;
-  const correct = opt === sc.answer;
-  document.querySelectorAll('#r3-answers .driver-answer-btn').forEach(b => {
-    b.onclick = null;
-    if (b.textContent === sc.answer) b.classList.add('correct');
-    else if (b === btn) b.classList.add('incorrect');
-  });
-  if (correct) state.r3.correct += 1;
-  bump(correct, 9);
-  document.getElementById('r3-result').textContent = correct ? 'Correct!' : ('Not quite, the driver is ' + sc.answer + '.');
-  state.r3.qIndex += 1;
-  setTimeout(() => {
-    if (state.r3.timeLeft > 0) loadScenario();
-    else endR3('Time\u2019s up! ');
-  }, 700);
-}
-function endR3(prefix) {
-  if (state.r3.timerId) clearInterval(state.r3.timerId);
-  document.getElementById('r3-scenario').textContent = prefix + 'Match-up complete: ' + state.r3.correct + ' of ' + r3Scenarios.length + ' scenarios matched correctly.';
-  document.getElementById('r3-answers').innerHTML = '';
-  document.getElementById('r3-result').textContent = '';
-  document.getElementById('r3-next').classList.remove('hidden');
-}
-function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+    fb.hidden = false;
+    $("t1").textContent = s1 + " of " + R1.length;
+    bumpScore();
+    var next = $("q1next");
+    next.hidden = false;
+    next.textContent = (qi === R1.length-1) ? "Go to Round 2" : "Next question";
+    next.focus();
   }
-  return arr;
-}
 
-/* ============================================================
-   RESULTS
-   ============================================================ */
-function showResults() {
-  const totalCorrectItems = state.r1.correct + state.r1.driverCorrect + state.r2.correct + state.r3.correct;
-  const totalItems = r1Cards.length * 2 + r2Cases.length + r3Scenarios.length;
-  const pct = Math.round((totalCorrectItems / totalItems) * 100);
+  $("q1next").addEventListener("click", function(){
+    if (qi === R1.length-1){
+      $("r1").hidden = true;
+      unlock2();
+    } else {
+      qi++;
+      drawQ();
+    }
+  });
 
-  document.getElementById('res-score').textContent = state.score;
-  document.getElementById('res-pct').textContent = pct + '%';
-  document.getElementById('res-streak').textContent = state.bestStreak;
+  /* ---------------- round 2 ---------------- */
+  function unlock2(){
+    var r2 = $("r2");
+    r2.classList.remove("locked");
+    $("r2sub").textContent = "Eight statements. Decide whether each one describes weather or climate.";
+    var box = $("sortRows");
+    box.innerHTML = "";
+    R2.forEach(function(item,idx){
+      var row = document.createElement("div");
+      row.className = "row";
+      var p = document.createElement("p");
+      p.textContent = item.t;
+      var pick = document.createElement("div");
+      pick.className = "pick";
+      ["W","C"].forEach(function(code){
+        var b = document.createElement("button");
+        b.type = "button";
+        b.textContent = (code === "W") ? "Weather" : "Climate";
+        b.setAttribute("aria-label", (code === "W" ? "Weather" : "Climate") + " for statement " + (idx+1));
+        b.addEventListener("click", function(){ judge2(item, code, b, pick, row); });
+        pick.appendChild(b);
+      });
+      row.appendChild(p);
+      row.appendChild(pick);
+      box.appendChild(row);
+    });
+    r2.scrollIntoView({behavior:"smooth", block:"start"});
+  }
 
-  let rankTitle, rankSub, icon;
-  if (pct >= 90) { rankTitle = 'Master Detective'; rankSub = 'Every driver named, every case cracked. Exceptional work.'; icon = '\u{1F3C6}'; }
-  else if (pct >= 75) { rankTitle = 'Senior Detective'; rankSub = 'Sharp instincts for spotting natural and human causes.'; icon = '\u{1F3C5}'; }
-  else if (pct >= 55) { rankTitle = 'Junior Detective'; rankSub = 'Good progress. A few cases are worth a second look.'; icon = '\u{1F50E}'; }
-  else { rankTitle = 'Field Cadet'; rankSub = 'Good start. Compare answers with your partner and try again.'; icon = '\u{1F4CB}'; }
+  function judge2(item, code, btn, pick, row){
+    var bs = pick.querySelectorAll("button");
+    for (var k=0;k<bs.length;k++){ bs[k].disabled = true; }
+    btn.classList.add("chosen", code === item.a ? "right" : "wrong");
+    if (code === item.a){ s2++; }
+    else {
+      var note = document.createElement("p");
+      note.className = "why";
+      note.textContent = (item.a === "W")
+        ? "This one is weather: a single moment at a single place."
+        : "This one is climate: a pattern held over many years.";
+      row.appendChild(note);
+    }
+    done2++;
+    $("t2").textContent = s2 + " of " + R2.length;
+    bumpScore();
+    if (done2 === R2.length){
+      var g = $("r2done");
+      g.hidden = false;
+      g.focus();
+    }
+  }
 
-  document.getElementById('res-badge-icon').textContent = icon;
-  document.getElementById('res-rank-title').textContent = rankTitle;
-  document.getElementById('res-rank-sub').textContent = rankSub;
-}
+  $("r2done").addEventListener("click", function(){
+    $("r2").hidden = true;
+    unlock3();
+  });
 
-function restartGame() {
-  state = { score: 0, streak: 0, bestStreak: 0, round: 0,
-    r1: { placed: 0, correct: 0, driverCorrect: 0 },
-    r2: { caseIndex: 0, correct: 0, naturalPicked: null, humanPicked: null },
-    r3: { qIndex: 0, correct: 0, timeLeft: 45, timerId: null, answered: false } };
-  updateHud();
-  showScreen('screen-intro');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+  /* ---------------- round 3 ---------------- */
+  function unlock3(){
+    var r3 = $("r3");
+    r3.classList.remove("locked");
+    $("r3sub").textContent = "Four claims you will actually hear. Myth or fact?";
+    var box = $("mythRows");
+    box.innerHTML = "";
+    R3.forEach(function(item){
+      var row = document.createElement("div");
+      row.className = "row";
+      var p = document.createElement("p");
+      p.textContent = "\u201c" + item.t + "\u201d";
+      var pick = document.createElement("div");
+      pick.className = "pick";
+      ["M","F"].forEach(function(code){
+        var b = document.createElement("button");
+        b.type = "button";
+        b.textContent = (code === "M") ? "Myth" : "Fact";
+        b.addEventListener("click", function(){ judge3(item, code, b, pick, row); });
+        pick.appendChild(b);
+      });
+      row.appendChild(p);
+      row.appendChild(pick);
+      box.appendChild(row);
+    });
+    r3.scrollIntoView({behavior:"smooth", block:"start"});
+  }
 
-updateHud();
+  function judge3(item, code, btn, pick, row){
+    var bs = pick.querySelectorAll("button");
+    for (var k=0;k<bs.length;k++){ bs[k].disabled = true; }
+    btn.classList.add("chosen", code === item.a ? "right" : "wrong");
+    if (code === item.a){ s3++; }
+    var note = document.createElement("p");
+    note.className = "why";
+    note.textContent = (item.a === "M" ? "Myth. " : "Fact. ") + item.why;
+    row.appendChild(note);
+    done3++;
+    $("t3").textContent = s3 + " of " + R3.length;
+    bumpScore();
+    if (done3 === R3.length){
+      var g = $("r3done");
+      g.hidden = false;
+      g.focus();
+    }
+  }
+
+  $("r3done").addEventListener("click", function(){
+    $("r3").hidden = true;
+    var total = bumpScore();
+    $("finalNum").textContent = total;
+    $("b1").textContent = s1 + " / 6";
+    $("b2").textContent = s2 + " / 8";
+    $("b3").textContent = s3 + " / 4";
+    var v;
+    if (total >= 16) { v = "Strong across all three. Push yourself on the challenge question at the end of the lesson."; }
+    else if (total >= 11) { v = "Solid. Look back at the round you dropped most in, that is the one to raise your hand about."; }
+    else { v = "Plenty to build on today. Keep the four vocabulary words in front of you and this gets much easier."; }
+    $("verdict").textContent = v;
+    var sum = $("sum");
+    sum.hidden = false;
+    sum.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
+  drawQ();
+})();
 </script>
 </body>
 </html>
