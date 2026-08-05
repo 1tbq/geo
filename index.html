@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Heat Trap &middot; Year 10 Geography Lesson 17</title>
+<title>Case File &middot; Year 10 Geography Lesson 18</title>
 <style>
 :root{
   --ink:#0B2239; --ink-soft:#153552; --sky:#2E7FA8; --ice:#DDEAF2;
@@ -17,35 +17,31 @@
 html,body{margin:0}
 body{background:var(--mist);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;
   -webkit-text-size-adjust:100%}
-.wrap{max-width:860px;margin:0 auto;padding:0 20px 72px}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px 72px}
 
-/* ---------- header / signature: the three bands ---------- */
+/* ---------- header / signature: the ice core column ---------- */
 header{background:var(--ink);color:var(--paper);margin-bottom:26px}
-.hd{max-width:860px;margin:0 auto;padding:22px 20px 0;
-  display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.hd{max-width:880px;margin:0 auto;padding:22px 20px 24px;display:flex;gap:26px;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap}
+.hdtext{flex:1 1 300px}
 .eyebrow{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ice-deep);margin:0 0 6px}
 h1{font-family:var(--display);font-size:clamp(28px,6vw,40px);line-height:1.05;margin:0;font-weight:700}
-.tagline{margin:8px 0 0;font-size:14.5px;color:var(--ice)}
+.tagline{margin:8px 0 0;font-size:14.5px;color:var(--ice);max-width:44ch}
 .score{font-family:var(--mono);text-align:right;flex-shrink:0}
 .score b{display:block;font-size:30px;color:var(--amber);line-height:1}
 .score span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ice-deep)}
-.sig{display:block;width:100%;height:88px;margin-top:14px}
-.sig .atmos{fill:var(--ink-soft)}
-.sig .surface{fill:var(--ember)}
-.sig .mol{fill:var(--slate)}
-.sig .inArrow{stroke:var(--amber);stroke-width:3;fill:none}
-.sig .outArrow{stroke:var(--ember);stroke-width:3;fill:none}
-.sig .backArrow{stroke:var(--amber);stroke-width:3;fill:none;stroke-dasharray:5 4}
-.sig .bandLabel{fill:var(--ice-deep);font:600 8px var(--body);letter-spacing:.12em}
-.pulse{animation:glow 3.2s ease-in-out infinite}
-@keyframes glow{0%,100%{opacity:.45}50%{opacity:1}}
-@media (prefers-reduced-motion:reduce){.pulse{animation:none;opacity:.85}}
+/* the core: layers get older and denser downwards */
+.coreWrap{display:flex;gap:10px;align-items:stretch;flex:0 0 auto}
+.core{width:44px;display:flex;flex-direction:column;border-radius:3px;overflow:hidden}
+.core i{display:block;flex:1;min-height:14px}
+.coreKey{display:flex;flex-direction:column;justify-content:space-between;font-family:var(--mono);
+  font-size:9.5px;color:var(--ice-deep);letter-spacing:.06em;padding:1px 0}
+@media (max-width:620px){.coreWrap{display:none}}
 
 /* ---------- rounds ---------- */
 .round{background:var(--paper);border:1px solid var(--ice-deep);border-radius:6px;padding:22px;margin-bottom:20px}
 .round[hidden]{display:none}
-.rlabel{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);
-  font-weight:700;margin:0 0 4px}
+.rlabel{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);font-weight:700;margin:0 0 4px}
 .round h2{font-family:var(--display);font-size:24px;margin:0 0 4px;font-weight:700}
 .rsub{margin:0 0 18px;color:var(--slate);font-size:15px}
 .locked{opacity:.55}
@@ -62,36 +58,31 @@ button{font:inherit;cursor:pointer}
 .opt.wrong{background:#FBEAE4;border-color:var(--ember)}
 :focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 
-/* ---------- round 2: sequencing ---------- */
-.slots{display:grid;gap:8px;margin-bottom:18px}
-.slot{display:flex;align-items:center;gap:12px;border:1.5px dashed var(--ice-deep);border-radius:5px;
-  padding:11px 13px;min-height:52px;background:var(--mist)}
-.slot .n{font-family:var(--mono);font-size:14px;color:var(--sky);font-weight:700;flex-shrink:0;width:18px}
-.slot .txt{flex:1;font-size:16px;color:var(--slate)}
-.slot.filled{border-style:solid;background:var(--paper)}
-.slot.filled .txt{color:var(--ink)}
-.slot.right{background:#E8F2E4;border-color:#4B7F3E}
-.slot.wrong{background:#FBEAE4;border-color:var(--ember)}
-.slot .drop{background:transparent;border:0;color:var(--ember);font-size:13px;font-weight:600;
-  text-decoration:underline;padding:2px 4px;flex-shrink:0}
-.bank{display:grid;gap:8px}
-.card{display:block;width:100%;text-align:left;background:var(--paper);border:1.5px solid var(--ice-deep);
-  border-radius:5px;padding:12px 14px;color:var(--ink);font-size:16px}
-.card:hover:not(:disabled){border-color:var(--ember);background:var(--mist)}
-.card[hidden]{display:none}
+/* ---------- round 2: the graph ---------- */
+figure{margin:0 0 20px;background:var(--mist);border:1px solid var(--ice-deep);border-radius:5px;padding:16px 14px 10px}
+figcaption{font-family:var(--mono);font-size:11.5px;color:var(--slate);margin-top:8px;line-height:1.45}
+.chart{display:block;width:100%;height:auto}
+.chart .grid{stroke:var(--ice-deep);stroke-width:1}
+.chart .axis{stroke:var(--slate);stroke-width:1.5}
+.chart .bars rect{fill:var(--ice-deep)}
+.chart .trend{fill:none;stroke:var(--ember);stroke-width:3;stroke-linecap:round;
+  stroke-dasharray:520;stroke-dashoffset:520;animation:draw 1.5s .3s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.chart .trend{animation:none;stroke-dashoffset:0}}
+.chart text{font:600 9px var(--body);fill:var(--slate)}
+.chart .ylab{font:600 9.5px var(--body);fill:var(--slate)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--slate);margin-top:6px}
+.legend i{display:inline-block;width:16px;height:4px;border-radius:2px;margin-right:6px;vertical-align:2px}
+.legend .b{background:var(--ice-deep)}
+.legend .t{background:var(--ember)}
 
-/* ---------- round 3: gas match ---------- */
-.timer{font-family:var(--mono);font-size:13px;color:var(--slate);margin:0 0 12px}
-.timer b{color:var(--ember);font-size:17px}
-.timer.low b{color:var(--ember);animation:blink 1s steps(2) infinite}
-@keyframes blink{50%{opacity:.3}}
-@media (prefers-reduced-motion:reduce){.timer.low b{animation:none}}
-.source{background:var(--ink);color:var(--paper);border-radius:5px;padding:18px 20px;margin-bottom:14px}
-.source .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:0 0 6px}
-.source p{margin:0;font-size:20px;font-weight:600;line-height:1.3}
-.gases{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px}
+/* ---------- round 3: match rows ---------- */
+.finding{background:var(--ink);color:var(--paper);border-radius:5px;padding:16px 18px;margin-bottom:14px}
+.finding .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:0 0 6px}
+.finding p{margin:0;font-size:19px;font-weight:600;line-height:1.3}
+.lines{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px}
 
-/* ---------- shared feedback / nav ---------- */
+/* ---------- feedback + nav ---------- */
 .fb{margin:16px 0 0;padding:12px 14px;border-radius:5px;font-size:15.5px;background:var(--mist);
   border-left:4px solid var(--sky)}
 .fb[hidden]{display:none}
@@ -100,7 +91,6 @@ button{font:inherit;cursor:pointer}
 .nav{margin-top:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .go{background:var(--ink);color:var(--paper);border:0;border-radius:5px;padding:12px 22px;font-size:16px;font-weight:600}
 .go:hover{background:var(--ink-soft)}
-.go:disabled{background:var(--ice-deep);color:var(--slate);cursor:default}
 .go[hidden]{display:none}
 .tally{font-family:var(--mono);font-size:13px;color:var(--slate);margin-left:auto}
 
@@ -110,51 +100,37 @@ button{font:inherit;cursor:pointer}
 .big{font-family:var(--mono);font-size:52px;color:var(--amber);line-height:1;margin:0}
 .big small{font-size:20px;color:var(--ice-deep)}
 .bd{margin:18px 0 0;padding:0;list-style:none;font-size:15.5px}
-.bd li{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid var(--ink-soft)}
-.bd span{font-family:var(--mono);color:var(--amber)}
+.bd li{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-top:1px solid var(--ink-soft)}
+.bd span{font-family:var(--mono);color:var(--amber);flex-shrink:0}
 .verdict{margin:18px 0 0;font-size:16px;color:var(--ice);max-width:56ch}
 .ghost{background:transparent;border:1.5px solid var(--ink-soft);color:var(--ice);border-radius:5px;
   padding:11px 18px;font-size:15px;margin-top:20px}
 .ghost:hover{border-color:var(--ice);color:var(--paper)}
-footer{max-width:860px;margin:0 auto;padding:26px 20px;font-size:13px;color:var(--slate)}
+footer{max-width:880px;margin:0 auto;padding:26px 20px;font-size:13px;color:var(--slate)}
 </style>
 </head>
 <body>
 
 <header>
   <div class="hd">
-    <div>
-      <p class="eyebrow">Year 10 Geography &middot; Lesson 17 &middot; VCGGK144</p>
-      <h1>Heat Trap</h1>
-      <p class="tagline">Light gets in easily. Heat has a much harder time getting out.</p>
+    <div class="hdtext">
+      <p class="eyebrow">Year 10 Geography &middot; Lesson 18 &middot; VCGGK144</p>
+      <h1>Case File</h1>
+      <p class="tagline">Three rounds. One dataset to read properly, and four lines of evidence to keep straight.</p>
     </div>
     <div class="score" aria-live="polite">
       <b id="scoreNum">0</b>
-      <span>points of 19</span>
+      <span>points of 16</span>
+    </div>
+    <div class="coreWrap" aria-hidden="true">
+      <div class="core">
+        <i style="background:#FFFFFF"></i><i style="background:#EFF6FA"></i><i style="background:#DDEAF2"></i>
+        <i style="background:#CDE2EE"></i><i style="background:#BBD4E4"></i><i style="background:#A8C8DC"></i>
+        <i style="background:#93B9D2"></i><i style="background:#7FA9C4"></i>
+      </div>
+      <div class="coreKey"><span>RECENT</span><span>ANCIENT</span></div>
     </div>
   </div>
-  <svg class="sig" viewBox="0 0 600 88" preserveAspectRatio="none" aria-hidden="true">
-    <rect class="atmos" x="0" y="20" width="600" height="52"/>
-    <rect class="surface" x="0" y="72" width="600" height="16"/>
-    <text class="bandLabel" x="8" y="14">SPACE</text>
-    <text class="bandLabel" x="8" y="34">ATMOSPHERE</text>
-    <g class="mol pulse">
-      <circle cx="120" cy="40" r="4"/><circle cx="205" cy="58" r="4"/><circle cx="290" cy="34" r="4"/>
-      <circle cx="360" cy="55" r="4"/><circle cx="450" cy="41" r="4"/><circle cx="530" cy="57" r="4"/>
-      <circle cx="165" cy="64" r="4"/><circle cx="400" cy="28" r="4"/><circle cx="490" cy="66" r="4"/>
-    </g>
-    <path class="inArrow" d="M60 6 L130 70" marker-end="url(#a1)"/>
-    <path class="outArrow" d="M250 70 L310 8" marker-end="url(#a2)"/>
-    <path class="backArrow" d="M430 44 L470 70" marker-end="url(#a3)"/>
-    <defs>
-      <marker id="a1" markerWidth="7" markerHeight="7" refX="4" refY="3.5" orient="auto">
-        <path d="M0,0 L7,3.5 L0,7 z" fill="#E29135"/></marker>
-      <marker id="a2" markerWidth="7" markerHeight="7" refX="4" refY="3.5" orient="auto">
-        <path d="M0,0 L7,3.5 L0,7 z" fill="#BF4F2A"/></marker>
-      <marker id="a3" markerWidth="7" markerHeight="7" refX="4" refY="3.5" orient="auto">
-        <path d="M0,0 L7,3.5 L0,7 z" fill="#E29135"/></marker>
-    </defs>
-  </svg>
 </header>
 
 <div class="wrap">
@@ -163,7 +139,7 @@ footer{max-width:860px;margin:0 auto;padding:26px 20px;font-size:13px;color:var(
   <section class="round" id="r1">
     <p class="rlabel">Round 1</p>
     <h2>Rapid Recall</h2>
-    <p class="rsub">Six questions on yesterday. One attempt each.</p>
+    <p class="rsub">Six questions on Monday and Tuesday. One attempt each.</p>
     <p class="qmeta" id="q1meta"></p>
     <p class="qtext" id="q1text"></p>
     <div class="opts" id="q1opts"></div>
@@ -177,45 +153,73 @@ footer{max-width:860px;margin:0 auto;padding:26px 20px;font-size:13px;color:var(
   <!-- ROUND 2 -->
   <section class="round locked" id="r2">
     <p class="rlabel">Round 2</p>
-    <h2>Order the Steps</h2>
+    <h2>Read the Graph</h2>
     <p class="rsub" id="r2sub">Finish Round 1 first.</p>
-    <div class="slots" id="slots"></div>
-    <div class="bank" id="bank"></div>
-    <p class="fb" id="r2fb" hidden></p>
+
+    <figure id="fig" hidden>
+      <svg class="chart" viewBox="0 0 640 300" role="img"
+           aria-label="Column graph of annual temperature anomalies from 2005 to 2024 with a five-year average line rising across the period.">
+        <!-- y grid + labels -->
+        <g class="grid">
+          <line x1="52" y1="250" x2="620" y2="250"/><line x1="52" y1="192" x2="620" y2="192"/>
+          <line x1="52" y1="134" x2="620" y2="134"/><line x1="52" y1="76" x2="620" y2="76"/>
+          <line x1="52" y1="18" x2="620" y2="18"/>
+        </g>
+        <g class="ylab">
+          <text x="44" y="253" text-anchor="end">0.0</text><text x="44" y="195" text-anchor="end">0.5</text>
+          <text x="44" y="137" text-anchor="end">1.0</text><text x="44" y="79" text-anchor="end">1.5</text>
+          <text x="44" y="21" text-anchor="end">2.0</text>
+        </g>
+        <text x="12" y="140" class="ylab" transform="rotate(-90 12 140)" text-anchor="middle">Anomaly (&#176;C)</text>
+        <g class="bars" id="bars"></g>
+        <polyline class="trend" id="trendLine" points=""/>
+        <line class="axis" x1="52" y1="250" x2="620" y2="250"/>
+        <line class="axis" x1="52" y1="18" x2="52" y2="250"/>
+        <g id="xlabels"></g>
+      </svg>
+      <div class="legend">
+        <span><i class="b"></i>Annual anomaly</span>
+        <span><i class="t"></i>Five-year average</span>
+      </div>
+      <figcaption>Annual temperature anomaly, 2005 to 2024. Illustrative dataset built for classroom practice, not a published record. An anomaly is the difference from a long-term average.</figcaption>
+    </figure>
+
+    <p class="qmeta" id="q2meta"></p>
+    <p class="qtext" id="q2text"></p>
+    <div class="opts" id="q2opts"></div>
+    <p class="fb" id="q2fb" hidden></p>
     <div class="nav">
-      <button class="go" id="r2check" disabled hidden>Check my order</button>
-      <button class="go" id="r2done" hidden>Go to Round 3</button>
-      <span class="tally" id="t2">0 of 5</span>
+      <button class="go" id="q2next" hidden>Next question</button>
+      <span class="tally" id="t2">0 of 4</span>
     </div>
   </section>
 
   <!-- ROUND 3 -->
   <section class="round locked" id="r3">
     <p class="rlabel">Round 3</p>
-    <h2>Gas Match</h2>
+    <h2>Which Line of Evidence?</h2>
     <p class="rsub" id="r3sub">Finish Round 2 first.</p>
-    <p class="timer" id="timer" hidden>Time left <b id="clock">60</b> seconds</p>
-    <div class="source" id="source" hidden>
-      <p class="lab">Human activity</p>
-      <p id="srcText"></p>
+    <div class="finding" id="finding" hidden>
+      <p class="lab">Finding</p>
+      <p id="findText"></p>
     </div>
-    <div class="gases" id="gases"></div>
-    <p class="fb" id="r3fb" hidden></p>
+    <div class="lines" id="lines"></div>
+    <p class="fb" id="q3fb" hidden></p>
     <div class="nav">
-      <button class="go" id="r3start" hidden>Start the 60 seconds</button>
-      <button class="go" id="r3done" hidden>See my score</button>
-      <span class="tally" id="t3">0 of 8</span>
+      <button class="go" id="r3start" hidden>Start Round 3</button>
+      <button class="go" id="q3next" hidden>Next finding</button>
+      <span class="tally" id="t3">0 of 6</span>
     </div>
   </section>
 
   <!-- SUMMARY -->
   <section class="sum" id="sum" hidden>
     <h2>How you went</h2>
-    <p class="big"><span id="finalNum">0</span><small> / 19</small></p>
+    <p class="big"><span id="finalNum">0</span><small> / 16</small></p>
     <ul class="bd">
       <li>Round 1 &middot; Rapid Recall <span id="b1">0 / 6</span></li>
-      <li>Round 2 &middot; Order the Steps <span id="b2">0 / 5</span></li>
-      <li>Round 3 &middot; Gas Match <span id="b3">0 / 8</span></li>
+      <li>Round 2 &middot; Read the Graph <span id="b2">0 / 4</span></li>
+      <li>Round 3 &middot; Which Line of Evidence? <span id="b3">0 / 6</span></li>
     </ul>
     <p class="verdict" id="verdict"></p>
     <button class="ghost" onclick="location.reload()">Start again</button>
@@ -232,274 +236,241 @@ footer{max-width:860px;margin:0 auto;padding:26px 20px;font-size:13px;color:var(
 
   /* ---------------- data ---------------- */
   var R1 = [
-    { q:"Climate is measured using records covering about how long?",
-      o:["One year","Ten years","Thirty years","Two hundred years"], a:2,
-      why:"Thirty years is long enough that one unusual year cannot move the average." },
-    { q:"\u201cHail is falling on the oval right now.\u201d This describes:",
-      o:["Weather","Climate","A trend","An average"], a:0,
-      why:"One moment at one place is weather every time." },
-    { q:"Which of these is a climate statement?",
-      o:["A storm is forecast for tonight","Cairns is humid all year round","It rained during recess","The wind is picking up"], a:1,
-      why:"A pattern that holds year after year is climate. The other three are single events." },
-    { q:"Other than temperature, climate change also shifts:",
-      o:["The length of a day","Rainfall patterns and season timing","The speed of Earth's orbit","The number of continents"], a:1,
-      why:"Rainfall, season length and the intensity of extremes all shift, which is why some regions get wetter rather than hotter." },
+    { q:"Climate is measured using records covering roughly how long?",
+      o:["One year","Ten years","Thirty years","Five hundred years"], a:2,
+      why:"Thirty years is the standard window, long enough that one unusual year cannot move the average." },
+    { q:"Which type of radiation do greenhouse gases mainly absorb?",
+      o:["Shortwave radiation coming in from the sun","Longwave heat radiating out from the surface",
+         "Both equally","Neither, they reflect it"], a:1,
+      why:"Sunlight passes through. It is the outgoing longwave heat that gets absorbed and re-radiated." },
+    { q:"Which pairing of gas and human source is correct?",
+      o:["Methane and coal-fired electricity","Nitrous oxide and beef cattle",
+         "Carbon dioxide and burning petrol","Water vapour and fertiliser"], a:2,
+      why:"Burning petrol releases carbon dioxide. Cattle are mainly methane, fertiliser is mainly nitrous oxide." },
+    { q:"The word enhanced in \u201cenhanced greenhouse effect\u201d refers to:",
+      o:["The natural process that keeps Earth warm","The extra warming from human-added gases",
+         "A change in the sun's output","Better measuring instruments"], a:1,
+      why:"The mechanism has not changed. The concentration of greenhouse gases has, and that extra warming is the enhanced part." },
+    { q:"Without any greenhouse gases, Earth's average surface temperature would be about:",
+      o:["\u221218 \u00b0C","0 \u00b0C","+15 \u00b0C","+33 \u00b0C"], a:0,
+      why:"About minus 18 degrees. The natural greenhouse effect is worth roughly 33 degrees of warming." },
     { q:"The year-to-year ups and downs in a temperature record are called:",
-      o:["The trend","Variability","The mean","The forecast"], a:1,
-      why:"Variability is the noise. The trend is the direction that remains once the noise is averaged out." },
-    { q:"A single cold week does not disprove climate change because:",
-      o:["Cold weather is very rare","A trend is measured across decades, not weeks","Thermometers are unreliable","Winter data is not recorded"], a:1,
-      why:"One week sits well inside normal variability. Only a long record can show a trend." }
+      o:["The trend","Variability","The anomaly","The forecast"], a:1,
+      why:"Variability is the noise. The trend is the direction left once the noise is averaged out." }
   ];
 
-  var STEPS = [
-    "Shortwave radiation from the sun passes through the atmosphere.",
-    "The Earth's surface absorbs that energy and warms up.",
-    "The warmed surface radiates longwave heat back towards space.",
-    "Greenhouse gases absorb some of that outgoing longwave heat.",
-    "The gases radiate heat again in all directions, including back down."
+  /* illustrative anomaly series, matched to the deck */
+  var YEARS = [2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,
+               2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+  var ANOM  = [0.98,0.50,0.62,0.42,0.92,0.19,0.13,0.51,1.20,0.91,
+               0.83,0.87,0.95,1.14,1.52,1.15,0.56,0.50,0.98,1.46];
+
+  var R2 = [
+    { q:"What does the vertical axis measure, and in what units?",
+      o:["Total rainfall in millimetres","Temperature anomaly in degrees Celsius",
+         "Carbon dioxide in parts per million","Sea level in centimetres"], a:1,
+      why:"Always name the axis and the unit first. Here it is the anomaly, the difference from a long-term average, in degrees Celsius." },
+    { q:"Which statement describes the overall trend most accurately?",
+      o:["The anomaly rises steadily every single year",
+         "The anomaly falls across the period",
+         "The anomaly varies year to year but rises across the period",
+         "There is no pattern at all"], a:2,
+      why:"This is the sentence to reuse in a source analysis. It names the variability and the trend, instead of pretending one of them is absent." },
+    { q:"2011 has the lowest anomaly on the graph. What does that tell you about the trend?",
+      o:["It disproves the trend","It shows the data must be wrong",
+         "It is one year of normal variability and the average still rises",
+         "It means the trend only started after 2011"], a:2,
+      why:"A single low year sits inside normal variability. That is precisely why the five-year average line is drawn." },
+    { q:"Which pair of figures would best support a claim that the anomaly has risen?",
+      o:["0.19 in 2010 and 0.13 in 2011","0.98 in 2005 and 1.46 in 2024",
+         "1.52 in 2019 and 1.15 in 2020","0.50 in 2006 and 0.51 in 2012"], a:1,
+      why:"Pick figures from opposite ends of the record. Two adjacent years, or two low years, show variability rather than the trend." }
   ];
 
+  var LINES = ["Temperature records","Ice cores","Sea level","Retreating ice"];
   var R3 = [
-    { s:"A coal-fired power station in the Latrobe Valley", a:"Carbon dioxide" },
-    { s:"Beef cattle grazing in Gippsland", a:"Methane" },
-    { s:"Fertiliser spread across a wheat crop", a:"Nitrous oxide" },
-    { s:"A petrol car on the drive to school", a:"Carbon dioxide" },
-    { s:"Food scraps breaking down in landfill", a:"Methane" },
-    { s:"Leaks during natural gas extraction", a:"Methane" },
-    { s:"Cement production at an industrial plant", a:"Carbon dioxide" },
-    { s:"Ploughing and disturbing soil on cropland", a:"Nitrous oxide" }
+    { f:"Air bubbles from ice formed in 1750 contain less carbon dioxide than today's atmosphere.",
+      a:"Ice cores", why:"The gas itself is sealed in the bubble, which makes ice cores a proxy record of the past atmosphere." },
+    { f:"Australia's national annual average has warmed by roughly 1.5 \u00b0C since 1910.",
+      a:"Temperature records", why:"Direct measurement by instruments, reported as an anomaly. This is the instrumental record." },
+    { f:"Satellites have measured the height of the ocean surface since 1993.",
+      a:"Sea level", why:"Tide gauges measure at the coast, satellite altimetry measures from space. Both track ocean height." },
+    { f:"Photographs of the same alpine glacier decades apart show it is much shorter now.",
+      a:"Retreating ice", why:"No instrument needed. Repeat photography and survey of ice extent is a line of evidence on its own." },
+    { f:"Arctic sea ice covers less area at the end of each summer than it used to.",
+      a:"Retreating ice", why:"Ice extent again, measured by satellite rather than by thermometer." },
+    { f:"Ocean water expanding as it warms is one reason this measurement has increased.",
+      a:"Sea level", why:"Thermal expansion plus melting land ice. Both raise ocean height." }
   ];
-  var GASES = ["Carbon dioxide","Methane","Nitrous oxide"];
 
   /* ---------------- state ---------------- */
-  var s1=0, s2=0, s3=0, qi=0;
-  var placed = [];      // round 2: indexes of STEPS in chosen order
-  var gi=0, clock=60, timerId=null;
+  var s1=0, s2=0, s3=0, i1=0, i2=0, i3=0;
 
-  function bumpScore(){
-    var t = s1+s2+s3;
-    $("scoreNum").textContent = t;
-    return t;
+  function bump(){ var t=s1+s2+s3; $("scoreNum").textContent=t; return t; }
+
+  /* generic one-at-a-time MCQ engine */
+  function ask(cfg){
+    var item = cfg.set[cfg.idx()];
+    $(cfg.meta).textContent = "Question " + (cfg.idx()+1) + " of " + cfg.set.length;
+    $(cfg.text).textContent = item.q;
+    var box = $(cfg.opts); box.innerHTML = "";
+    item.o.forEach(function(t,k){
+      var b = document.createElement("button");
+      b.className="opt"; b.type="button"; b.textContent=t;
+      b.addEventListener("click", function(){ mark(cfg, item, k, b); });
+      box.appendChild(b);
+    });
+    $(cfg.fb).hidden = true;
+    $(cfg.next).hidden = true;
+  }
+
+  function mark(cfg, item, k, btn){
+    var all = $(cfg.opts).querySelectorAll("button");
+    for (var j=0;j<all.length;j++){ all[j].disabled = true; }
+    var fb = $(cfg.fb);
+    if (k === item.a){ btn.classList.add("right"); cfg.inc(); fb.className="fb ok"; fb.textContent="Correct. "+item.why; }
+    else { btn.classList.add("wrong"); all[item.a].classList.add("right"); fb.className="fb no"; fb.textContent="Not this time. "+item.why; }
+    fb.hidden = false;
+    $(cfg.tally).textContent = cfg.score() + " of " + cfg.set.length;
+    bump();
+    var n = $(cfg.next);
+    n.hidden = false;
+    n.textContent = (cfg.idx() === cfg.set.length-1) ? cfg.lastLabel : cfg.nextLabel;
+    n.focus();
   }
 
   /* ---------------- round 1 ---------------- */
-  function drawQ(){
-    var q = R1[qi];
-    $("q1meta").textContent = "Question " + (qi+1) + " of " + R1.length;
-    $("q1text").textContent = q.q;
-    var box = $("q1opts"); box.innerHTML = "";
-    q.o.forEach(function(text,i){
-      var b = document.createElement("button");
-      b.className="opt"; b.type="button"; b.textContent=text;
-      b.addEventListener("click", function(){ answer(i,b); });
-      box.appendChild(b);
-    });
-    $("q1fb").hidden = true; $("q1next").hidden = true;
-  }
-
-  function answer(i,btn){
-    var q = R1[qi];
-    var all = $("q1opts").querySelectorAll("button");
-    for (var k=0;k<all.length;k++){ all[k].disabled = true; }
-    var fb = $("q1fb");
-    if (i === q.a){ btn.classList.add("right"); s1++; fb.className="fb ok"; fb.textContent = "Correct. " + q.why; }
-    else { btn.classList.add("wrong"); all[q.a].classList.add("right"); fb.className="fb no"; fb.textContent = "Not this time. " + q.why; }
-    fb.hidden = false;
-    $("t1").textContent = s1 + " of " + R1.length;
-    bumpScore();
-    var next = $("q1next");
-    next.hidden = false;
-    next.textContent = (qi === R1.length-1) ? "Go to Round 2" : "Next question";
-    next.focus();
-  }
-
+  var C1 = {
+    set:R1, meta:"q1meta", text:"q1text", opts:"q1opts", fb:"q1fb", next:"q1next", tally:"t1",
+    idx:function(){ return i1; }, inc:function(){ s1++; }, score:function(){ return s1; },
+    nextLabel:"Next question", lastLabel:"Go to Round 2"
+  };
   $("q1next").addEventListener("click", function(){
-    if (qi === R1.length-1){ $("r1").hidden = true; unlock2(); }
-    else { qi++; drawQ(); }
+    if (i1 === R1.length-1){ $("r1").hidden = true; openR2(); }
+    else { i1++; ask(C1); }
   });
 
-  /* ---------------- round 2: sequencing ---------------- */
-  function shuffled(n){
-    var a=[], i;
-    for (i=0;i<n;i++){ a.push(i); }
-    for (i=a.length-1;i>0;i--){
-      var j = Math.floor(Math.random()*(i+1));
-      var t=a[i]; a[i]=a[j]; a[j]=t;
-    }
-    return a;
+  /* ---------------- round 2 ---------------- */
+  function drawChart(){
+    var x0=52, x1=620, yBase=250, yTop=18, max=2.0;
+    var n=ANOM.length, band=(x1-x0)/n, bw=band*0.6;
+    var bars=$("bars"), xl=$("xlabels");
+    bars.innerHTML=""; xl.innerHTML="";
+    ANOM.forEach(function(v,k){
+      var h=(v/max)*(yBase-yTop);
+      var x=x0+band*k+(band-bw)/2;
+      var r=document.createElementNS("http://www.w3.org/2000/svg","rect");
+      r.setAttribute("x",x.toFixed(1)); r.setAttribute("y",(yBase-h).toFixed(1));
+      r.setAttribute("width",bw.toFixed(1)); r.setAttribute("height",h.toFixed(1));
+      bars.appendChild(r);
+      if (k % 3 === 0 || k === n-1){
+        var t=document.createElementNS("http://www.w3.org/2000/svg","text");
+        t.setAttribute("x",(x+bw/2).toFixed(1)); t.setAttribute("y",String(yBase+16));
+        t.setAttribute("text-anchor","middle"); t.textContent=String(YEARS[k]);
+        xl.appendChild(t);
+      }
+    });
+    var pts=[];
+    ANOM.forEach(function(v,k){
+      var slice=ANOM.slice(Math.max(0,k-4),k+1);
+      var sum=0; for (var j=0;j<slice.length;j++){ sum+=slice[j]; }
+      var avg=sum/slice.length;
+      var y=yBase-(avg/max)*(yBase-yTop);
+      pts.push((x0+band*k+band/2).toFixed(1)+","+y.toFixed(1));
+    });
+    $("trendLine").setAttribute("points", pts.join(" "));
   }
 
-  function unlock2(){
-    var r2 = $("r2");
+  var C2 = {
+    set:R2, meta:"q2meta", text:"q2text", opts:"q2opts", fb:"q2fb", next:"q2next", tally:"t2",
+    idx:function(){ return i2; }, inc:function(){ s2++; }, score:function(){ return s2; },
+    nextLabel:"Next question", lastLabel:"Go to Round 3"
+  };
+
+  function openR2(){
+    var r2=$("r2");
     r2.classList.remove("locked");
-    $("r2sub").textContent = "Five steps, out of order. Tap them in the sequence the greenhouse effect actually follows. You have not been taught this yet, so a sensible guess is the point.";
-    var bank = $("bank"); bank.innerHTML = "";
-    shuffled(STEPS.length).forEach(function(idx){
-      var b = document.createElement("button");
-      b.className="card"; b.type="button"; b.textContent = STEPS[idx];
-      b.dataset.idx = idx;
-      b.addEventListener("click", function(){ place(idx, b); });
-      bank.appendChild(b);
-    });
-    renderSlots();
-    $("r2check").hidden = false;
+    $("r2sub").textContent = "One dataset, four questions. This is the exact skill Friday's written task needs.";
+    $("fig").hidden = false;
+    drawChart();
+    ask(C2);
     r2.scrollIntoView({behavior:"smooth", block:"start"});
   }
 
-  function renderSlots(){
-    var box = $("slots"); box.innerHTML = "";
-    for (var i=0;i<STEPS.length;i++){
-      var slot = document.createElement("div");
-      slot.className = "slot" + (placed[i] !== undefined ? " filled" : "");
-      var n = document.createElement("span"); n.className="n"; n.textContent = (i+1) + ".";
-      var t = document.createElement("span"); t.className="txt";
-      t.textContent = (placed[i] !== undefined) ? STEPS[placed[i]] : "tap a step below";
-      slot.appendChild(n); slot.appendChild(t);
-      if (placed[i] !== undefined){
-        var rm = document.createElement("button");
-        rm.className="drop"; rm.type="button"; rm.textContent="remove";
-        rm.dataset.pos = i;
-        rm.addEventListener("click", removeAt);
-        slot.appendChild(rm);
-      }
-      box.appendChild(slot);
-    }
-    $("r2check").disabled = (placed.length !== STEPS.length);
-  }
-
-  function place(idx, btn){
-    if (placed.length >= STEPS.length) { return; }
-    placed.push(idx);
-    btn.hidden = true;
-    renderSlots();
-  }
-
-  function removeAt(e){
-    var pos = parseInt(e.currentTarget.dataset.pos, 10);
-    var idx = placed[pos];
-    placed.splice(pos,1);
-    var card = $("bank").querySelector('[data-idx="' + idx + '"]');
-    if (card) { card.hidden = false; }
-    renderSlots();
-  }
-
-  $("r2check").addEventListener("click", function(){
-    var slots = $("slots").querySelectorAll(".slot");
-    for (var i=0;i<placed.length;i++){
-      var ok = (placed[i] === i);
-      slots[i].classList.add(ok ? "right" : "wrong");
-      if (ok) { s2++; }
-      var rm = slots[i].querySelector(".drop");
-      if (rm) { rm.remove(); }
-    }
-    var cards = $("bank").querySelectorAll(".card");
-    for (var k=0;k<cards.length;k++){ cards[k].disabled = true; }
-    var fb = $("r2fb");
-    if (s2 === STEPS.length){
-      fb.className="fb ok";
-      fb.textContent = "All five in order. Keep this sequence in front of you, it is the backbone of today's lesson.";
-    } else {
-      fb.className="fb no";
-      fb.textContent = "Correct order: shortwave in, surface warms, longwave out, gases absorb, gases re-radiate. The step most people move is the last one, and it is the step that explains the warming.";
-    }
-    fb.hidden = false;
-    $("t2").textContent = s2 + " of " + STEPS.length;
-    bumpScore();
-    this.hidden = true;
-    var g = $("r2done"); g.hidden = false; g.focus();
+  $("q2next").addEventListener("click", function(){
+    if (i2 === R2.length-1){
+      $("r2").hidden = true;
+      var r3=$("r3");
+      r3.classList.remove("locked");
+      $("r3sub").textContent = "Six findings. Decide which of the four lines of evidence each one comes from.";
+      var st=$("r3start"); st.hidden=false;
+      r3.scrollIntoView({behavior:"smooth", block:"start"});
+      st.focus();
+    } else { i2++; ask(C2); }
   });
 
-  $("r2done").addEventListener("click", function(){
-    $("r2").hidden = true;
-    var r3 = $("r3");
-    r3.classList.remove("locked");
-    $("r3sub").textContent = "Eight Australian activities. Name the greenhouse gas each one mainly releases, against the clock.";
-    var st = $("r3start"); st.hidden = false;
-    r3.scrollIntoView({behavior:"smooth", block:"start"});
-    st.focus();
-  });
-
-  /* ---------------- round 3: gas match ---------------- */
+  /* ---------------- round 3 ---------------- */
   $("r3start").addEventListener("click", function(){
     this.hidden = true;
-    $("timer").hidden = false;
-    $("source").hidden = false;
-    drawGas();
-    timerId = setInterval(tick, 1000);
+    $("finding").hidden = false;
+    drawFinding();
   });
 
-  function tick(){
-    clock--;
-    $("clock").textContent = clock;
-    if (clock <= 10) { $("timer").classList.add("low"); }
-    if (clock <= 0) { endRound3("Time is up."); }
-  }
-
-  function drawGas(){
-    if (gi >= R3.length) { endRound3(null); return; }
-    $("srcText").textContent = R3[gi].s;
-    var box = $("gases"); box.innerHTML = "";
-    GASES.forEach(function(g){
-      var b = document.createElement("button");
-      b.className="opt"; b.type="button"; b.textContent = g;
-      b.addEventListener("click", function(){ judgeGas(g, b); });
+  function drawFinding(){
+    var item = R3[i3];
+    $("findText").textContent = item.f;
+    var box = $("lines"); box.innerHTML = "";
+    LINES.forEach(function(name){
+      var b=document.createElement("button");
+      b.className="opt"; b.type="button"; b.textContent=name;
+      b.addEventListener("click", function(){ judge3(item, name, b); });
       box.appendChild(b);
     });
-    $("r3fb").hidden = true;
+    $("q3fb").hidden = true;
+    $("q3next").hidden = true;
   }
 
-  function judgeGas(choice, btn){
-    var item = R3[gi];
-    var all = $("gases").querySelectorAll("button");
-    for (var k=0;k<all.length;k++){ all[k].disabled = true; }
-    var fb = $("r3fb");
-    if (choice === item.a){
-      btn.classList.add("right"); s3++;
-      fb.className="fb ok"; fb.textContent = "Correct.";
-    } else {
+  function judge3(item, name, btn){
+    var all = $("lines").querySelectorAll("button");
+    for (var j=0;j<all.length;j++){ all[j].disabled = true; }
+    var fb = $("q3fb");
+    if (name === item.a){ btn.classList.add("right"); s3++; fb.className="fb ok"; fb.textContent="Correct. "+item.why; }
+    else {
       btn.classList.add("wrong");
-      for (var j=0;j<all.length;j++){ if (all[j].textContent === item.a){ all[j].classList.add("right"); } }
-      fb.className="fb no"; fb.textContent = "This one mainly releases " + item.a.toLowerCase() + ".";
+      for (var k=0;k<all.length;k++){ if (all[k].textContent === item.a){ all[k].classList.add("right"); } }
+      fb.className="fb no"; fb.textContent="This one is "+item.a.toLowerCase()+". "+item.why;
     }
     fb.hidden = false;
     $("t3").textContent = s3 + " of " + R3.length;
-    bumpScore();
-    gi++;
-    setTimeout(function(){ if (timerId !== null || gi >= R3.length) { drawGas(); } }, 650);
+    bump();
+    var n=$("q3next");
+    n.hidden = false;
+    n.textContent = (i3 === R3.length-1) ? "See my score" : "Next finding";
+    n.focus();
   }
 
-  function endRound3(msg){
-    if (timerId !== null) { clearInterval(timerId); timerId = null; }
-    $("gases").innerHTML = "";
-    $("source").hidden = true;
-    $("timer").hidden = true;
-    if (msg){
-      var fb = $("r3fb");
-      fb.className="fb no";
-      fb.textContent = msg + " You answered " + gi + " of " + R3.length + ". Speed comes with knowing the sources, not with clicking faster.";
-      fb.hidden = false;
-    }
-    var g = $("r3done"); g.hidden = false; g.focus();
-  }
-
-  $("r3done").addEventListener("click", function(){
-    $("r3").hidden = true;
-    var total = bumpScore();
-    $("finalNum").textContent = total;
-    $("b1").textContent = s1 + " / 6";
-    $("b2").textContent = s2 + " / 5";
-    $("b3").textContent = s3 + " / 8";
-    var v;
-    if (total >= 16) { v = "Strong start, and Rounds 2 and 3 were before you were taught any of it. Aim for the challenge task at the end of the lesson."; }
-    else if (total >= 10) { v = "Good position to learn from. Watch closely when we get to the four-step diagram."; }
-    else { v = "Rounds 2 and 3 were meant to be hard before instruction. Your Round 1 score is the one that matters right now."; }
-    $("verdict").textContent = v;
-    var sum = $("sum"); sum.hidden = false;
-    sum.scrollIntoView({behavior:"smooth", block:"start"});
+  $("q3next").addEventListener("click", function(){
+    if (i3 === R3.length-1){ finish(); }
+    else { i3++; drawFinding(); }
   });
 
-  drawQ();
+  function finish(){
+    $("r3").hidden = true;
+    var total = bump();
+    $("finalNum").textContent = total;
+    $("b1").textContent = s1 + " / 6";
+    $("b2").textContent = s2 + " / 4";
+    $("b3").textContent = s3 + " / 6";
+    var v;
+    if (s2 === 4) { v = "Full marks on the graph round, which is the one that matters most for Friday. Aim for the challenge task at the end of the lesson."; }
+    else if (total >= 11) { v = "Solid overall. Look back at the graph questions you dropped, that skill gets assessed on Friday and again in Week 8."; }
+    else { v = "The graph round is the one to focus on today. Keep the sentence starters in front of you during the Gallery Walk."; }
+    $("verdict").textContent = v;
+    var sum=$("sum"); sum.hidden=false;
+    sum.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  ask(C1);
 })();
 </script>
 </body>
