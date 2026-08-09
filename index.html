@@ -3,475 +3,579 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Case File &middot; Year 10 Geography Lesson 18</title>
+<title>Impact Atlas | Climate Change Around the World</title>
 <style>
-:root{
-  --ink:#0B2239; --ink-soft:#153552; --sky:#2E7FA8; --ice:#DDEAF2;
-  --ice-deep:#BBD4E4; --amber:#E29135; --ember:#BF4F2A; --slate:#55697A;
-  --mist:#F2F6F9; --paper:#FFFFFF;
-  --display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
-  --body:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-}
-*{box-sizing:border-box}
-html,body{margin:0}
-body{background:var(--mist);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;
-  -webkit-text-size-adjust:100%}
-.wrap{max-width:880px;margin:0 auto;padding:0 20px 72px}
+  :root{
+    --ink:#16294A; --ink-2:#1F3A66; --teal:#0E7C86; --teal-2:#0B6169;
+    --sand:#E0A33E; --ember:#C05243; --cream:#FBF7F0; --paper:#FFFFFF;
+    --slate:#5A6472; --line:#E2DACB; --good:#2E7D57; --bad:#B03A2E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;
+    background:var(--cream); color:#222; line-height:1.5;
+    min-height:100vh; padding:18px 14px 60px;
+  }
+  .wrap{max-width:940px;margin:0 auto}
 
-/* ---------- header / signature: the ice core column ---------- */
-header{background:var(--ink);color:var(--paper);margin-bottom:26px}
-.hd{max-width:880px;margin:0 auto;padding:22px 20px 24px;display:flex;gap:26px;align-items:flex-start;
-  justify-content:space-between;flex-wrap:wrap}
-.hdtext{flex:1 1 300px}
-.eyebrow{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ice-deep);margin:0 0 6px}
-h1{font-family:var(--display);font-size:clamp(28px,6vw,40px);line-height:1.05;margin:0;font-weight:700}
-.tagline{margin:8px 0 0;font-size:14.5px;color:var(--ice);max-width:44ch}
-.score{font-family:var(--mono);text-align:right;flex-shrink:0}
-.score b{display:block;font-size:30px;color:var(--amber);line-height:1}
-.score span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ice-deep)}
-/* the core: layers get older and denser downwards */
-.coreWrap{display:flex;gap:10px;align-items:stretch;flex:0 0 auto}
-.core{width:44px;display:flex;flex-direction:column;border-radius:3px;overflow:hidden}
-.core i{display:block;flex:1;min-height:14px}
-.coreKey{display:flex;flex-direction:column;justify-content:space-between;font-family:var(--mono);
-  font-size:9.5px;color:var(--ice-deep);letter-spacing:.06em;padding:1px 0}
-@media (max-width:620px){.coreWrap{display:none}}
+  /* ---------- header ---------- */
+  header{background:var(--ink);border-radius:14px;padding:20px 22px;color:#fff;position:relative;overflow:hidden}
+  header::after{content:"";position:absolute;right:-40px;top:-50px;width:190px;height:190px;border-radius:50%;
+    background:var(--teal);opacity:.35}
+  header .eyebrow{font-size:.72rem;letter-spacing:2px;color:var(--sand);font-weight:bold;text-transform:uppercase}
+  header h1{font-size:1.9rem;margin:4px 0 6px;letter-spacing:.5px}
+  header p{color:#C9D2E0;font-size:.95rem;max-width:640px}
 
-/* ---------- rounds ---------- */
-.round{background:var(--paper);border:1px solid var(--ice-deep);border-radius:6px;padding:22px;margin-bottom:20px}
-.round[hidden]{display:none}
-.rlabel{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);font-weight:700;margin:0 0 4px}
-.round h2{font-family:var(--display);font-size:24px;margin:0 0 4px;font-weight:700}
-.rsub{margin:0 0 18px;color:var(--slate);font-size:15px}
-.locked{opacity:.55}
+  /* ---------- scoreboard ---------- */
+  .board{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+  .stat{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:10px 12px;text-align:center}
+  .stat .n{font-size:1.5rem;font-weight:bold;color:var(--ink);line-height:1.15}
+  .stat .l{font-size:.66rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--slate);font-weight:bold}
+  .stat.hot .n{color:var(--ember)}
 
-.qmeta{font-family:var(--mono);font-size:12px;color:var(--slate);margin:0 0 6px}
-.qtext{font-size:19px;font-weight:600;margin:0 0 16px;line-height:1.35}
-.opts{display:grid;gap:9px}
-button{font:inherit;cursor:pointer}
-.opt{display:block;width:100%;text-align:left;background:var(--mist);border:1.5px solid var(--ice-deep);
-  border-radius:5px;padding:12px 14px;color:var(--ink);transition:background .12s,border-color .12s}
-.opt:hover:not(:disabled){border-color:var(--sky);background:var(--paper)}
-.opt:disabled{cursor:default}
-.opt.right{background:#E8F2E4;border-color:#4B7F3E;font-weight:600}
-.opt.wrong{background:#FBEAE4;border-color:var(--ember)}
-:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+  .progress{height:9px;background:#E9E2D6;border-radius:99px;overflow:hidden;margin-bottom:16px}
+  .progress > div{height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--sand));transition:width .35s}
 
-/* ---------- round 2: the graph ---------- */
-figure{margin:0 0 20px;background:var(--mist);border:1px solid var(--ice-deep);border-radius:5px;padding:16px 14px 10px}
-figcaption{font-family:var(--mono);font-size:11.5px;color:var(--slate);margin-top:8px;line-height:1.45}
-.chart{display:block;width:100%;height:auto}
-.chart .grid{stroke:var(--ice-deep);stroke-width:1}
-.chart .axis{stroke:var(--slate);stroke-width:1.5}
-.chart .bars rect{fill:var(--ice-deep)}
-.chart .trend{fill:none;stroke:var(--ember);stroke-width:3;stroke-linecap:round;
-  stroke-dasharray:520;stroke-dashoffset:520;animation:draw 1.5s .3s ease-out forwards}
-@keyframes draw{to{stroke-dashoffset:0}}
-@media (prefers-reduced-motion:reduce){.chart .trend{animation:none;stroke-dashoffset:0}}
-.chart text{font:600 9px var(--body);fill:var(--slate)}
-.chart .ylab{font:600 9.5px var(--body);fill:var(--slate)}
-.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--slate);margin-top:6px}
-.legend i{display:inline-block;width:16px;height:4px;border-radius:2px;margin-right:6px;vertical-align:2px}
-.legend .b{background:var(--ice-deep)}
-.legend .t{background:var(--ember)}
+  /* ---------- panels ---------- */
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:14px}
+  .roundtag{display:inline-block;background:var(--teal);color:#fff;font-size:.68rem;font-weight:bold;
+    letter-spacing:1.4px;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:10px}
+  .roundtag.r2{background:var(--sand)} .roundtag.r3{background:var(--ember)} .roundtag.r4{background:var(--slate)}
+  h2{font-size:1.28rem;color:var(--ink);margin-bottom:6px}
+  .sub{color:var(--slate);font-size:.9rem;margin-bottom:16px}
 
-/* ---------- round 3: match rows ---------- */
-.finding{background:var(--ink);color:var(--paper);border-radius:5px;padding:16px 18px;margin-bottom:14px}
-.finding .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:0 0 6px}
-.finding p{margin:0;font-size:19px;font-weight:600;line-height:1.3}
-.lines{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px}
+  .qbox{background:#F7F4ED;border-left:5px solid var(--ink);border-radius:9px;padding:15px 17px;margin-bottom:15px}
+  .qbox .qno{font-size:.68rem;letter-spacing:1.3px;text-transform:uppercase;color:var(--slate);font-weight:bold}
+  .qbox .qtext{font-size:1.08rem;margin-top:5px;color:#1a1a1a}
+  .qbox .filetitle{font-weight:bold;color:var(--teal);font-size:.95rem;margin-top:6px}
 
-/* ---------- feedback + nav ---------- */
-.fb{margin:16px 0 0;padding:12px 14px;border-radius:5px;font-size:15.5px;background:var(--mist);
-  border-left:4px solid var(--sky)}
-.fb[hidden]{display:none}
-.fb.ok{border-left-color:#4B7F3E}
-.fb.no{border-left-color:var(--ember)}
-.nav{margin-top:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.go{background:var(--ink);color:var(--paper);border:0;border-radius:5px;padding:12px 22px;font-size:16px;font-weight:600}
-.go:hover{background:var(--ink-soft)}
-.go[hidden]{display:none}
-.tally{font-family:var(--mono);font-size:13px;color:var(--slate);margin-left:auto}
+  .opts{display:grid;gap:9px}
+  .opts.two{grid-template-columns:1fr 1fr}
+  .opts.four{grid-template-columns:1fr 1fr}
+  @media(max-width:620px){.opts.two,.opts.four{grid-template-columns:1fr}}
 
-/* ---------- summary ---------- */
-.sum{background:var(--ink);color:var(--paper);border-radius:6px;padding:26px}
-.sum h2{font-family:var(--display);font-size:26px;margin:0 0 16px}
-.big{font-family:var(--mono);font-size:52px;color:var(--amber);line-height:1;margin:0}
-.big small{font-size:20px;color:var(--ice-deep)}
-.bd{margin:18px 0 0;padding:0;list-style:none;font-size:15.5px}
-.bd li{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-top:1px solid var(--ink-soft)}
-.bd span{font-family:var(--mono);color:var(--amber);flex-shrink:0}
-.verdict{margin:18px 0 0;font-size:16px;color:var(--ice);max-width:56ch}
-.ghost{background:transparent;border:1.5px solid var(--ink-soft);color:var(--ice);border-radius:5px;
-  padding:11px 18px;font-size:15px;margin-top:20px}
-.ghost:hover{border-color:var(--ice);color:var(--paper)}
-footer{max-width:880px;margin:0 auto;padding:26px 20px;font-size:13px;color:var(--slate)}
+  button.opt{
+    font-family:inherit;font-size:1rem;text-align:left;background:var(--paper);
+    border:2px solid var(--line);border-radius:10px;padding:12px 15px;cursor:pointer;
+    transition:.14s;color:#222;display:flex;gap:11px;align-items:flex-start;line-height:1.4;
+  }
+  button.opt:hover:not(:disabled){border-color:var(--teal);background:#F2F8F8;transform:translateY(-1px)}
+  button.opt .k{flex:0 0 25px;height:25px;border-radius:50%;background:var(--ink);color:#fff;
+    font-size:.78rem;font-weight:bold;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  button.opt:disabled{cursor:default;opacity:1}
+  button.opt.correct{border-color:var(--good);background:#EAF5EF}
+  button.opt.correct .k{background:var(--good)}
+  button.opt.wrong{border-color:var(--bad);background:#FBEDEB}
+  button.opt.wrong .k{background:var(--bad)}
+  button.opt.dim{opacity:.5}
+
+  .feedback{margin-top:14px;border-radius:10px;padding:13px 16px;font-size:.96rem;display:none}
+  .feedback.show{display:block}
+  .feedback.yes{background:#EAF5EF;border-left:5px solid var(--good)}
+  .feedback.no{background:#FBEDEB;border-left:5px solid var(--bad)}
+  .feedback strong{display:block;margin-bottom:3px}
+
+  .nav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:.97rem;font-weight:bold;border:none;border-radius:9px;
+    padding:11px 22px;cursor:pointer;background:var(--ink);color:#fff;transition:.14s}
+  .btn:hover{background:var(--ink-2)}
+  .btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+  .btn.ghost:hover{background:#EDEAE2}
+  .btn.sand{background:var(--sand);color:var(--ink)}
+  .btn.sand:hover{background:#CE9331}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+
+  .streakflag{font-size:.85rem;color:var(--ember);font-weight:bold;min-height:20px}
+
+  /* ---------- start + results ---------- */
+  .rounds{display:grid;gap:10px;margin:16px 0}
+  .rline{display:flex;gap:13px;align-items:flex-start;background:#F7F4ED;border-radius:10px;padding:12px 14px}
+  .rline .num{flex:0 0 27px;height:27px;border-radius:50%;background:var(--teal);color:#fff;font-weight:bold;
+    font-size:.85rem;display:flex;align-items:center;justify-content:center}
+  .rline b{color:var(--ink)}
+  .rline span{font-size:.93rem;color:#333}
+
+  .badgegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+  .badge{border:2px dashed var(--line);border-radius:11px;padding:12px;text-align:center;opacity:.4}
+  .badge.earned{opacity:1;border-style:solid;border-color:var(--sand);background:#FBF3E2}
+  .badge .ic{font-size:1.5rem}
+  .badge .bn{font-weight:bold;color:var(--ink);font-size:.9rem;margin-top:3px}
+  .badge .bd{font-size:.76rem;color:var(--slate)}
+
+  .review{border:1px solid var(--line);border-radius:11px;padding:13px 15px;margin-bottom:10px;background:#FDFBF7}
+  .review .rq{font-weight:bold;color:var(--ink);font-size:.96rem}
+  .review .ra{font-size:.9rem;margin-top:5px}
+  .review .ra .x{color:var(--bad)} .review .ra .t{color:var(--good)}
+
+  .scorebig{text-align:center;padding:8px 0 4px}
+  .scorebig .pct{font-size:3.4rem;font-weight:bold;color:var(--ink);line-height:1}
+  .scorebig .band{font-size:1.05rem;color:var(--teal);font-weight:bold;margin-top:4px}
+
+  /* ---------- certificate ---------- */
+  #cert{display:none;border:4px double var(--ink);border-radius:6px;padding:26px;text-align:center;background:#fff;margin-top:16px}
+  #cert .ct{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--slate);font-weight:bold}
+  #cert h3{font-size:1.5rem;color:var(--ink);margin:8px 0}
+  #cert .nameline{border-bottom:1.5px solid var(--ink);width:70%;margin:16px auto 5px;height:28px}
+  #cert .small{font-size:.8rem;color:var(--slate)}
+  #cert .certscore{font-size:1.15rem;font-weight:bold;color:var(--teal);margin-top:10px}
+
+  footer{text-align:center;font-size:.78rem;color:var(--slate);margin-top:22px}
+  .hidden{display:none}
+
+  @media print{
+    body{background:#fff;padding:0}
+    header,.board,.progress,.nav,.panel:not(#certpanel),footer{display:none !important}
+    #certpanel{border:none;padding:0}
+    #cert{display:block !important;border-color:#000}
+  }
 </style>
 </head>
 <body>
-
-<header>
-  <div class="hd">
-    <div class="hdtext">
-      <p class="eyebrow">Year 10 Geography &middot; Lesson 18 &middot; VCGGK144</p>
-      <h1>Case File</h1>
-      <p class="tagline">Three rounds. One dataset to read properly, and four lines of evidence to keep straight.</p>
-    </div>
-    <div class="score" aria-live="polite">
-      <b id="scoreNum">0</b>
-      <span>points of 16</span>
-    </div>
-    <div class="coreWrap" aria-hidden="true">
-      <div class="core">
-        <i style="background:#FFFFFF"></i><i style="background:#EFF6FA"></i><i style="background:#DDEAF2"></i>
-        <i style="background:#CDE2EE"></i><i style="background:#BBD4E4"></i><i style="background:#A8C8DC"></i>
-        <i style="background:#93B9D2"></i><i style="background:#7FA9C4"></i>
-      </div>
-      <div class="coreKey"><span>RECENT</span><span>ANCIENT</span></div>
-    </div>
-  </div>
-</header>
-
 <div class="wrap">
 
-  <!-- ROUND 1 -->
-  <section class="round" id="r1">
-    <p class="rlabel">Round 1</p>
-    <h2>Rapid Recall</h2>
-    <p class="rsub">Six questions on Monday and Tuesday. One attempt each.</p>
-    <p class="qmeta" id="q1meta"></p>
-    <p class="qtext" id="q1text"></p>
-    <div class="opts" id="q1opts"></div>
-    <p class="fb" id="q1fb" hidden></p>
+  <header>
+    <div class="eyebrow">Lesson 21 &nbsp;•&nbsp; Year 10 Geography &nbsp;•&nbsp; VCGGK144</div>
+    <h1>Impact Atlas</h1>
+    <p>Climate change around the world. Four rounds, four skills. Same cause everywhere, very different damage.</p>
+  </header>
+
+  <div class="board">
+    <div class="stat"><div class="n" id="sScore">0</div><div class="l">Score</div></div>
+    <div class="stat"><div class="n" id="sCorrect">0/0</div><div class="l">Correct</div></div>
+    <div class="stat hot"><div class="n" id="sStreak">0</div><div class="l">Streak</div></div>
+    <div class="stat"><div class="n" id="sRound">-</div><div class="l">Round</div></div>
+  </div>
+  <div class="progress"><div id="bar"></div></div>
+
+  <!-- ============ START ============ -->
+  <div class="panel" id="startPanel">
+    <h2>How this works</h2>
+    <p class="sub">Work with your partner. Say your reason out loud before you click. Read the feedback every time, that is where the marks come from.</p>
+    <div class="rounds">
+      <div class="rline"><div class="num">1</div><span><b>Rapid Recall.</b> Quick questions on last week's climate science and today's key words.</span></div>
+      <div class="rline"><div class="num">2</div><span><b>Impact Sort.</b> Read the description, name which of the four global impacts it is.</span></div>
+      <div class="rline"><div class="num">3</div><span><b>Region Files.</b> A short field report from somewhere in the world. Work out where and what.</span></div>
+      <div class="rline"><div class="num">4</div><span><b>Vulnerability Call.</b> Two places, one hazard. Decide who is worse off and why.</span></div>
+    </div>
+    <p class="sub"><b>Scoring:</b> 10 points a correct answer, plus a growing streak bonus. Get three in a row and the bonus starts stacking. A wrong answer resets the streak, not your score.</p>
+    <div class="nav"><span></span><button class="btn sand" onclick="startGame()">Start round 1</button></div>
+  </div>
+
+  <!-- ============ QUESTION ============ -->
+  <div class="panel hidden" id="qPanel">
+    <span class="roundtag" id="rTag">Round 1</span>
+    <h2 id="rTitle">Rapid Recall</h2>
+    <p class="sub" id="rSub"></p>
+
+    <div class="qbox">
+      <div class="qno" id="qNo">Question 1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="filetitle hidden" id="qFile"></div>
+    </div>
+
+    <div class="opts" id="opts"></div>
+
+    <div class="feedback" id="fb"><strong id="fbTitle"></strong><span id="fbText"></span></div>
+
     <div class="nav">
-      <button class="go" id="q1next" hidden>Next question</button>
-      <span class="tally" id="t1">0 of 6</span>
+      <div class="streakflag" id="streakFlag"></div>
+      <button class="btn" id="nextBtn" onclick="next()" disabled>Next</button>
     </div>
-  </section>
+  </div>
 
-  <!-- ROUND 2 -->
-  <section class="round locked" id="r2">
-    <p class="rlabel">Round 2</p>
-    <h2>Read the Graph</h2>
-    <p class="rsub" id="r2sub">Finish Round 1 first.</p>
+  <!-- ============ ROUND BREAK ============ -->
+  <div class="panel hidden" id="breakPanel">
+    <span class="roundtag" id="bTag">Round complete</span>
+    <h2 id="bTitle"></h2>
+    <p class="sub" id="bText"></p>
+    <div class="nav"><span></span><button class="btn sand" id="bBtn" onclick="nextRound()">Continue</button></div>
+  </div>
 
-    <figure id="fig" hidden>
-      <svg class="chart" viewBox="0 0 640 300" role="img"
-           aria-label="Column graph of annual temperature anomalies from 2005 to 2024 with a five-year average line rising across the period.">
-        <!-- y grid + labels -->
-        <g class="grid">
-          <line x1="52" y1="250" x2="620" y2="250"/><line x1="52" y1="192" x2="620" y2="192"/>
-          <line x1="52" y1="134" x2="620" y2="134"/><line x1="52" y1="76" x2="620" y2="76"/>
-          <line x1="52" y1="18" x2="620" y2="18"/>
-        </g>
-        <g class="ylab">
-          <text x="44" y="253" text-anchor="end">0.0</text><text x="44" y="195" text-anchor="end">0.5</text>
-          <text x="44" y="137" text-anchor="end">1.0</text><text x="44" y="79" text-anchor="end">1.5</text>
-          <text x="44" y="21" text-anchor="end">2.0</text>
-        </g>
-        <text x="12" y="140" class="ylab" transform="rotate(-90 12 140)" text-anchor="middle">Anomaly (&#176;C)</text>
-        <g class="bars" id="bars"></g>
-        <polyline class="trend" id="trendLine" points=""/>
-        <line class="axis" x1="52" y1="250" x2="620" y2="250"/>
-        <line class="axis" x1="52" y1="18" x2="52" y2="250"/>
-        <g id="xlabels"></g>
-      </svg>
-      <div class="legend">
-        <span><i class="b"></i>Annual anomaly</span>
-        <span><i class="t"></i>Five-year average</span>
-      </div>
-      <figcaption>Annual temperature anomaly, 2005 to 2024. Illustrative dataset built for classroom practice, not a published record. An anomaly is the difference from a long-term average.</figcaption>
-    </figure>
+  <!-- ============ RESULTS ============ -->
+  <div class="panel hidden" id="endPanel">
+    <span class="roundtag">Final result</span>
+    <div class="scorebig">
+      <div class="pct" id="ePct">0%</div>
+      <div class="band" id="eBand"></div>
+      <p class="sub" id="eLine" style="margin-top:8px"></p>
+    </div>
 
-    <p class="qmeta" id="q2meta"></p>
-    <p class="qtext" id="q2text"></p>
-    <div class="opts" id="q2opts"></div>
-    <p class="fb" id="q2fb" hidden></p>
+    <h2 style="margin-top:14px">Badges</h2>
+    <div class="badgegrid" id="badges"></div>
+
+    <h2 style="margin-top:14px">Mistake review</h2>
+    <p class="sub">Read these before you close the tab. These are the ones to fix.</p>
+    <div id="reviewList"></div>
+
     <div class="nav">
-      <button class="go" id="q2next" hidden>Next question</button>
-      <span class="tally" id="t2">0 of 4</span>
+      <button class="btn ghost" onclick="location.reload()">Play again</button>
+      <button class="btn sand" onclick="showCert()">Get certificate</button>
     </div>
-  </section>
+  </div>
 
-  <!-- ROUND 3 -->
-  <section class="round locked" id="r3">
-    <p class="rlabel">Round 3</p>
-    <h2>Which Line of Evidence?</h2>
-    <p class="rsub" id="r3sub">Finish Round 2 first.</p>
-    <div class="finding" id="finding" hidden>
-      <p class="lab">Finding</p>
-      <p id="findText"></p>
+  <div class="panel hidden" id="certpanel">
+    <div id="cert">
+      <div class="ct">Year 10 Geography &nbsp;•&nbsp; Environmental Change and Management</div>
+      <h3>Impact Atlas: Climate Change Around the World</h3>
+      <div class="small">Awarded to</div>
+      <div class="nameline"></div>
+      <div class="small">Student name</div>
+      <div class="certscore" id="certScore"></div>
+      <div class="small" id="certBadges" style="margin-top:8px"></div>
+      <div class="small" style="margin-top:14px">Lesson 21 &nbsp;•&nbsp; VCGGK144 &nbsp;•&nbsp; Date: ____________</div>
     </div>
-    <div class="lines" id="lines"></div>
-    <p class="fb" id="q3fb" hidden></p>
-    <div class="nav">
-      <button class="go" id="r3start" hidden>Start Round 3</button>
-      <button class="go" id="q3next" hidden>Next finding</button>
-      <span class="tally" id="t3">0 of 6</span>
+    <div class="nav" style="margin-top:14px">
+      <button class="btn ghost" onclick="hideCert()">Back</button>
+      <button class="btn" onclick="window.print()">Print</button>
     </div>
-  </section>
+  </div>
 
-  <!-- SUMMARY -->
-  <section class="sum" id="sum" hidden>
-    <h2>How you went</h2>
-    <p class="big"><span id="finalNum">0</span><small> / 16</small></p>
-    <ul class="bd">
-      <li>Round 1 &middot; Rapid Recall <span id="b1">0 / 6</span></li>
-      <li>Round 2 &middot; Read the Graph <span id="b2">0 / 4</span></li>
-      <li>Round 3 &middot; Which Line of Evidence? <span id="b3">0 / 6</span></li>
-    </ul>
-    <p class="verdict" id="verdict"></p>
-    <button class="ghost" onclick="location.reload()">Start again</button>
-  </section>
-
+  <footer>Impact Atlas &nbsp;•&nbsp; Lesson 21, Week 5 &nbsp;•&nbsp; Figures are approximate and shift with each new global assessment.</footer>
 </div>
 
-<footer>Built for Manor Lakes College &middot; Environmental Change and Management &middot; all examples original.</footer>
-
 <script>
-(function(){
-  "use strict";
-  var $ = function(id){ return document.getElementById(id); };
-
-  /* ---------------- data ---------------- */
-  var R1 = [
-    { q:"Climate is measured using records covering roughly how long?",
-      o:["One year","Ten years","Thirty years","Five hundred years"], a:2,
-      why:"Thirty years is the standard window, long enough that one unusual year cannot move the average." },
-    { q:"Which type of radiation do greenhouse gases mainly absorb?",
-      o:["Shortwave radiation coming in from the sun","Longwave heat radiating out from the surface",
-         "Both equally","Neither, they reflect it"], a:1,
-      why:"Sunlight passes through. It is the outgoing longwave heat that gets absorbed and re-radiated." },
-    { q:"Which pairing of gas and human source is correct?",
-      o:["Methane and coal-fired electricity","Nitrous oxide and beef cattle",
-         "Carbon dioxide and burning petrol","Water vapour and fertiliser"], a:2,
-      why:"Burning petrol releases carbon dioxide. Cattle are mainly methane, fertiliser is mainly nitrous oxide." },
-    { q:"The word enhanced in \u201cenhanced greenhouse effect\u201d refers to:",
-      o:["The natural process that keeps Earth warm","The extra warming from human-added gases",
-         "A change in the sun's output","Better measuring instruments"], a:1,
-      why:"The mechanism has not changed. The concentration of greenhouse gases has, and that extra warming is the enhanced part." },
-    { q:"Without any greenhouse gases, Earth's average surface temperature would be about:",
-      o:["\u221218 \u00b0C","0 \u00b0C","+15 \u00b0C","+33 \u00b0C"], a:0,
-      why:"About minus 18 degrees. The natural greenhouse effect is worth roughly 33 degrees of warming." },
-    { q:"The year-to-year ups and downs in a temperature record are called:",
-      o:["The trend","Variability","The anomaly","The forecast"], a:1,
-      why:"Variability is the noise. The trend is the direction left once the noise is averaged out." }
-  ];
-
-  /* illustrative anomaly series, matched to the deck */
-  var YEARS = [2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,
-               2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
-  var ANOM  = [0.98,0.50,0.62,0.42,0.92,0.19,0.13,0.51,1.20,0.91,
-               0.83,0.87,0.95,1.14,1.52,1.15,0.56,0.50,0.98,1.46];
-
-  var R2 = [
-    { q:"What does the vertical axis measure, and in what units?",
-      o:["Total rainfall in millimetres","Temperature anomaly in degrees Celsius",
-         "Carbon dioxide in parts per million","Sea level in centimetres"], a:1,
-      why:"Always name the axis and the unit first. Here it is the anomaly, the difference from a long-term average, in degrees Celsius." },
-    { q:"Which statement describes the overall trend most accurately?",
-      o:["The anomaly rises steadily every single year",
-         "The anomaly falls across the period",
-         "The anomaly varies year to year but rises across the period",
-         "There is no pattern at all"], a:2,
-      why:"This is the sentence to reuse in a source analysis. It names the variability and the trend, instead of pretending one of them is absent." },
-    { q:"2011 has the lowest anomaly on the graph. What does that tell you about the trend?",
-      o:["It disproves the trend","It shows the data must be wrong",
-         "It is one year of normal variability and the average still rises",
-         "It means the trend only started after 2011"], a:2,
-      why:"A single low year sits inside normal variability. That is precisely why the five-year average line is drawn." },
-    { q:"Which pair of figures would best support a claim that the anomaly has risen?",
-      o:["0.19 in 2010 and 0.13 in 2011","0.98 in 2005 and 1.46 in 2024",
-         "1.52 in 2019 and 1.15 in 2020","0.50 in 2006 and 0.51 in 2012"], a:1,
-      why:"Pick figures from opposite ends of the record. Two adjacent years, or two low years, show variability rather than the trend." }
-  ];
-
-  var LINES = ["Temperature records","Ice cores","Sea level","Retreating ice"];
-  var R3 = [
-    { f:"Air bubbles from ice formed in 1750 contain less carbon dioxide than today's atmosphere.",
-      a:"Ice cores", why:"The gas itself is sealed in the bubble, which makes ice cores a proxy record of the past atmosphere." },
-    { f:"Australia's national annual average has warmed by roughly 1.5 \u00b0C since 1910.",
-      a:"Temperature records", why:"Direct measurement by instruments, reported as an anomaly. This is the instrumental record." },
-    { f:"Satellites have measured the height of the ocean surface since 1993.",
-      a:"Sea level", why:"Tide gauges measure at the coast, satellite altimetry measures from space. Both track ocean height." },
-    { f:"Photographs of the same alpine glacier decades apart show it is much shorter now.",
-      a:"Retreating ice", why:"No instrument needed. Repeat photography and survey of ice extent is a line of evidence on its own." },
-    { f:"Arctic sea ice covers less area at the end of each summer than it used to.",
-      a:"Retreating ice", why:"Ice extent again, measured by satellite rather than by thermometer." },
-    { f:"Ocean water expanding as it warms is one reason this measurement has increased.",
-      a:"Sea level", why:"Thermal expansion plus melting land ice. Both raise ocean height." }
-  ];
-
-  /* ---------------- state ---------------- */
-  var s1=0, s2=0, s3=0, i1=0, i2=0, i3=0;
-
-  function bump(){ var t=s1+s2+s3; $("scoreNum").textContent=t; return t; }
-
-  /* generic one-at-a-time MCQ engine */
-  function ask(cfg){
-    var item = cfg.set[cfg.idx()];
-    $(cfg.meta).textContent = "Question " + (cfg.idx()+1) + " of " + cfg.set.length;
-    $(cfg.text).textContent = item.q;
-    var box = $(cfg.opts); box.innerHTML = "";
-    item.o.forEach(function(t,k){
-      var b = document.createElement("button");
-      b.className="opt"; b.type="button"; b.textContent=t;
-      b.addEventListener("click", function(){ mark(cfg, item, k, b); });
-      box.appendChild(b);
-    });
-    $(cfg.fb).hidden = true;
-    $(cfg.next).hidden = true;
+/* ============================================================
+   DATA
+   ============================================================ */
+const ROUNDS = [
+  {
+    name:"Rapid Recall",
+    tag:"r1",
+    sub:"Eight quick questions. Last week's science and today's vocabulary.",
+    breakTitle:"Round 1 done",
+    breakText:"That is the science secure. Now we use it. Round 2 asks you to name the impact from a description.",
+    qs:[
+      { q:"What is the difference between weather and climate?",
+        o:["Weather is short-term conditions; climate is the long-term average pattern",
+           "Weather happens on land; climate happens over oceans",
+           "Weather is measured; climate is only predicted",
+           "They mean the same thing"],
+        a:0,
+        f:"Weather is what the atmosphere is doing today. Climate is the pattern over roughly 30 years or more." },
+      { q:"Which of these does NOT add water to the ocean when it melts?",
+        o:["Greenland's ice sheet","Arctic sea ice","Himalayan glaciers","The Antarctic ice sheet"],
+        a:1,
+        f:"Sea ice is already floating, so melting it does not raise sea level. Only land ice adds new water." },
+      { q:"Global sea level has risen roughly how much since satellite records began in 1993?",
+        o:["About 1 cm","About 11 cm","About 60 cm","About 2 m"],
+        a:1,
+        f:"About 11 cm, and the rate has roughly doubled from about 2.1 mm a year to about 4.5 mm a year." },
+      { q:"Desertification means...",
+        o:["The Sahara physically sliding southwards",
+           "Productive dryland degrading until it can no longer grow things",
+           "A desert becoming greener after rain",
+           "Sand dunes forming on a beach"],
+        a:1,
+        f:"It is a process of land degrading in place, not a desert moving across the map." },
+      { q:"Why does a warmer atmosphere produce heavier downpours?",
+        o:["Warm air is heavier so it falls faster",
+           "Warm air holds more water vapour, roughly 7% more per degree",
+           "Warm air spins faster near the equator",
+           "Warm air blocks sunlight"],
+        a:1,
+        f:"Roughly 7% more moisture capacity per degree of warming. More moisture in, more rain out." },
+      { q:"Vulnerability is best defined as...",
+        o:["How hot a place gets",
+           "How much carbon a country emits",
+           "How badly a place is likely to be harmed by a hazard it faces",
+           "The distance from the equator"],
+        a:2,
+        f:"Vulnerability combines exposure, sensitivity and adaptive capacity. It is about harm, not temperature." },
+      { q:"The Arctic is warming at roughly what rate compared with the global average?",
+        o:["The same rate","About half as fast","About three to four times faster","About twenty times faster"],
+        a:2,
+        f:"Around three to four times faster. Melting bright ice exposes dark ocean, which absorbs more heat." },
+      { q:"2024 was the warmest year on record, at about how far above the 1850-1900 average?",
+        o:["0.5 degrees","1.55 degrees","3 degrees","5 degrees"],
+        a:1,
+        f:"About 1.55 degrees. 2025 came in second or third at about 1.44 degrees, even with a cooling La Nina." }
+    ]
+  },
+  {
+    name:"Impact Sort",
+    tag:"r2",
+    sub:"Which of the four global impacts is being described? Read carefully, some are close together.",
+    breakTitle:"Round 2 done",
+    breakText:"You can name the impacts. Round 3 is harder: you get a field report and have to work out the region as well.",
+    common:["Rising seas","Desertification","More intense extreme weather","Vanishing ice and snow"],
+    qs:[
+      { q:"Farmers report that the soil in their coastal paddies has turned salty and rice will no longer grow, even though the fields have not flooded.", a:0,
+        f:"Saltwater intrusion is one of the earliest effects of rising seas. The damage arrives underground before the water arrives above ground." },
+      { q:"A lake that supported fishing communities for generations has lost about 90% of its surface area since the 1960s.", a:1,
+        f:"Lake Chad in the Sahel. Less reliable rain, more evaporation, and heavy irrigation pressure on what is left." },
+      { q:"A city records five consecutive days above 45 degrees, and hospital admissions for heat stress triple.", a:2,
+        f:"A heatwave. A hotter baseline means events like this start from a higher point and last longer." },
+      { q:"Roads and houses built on frozen ground are cracking and tilting as the ground beneath them thaws.", a:3,
+        f:"Thawing permafrost in the Arctic. It also releases methane, which adds more warming. That is a feedback loop." },
+      { q:"An airstrip on a coral atoll floods during king tides several times a year, when it used to flood once a decade.", a:0,
+        f:"Rising seas. The tide range has not changed much; the water it is starting from is higher." },
+      { q:"Herders and crop farmers are increasingly in conflict over access to a shrinking number of waterholes.", a:1,
+        f:"Desertification in the Sahel. When productive land shrinks, competition for what is left intensifies." },
+      { q:"A tropical cyclone crosses unusually warm ocean water and intensifies from category 2 to category 5 in under 24 hours.", a:2,
+        f:"Warm ocean water is fuel for cyclones. Warming does not create cyclones, it gives existing ones more energy." },
+      { q:"A river that farmers rely on in the dry season is running lower each year because the glacier feeding it has retreated.", a:3,
+        f:"Mountain glaciers act as a water bank. When the bank empties, the dry-season withdrawal stops." }
+    ]
+  },
+  {
+    name:"Region Files",
+    tag:"r3",
+    sub:"A short field report from somewhere in the world. Work out which region it is describing.",
+    breakTitle:"Round 3 done",
+    breakText:"Last round. Now you judge, not just identify. Same hazard, two very different countries.",
+    qs:[
+      { file:"FILE 01",
+        q:"Nine coral atolls. Highest point under five metres. Population about 11,000. One third of citizens entered a ballot for a permanent visa to Australia within four days of it opening.",
+        o:["Tuvalu","Bangladesh","Iceland","Chad"], a:0,
+        f:"Tuvalu. The Falepili Union treaty with Australia allows up to 280 Tuvaluans a year to move here permanently." },
+      { file:"FILE 02",
+        q:"A semi-arid belt running along the southern edge of the world's largest hot desert. Rainfall is becoming less reliable, vegetation is thinning, and a huge tree-planting project stretching about 8,000 km is under way.",
+        o:["The Amazon Basin","The Sahel","Central Australia","Patagonia"], a:1,
+        f:"The Sahel. The Great Green Wall, launched by the African Union in 2007, aims to restore 100 million hectares." },
+      { file:"FILE 03",
+        q:"A vast river delta where two thirds of the country sits less than five metres above sea level. Cyclone shelters and mobile phone warning systems have cut deaths sharply, but salt is ruining the rice.",
+        o:["The Netherlands","Egypt","Bangladesh","Vietnam's central coast"], a:2,
+        f:"Bangladesh. High exposure, but strong adaptive capacity in one specific area: cyclone warning and evacuation." },
+      { file:"FILE 04",
+        q:"Warming here is running about three to four times the global average. Sea ice that communities have travelled and hunted on for generations is becoming unsafe, and the ground under the roads is softening.",
+        o:["The Arctic","The Sahara","The Mediterranean","The Coral Sea"], a:0,
+        f:"The Arctic. The albedo feedback is why the poles warm fastest: less white ice means more dark water absorbing heat." },
+      { file:"FILE 05",
+        q:"Sometimes called the water tower of Asia. Around two billion people downstream rely on rivers fed by its snow and ice, which is now retreating.",
+        o:["The Andes","The European Alps","The Himalaya","The Great Dividing Range"], a:2,
+        f:"The Himalaya. The change happens high in the mountains but the consequence lands in cities and farms far below." },
+      { file:"FILE 06",
+        q:"A wealthy region where a single heatwave killed tens of thousands of mostly elderly people, prompting governments to build national heat health warning systems.",
+        o:["Western Europe","The Pacific Islands","The Sahel","Greenland"], a:0,
+        f:"Western Europe. Proof that wealth does not make a country immune, but it does change what a country can do next time." }
+    ]
+  },
+  {
+    name:"Vulnerability Call",
+    tag:"r4",
+    sub:"Same hazard, two different places. Which is more vulnerable, and why? Think exposure, sensitivity, adaptive capacity.",
+    breakTitle:"All rounds complete",
+    breakText:"",
+    qs:[
+      { q:"A category 4 cyclone crosses the coast of a wealthy country with building codes, evacuation plans and insurance, and also crosses a low-income country with none of these. Where will the death toll be higher?",
+        o:["The wealthy country","The low-income country","Identical in both","Impossible to say"], a:1,
+        f:"Adaptive capacity is doing the work here. The wealthy country usually loses more money; the low-income country loses more lives." },
+      { q:"Two farming communities face the same three-year drought. One has irrigation, crop insurance and off-farm income. The other depends entirely on rain-fed subsistence crops. Which is more sensitive to the drought?",
+        o:["The irrigated community","The rain-fed community","Neither, drought affects all farms equally","The one closer to the coast"], a:1,
+        f:"Sensitivity is about how much daily life depends on the thing being hit. Rain-fed subsistence farming has no buffer." },
+      { q:"A country with high adaptive capacity but extremely high exposure, such as a low-lying atoll nation, faces sea level rise. What is the honest conclusion?",
+        o:["Money removes the risk entirely",
+           "Capacity helps, but you cannot buy your way out of having no high ground",
+           "Exposure never matters if a country is wealthy",
+           "Sea level rise will not affect it"], a:1,
+        f:"This is the limit of adaptation. Adaptive capacity buys time and reduces harm; it does not change your elevation." },
+      { q:"Which factor best explains why the same 1.5 degrees of global warming produces desertification in one place and coastal flooding in another?",
+        o:["Different amounts of warming in each place",
+           "Different exposure, because the physical geography of each place is different",
+           "Different levels of wealth",
+           "Different populations"], a:1,
+        f:"Exposure. The warming is shared; what it does depends on whether you are low-lying, semi-arid, polar or in the cyclone belt." },
+      { q:"A government installs an early warning system that texts every phone in a cyclone's path. Which part of the vulnerability picture has it improved?",
+        o:["Exposure","Sensitivity","Adaptive capacity","The hazard itself"], a:2,
+        f:"Adaptive capacity. The cyclone is unchanged and the coastline is unchanged; the ability to respond is what improved." },
+      { q:"Wealthy countries generally suffer fewer climate deaths than low-income countries. What is the correct conclusion to draw?",
+        o:["Climate change does not affect wealthy countries",
+           "Wealthy countries are less exposed to hazards",
+           "Wealthy countries have more capacity to protect people, so harm shows up as cost rather than lives",
+           "Low-income countries are hit by worse hazards"], a:2,
+        f:"The hazard is not gentler in a rich country. The difference is what the country can afford to do before, during and after." }
+    ]
   }
+];
 
-  function mark(cfg, item, k, btn){
-    var all = $(cfg.opts).querySelectorAll("button");
-    for (var j=0;j<all.length;j++){ all[j].disabled = true; }
-    var fb = $(cfg.fb);
-    if (k === item.a){ btn.classList.add("right"); cfg.inc(); fb.className="fb ok"; fb.textContent="Correct. "+item.why; }
-    else { btn.classList.add("wrong"); all[item.a].classList.add("right"); fb.className="fb no"; fb.textContent="Not this time. "+item.why; }
-    fb.hidden = false;
-    $(cfg.tally).textContent = cfg.score() + " of " + cfg.set.length;
-    bump();
-    var n = $(cfg.next);
-    n.hidden = false;
-    n.textContent = (cfg.idx() === cfg.set.length-1) ? cfg.lastLabel : cfg.nextLabel;
-    n.focus();
-  }
+const BADGES = [
+  { id:"recall",  ic:"◎", n:"Recall Ready",     d:"7 or more correct in round 1" },
+  { id:"sorter",  ic:"⬡", n:"Impact Sorter",    d:"7 or more correct in round 2" },
+  { id:"field",   ic:"⌖", n:"Field Analyst",    d:"5 or more correct in round 3" },
+  { id:"judge",   ic:"⚖", n:"Vulnerability Judge", d:"5 or more correct in round 4" },
+  { id:"streak6", ic:"▲", n:"Chain Reaction",   d:"A streak of 6 or better" },
+  { id:"atlas",   ic:"★", n:"Atlas Complete",   d:"85% or higher overall" }
+];
 
-  /* ---------------- round 1 ---------------- */
-  var C1 = {
-    set:R1, meta:"q1meta", text:"q1text", opts:"q1opts", fb:"q1fb", next:"q1next", tally:"t1",
-    idx:function(){ return i1; }, inc:function(){ s1++; }, score:function(){ return s1; },
-    nextLabel:"Next question", lastLabel:"Go to Round 2"
-  };
-  $("q1next").addEventListener("click", function(){
-    if (i1 === R1.length-1){ $("r1").hidden = true; openR2(); }
-    else { i1++; ask(C1); }
+/* ============================================================
+   STATE
+   ============================================================ */
+let ri=0, qi=0, score=0, correct=0, answered=0, streak=0, best=0, locked=false;
+let roundCorrect=[0,0,0,0];
+let mistakes=[];
+const TOTAL = ROUNDS.reduce((t,r)=>t+r.qs.length,0);
+
+const $ = id => document.getElementById(id);
+
+function startGame(){
+  $('startPanel').classList.add('hidden');
+  $('qPanel').classList.remove('hidden');
+  renderQ();
+}
+
+function optionsFor(round,q){
+  return q.o ? q.o : round.common;
+}
+
+function renderQ(){
+  const r = ROUNDS[ri], q = r.qs[qi];
+  locked = false;
+  $('rTag').className = 'roundtag ' + (ri===1?'r2':ri===2?'r3':ri===3?'r4':'');
+  $('rTag').textContent = 'Round ' + (ri+1);
+  $('rTitle').textContent = r.name;
+  $('rSub').textContent = r.sub;
+  $('qNo').textContent = 'Question ' + (qi+1) + ' of ' + r.qs.length;
+  $('qText').textContent = q.q;
+
+  const fileEl = $('qFile');
+  if (q.file){ fileEl.textContent = q.file; fileEl.classList.remove('hidden'); }
+  else fileEl.classList.add('hidden');
+
+  const opts = optionsFor(r,q);
+  const box = $('opts');
+  box.className = 'opts' + (opts.length===2 ? ' two' : opts.length===4 ? ' four' : '');
+  box.innerHTML = '';
+  opts.forEach((text,i)=>{
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.innerHTML = '<span class="k">'+String.fromCharCode(65+i)+'</span><span>'+text+'</span>';
+    b.onclick = ()=>choose(i,b);
+    box.appendChild(b);
   });
 
-  /* ---------------- round 2 ---------------- */
-  function drawChart(){
-    var x0=52, x1=620, yBase=250, yTop=18, max=2.0;
-    var n=ANOM.length, band=(x1-x0)/n, bw=band*0.6;
-    var bars=$("bars"), xl=$("xlabels");
-    bars.innerHTML=""; xl.innerHTML="";
-    ANOM.forEach(function(v,k){
-      var h=(v/max)*(yBase-yTop);
-      var x=x0+band*k+(band-bw)/2;
-      var r=document.createElementNS("http://www.w3.org/2000/svg","rect");
-      r.setAttribute("x",x.toFixed(1)); r.setAttribute("y",(yBase-h).toFixed(1));
-      r.setAttribute("width",bw.toFixed(1)); r.setAttribute("height",h.toFixed(1));
-      bars.appendChild(r);
-      if (k % 3 === 0 || k === n-1){
-        var t=document.createElementNS("http://www.w3.org/2000/svg","text");
-        t.setAttribute("x",(x+bw/2).toFixed(1)); t.setAttribute("y",String(yBase+16));
-        t.setAttribute("text-anchor","middle"); t.textContent=String(YEARS[k]);
-        xl.appendChild(t);
-      }
-    });
-    var pts=[];
-    ANOM.forEach(function(v,k){
-      var slice=ANOM.slice(Math.max(0,k-4),k+1);
-      var sum=0; for (var j=0;j<slice.length;j++){ sum+=slice[j]; }
-      var avg=sum/slice.length;
-      var y=yBase-(avg/max)*(yBase-yTop);
-      pts.push((x0+band*k+band/2).toFixed(1)+","+y.toFixed(1));
-    });
-    $("trendLine").setAttribute("points", pts.join(" "));
-  }
+  $('fb').className = 'feedback';
+  $('nextBtn').disabled = true;
+  $('nextBtn').textContent = (qi === r.qs.length-1) ? 'Finish round' : 'Next';
+  $('streakFlag').textContent = '';
+  updateBoard();
+}
 
-  var C2 = {
-    set:R2, meta:"q2meta", text:"q2text", opts:"q2opts", fb:"q2fb", next:"q2next", tally:"t2",
-    idx:function(){ return i2; }, inc:function(){ s2++; }, score:function(){ return s2; },
-    nextLabel:"Next question", lastLabel:"Go to Round 3"
-  };
+function choose(i, btn){
+  if (locked) return;
+  locked = true;
+  const r = ROUNDS[ri], q = r.qs[qi];
+  const opts = optionsFor(r,q);
+  const isRight = (i === q.a);
+  answered++;
 
-  function openR2(){
-    var r2=$("r2");
-    r2.classList.remove("locked");
-    $("r2sub").textContent = "One dataset, four questions. This is the exact skill Friday's written task needs.";
-    $("fig").hidden = false;
-    drawChart();
-    ask(C2);
-    r2.scrollIntoView({behavior:"smooth", block:"start"});
-  }
-
-  $("q2next").addEventListener("click", function(){
-    if (i2 === R2.length-1){
-      $("r2").hidden = true;
-      var r3=$("r3");
-      r3.classList.remove("locked");
-      $("r3sub").textContent = "Six findings. Decide which of the four lines of evidence each one comes from.";
-      var st=$("r3start"); st.hidden=false;
-      r3.scrollIntoView({behavior:"smooth", block:"start"});
-      st.focus();
-    } else { i2++; ask(C2); }
+  document.querySelectorAll('#opts .opt').forEach((b,idx)=>{
+    b.disabled = true;
+    if (idx === q.a) b.classList.add('correct');
+    else if (idx === i) b.classList.add('wrong');
+    else b.classList.add('dim');
   });
 
-  /* ---------------- round 3 ---------------- */
-  $("r3start").addEventListener("click", function(){
-    this.hidden = true;
-    $("finding").hidden = false;
-    drawFinding();
-  });
-
-  function drawFinding(){
-    var item = R3[i3];
-    $("findText").textContent = item.f;
-    var box = $("lines"); box.innerHTML = "";
-    LINES.forEach(function(name){
-      var b=document.createElement("button");
-      b.className="opt"; b.type="button"; b.textContent=name;
-      b.addEventListener("click", function(){ judge3(item, name, b); });
-      box.appendChild(b);
-    });
-    $("q3fb").hidden = true;
-    $("q3next").hidden = true;
+  if (isRight){
+    correct++; roundCorrect[ri]++; streak++;
+    if (streak > best) best = streak;
+    let pts = 10, bonus = 0;
+    if (streak >= 3) bonus = Math.min((streak-2)*5, 25);
+    pts += bonus; score += pts;
+    $('fb').className = 'feedback show yes';
+    $('fbTitle').textContent = 'Correct  +' + pts + (bonus ? '  (10 base, ' + bonus + ' streak bonus)' : '');
+    $('fbText').textContent = q.f;
+    if (streak >= 3) $('streakFlag').textContent = streak + ' in a row';
+  } else {
+    streak = 0;
+    $('fb').className = 'feedback show no';
+    $('fbTitle').textContent = 'Not quite. The answer is ' + String.fromCharCode(65+q.a) + ': ' + opts[q.a];
+    $('fbText').textContent = q.f;
+    mistakes.push({ round:r.name, q:q.q, gave:opts[i], right:opts[q.a], why:q.f });
   }
+  $('nextBtn').disabled = false;
+  updateBoard();
+}
 
-  function judge3(item, name, btn){
-    var all = $("lines").querySelectorAll("button");
-    for (var j=0;j<all.length;j++){ all[j].disabled = true; }
-    var fb = $("q3fb");
-    if (name === item.a){ btn.classList.add("right"); s3++; fb.className="fb ok"; fb.textContent="Correct. "+item.why; }
-    else {
-      btn.classList.add("wrong");
-      for (var k=0;k<all.length;k++){ if (all[k].textContent === item.a){ all[k].classList.add("right"); } }
-      fb.className="fb no"; fb.textContent="This one is "+item.a.toLowerCase()+". "+item.why;
-    }
-    fb.hidden = false;
-    $("t3").textContent = s3 + " of " + R3.length;
-    bump();
-    var n=$("q3next");
-    n.hidden = false;
-    n.textContent = (i3 === R3.length-1) ? "See my score" : "Next finding";
-    n.focus();
+function next(){
+  const r = ROUNDS[ri];
+  if (qi < r.qs.length-1){ qi++; renderQ(); return; }
+  // round finished
+  if (ri < ROUNDS.length-1){
+    $('qPanel').classList.add('hidden');
+    $('breakPanel').classList.remove('hidden');
+    $('bTitle').textContent = r.breakTitle;
+    $('bText').textContent = roundCorrect[ri] + ' of ' + r.qs.length + ' correct in that round. ' + r.breakText;
+    $('bBtn').textContent = 'Start round ' + (ri+2);
+  } else {
+    finish();
   }
+}
 
-  $("q3next").addEventListener("click", function(){
-    if (i3 === R3.length-1){ finish(); }
-    else { i3++; drawFinding(); }
-  });
+function nextRound(){
+  ri++; qi=0;
+  $('breakPanel').classList.add('hidden');
+  $('qPanel').classList.remove('hidden');
+  renderQ();
+}
 
-  function finish(){
-    $("r3").hidden = true;
-    var total = bump();
-    $("finalNum").textContent = total;
-    $("b1").textContent = s1 + " / 6";
-    $("b2").textContent = s2 + " / 4";
-    $("b3").textContent = s3 + " / 6";
-    var v;
-    if (s2 === 4) { v = "Full marks on the graph round, which is the one that matters most for Friday. Aim for the challenge task at the end of the lesson."; }
-    else if (total >= 11) { v = "Solid overall. Look back at the graph questions you dropped, that skill gets assessed on Friday and again in Week 8."; }
-    else { v = "The graph round is the one to focus on today. Keep the sentence starters in front of you during the Gallery Walk."; }
-    $("verdict").textContent = v;
-    var sum=$("sum"); sum.hidden=false;
-    sum.scrollIntoView({behavior:"smooth", block:"start"});
+function updateBoard(){
+  $('sScore').textContent = score;
+  $('sCorrect').textContent = correct + '/' + answered;
+  $('sStreak').textContent = streak;
+  $('sRound').textContent = (ri+1) + '/4';
+  $('bar').style.width = (answered / TOTAL * 100) + '%';
+}
+
+function earnedBadges(){
+  const pct = Math.round(correct / TOTAL * 100);
+  const got = [];
+  if (roundCorrect[0] >= 7) got.push('recall');
+  if (roundCorrect[1] >= 7) got.push('sorter');
+  if (roundCorrect[2] >= 5) got.push('field');
+  if (roundCorrect[3] >= 5) got.push('judge');
+  if (best >= 6) got.push('streak6');
+  if (pct >= 85) got.push('atlas');
+  return got;
+}
+
+function finish(){
+  $('qPanel').classList.add('hidden');
+  $('endPanel').classList.remove('hidden');
+  const pct = Math.round(correct / TOTAL * 100);
+  $('ePct').textContent = pct + '%';
+  $('eLine').textContent = correct + ' of ' + TOTAL + ' correct  •  ' + score + ' points  •  best streak ' + best;
+
+  let band;
+  if (pct >= 90) band = 'Outstanding. You could teach this round.';
+  else if (pct >= 75) band = 'Strong. The framework has stuck.';
+  else if (pct >= 60) band = 'Solid start. Check the review below.';
+  else band = 'Worth a second run. Read every review card first.';
+  $('eBand').textContent = band;
+
+  const got = earnedBadges();
+  $('badges').innerHTML = BADGES.map(b =>
+    '<div class="badge' + (got.includes(b.id) ? ' earned' : '') + '">' +
+    '<div class="ic">' + b.ic + '</div><div class="bn">' + b.n + '</div><div class="bd">' + b.d + '</div></div>'
+  ).join('');
+
+  const rl = $('reviewList');
+  if (!mistakes.length){
+    rl.innerHTML = '<div class="review"><div class="rq">Nothing to review. Every answer correct.</div>' +
+      '<div class="ra">Go and explain the difference between exposure and adaptive capacity to someone who got it wrong.</div></div>';
+  } else {
+    rl.innerHTML = mistakes.map(m =>
+      '<div class="review"><div class="rq">' + m.round + ': ' + m.q + '</div>' +
+      '<div class="ra"><span class="x">You said: ' + m.gave + '</span><br>' +
+      '<span class="t">Answer: ' + m.right + '</span><br>' + m.why + '</div></div>'
+    ).join('');
   }
+  updateBoard();
+}
 
-  ask(C1);
-})();
+function showCert(){
+  const pct = Math.round(correct / TOTAL * 100);
+  const got = earnedBadges().map(id => BADGES.find(b => b.id===id).n);
+  $('certScore').textContent = correct + ' of ' + TOTAL + ' correct  (' + pct + '%)  •  ' + score + ' points';
+  $('certBadges').textContent = got.length ? 'Badges: ' + got.join(', ') : 'No badges this run. Play again.';
+  $('endPanel').classList.add('hidden');
+  $('certpanel').classList.remove('hidden');
+  $('cert').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function hideCert(){
+  $('certpanel').classList.add('hidden');
+  $('endPanel').classList.remove('hidden');
+}
 </script>
 </body>
 </html>
