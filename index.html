@@ -3,579 +3,491 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Impact Atlas | Climate Change Around the World</title>
+<title>The Management Desk | Year 10 Geography Lesson 26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#16294A; --ink-2:#1F3A66; --teal:#0E7C86; --teal-2:#0B6169;
-    --sand:#E0A33E; --ember:#C05243; --cream:#FBF7F0; --paper:#FFFFFF;
-    --slate:#5A6472; --line:#E2DACB; --good:#2E7D57; --bad:#B03A2E;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{
-    font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;
-    background:var(--cream); color:#222; line-height:1.5;
-    min-height:100vh; padding:18px 14px 60px;
-  }
-  .wrap{max-width:940px;margin:0 auto}
+:root{
+  --ink:#16332A; --ink-2:#0F2620; --green:#2F7A55; --sage:#9BC0A6;
+  --ochre:#C05A2B; --sand:#F1EDE2; --paper:#FBFAF6; --line:#D8DED8;
+  --text:#17241E; --muted:#5C6B63; --good:#2F7A55; --bad:#B4402A;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--ink);
+  background-image:radial-gradient(circle at 12% -10%, rgba(47,122,85,.55), transparent 46%),
+                   radial-gradient(circle at 100% 8%, rgba(192,90,43,.28), transparent 40%);
+  background-attachment:fixed;
+  font-family:var(--body); color:var(--text); line-height:1.5;
+  padding:20px 14px 60px;
+}
+.wrap{max-width:880px;margin:0 auto}
 
-  /* ---------- header ---------- */
-  header{background:var(--ink);border-radius:14px;padding:20px 22px;color:#fff;position:relative;overflow:hidden}
-  header::after{content:"";position:absolute;right:-40px;top:-50px;width:190px;height:190px;border-radius:50%;
-    background:var(--teal);opacity:.35}
-  header .eyebrow{font-size:.72rem;letter-spacing:2px;color:var(--sand);font-weight:bold;text-transform:uppercase}
-  header h1{font-size:1.9rem;margin:4px 0 6px;letter-spacing:.5px}
-  header p{color:#C9D2E0;font-size:.95rem;max-width:640px}
+/* ---------- masthead ---------- */
+.masthead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.brand{color:#fff}
+.brand .dept{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+.brand h1{font-family:var(--display);font-size:clamp(26px,5vw,40px);margin:2px 0 0;letter-spacing:-.02em;font-weight:700}
+.brand p{margin:4px 0 0;color:var(--sage);font-size:13.5px;max-width:44ch}
+.stamp{
+  border:2px solid var(--ochre);color:var(--ochre);border-radius:6px;
+  padding:8px 12px;transform:rotate(-4deg);text-align:center;
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;line-height:1.35;
+  background:rgba(192,90,43,.08)
+}
+.stamp b{display:block;font-size:15px;letter-spacing:.04em}
 
-  /* ---------- scoreboard ---------- */
-  .board{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
-  .stat{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:10px 12px;text-align:center}
-  .stat .n{font-size:1.5rem;font-weight:bold;color:var(--ink);line-height:1.15}
-  .stat .l{font-size:.66rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--slate);font-weight:bold}
-  .stat.hot .n{color:var(--ember)}
+/* ---------- ledger (signature) ---------- */
+.ledger{
+  background:var(--paper);border-radius:12px;padding:14px 16px;margin-bottom:14px;
+  border:1px solid var(--line);
+  box-shadow:0 10px 30px rgba(0,0,0,.22)
+}
+.ledger-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ledger-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fund{font-family:var(--mono);font-size:clamp(24px,5.5vw,34px);font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.fund.up{color:var(--good)} .fund.down{color:var(--bad)}
+.stats{display:flex;gap:18px;flex-wrap:wrap}
+.stat{text-align:right}
+.stat span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.stat b{font-family:var(--display);font-size:20px;color:var(--ink)}
+.bar{height:7px;background:#E6E9E4;border-radius:99px;overflow:hidden;margin-top:12px}
+.bar i{display:block;height:100%;background:var(--green);width:0;transition:width .45s ease}
+.entries{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px;display:none}
+.entries.show{display:block}
+.entry{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);padding:2px 0}
+.entry b{color:var(--ink);font-weight:600}
+.entry.minus b{color:var(--bad)}
 
-  .progress{height:9px;background:#E9E2D6;border-radius:99px;overflow:hidden;margin-bottom:16px}
-  .progress > div{height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--sand));transition:width .35s}
+/* ---------- panels ---------- */
+.panel{
+  background:var(--paper);border-radius:14px;padding:22px;border:1px solid var(--line);
+  box-shadow:0 14px 40px rgba(0,0,0,.25)
+}
+h2{font-family:var(--display);font-size:clamp(20px,4vw,27px);margin:0 0 8px;letter-spacing:-.01em;color:var(--ink)}
+h3{font-family:var(--display);font-size:18px;margin:0 0 6px;color:var(--ink)}
+p{margin:0 0 12px}
+.lede{color:var(--muted);font-size:15px}
+ul.brief{margin:0 0 16px;padding-left:18px;color:var(--muted);font-size:14.5px}
+ul.brief li{margin-bottom:5px}
+ul.brief b{color:var(--text)}
 
-  /* ---------- panels ---------- */
-  .panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:14px}
-  .roundtag{display:inline-block;background:var(--teal);color:#fff;font-size:.68rem;font-weight:bold;
-    letter-spacing:1.4px;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:10px}
-  .roundtag.r2{background:var(--sand)} .roundtag.r3{background:var(--ember)} .roundtag.r4{background:var(--slate)}
-  h2{font-size:1.28rem;color:var(--ink);margin-bottom:6px}
-  .sub{color:var(--slate);font-size:.9rem;margin-bottom:16px}
+.btn{
+  font-family:var(--display);font-size:16px;font-weight:600;border:none;border-radius:10px;
+  background:var(--ink);color:#fff;padding:13px 22px;cursor:pointer;transition:transform .12s, background .18s
+}
+.btn:hover{background:var(--green)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.ghost:hover{background:var(--sand);color:var(--ink)}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
 
-  .qbox{background:#F7F4ED;border-left:5px solid var(--ink);border-radius:9px;padding:15px 17px;margin-bottom:15px}
-  .qbox .qno{font-size:.68rem;letter-spacing:1.3px;text-transform:uppercase;color:var(--slate);font-weight:bold}
-  .qbox .qtext{font-size:1.08rem;margin-top:5px;color:#1a1a1a}
-  .qbox .filetitle{font-weight:bold;color:var(--teal);font-size:.95rem;margin-top:6px}
+/* ---------- round intro ---------- */
+.roundtag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre)}
+.filetab{
+  display:inline-block;background:var(--sand);border:1px solid var(--line);border-bottom:none;
+  border-radius:8px 8px 0 0;padding:6px 14px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:-1px
+}
 
-  .opts{display:grid;gap:9px}
-  .opts.two{grid-template-columns:1fr 1fr}
-  .opts.four{grid-template-columns:1fr 1fr}
-  @media(max-width:620px){.opts.two,.opts.four{grid-template-columns:1fr}}
+/* ---------- question ---------- */
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.qcount{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.streak{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ochre)}
+.prompt{font-family:var(--display);font-size:clamp(18px,3.6vw,23px);line-height:1.35;margin:0 0 6px;color:var(--ink)}
+.context{color:var(--muted);font-size:14.5px;margin-bottom:16px}
+.opts{display:grid;gap:9px}
+.opts.two{grid-template-columns:1fr 1fr}
+@media(max-width:560px){.opts.two{grid-template-columns:1fr}}
+.opt{
+  text-align:left;font-family:var(--body);font-size:15.5px;color:var(--text);
+  background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:13px 15px;cursor:pointer;
+  transition:border-color .15s, background .15s, transform .1s;width:100%
+}
+.opt:hover:not(:disabled){border-color:var(--green);background:#F4F8F4}
+.opt:disabled{cursor:default}
+.opt .key{font-family:var(--mono);font-size:12px;color:var(--muted);margin-right:9px}
+.opt.correct{border-color:var(--good);background:#EAF3EC}
+.opt.wrong{border-color:var(--bad);background:#F9EDE9}
+.opt.correct .key,.opt.wrong .key{color:inherit}
 
-  button.opt{
-    font-family:inherit;font-size:1rem;text-align:left;background:var(--paper);
-    border:2px solid var(--line);border-radius:10px;padding:12px 15px;cursor:pointer;
-    transition:.14s;color:#222;display:flex;gap:11px;align-items:flex-start;line-height:1.4;
-  }
-  button.opt:hover:not(:disabled){border-color:var(--teal);background:#F2F8F8;transform:translateY(-1px)}
-  button.opt .k{flex:0 0 25px;height:25px;border-radius:50%;background:var(--ink);color:#fff;
-    font-size:.78rem;font-weight:bold;display:flex;align-items:center;justify-content:center;margin-top:1px}
-  button.opt:disabled{cursor:default;opacity:1}
-  button.opt.correct{border-color:var(--good);background:#EAF5EF}
-  button.opt.correct .k{background:var(--good)}
-  button.opt.wrong{border-color:var(--bad);background:#FBEDEB}
-  button.opt.wrong .k{background:var(--bad)}
-  button.opt.dim{opacity:.5}
+.feedback{margin-top:14px;border-radius:10px;padding:13px 15px;font-size:14.5px;display:none}
+.feedback.show{display:block}
+.feedback.right{background:#EAF3EC;border-left:4px solid var(--good)}
+.feedback.wrong{background:#F9EDE9;border-left:4px solid var(--bad)}
+.feedback b{font-family:var(--display)}
 
-  .feedback{margin-top:14px;border-radius:10px;padding:13px 16px;font-size:.96rem;display:none}
-  .feedback.show{display:block}
-  .feedback.yes{background:#EAF5EF;border-left:5px solid var(--good)}
-  .feedback.no{background:#FBEDEB;border-left:5px solid var(--bad)}
-  .feedback strong{display:block;margin-bottom:3px}
+/* ---------- results ---------- */
+.badge{
+  display:inline-block;background:var(--ink);color:#fff;border-radius:99px;
+  padding:7px 16px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase
+}
+.scoregrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+@media(max-width:560px){.scoregrid{grid-template-columns:1fr 1fr}}
+.scorebox{background:var(--sand);border-radius:10px;padding:12px;text-align:center}
+.scorebox b{display:block;font-family:var(--display);font-size:26px;color:var(--ink)}
+.scorebox span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.review{margin-top:6px}
+.review .item{border-left:3px solid var(--ochre);background:#fff;border-radius:0 8px 8px 0;padding:10px 13px;margin-bottom:9px;font-size:14px}
+.review .item .q{font-weight:600;color:var(--ink);margin-bottom:3px}
+.review .item .a{color:var(--muted)}
+.review .item .a b{color:var(--good)}
 
-  .nav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px;flex-wrap:wrap}
-  .btn{font-family:inherit;font-size:.97rem;font-weight:bold;border:none;border-radius:9px;
-    padding:11px 22px;cursor:pointer;background:var(--ink);color:#fff;transition:.14s}
-  .btn:hover{background:var(--ink-2)}
-  .btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
-  .btn.ghost:hover{background:#EDEAE2}
-  .btn.sand{background:var(--sand);color:var(--ink)}
-  .btn.sand:hover{background:#CE9331}
-  .btn:disabled{opacity:.4;cursor:not-allowed}
-
-  .streakflag{font-size:.85rem;color:var(--ember);font-weight:bold;min-height:20px}
-
-  /* ---------- start + results ---------- */
-  .rounds{display:grid;gap:10px;margin:16px 0}
-  .rline{display:flex;gap:13px;align-items:flex-start;background:#F7F4ED;border-radius:10px;padding:12px 14px}
-  .rline .num{flex:0 0 27px;height:27px;border-radius:50%;background:var(--teal);color:#fff;font-weight:bold;
-    font-size:.85rem;display:flex;align-items:center;justify-content:center}
-  .rline b{color:var(--ink)}
-  .rline span{font-size:.93rem;color:#333}
-
-  .badgegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
-  .badge{border:2px dashed var(--line);border-radius:11px;padding:12px;text-align:center;opacity:.4}
-  .badge.earned{opacity:1;border-style:solid;border-color:var(--sand);background:#FBF3E2}
-  .badge .ic{font-size:1.5rem}
-  .badge .bn{font-weight:bold;color:var(--ink);font-size:.9rem;margin-top:3px}
-  .badge .bd{font-size:.76rem;color:var(--slate)}
-
-  .review{border:1px solid var(--line);border-radius:11px;padding:13px 15px;margin-bottom:10px;background:#FDFBF7}
-  .review .rq{font-weight:bold;color:var(--ink);font-size:.96rem}
-  .review .ra{font-size:.9rem;margin-top:5px}
-  .review .ra .x{color:var(--bad)} .review .ra .t{color:var(--good)}
-
-  .scorebig{text-align:center;padding:8px 0 4px}
-  .scorebig .pct{font-size:3.4rem;font-weight:bold;color:var(--ink);line-height:1}
-  .scorebig .band{font-size:1.05rem;color:var(--teal);font-weight:bold;margin-top:4px}
-
-  /* ---------- certificate ---------- */
-  #cert{display:none;border:4px double var(--ink);border-radius:6px;padding:26px;text-align:center;background:#fff;margin-top:16px}
-  #cert .ct{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--slate);font-weight:bold}
-  #cert h3{font-size:1.5rem;color:var(--ink);margin:8px 0}
-  #cert .nameline{border-bottom:1.5px solid var(--ink);width:70%;margin:16px auto 5px;height:28px}
-  #cert .small{font-size:.8rem;color:var(--slate)}
-  #cert .certscore{font-size:1.15rem;font-weight:bold;color:var(--teal);margin-top:10px}
-
-  footer{text-align:center;font-size:.78rem;color:var(--slate);margin-top:22px}
-  .hidden{display:none}
-
-  @media print{
-    body{background:#fff;padding:0}
-    header,.board,.progress,.nav,.panel:not(#certpanel),footer{display:none !important}
-    #certpanel{border:none;padding:0}
-    #cert{display:block !important;border-color:#000}
-  }
+/* ---------- certificate ---------- */
+.cert{display:none;background:#fff;border:3px double var(--ink);border-radius:6px;padding:28px;text-align:center;margin-top:18px}
+.cert.show{display:block}
+.cert .cdept{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.cert h3{font-family:var(--display);font-size:26px;margin:8px 0 2px}
+.cert .name{font-family:var(--display);font-size:22px;border-bottom:1.5px solid var(--line);display:inline-block;min-width:260px;padding:14px 10px 4px;margin:12px 0}
+.cert .line{color:var(--muted);font-size:14px;margin:4px 0}
+.cert .seal{margin-top:14px;display:inline-block;border:2px solid var(--ochre);color:var(--ochre);border-radius:50%;width:96px;height:96px;line-height:1.25;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;display:flex;align-items:center;justify-content:center;flex-direction:column;margin-left:auto;margin-right:auto}
+.cert .seal b{font-size:17px}
+.footnote{color:var(--sage);font-size:12px;text-align:center;margin-top:22px;font-family:var(--mono);letter-spacing:.04em}
+.hide{display:none}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+@media print{
+  body{background:#fff;padding:0}
+  .masthead,.ledger,.panel,.footnote{display:none!important}
+  .cert{display:block!important;border-color:#000;box-shadow:none}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <header>
-    <div class="eyebrow">Lesson 21 &nbsp;•&nbsp; Year 10 Geography &nbsp;•&nbsp; VCGGK144</div>
-    <h1>Impact Atlas</h1>
-    <p>Climate change around the world. Four rounds, four skills. Same cause everywhere, very different damage.</p>
-  </header>
-
-  <div class="board">
-    <div class="stat"><div class="n" id="sScore">0</div><div class="l">Score</div></div>
-    <div class="stat"><div class="n" id="sCorrect">0/0</div><div class="l">Correct</div></div>
-    <div class="stat hot"><div class="n" id="sStreak">0</div><div class="l">Streak</div></div>
-    <div class="stat"><div class="n" id="sRound">-</div><div class="l">Round</div></div>
-  </div>
-  <div class="progress"><div id="bar"></div></div>
-
-  <!-- ============ START ============ -->
-  <div class="panel" id="startPanel">
-    <h2>How this works</h2>
-    <p class="sub">Work with your partner. Say your reason out loud before you click. Read the feedback every time, that is where the marks come from.</p>
-    <div class="rounds">
-      <div class="rline"><div class="num">1</div><span><b>Rapid Recall.</b> Quick questions on last week's climate science and today's key words.</span></div>
-      <div class="rline"><div class="num">2</div><span><b>Impact Sort.</b> Read the description, name which of the four global impacts it is.</span></div>
-      <div class="rline"><div class="num">3</div><span><b>Region Files.</b> A short field report from somewhere in the world. Work out where and what.</span></div>
-      <div class="rline"><div class="num">4</div><span><b>Vulnerability Call.</b> Two places, one hazard. Decide who is worse off and why.</span></div>
+  <div class="masthead">
+    <div class="brand">
+      <div class="dept">Year 10 Geography &middot; Week 6 &middot; Lesson 26</div>
+      <h1>The Management Desk</h1>
+      <p>You are running the environmental management budget. Every correct decision releases funding. Every wrong one costs the department.</p>
     </div>
-    <p class="sub"><b>Scoring:</b> 10 points a correct answer, plus a growing streak bonus. Get three in a row and the bonus starts stacking. A wrong answer resets the streak, not your score.</p>
-    <div class="nav"><span></span><button class="btn sand" onclick="startGame()">Start round 1</button></div>
+    <div class="stamp">Environmental<b>Management</b>VCGGK145</div>
   </div>
 
-  <!-- ============ QUESTION ============ -->
-  <div class="panel hidden" id="qPanel">
-    <span class="roundtag" id="rTag">Round 1</span>
-    <h2 id="rTitle">Rapid Recall</h2>
-    <p class="sub" id="rSub"></p>
-
-    <div class="qbox">
-      <div class="qno" id="qNo">Question 1</div>
-      <div class="qtext" id="qText"></div>
-      <div class="filetitle hidden" id="qFile"></div>
+  <div class="ledger">
+    <div class="ledger-top">
+      <div>
+        <div class="ledger-label">Funding secured</div>
+        <div class="fund" id="fund">$0</div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span>Round</span><b id="roundNum">0/4</b></div>
+        <div class="stat"><span>Correct</span><b id="correctNum">0</b></div>
+        <div class="stat"><span>Streak</span><b id="streakNum">0</b></div>
+      </div>
     </div>
-
-    <div class="opts" id="opts"></div>
-
-    <div class="feedback" id="fb"><strong id="fbTitle"></strong><span id="fbText"></span></div>
-
-    <div class="nav">
-      <div class="streakflag" id="streakFlag"></div>
-      <button class="btn" id="nextBtn" onclick="next()" disabled>Next</button>
-    </div>
+    <div class="bar"><i id="bar"></i></div>
+    <div class="entries" id="entries"></div>
   </div>
 
-  <!-- ============ ROUND BREAK ============ -->
-  <div class="panel hidden" id="breakPanel">
-    <span class="roundtag" id="bTag">Round complete</span>
-    <h2 id="bTitle"></h2>
-    <p class="sub" id="bText"></p>
-    <div class="nav"><span></span><button class="btn sand" id="bBtn" onclick="nextRound()">Continue</button></div>
-  </div>
+  <div class="panel" id="panel"></div>
 
-  <!-- ============ RESULTS ============ -->
-  <div class="panel hidden" id="endPanel">
-    <span class="roundtag">Final result</span>
-    <div class="scorebig">
-      <div class="pct" id="ePct">0%</div>
-      <div class="band" id="eBand"></div>
-      <p class="sub" id="eLine" style="margin-top:8px"></p>
-    </div>
-
-    <h2 style="margin-top:14px">Badges</h2>
-    <div class="badgegrid" id="badges"></div>
-
-    <h2 style="margin-top:14px">Mistake review</h2>
-    <p class="sub">Read these before you close the tab. These are the ones to fix.</p>
-    <div id="reviewList"></div>
-
-    <div class="nav">
-      <button class="btn ghost" onclick="location.reload()">Play again</button>
-      <button class="btn sand" onclick="showCert()">Get certificate</button>
-    </div>
-  </div>
-
-  <div class="panel hidden" id="certpanel">
-    <div id="cert">
-      <div class="ct">Year 10 Geography &nbsp;•&nbsp; Environmental Change and Management</div>
-      <h3>Impact Atlas: Climate Change Around the World</h3>
-      <div class="small">Awarded to</div>
-      <div class="nameline"></div>
-      <div class="small">Student name</div>
-      <div class="certscore" id="certScore"></div>
-      <div class="small" id="certBadges" style="margin-top:8px"></div>
-      <div class="small" style="margin-top:14px">Lesson 21 &nbsp;•&nbsp; VCGGK144 &nbsp;•&nbsp; Date: ____________</div>
-    </div>
-    <div class="nav" style="margin-top:14px">
-      <button class="btn ghost" onclick="hideCert()">Back</button>
-      <button class="btn" onclick="window.print()">Print</button>
-    </div>
-  </div>
-
-  <footer>Impact Atlas &nbsp;•&nbsp; Lesson 21, Week 5 &nbsp;•&nbsp; Figures are approximate and shift with each new global assessment.</footer>
+  <div class="footnote">Figures current as at August 2026. Built for Manor Lakes College.</div>
 </div>
 
 <script>
-/* ============================================================
-   DATA
-   ============================================================ */
+/* ============================ CONTENT ============================ */
 const ROUNDS = [
   {
-    name:"Rapid Recall",
-    tag:"r1",
-    sub:"Eight quick questions. Last week's science and today's vocabulary.",
-    breakTitle:"Round 1 done",
-    breakText:"That is the science secure. Now we use it. Round 2 asks you to name the impact from a description.",
-    qs:[
-      { q:"What is the difference between weather and climate?",
-        o:["Weather is short-term conditions; climate is the long-term average pattern",
-           "Weather happens on land; climate happens over oceans",
-           "Weather is measured; climate is only predicted",
-           "They mean the same thing"],
-        a:0,
-        f:"Weather is what the atmosphere is doing today. Climate is the pattern over roughly 30 years or more." },
-      { q:"Which of these does NOT add water to the ocean when it melts?",
-        o:["Greenland's ice sheet","Arctic sea ice","Himalayan glaciers","The Antarctic ice sheet"],
-        a:1,
-        f:"Sea ice is already floating, so melting it does not raise sea level. Only land ice adds new water." },
-      { q:"Global sea level has risen roughly how much since satellite records began in 1993?",
-        o:["About 1 cm","About 11 cm","About 60 cm","About 2 m"],
-        a:1,
-        f:"About 11 cm, and the rate has roughly doubled from about 2.1 mm a year to about 4.5 mm a year." },
-      { q:"Desertification means...",
-        o:["The Sahara physically sliding southwards",
-           "Productive dryland degrading until it can no longer grow things",
-           "A desert becoming greener after rain",
-           "Sand dunes forming on a beach"],
-        a:1,
-        f:"It is a process of land degrading in place, not a desert moving across the map." },
-      { q:"Why does a warmer atmosphere produce heavier downpours?",
-        o:["Warm air is heavier so it falls faster",
-           "Warm air holds more water vapour, roughly 7% more per degree",
-           "Warm air spins faster near the equator",
-           "Warm air blocks sunlight"],
-        a:1,
-        f:"Roughly 7% more moisture capacity per degree of warming. More moisture in, more rain out." },
-      { q:"Vulnerability is best defined as...",
-        o:["How hot a place gets",
-           "How much carbon a country emits",
-           "How badly a place is likely to be harmed by a hazard it faces",
-           "The distance from the equator"],
-        a:2,
-        f:"Vulnerability combines exposure, sensitivity and adaptive capacity. It is about harm, not temperature." },
-      { q:"The Arctic is warming at roughly what rate compared with the global average?",
-        o:["The same rate","About half as fast","About three to four times faster","About twenty times faster"],
-        a:2,
-        f:"Around three to four times faster. Melting bright ice exposes dark ocean, which absorbs more heat." },
-      { q:"2024 was the warmest year on record, at about how far above the 1850-1900 average?",
-        o:["0.5 degrees","1.55 degrees","3 degrees","5 degrees"],
-        a:1,
-        f:"About 1.55 degrees. 2025 came in second or third at about 1.44 degrees, even with a cooling La Nina." }
+    name: "Round 1 &middot; Warm-up",
+    tab: "File 01",
+    title: "What you already know",
+    blurb: "Eight quick questions from Week 5 and the start of today.",
+    items: [
+      { q:"Environmental management means:",
+        o:["Any change that happens to an environment",
+           "A deliberate, organised response to environmental change",
+           "Leaving an environment completely alone"],
+        a:1, why:"Management is deliberate. Someone has decided what to protect and what has to change." },
+      { q:"Adaptation means:",
+        o:["Reducing the cause of the change",
+           "Adjusting to a change we cannot stop",
+           "Measuring how much the climate has warmed"],
+        a:1, why:"Adaptation adjusts to the change. Mitigation attacks the cause." },
+      { q:"Which of these is mitigation?",
+        o:["Building a sea wall","Raising a house on stilts","Replacing a coal plant with wind power"],
+        a:2, why:"Mitigation reduces emissions, which is the cause. The other two adjust to the effects." },
+      { q:"The average elevation of Tuvalu is about:",
+        o:["2 metres","20 metres","200 metres"],
+        a:0, why:"About 2 metres, which is why sea level rise is an existential problem there." },
+      { q:"The three approaches to environmental management are legislative, community-based and:",
+        o:["market-based","weather-based","climate-based"],
+        a:0, why:"Market-based approaches change the price so the better choice pays." },
+      { q:"A law protecting an environment only works if:",
+        o:["Everybody agrees with it","It is enforced","It has been in place for a long time"],
+        a:1, why:"A law with no inspector behind it changes very little on the ground." },
+      { q:"Australia's first independent national environmental regulator started work in:",
+        o:["2004","2019","2026"],
+        a:2, why:"The National Environmental Protection Agency began operating on 1 July 2026." },
+      { q:"Which question causes the most argument in environmental management?",
+        o:["What are we protecting?","Whose behaviour has to change?","Who enforces it and who pays?"],
+        a:2, why:"Nearly every environmental fight in the news is an argument about who carries the cost." }
     ]
   },
   {
-    name:"Impact Sort",
-    tag:"r2",
-    sub:"Which of the four global impacts is being described? Read carefully, some are close together.",
-    breakTitle:"Round 2 done",
-    breakText:"You can name the impacts. Round 3 is harder: you get a field report and have to work out the region as well.",
-    common:["Rising seas","Desertification","More intense extreme weather","Vanishing ice and snow"],
-    qs:[
-      { q:"Farmers report that the soil in their coastal paddies has turned salty and rice will no longer grow, even though the fields have not flooded.", a:0,
-        f:"Saltwater intrusion is one of the earliest effects of rising seas. The damage arrives underground before the water arrives above ground." },
-      { q:"A lake that supported fishing communities for generations has lost about 90% of its surface area since the 1960s.", a:1,
-        f:"Lake Chad in the Sahel. Less reliable rain, more evaporation, and heavy irrigation pressure on what is left." },
-      { q:"A city records five consecutive days above 45 degrees, and hospital admissions for heat stress triple.", a:2,
-        f:"A heatwave. A hotter baseline means events like this start from a higher point and last longer." },
-      { q:"Roads and houses built on frozen ground are cracking and tilting as the ground beneath them thaws.", a:3,
-        f:"Thawing permafrost in the Arctic. It also releases methane, which adds more warming. That is a feedback loop." },
-      { q:"An airstrip on a coral atoll floods during king tides several times a year, when it used to flood once a decade.", a:0,
-        f:"Rising seas. The tide range has not changed much; the water it is starting from is higher." },
-      { q:"Herders and crop farmers are increasingly in conflict over access to a shrinking number of waterholes.", a:1,
-        f:"Desertification in the Sahel. When productive land shrinks, competition for what is left intensifies." },
-      { q:"A tropical cyclone crosses unusually warm ocean water and intensifies from category 2 to category 5 in under 24 hours.", a:2,
-        f:"Warm ocean water is fuel for cyclones. Warming does not create cyclones, it gives existing ones more energy." },
-      { q:"A river that farmers rely on in the dry season is running lower each year because the glacier feeding it has retreated.", a:3,
-        f:"Mountain glaciers act as a water bank. When the bank empties, the dry-season withdrawal stops." }
+    name: "Round 2 &middot; Sorting",
+    tab: "File 02",
+    title: "Name the approach",
+    blurb: "Twelve real responses. Legislative, community-based or market-based?",
+    fixed: ["Legislative","Community-based","Market-based"],
+    items: [
+      { q:"Victorians get 10 cents back for every eligible drink container they return.", a:"Market-based", why:"Nothing is banned. The payoff changed, so the behaviour changed." },
+      { q:"A supermarket chain is fined for clearing native vegetation without a permit.", a:"Legislative", why:"A rule with a penalty behind it." },
+      { q:"Landcare volunteers spend Sunday morning replanting a creek bank.", a:"Community-based", why:"Local people doing the work themselves, usually unpaid." },
+      { q:"A farmer is paid to keep trees standing and sells the carbon credit to an airline.", a:"Market-based", why:"The standing tree is now worth money, so keeping it becomes the profitable choice." },
+      { q:"Victoria bans single-use plastic straws, cutlery and polystyrene cups.", a:"Legislative", why:"In force since February 2023. A ban applies to everyone." },
+      { q:"An Indigenous ranger group burns Country early in the season and monitors threatened species.", a:"Community-based", why:"Traditional knowledge applied on Country by the people who hold it." },
+      { q:"Water entitlements are bought and sold between irrigators in the Murray-Darling.", a:"Market-based", why:"A capped, tradeable resource, so water moves to where it is valued most." },
+      { q:"Recreational fishers may keep only a set number of fish per day.", a:"Legislative", why:"Bag limits are rules with penalties, set under fisheries law." },
+      { q:"A friends of the wetland group pulls weeds on the first Saturday of every month.", a:"Community-based", why:"Voluntary, local and ongoing, which is both its strength and its weakness." },
+      { q:"A national regulator turns up unannounced to audit a mine site.", a:"Legislative", why:"Enforcement of the national environment law." },
+      { q:"A council offers a rebate to households that plant a shade tree in the front yard.", a:"Market-based", why:"Money makes the tree cheaper than not planting it." },
+      { q:"Fifteen thousand people spend a morning collecting rubbish on Clean Up Australia Day.", a:"Community-based", why:"Organised by the community rather than compelled by law." }
     ]
   },
   {
-    name:"Region Files",
-    tag:"r3",
-    sub:"A short field report from somewhere in the world. Work out which region it is describing.",
-    breakTitle:"Round 3 done",
-    breakText:"Last round. Now you judge, not just identify. Same hazard, two very different countries.",
-    qs:[
-      { file:"FILE 01",
-        q:"Nine coral atolls. Highest point under five metres. Population about 11,000. One third of citizens entered a ballot for a permanent visa to Australia within four days of it opening.",
-        o:["Tuvalu","Bangladesh","Iceland","Chad"], a:0,
-        f:"Tuvalu. The Falepili Union treaty with Australia allows up to 280 Tuvaluans a year to move here permanently." },
-      { file:"FILE 02",
-        q:"A semi-arid belt running along the southern edge of the world's largest hot desert. Rainfall is becoming less reliable, vegetation is thinning, and a huge tree-planting project stretching about 8,000 km is under way.",
-        o:["The Amazon Basin","The Sahel","Central Australia","Patagonia"], a:1,
-        f:"The Sahel. The Great Green Wall, launched by the African Union in 2007, aims to restore 100 million hectares." },
-      { file:"FILE 03",
-        q:"A vast river delta where two thirds of the country sits less than five metres above sea level. Cyclone shelters and mobile phone warning systems have cut deaths sharply, but salt is ruining the rice.",
-        o:["The Netherlands","Egypt","Bangladesh","Vietnam's central coast"], a:2,
-        f:"Bangladesh. High exposure, but strong adaptive capacity in one specific area: cyclone warning and evacuation." },
-      { file:"FILE 04",
-        q:"Warming here is running about three to four times the global average. Sea ice that communities have travelled and hunted on for generations is becoming unsafe, and the ground under the roads is softening.",
-        o:["The Arctic","The Sahara","The Mediterranean","The Coral Sea"], a:0,
-        f:"The Arctic. The albedo feedback is why the poles warm fastest: less white ice means more dark water absorbing heat." },
-      { file:"FILE 05",
-        q:"Sometimes called the water tower of Asia. Around two billion people downstream rely on rivers fed by its snow and ice, which is now retreating.",
-        o:["The Andes","The European Alps","The Himalaya","The Great Dividing Range"], a:2,
-        f:"The Himalaya. The change happens high in the mountains but the consequence lands in cities and farms far below." },
-      { file:"FILE 06",
-        q:"A wealthy region where a single heatwave killed tens of thousands of mostly elderly people, prompting governments to build national heat health warning systems.",
-        o:["Western Europe","The Pacific Islands","The Sahel","Greenland"], a:0,
-        f:"Western Europe. Proof that wealth does not make a country immune, but it does change what a country can do next time." }
+    name: "Round 3 &middot; Judgement",
+    tab: "File 03",
+    title: "Strength or limitation?",
+    blurb: "Eight statements about the three approaches. Which side of the ledger does each belong on?",
+    fixed: ["Strength","Limitation"],
+    items: [
+      { q:"Legislative: it applies to everyone, whether they agree or not.", a:"Strength", why:"Universal coverage is the thing only law can deliver." },
+      { q:"Community-based: it depends on volunteers turning up year after year.", a:"Limitation", why:"When the volunteers stop, the management stops." },
+      { q:"Market-based: it changes millions of everyday decisions without policing anyone.", a:"Strength", why:"Three billion containers, and nobody was fined." },
+      { q:"Market-based: if the refund is too small, or the refund point is too far away, nothing changes.", a:"Limitation", why:"The incentive has to be big enough and easy enough to reach." },
+      { q:"Community-based: local people know the place and care what happens to it.", a:"Strength", why:"Local knowledge and ownership are hard to buy." },
+      { q:"Legislative: a rule with no inspector behind it changes very little.", a:"Limitation", why:"Enforcement costs money, and it is the first thing cut." },
+      { q:"Legislative: it can force a large company to stop.", a:"Strength", why:"No volunteer group can do this." },
+      { q:"Community-based: it cannot make a major polluter change its behaviour.", a:"Limitation", why:"Scale is the ceiling on what community action can achieve." }
     ]
   },
   {
-    name:"Vulnerability Call",
-    tag:"r4",
-    sub:"Same hazard, two different places. Which is more vulnerable, and why? Think exposure, sensitivity, adaptive capacity.",
-    breakTitle:"All rounds complete",
-    breakText:"",
-    qs:[
-      { q:"A category 4 cyclone crosses the coast of a wealthy country with building codes, evacuation plans and insurance, and also crosses a low-income country with none of these. Where will the death toll be higher?",
-        o:["The wealthy country","The low-income country","Identical in both","Impossible to say"], a:1,
-        f:"Adaptive capacity is doing the work here. The wealthy country usually loses more money; the low-income country loses more lives." },
-      { q:"Two farming communities face the same three-year drought. One has irrigation, crop insurance and off-farm income. The other depends entirely on rain-fed subsistence crops. Which is more sensitive to the drought?",
-        o:["The irrigated community","The rain-fed community","Neither, drought affects all farms equally","The one closer to the coast"], a:1,
-        f:"Sensitivity is about how much daily life depends on the thing being hit. Rain-fed subsistence farming has no buffer." },
-      { q:"A country with high adaptive capacity but extremely high exposure, such as a low-lying atoll nation, faces sea level rise. What is the honest conclusion?",
-        o:["Money removes the risk entirely",
-           "Capacity helps, but you cannot buy your way out of having no high ground",
-           "Exposure never matters if a country is wealthy",
-           "Sea level rise will not affect it"], a:1,
-        f:"This is the limit of adaptation. Adaptive capacity buys time and reduces harm; it does not change your elevation." },
-      { q:"Which factor best explains why the same 1.5 degrees of global warming produces desertification in one place and coastal flooding in another?",
-        o:["Different amounts of warming in each place",
-           "Different exposure, because the physical geography of each place is different",
-           "Different levels of wealth",
-           "Different populations"], a:1,
-        f:"Exposure. The warming is shared; what it does depends on whether you are low-lying, semi-arid, polar or in the cyclone belt." },
-      { q:"A government installs an early warning system that texts every phone in a cyclone's path. Which part of the vulnerability picture has it improved?",
-        o:["Exposure","Sensitivity","Adaptive capacity","The hazard itself"], a:2,
-        f:"Adaptive capacity. The cyclone is unchanged and the coastline is unchanged; the ability to respond is what improved." },
-      { q:"Wealthy countries generally suffer fewer climate deaths than low-income countries. What is the correct conclusion to draw?",
-        o:["Climate change does not affect wealthy countries",
-           "Wealthy countries are less exposed to hazards",
-           "Wealthy countries have more capacity to protect people, so harm shows up as cost rather than lives",
-           "Low-income countries are hit by worse hazards"], a:2,
-        f:"The hazard is not gentler in a rich country. The difference is what the country can afford to do before, during and after." }
+    name: "Round 4 &middot; Case files",
+    tab: "File 04",
+    title: "Choose the response",
+    blurb: "Six problems land on your desk. Pick the response that fits the problem.",
+    items: [
+      { q:"Drink containers blow from a shopping strip into a creek every windy week.",
+        o:["Fine every shopper caught dropping litter",
+           "Make the empty container worth money and put a refund point nearby",
+           "Declare the creek a national park"],
+        a:1, why:"Market-based. You cannot police thousands of people, but you can change what an empty can is worth." },
+      { q:"A rare native grassland survives on privately owned farmland.",
+        o:["Pay the landholder for a permanent conservation covenant",
+           "Hope the landholder protects it voluntarily",
+           "Ban all farming in the district"],
+        a:0, why:"A covenant is permanent, compensated and voluntary. Over 6,770 private protected areas work this way." },
+      { q:"Illegal dumping in a bush reserve continues, even though it is already against the law.",
+        o:["Pass the same law again with a bigger fine on paper",
+           "Fund patrols, cameras and someone to follow up reports",
+           "Ask the community to feel better about the reserve"],
+        a:1, why:"The law already exists. What is missing is enforcement, which is step five and the step that gets cut." },
+      { q:"A creek needs 4,000 plants in the ground before spring and the council has no spare staff.",
+        o:["A community planting program run with a local group",
+           "A fine for residents who do not plant",
+           "Selling carbon credits from the creek"],
+        a:0, why:"Community-based management is at its best doing hands-on work that agencies cannot staff." },
+      { q:"A company wants to expand a plant next to a wetland listed as nationally important.",
+        o:["A Clean Up Australia Day at the wetland",
+           "Assessment and approval under the national environment law",
+           "A container refund scheme"],
+        a:1, why:"Legislative. Nationally important places are assessed under the EPBC Act and its regulator." },
+      { q:"Emissions come from thousands of small businesses, none of them large enough to inspect.",
+        o:["Inspect every business weekly",
+           "Put a price on emissions so cutting them saves money",
+           "Publish a request asking businesses to try harder"],
+        a:1, why:"Market-based tools work exactly where enforcement does not scale." }
     ]
   }
 ];
 
-const BADGES = [
-  { id:"recall",  ic:"◎", n:"Recall Ready",     d:"7 or more correct in round 1" },
-  { id:"sorter",  ic:"⬡", n:"Impact Sorter",    d:"7 or more correct in round 2" },
-  { id:"field",   ic:"⌖", n:"Field Analyst",    d:"5 or more correct in round 3" },
-  { id:"judge",   ic:"⚖", n:"Vulnerability Judge", d:"5 or more correct in round 4" },
-  { id:"streak6", ic:"▲", n:"Chain Reaction",   d:"A streak of 6 or better" },
-  { id:"atlas",   ic:"★", n:"Atlas Complete",   d:"85% or higher overall" }
-];
+/* ============================ ENGINE ============================ */
+const S = { round:0, index:0, correct:0, total:0, streak:0, best:0, fund:0, mistakes:[], log:[] };
+const TOTAL_Q = ROUNDS.reduce((n,r)=>n+r.items.length,0);
+const panel = document.getElementById('panel');
+const money = n => "$" + n.toLocaleString('en-AU');
 
-/* ============================================================
-   STATE
-   ============================================================ */
-let ri=0, qi=0, score=0, correct=0, answered=0, streak=0, best=0, locked=false;
-let roundCorrect=[0,0,0,0];
-let mistakes=[];
-const TOTAL = ROUNDS.reduce((t,r)=>t+r.qs.length,0);
+function shuffle(a){ const b=a.slice(); for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; }
 
-const $ = id => document.getElementById(id);
-
-function startGame(){
-  $('startPanel').classList.add('hidden');
-  $('qPanel').classList.remove('hidden');
-  renderQ();
+function updateLedger(delta,label){
+  document.getElementById('fund').textContent = money(S.fund);
+  document.getElementById('roundNum').textContent = (S.round+1>4?4:S.round+1) + "/4";
+  document.getElementById('correctNum').textContent = S.correct;
+  document.getElementById('streakNum').textContent = S.streak;
+  document.getElementById('bar').style.width = Math.round((S.total/TOTAL_Q)*100) + "%";
+  const f = document.getElementById('fund');
+  f.classList.remove('up','down');
+  if(delta>0) f.classList.add('up'); else if(delta<0) f.classList.add('down');
+  if(label){
+    const box = document.getElementById('entries');
+    box.classList.add('show');
+    const row = document.createElement('div');
+    row.className = 'entry' + (delta<0?' minus':'');
+    row.innerHTML = '<span>'+label+'</span><b>'+(delta<0?'-':'+')+money(Math.abs(delta))+'</b>';
+    box.prepend(row);
+    while(box.children.length>4) box.removeChild(box.lastChild);
+  }
 }
 
-function optionsFor(round,q){
-  return q.o ? q.o : round.common;
+function startScreen(){
+  panel.innerHTML = `
+    <h2>Before you start</h2>
+    <p class="lede">Four rounds, ${TOTAL_Q} decisions. You are releasing funding for environmental management, and the department is watching.</p>
+    <ul class="brief">
+      <li><b>Correct decision:</b> $5,000 released.</li>
+      <li><b>Three or more in a row:</b> $10,000 per decision while the streak holds.</li>
+      <li><b>Wrong decision:</b> $2,000 lost, and the streak resets.</li>
+      <li>Every answer is explained, and anything you miss comes back for review at the end.</li>
+    </ul>
+    <div class="btnrow"><button class="btn" id="go">Open file 01</button></div>`;
+  document.getElementById('go').onclick = roundIntro;
 }
 
-function renderQ(){
-  const r = ROUNDS[ri], q = r.qs[qi];
-  locked = false;
-  $('rTag').className = 'roundtag ' + (ri===1?'r2':ri===2?'r3':ri===3?'r4':'');
-  $('rTag').textContent = 'Round ' + (ri+1);
-  $('rTitle').textContent = r.name;
-  $('rSub').textContent = r.sub;
-  $('qNo').textContent = 'Question ' + (qi+1) + ' of ' + r.qs.length;
-  $('qText').textContent = q.q;
+function roundIntro(){
+  const r = ROUNDS[S.round];
+  panel.innerHTML = `
+    <div class="filetab">${r.tab}</div>
+    <div style="border-top:1px solid var(--line);padding-top:16px">
+      <div class="roundtag">${r.name}</div>
+      <h2>${r.title}</h2>
+      <p class="lede">${r.blurb}</p>
+      <div class="btnrow"><button class="btn" id="go">Start round</button></div>
+    </div>`;
+  document.getElementById('go').onclick = ()=>{ S.index=0; question(); };
+}
 
-  const fileEl = $('qFile');
-  if (q.file){ fileEl.textContent = q.file; fileEl.classList.remove('hidden'); }
-  else fileEl.classList.add('hidden');
+function question(){
+  const r = ROUNDS[S.round];
+  const it = r.items[S.index];
+  const options = r.fixed ? r.fixed.slice() : shuffle(it.o.map((t,i)=>({t, ok:i===it.a})));
+  const isFixed = !!r.fixed;
+  const keys = ["A","B","C","D"];
 
-  const opts = optionsFor(r,q);
-  const box = $('opts');
-  box.className = 'opts' + (opts.length===2 ? ' two' : opts.length===4 ? ' four' : '');
-  box.innerHTML = '';
-  opts.forEach((text,i)=>{
+  panel.innerHTML = `
+    <div class="qhead">
+      <span class="qcount">${r.tab} &middot; Question ${S.index+1} of ${r.items.length}</span>
+      <span class="streak">${S.streak>=3 ? "Streak x2 active ("+S.streak+")" : (S.streak>0? "Streak "+S.streak : "")}</span>
+    </div>
+    <p class="prompt">${it.q}</p>
+    ${isFixed ? '<div class="context">Choose the correct label.</div>' : ''}
+    <div class="opts ${isFixed && r.fixed.length===2 ? 'two':''}" id="opts"></div>
+    <div class="feedback" id="fb"></div>
+    <div class="btnrow hide" id="nextrow"><button class="btn" id="next">Next</button></div>`;
+
+  const box = document.getElementById('opts');
+  options.forEach((o,i)=>{
+    const label = isFixed ? o : o.t;
+    const correct = isFixed ? (label===it.a) : o.ok;
     const b = document.createElement('button');
-    b.className = 'opt';
-    b.innerHTML = '<span class="k">'+String.fromCharCode(65+i)+'</span><span>'+text+'</span>';
-    b.onclick = ()=>choose(i,b);
+    b.className='opt'; b.type='button';
+    b.innerHTML = '<span class="key">'+keys[i]+'</span>'+label;
+    b.onclick = ()=>answer(b, correct, it, label);
     box.appendChild(b);
   });
-
-  $('fb').className = 'feedback';
-  $('nextBtn').disabled = true;
-  $('nextBtn').textContent = (qi === r.qs.length-1) ? 'Finish round' : 'Next';
-  $('streakFlag').textContent = '';
-  updateBoard();
 }
 
-function choose(i, btn){
-  if (locked) return;
-  locked = true;
-  const r = ROUNDS[ri], q = r.qs[qi];
-  const opts = optionsFor(r,q);
-  const isRight = (i === q.a);
-  answered++;
-
-  document.querySelectorAll('#opts .opt').forEach((b,idx)=>{
-    b.disabled = true;
-    if (idx === q.a) b.classList.add('correct');
-    else if (idx === i) b.classList.add('wrong');
-    else b.classList.add('dim');
-  });
-
-  if (isRight){
-    correct++; roundCorrect[ri]++; streak++;
-    if (streak > best) best = streak;
-    let pts = 10, bonus = 0;
-    if (streak >= 3) bonus = Math.min((streak-2)*5, 25);
-    pts += bonus; score += pts;
-    $('fb').className = 'feedback show yes';
-    $('fbTitle').textContent = 'Correct  +' + pts + (bonus ? '  (10 base, ' + bonus + ' streak bonus)' : '');
-    $('fbText').textContent = q.f;
-    if (streak >= 3) $('streakFlag').textContent = streak + ' in a row';
+function answer(btn, correct, it, chosen){
+  const r = ROUNDS[S.round];
+  document.querySelectorAll('.opt').forEach(b=>{ b.disabled = true; });
+  S.total++;
+  let delta;
+  if(correct){
+    S.correct++; S.streak++; S.best=Math.max(S.best,S.streak);
+    delta = S.streak>=3 ? 10000 : 5000;
+    S.fund += delta;
+    btn.classList.add('correct');
   } else {
-    streak = 0;
-    $('fb').className = 'feedback show no';
-    $('fbTitle').textContent = 'Not quite. The answer is ' + String.fromCharCode(65+q.a) + ': ' + opts[q.a];
-    $('fbText').textContent = q.f;
-    mistakes.push({ round:r.name, q:q.q, gave:opts[i], right:opts[q.a], why:q.f });
+    S.streak = 0; delta = -2000; S.fund = Math.max(0, S.fund-2000);
+    btn.classList.add('wrong');
+    document.querySelectorAll('.opt').forEach(b=>{
+      const txt = b.textContent.replace(/^[A-D]/,'').trim();
+      const right = r.fixed ? it.a : it.o[it.a];
+      if(txt === right) b.classList.add('correct');
+    });
+    S.mistakes.push({ q: it.q, a: r.fixed ? it.a : it.o[it.a], why: it.why });
   }
-  $('nextBtn').disabled = false;
-  updateBoard();
+  updateLedger(delta, r.tab + " Q" + (S.index+1));
+
+  const fb = document.getElementById('fb');
+  fb.className = 'feedback show ' + (correct?'right':'wrong');
+  fb.innerHTML = '<b>' + (correct ? (S.streak>=3?'Correct. Streak bonus.':'Correct.') : 'Not quite.') + '</b> ' + it.why;
+  const row = document.getElementById('nextrow');
+  row.classList.remove('hide');
+  const nb = document.getElementById('next');
+  nb.textContent = (S.index+1 < r.items.length) ? 'Next' : (S.round+1 < ROUNDS.length ? 'Close this file' : 'See your result');
+  nb.onclick = ()=>{
+    if(S.index+1 < r.items.length){ S.index++; question(); }
+    else if(S.round+1 < ROUNDS.length){ S.round++; roundIntro(); }
+    else results();
+  };
+  nb.focus();
 }
 
-function next(){
-  const r = ROUNDS[ri];
-  if (qi < r.qs.length-1){ qi++; renderQ(); return; }
-  // round finished
-  if (ri < ROUNDS.length-1){
-    $('qPanel').classList.add('hidden');
-    $('breakPanel').classList.remove('hidden');
-    $('bTitle').textContent = r.breakTitle;
-    $('bText').textContent = roundCorrect[ri] + ' of ' + r.qs.length + ' correct in that round. ' + r.breakText;
-    $('bBtn').textContent = 'Start round ' + (ri+2);
-  } else {
-    finish();
-  }
+function badgeFor(pct){
+  if(pct>=95) return "Chief Environmental Officer";
+  if(pct>=85) return "Senior Policy Adviser";
+  if(pct>=70) return "Management Officer";
+  if(pct>=55) return "Graduate Analyst";
+  return "Work Experience, Week One";
 }
 
-function nextRound(){
-  ri++; qi=0;
-  $('breakPanel').classList.add('hidden');
-  $('qPanel').classList.remove('hidden');
-  renderQ();
+function results(){
+  const pct = Math.round((S.correct/TOTAL_Q)*100);
+  const badge = badgeFor(pct);
+  panel.innerHTML = `
+    <div class="roundtag">Desk closed</div>
+    <h2>${money(S.fund)} released for management</h2>
+    <div class="badge">${badge}</div>
+    <div class="scoregrid">
+      <div class="scorebox"><b>${S.correct}/${TOTAL_Q}</b><span>Correct</span></div>
+      <div class="scorebox"><b>${pct}%</b><span>Accuracy</span></div>
+      <div class="scorebox"><b>${S.best}</b><span>Best streak</span></div>
+    </div>
+    ${S.mistakes.length ? `
+      <h3>Worth another look</h3>
+      <div class="review">${S.mistakes.map(m=>`
+        <div class="item">
+          <div class="q">${m.q}</div>
+          <div class="a">Correct answer: <b>${m.a}</b>. ${m.why}</div>
+        </div>`).join('')}</div>` :
+      `<h3>Nothing to review</h3><p class="lede">You did not miss a single decision. Take the certificate.</p>`}
+    <div class="btnrow">
+      <button class="btn" id="cert">Make certificate</button>
+      <button class="btn ghost" id="again">Run the desk again</button>
+    </div>
+    <div class="cert" id="certbox">
+      <div class="cdept">Year 10 Geography &middot; Environmental Change and Management</div>
+      <h3>Certificate of Environmental Management</h3>
+      <div class="line">awarded to</div>
+      <div class="name" id="certname">&nbsp;</div>
+      <div class="line">for releasing <b>${money(S.fund)}</b> in management funding with ${pct}% accuracy</div>
+      <div class="line">Lesson 26 &middot; Managing Environmental Change &middot; VCGGK145</div>
+      <div class="seal"><b>${badge.split(',')[0]}</b>The Management Desk</div>
+    </div>`;
+  document.getElementById('again').onclick = ()=>{
+    S.round=0;S.index=0;S.correct=0;S.total=0;S.streak=0;S.best=0;S.fund=0;S.mistakes=[];
+    document.getElementById('entries').innerHTML='';
+    updateLedger(0,null); startScreen();
+  };
+  document.getElementById('cert').onclick = ()=>{
+    const nm = prompt("Type your name for the certificate:");
+    if(nm===null) return;
+    document.getElementById('certname').textContent = nm.trim() || "Year 10 Geography";
+    document.getElementById('certbox').classList.add('show');
+    setTimeout(()=>window.print(), 250);
+  };
+  updateLedger(0,null);
 }
 
-function updateBoard(){
-  $('sScore').textContent = score;
-  $('sCorrect').textContent = correct + '/' + answered;
-  $('sStreak').textContent = streak;
-  $('sRound').textContent = (ri+1) + '/4';
-  $('bar').style.width = (answered / TOTAL * 100) + '%';
-}
-
-function earnedBadges(){
-  const pct = Math.round(correct / TOTAL * 100);
-  const got = [];
-  if (roundCorrect[0] >= 7) got.push('recall');
-  if (roundCorrect[1] >= 7) got.push('sorter');
-  if (roundCorrect[2] >= 5) got.push('field');
-  if (roundCorrect[3] >= 5) got.push('judge');
-  if (best >= 6) got.push('streak6');
-  if (pct >= 85) got.push('atlas');
-  return got;
-}
-
-function finish(){
-  $('qPanel').classList.add('hidden');
-  $('endPanel').classList.remove('hidden');
-  const pct = Math.round(correct / TOTAL * 100);
-  $('ePct').textContent = pct + '%';
-  $('eLine').textContent = correct + ' of ' + TOTAL + ' correct  •  ' + score + ' points  •  best streak ' + best;
-
-  let band;
-  if (pct >= 90) band = 'Outstanding. You could teach this round.';
-  else if (pct >= 75) band = 'Strong. The framework has stuck.';
-  else if (pct >= 60) band = 'Solid start. Check the review below.';
-  else band = 'Worth a second run. Read every review card first.';
-  $('eBand').textContent = band;
-
-  const got = earnedBadges();
-  $('badges').innerHTML = BADGES.map(b =>
-    '<div class="badge' + (got.includes(b.id) ? ' earned' : '') + '">' +
-    '<div class="ic">' + b.ic + '</div><div class="bn">' + b.n + '</div><div class="bd">' + b.d + '</div></div>'
-  ).join('');
-
-  const rl = $('reviewList');
-  if (!mistakes.length){
-    rl.innerHTML = '<div class="review"><div class="rq">Nothing to review. Every answer correct.</div>' +
-      '<div class="ra">Go and explain the difference between exposure and adaptive capacity to someone who got it wrong.</div></div>';
-  } else {
-    rl.innerHTML = mistakes.map(m =>
-      '<div class="review"><div class="rq">' + m.round + ': ' + m.q + '</div>' +
-      '<div class="ra"><span class="x">You said: ' + m.gave + '</span><br>' +
-      '<span class="t">Answer: ' + m.right + '</span><br>' + m.why + '</div></div>'
-    ).join('');
-  }
-  updateBoard();
-}
-
-function showCert(){
-  const pct = Math.round(correct / TOTAL * 100);
-  const got = earnedBadges().map(id => BADGES.find(b => b.id===id).n);
-  $('certScore').textContent = correct + ' of ' + TOTAL + ' correct  (' + pct + '%)  •  ' + score + ' points';
-  $('certBadges').textContent = got.length ? 'Badges: ' + got.join(', ') : 'No badges this run. Play again.';
-  $('endPanel').classList.add('hidden');
-  $('certpanel').classList.remove('hidden');
-  $('cert').style.display = 'block';
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function hideCert(){
-  $('certpanel').classList.add('hidden');
-  $('endPanel').classList.remove('hidden');
-}
+updateLedger(0,null);
+startScreen();
 </script>
 </body>
 </html>
