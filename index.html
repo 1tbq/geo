@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Management Desk | Year 10 Geography Lesson 26</title>
+<title>Ranger Station | Year 10 Geography Lesson 27</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#16332A; --ink-2:#0F2620; --green:#2F7A55; --sage:#9BC0A6;
-  --ochre:#C05A2B; --sand:#F1EDE2; --paper:#FBFAF6; --line:#D8DED8;
+  --ink:#16332A; --green:#2F7A55; --sage:#9BC0A6; --ochre:#C05A2B;
+  --sand:#F1EDE2; --paper:#FBFAF6; --line:#D8DED8;
   --text:#17241E; --muted:#5C6B63; --good:#2F7A55; --bad:#B4402A;
   --display:"Space Grotesk",system-ui,sans-serif;
   --body:"IBM Plex Sans",system-ui,sans-serif;
@@ -20,11 +20,10 @@
 html,body{margin:0;padding:0}
 body{
   background:var(--ink);
-  background-image:radial-gradient(circle at 12% -10%, rgba(47,122,85,.55), transparent 46%),
-                   radial-gradient(circle at 100% 8%, rgba(192,90,43,.28), transparent 40%);
+  background-image:radial-gradient(circle at 88% -8%, rgba(47,122,85,.6), transparent 45%),
+                   radial-gradient(circle at 0% 20%, rgba(155,192,166,.18), transparent 38%);
   background-attachment:fixed;
-  font-family:var(--body); color:var(--text); line-height:1.5;
-  padding:20px 14px 60px;
+  font-family:var(--body);color:var(--text);line-height:1.5;padding:20px 14px 60px;
 }
 .wrap{max-width:880px;margin:0 auto}
 
@@ -33,42 +32,32 @@ body{
 .brand{color:#fff}
 .brand .dept{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
 .brand h1{font-family:var(--display);font-size:clamp(26px,5vw,40px);margin:2px 0 0;letter-spacing:-.02em;font-weight:700}
-.brand p{margin:4px 0 0;color:var(--sage);font-size:13.5px;max-width:44ch}
-.stamp{
-  border:2px solid var(--ochre);color:var(--ochre);border-radius:6px;
-  padding:8px 12px;transform:rotate(-4deg);text-align:center;
-  font-family:var(--mono);font-size:11px;letter-spacing:.12em;line-height:1.35;
-  background:rgba(192,90,43,.08)
-}
-.stamp b{display:block;font-size:15px;letter-spacing:.04em}
+.brand p{margin:4px 0 0;color:var(--sage);font-size:13.5px;max-width:46ch}
+.post{border:1.5px solid var(--sage);border-radius:4px;padding:8px 12px;color:var(--sage);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;line-height:1.5;text-align:center}
+.post b{display:block;font-size:14px;color:#fff;letter-spacing:.04em}
 
-/* ---------- ledger (signature) ---------- */
-.ledger{
-  background:var(--paper);border-radius:12px;padding:14px 16px;margin-bottom:14px;
-  border:1px solid var(--line);
-  box-shadow:0 10px 30px rgba(0,0,0,.22)
-}
-.ledger-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
-.ledger-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.fund{font-family:var(--mono);font-size:clamp(24px,5.5vw,34px);font-weight:600;color:var(--ink);letter-spacing:-.01em}
-.fund.up{color:var(--good)} .fund.down{color:var(--bad)}
+/* ---------- gauge (signature) ---------- */
+.gauge{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:14px;box-shadow:0 10px 30px rgba(0,0,0,.22)}
+.gtop{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.glabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.gval{font-family:var(--display);font-size:clamp(24px,5.5vw,34px);font-weight:700;color:var(--ink)}
+.gval small{font-size:15px;color:var(--muted);font-weight:500}
 .stats{display:flex;gap:18px;flex-wrap:wrap}
 .stat{text-align:right}
 .stat span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .stat b{font-family:var(--display);font-size:20px;color:var(--ink)}
-.bar{height:7px;background:#E6E9E4;border-radius:99px;overflow:hidden;margin-top:12px}
-.bar i{display:block;height:100%;background:var(--green);width:0;transition:width .45s ease}
-.entries{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px;display:none}
-.entries.show{display:block}
-.entry{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);padding:2px 0}
-.entry b{color:var(--ink);font-weight:600}
-.entry.minus b{color:var(--bad)}
+.track{position:relative;height:16px;background:#E6E9E4;border-radius:4px;margin-top:12px;overflow:hidden}
+.track i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#B4402A,#C08A2B 45%,#2F7A55 75%);width:45%;transition:width .5s ease}
+.ticks{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.08em;margin-top:4px}
+.logbook{margin-top:12px;border-top:1px dashed var(--line);padding-top:8px;display:none}
+.logbook.show{display:block}
+.log{display:flex;gap:10px;align-items:baseline;font-family:var(--mono);font-size:11.5px;color:var(--muted);padding:2px 0;border-bottom:1px solid #EFEFE9}
+.log .mark{color:var(--good);font-weight:600}
+.log.bad .mark{color:var(--bad)}
+.log .txt{flex:1}
 
 /* ---------- panels ---------- */
-.panel{
-  background:var(--paper);border-radius:14px;padding:22px;border:1px solid var(--line);
-  box-shadow:0 14px 40px rgba(0,0,0,.25)
-}
+.panel{background:var(--paper);border-radius:14px;padding:22px;border:1px solid var(--line);box-shadow:0 14px 40px rgba(0,0,0,.25)}
 h2{font-family:var(--display);font-size:clamp(20px,4vw,27px);margin:0 0 8px;letter-spacing:-.01em;color:var(--ink)}
 h3{font-family:var(--display);font-size:18px;margin:0 0 6px;color:var(--ink)}
 p{margin:0 0 12px}
@@ -77,26 +66,17 @@ ul.brief{margin:0 0 16px;padding-left:18px;color:var(--muted);font-size:14.5px}
 ul.brief li{margin-bottom:5px}
 ul.brief b{color:var(--text)}
 
-.btn{
-  font-family:var(--display);font-size:16px;font-weight:600;border:none;border-radius:10px;
-  background:var(--ink);color:#fff;padding:13px 22px;cursor:pointer;transition:transform .12s, background .18s
-}
+.btn{font-family:var(--display);font-size:16px;font-weight:600;border:none;border-radius:10px;background:var(--ink);color:#fff;padding:13px 22px;cursor:pointer;transition:transform .12s, background .18s}
 .btn:hover{background:var(--green)}
 .btn:active{transform:translateY(1px)}
 .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
-.btn.ghost:hover{background:var(--sand);color:var(--ink)}
+.btn.ghost:hover{background:var(--sand)}
 .btn:focus-visible,.opt:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
 .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
 
-/* ---------- round intro ---------- */
 .roundtag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre)}
-.filetab{
-  display:inline-block;background:var(--sand);border:1px solid var(--line);border-bottom:none;
-  border-radius:8px 8px 0 0;padding:6px 14px;font-family:var(--mono);font-size:11px;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:-1px
-}
+.patrol{display:inline-block;border:1.5px solid var(--line);border-radius:99px;padding:5px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:var(--sand);margin-bottom:12px}
 
-/* ---------- question ---------- */
 .qhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
 .qcount{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .streak{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ochre)}
@@ -104,18 +84,14 @@ ul.brief b{color:var(--text)}
 .context{color:var(--muted);font-size:14.5px;margin-bottom:16px}
 .opts{display:grid;gap:9px}
 .opts.two{grid-template-columns:1fr 1fr}
-@media(max-width:560px){.opts.two{grid-template-columns:1fr}}
-.opt{
-  text-align:left;font-family:var(--body);font-size:15.5px;color:var(--text);
-  background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:13px 15px;cursor:pointer;
-  transition:border-color .15s, background .15s, transform .1s;width:100%
-}
+.opts.four{grid-template-columns:1fr 1fr}
+@media(max-width:560px){.opts.two,.opts.four{grid-template-columns:1fr}}
+.opt{text-align:left;font-family:var(--body);font-size:15.5px;color:var(--text);background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:13px 15px;cursor:pointer;transition:border-color .15s,background .15s;width:100%}
 .opt:hover:not(:disabled){border-color:var(--green);background:#F4F8F4}
 .opt:disabled{cursor:default}
 .opt .key{font-family:var(--mono);font-size:12px;color:var(--muted);margin-right:9px}
 .opt.correct{border-color:var(--good);background:#EAF3EC}
 .opt.wrong{border-color:var(--bad);background:#F9EDE9}
-.opt.correct .key,.opt.wrong .key{color:inherit}
 
 .feedback{margin-top:14px;border-radius:10px;padding:13px 15px;font-size:14.5px;display:none}
 .feedback.show{display:block}
@@ -123,37 +99,31 @@ ul.brief b{color:var(--text)}
 .feedback.wrong{background:#F9EDE9;border-left:4px solid var(--bad)}
 .feedback b{font-family:var(--display)}
 
-/* ---------- results ---------- */
-.badge{
-  display:inline-block;background:var(--ink);color:#fff;border-radius:99px;
-  padding:7px 16px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase
-}
+.badge{display:inline-block;background:var(--ink);color:#fff;border-radius:99px;padding:7px 16px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
 .scoregrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
 @media(max-width:560px){.scoregrid{grid-template-columns:1fr 1fr}}
 .scorebox{background:var(--sand);border-radius:10px;padding:12px;text-align:center}
 .scorebox b{display:block;font-family:var(--display);font-size:26px;color:var(--ink)}
 .scorebox span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.review{margin-top:6px}
 .review .item{border-left:3px solid var(--ochre);background:#fff;border-radius:0 8px 8px 0;padding:10px 13px;margin-bottom:9px;font-size:14px}
 .review .item .q{font-weight:600;color:var(--ink);margin-bottom:3px}
 .review .item .a{color:var(--muted)}
 .review .item .a b{color:var(--good)}
 
-/* ---------- certificate ---------- */
 .cert{display:none;background:#fff;border:3px double var(--ink);border-radius:6px;padding:28px;text-align:center;margin-top:18px}
 .cert.show{display:block}
 .cert .cdept{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .cert h3{font-family:var(--display);font-size:26px;margin:8px 0 2px}
 .cert .name{font-family:var(--display);font-size:22px;border-bottom:1.5px solid var(--line);display:inline-block;min-width:260px;padding:14px 10px 4px;margin:12px 0}
 .cert .line{color:var(--muted);font-size:14px;margin:4px 0}
-.cert .seal{margin-top:14px;display:inline-block;border:2px solid var(--ochre);color:var(--ochre);border-radius:50%;width:96px;height:96px;line-height:1.25;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;display:flex;align-items:center;justify-content:center;flex-direction:column;margin-left:auto;margin-right:auto}
-.cert .seal b{font-size:17px}
+.cert .seal{margin:14px auto 0;border:2px solid var(--green);color:var(--green);border-radius:50%;width:100px;height:100px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:6px}
+.cert .seal b{font-size:16px;color:var(--ink)}
 .footnote{color:var(--sage);font-size:12px;text-align:center;margin-top:22px;font-family:var(--mono);letter-spacing:.04em}
 .hide{display:none}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
 @media print{
   body{background:#fff;padding:0}
-  .masthead,.ledger,.panel,.footnote{display:none!important}
+  .masthead,.gauge,.panel,.footnote{display:none!important}
   .cert{display:block!important;border-color:#000;box-shadow:none}
 }
 </style>
@@ -163,27 +133,28 @@ ul.brief b{color:var(--text)}
 
   <div class="masthead">
     <div class="brand">
-      <div class="dept">Year 10 Geography &middot; Week 6 &middot; Lesson 26</div>
-      <h1>The Management Desk</h1>
-      <p>You are running the environmental management budget. Every correct decision releases funding. Every wrong one costs the department.</p>
+      <div class="dept">Year 10 Geography &middot; Week 6 &middot; Lesson 27</div>
+      <h1>Ranger Station</h1>
+      <p>You are on duty. Every correct call improves the health of the park you are managing. Every wrong call lets a pressure through.</p>
     </div>
-    <div class="stamp">Environmental<b>Management</b>VCGGK145</div>
+    <div class="post">Protected Areas<b>Field Log</b>VCGGK145</div>
   </div>
 
-  <div class="ledger">
-    <div class="ledger-top">
+  <div class="gauge">
+    <div class="gtop">
       <div>
-        <div class="ledger-label">Funding secured</div>
-        <div class="fund" id="fund">$0</div>
+        <div class="glabel">Park health index</div>
+        <div class="gval"><span id="health">45</span><small>/100</small></div>
       </div>
       <div class="stats">
-        <div class="stat"><span>Round</span><b id="roundNum">0/4</b></div>
+        <div class="stat"><span>Patrol</span><b id="roundNum">0/4</b></div>
         <div class="stat"><span>Correct</span><b id="correctNum">0</b></div>
         <div class="stat"><span>Streak</span><b id="streakNum">0</b></div>
       </div>
     </div>
-    <div class="bar"><i id="bar"></i></div>
-    <div class="entries" id="entries"></div>
+    <div class="track"><i id="track"></i></div>
+    <div class="ticks"><span>DEGRADED</span><span>AT RISK</span><span>RECOVERING</span><span>HEALTHY</span></div>
+    <div class="logbook" id="logbook"></div>
   </div>
 
   <div class="panel" id="panel"></div>
@@ -195,189 +166,183 @@ ul.brief b{color:var(--text)}
 /* ============================ CONTENT ============================ */
 const ROUNDS = [
   {
-    name: "Round 1 &middot; Warm-up",
-    tab: "File 01",
-    title: "What you already know",
-    blurb: "Eight quick questions from Week 5 and the start of today.",
-    items: [
-      { q:"Environmental management means:",
-        o:["Any change that happens to an environment",
-           "A deliberate, organised response to environmental change",
-           "Leaving an environment completely alone"],
-        a:1, why:"Management is deliberate. Someone has decided what to protect and what has to change." },
-      { q:"Adaptation means:",
-        o:["Reducing the cause of the change",
-           "Adjusting to a change we cannot stop",
-           "Measuring how much the climate has warmed"],
-        a:1, why:"Adaptation adjusts to the change. Mitigation attacks the cause." },
-      { q:"Which of these is mitigation?",
-        o:["Building a sea wall","Raising a house on stilts","Replacing a coal plant with wind power"],
-        a:2, why:"Mitigation reduces emissions, which is the cause. The other two adjust to the effects." },
-      { q:"The average elevation of Tuvalu is about:",
-        o:["2 metres","20 metres","200 metres"],
-        a:0, why:"About 2 metres, which is why sea level rise is an existential problem there." },
-      { q:"The three approaches to environmental management are legislative, community-based and:",
-        o:["market-based","weather-based","climate-based"],
-        a:0, why:"Market-based approaches change the price so the better choice pays." },
-      { q:"A law protecting an environment only works if:",
-        o:["Everybody agrees with it","It is enforced","It has been in place for a long time"],
-        a:1, why:"A law with no inspector behind it changes very little on the ground." },
-      { q:"Australia's first independent national environmental regulator started work in:",
-        o:["2004","2019","2026"],
-        a:2, why:"The National Environmental Protection Agency began operating on 1 July 2026." },
-      { q:"Which question causes the most argument in environmental management?",
-        o:["What are we protecting?","Whose behaviour has to change?","Who enforces it and who pays?"],
-        a:2, why:"Nearly every environmental fight in the news is an argument about who carries the cost." }
+    name:"Patrol 1 &middot; Briefing",
+    tab:"Patrol 01",
+    title:"What you already know",
+    blurb:"Eight quick questions from yesterday's lesson and the start of today.",
+    items:[
+      { q:"A protected area is:",
+        o:["Any area of bushland with no houses on it",
+           "A clearly defined area of land or sea, recognised in law and managed for the long-term conservation of nature",
+           "An area where all human activity is banned forever"],
+        a:1, why:"Recognised in law, clearly bounded, and managed for conservation over the long term." },
+      { q:"Declaring a national park is an example of which management approach?",
+        o:["Legislative","Community-based","Market-based"],
+        a:0, why:"Parks are declared under an Act of parliament, so the boundary and the rules are law." },
+      { q:"Conservation means:",
+        o:["Leave it completely alone","Use it, but use it carefully so it stays healthy","Restore it to what it looked like 200 years ago"],
+        a:1, why:"Preservation is the leave-it-alone idea. Conservation allows careful use." },
+      { q:"Roughly what share of Australia's landmass sits inside a protected area?",
+        o:["About 5 per cent","About 22 per cent","About 60 per cent"],
+        a:1, why:"22.57 per cent at 30 June 2024, across 14,575 protected areas." },
+      { q:"Which type makes up the largest share of the National Reserve System?",
+        o:["National parks","Indigenous Protected Areas","Private land covenants"],
+        a:1, why:"Indigenous Protected Areas are 49 per cent of the system, over 85 million hectares." },
+      { q:"A 'paper park' is:",
+        o:["A park that only allows walking",
+           "A park declared on a map but never funded or enforced",
+           "A park managed by a private landholder"],
+        a:1, why:"Declared at step three and abandoned before step five." },
+      { q:"After the 2004 rezoning, no-take green zones covered what share of the Great Barrier Reef Marine Park?",
+        o:["15 per cent","33 per cent","60 per cent"],
+        a:1, why:"Up from under 5 per cent before the new zoning plan came into force on 1 July 2004." },
+      { q:"True or false: a protected area means no human activity at all.",
+        o:["True","False"],
+        a:1, why:"False. Most protected areas allow walking, tourism, research, cultural practice and sometimes fishing." }
     ]
   },
   {
-    name: "Round 2 &middot; Sorting",
-    tab: "File 02",
-    title: "Name the approach",
-    blurb: "Twelve real responses. Legislative, community-based or market-based?",
-    fixed: ["Legislative","Community-based","Market-based"],
-    items: [
-      { q:"Victorians get 10 cents back for every eligible drink container they return.", a:"Market-based", why:"Nothing is banned. The payoff changed, so the behaviour changed." },
-      { q:"A supermarket chain is fined for clearing native vegetation without a permit.", a:"Legislative", why:"A rule with a penalty behind it." },
-      { q:"Landcare volunteers spend Sunday morning replanting a creek bank.", a:"Community-based", why:"Local people doing the work themselves, usually unpaid." },
-      { q:"A farmer is paid to keep trees standing and sells the carbon credit to an airline.", a:"Market-based", why:"The standing tree is now worth money, so keeping it becomes the profitable choice." },
-      { q:"Victoria bans single-use plastic straws, cutlery and polystyrene cups.", a:"Legislative", why:"In force since February 2023. A ban applies to everyone." },
-      { q:"An Indigenous ranger group burns Country early in the season and monitors threatened species.", a:"Community-based", why:"Traditional knowledge applied on Country by the people who hold it." },
-      { q:"Water entitlements are bought and sold between irrigators in the Murray-Darling.", a:"Market-based", why:"A capped, tradeable resource, so water moves to where it is valued most." },
-      { q:"Recreational fishers may keep only a set number of fish per day.", a:"Legislative", why:"Bag limits are rules with penalties, set under fisheries law." },
-      { q:"A friends of the wetland group pulls weeds on the first Saturday of every month.", a:"Community-based", why:"Voluntary, local and ongoing, which is both its strength and its weakness." },
-      { q:"A national regulator turns up unannounced to audit a mine site.", a:"Legislative", why:"Enforcement of the national environment law." },
-      { q:"A council offers a rebate to households that plant a shade tree in the front yard.", a:"Market-based", why:"Money makes the tree cheaper than not planting it." },
-      { q:"Fifteen thousand people spend a morning collecting rubbish on Clean Up Australia Day.", a:"Community-based", why:"Organised by the community rather than compelled by law." }
+    name:"Patrol 2 &middot; Identification",
+    tab:"Patrol 02",
+    title:"Which kind of protected area?",
+    blurb:"Ten entries in the log. Name the type of protected area.",
+    fixed:["National or state park","Marine national park or sanctuary","Indigenous Protected Area","Private land covenant"],
+    items:[
+      { q:"Point Cook Marine Sanctuary, twenty minutes down the road from school.", a:"Marine national park or sanctuary", why:"One of Victoria's 11 sanctuaries, declared in 2002." },
+      { q:"Country managed by Traditional Owners under agreement, with ranger groups doing burning and species monitoring.", a:"Indigenous Protected Area", why:"Ranger programs have been funded since 2007 and are now the largest part of the reserve system." },
+      { q:"A grazier signs a permanent agreement protecting remnant grassland on their farm.", a:"Private land covenant", why:"The agreement stays with the title, so it survives the sale of the property." },
+      { q:"Gariwerd, also known as the Grampians, managed by Parks Victoria.", a:"National or state park", why:"Declared under state law and managed by a state agency." },
+      { q:"A green zone where no fishing or collecting is allowed on the Great Barrier Reef.", a:"Marine national park or sanctuary", why:"A no-take zone inside a much larger multiple-use marine park." },
+      { q:"Almost half of the National Reserve System by area, over 85 million hectares.", a:"Indigenous Protected Area", why:"49 per cent of the system, more than 11 per cent of Australia." },
+      { q:"More than 6,770 small protected areas covering about 1 per cent of Australia.", a:"Private land covenant", why:"Small individually, but they protect habitat that governments do not own." },
+      { q:"Declared under a state Act, with campgrounds, walking tracks and a visitor centre.", a:"National or state park", why:"Conservation plus public access is the classic national park model." },
+      { q:"Sea Country included in the national protected areas database for the first time in 2024.", a:"Indigenous Protected Area", why:"Eleven Sea Country IPAs were counted for the first time in that update." },
+      { q:"Thirteen of these, plus eleven smaller sanctuaries, were declared across Victoria in 2002.", a:"Marine national park or sanctuary", why:"Victoria was one of the first places in the world to declare a whole representative network at once." }
     ]
   },
   {
-    name: "Round 3 &middot; Judgement",
-    tab: "File 03",
-    title: "Strength or limitation?",
-    blurb: "Eight statements about the three approaches. Which side of the ledger does each belong on?",
-    fixed: ["Strength","Limitation"],
-    items: [
-      { q:"Legislative: it applies to everyone, whether they agree or not.", a:"Strength", why:"Universal coverage is the thing only law can deliver." },
-      { q:"Community-based: it depends on volunteers turning up year after year.", a:"Limitation", why:"When the volunteers stop, the management stops." },
-      { q:"Market-based: it changes millions of everyday decisions without policing anyone.", a:"Strength", why:"Three billion containers, and nobody was fined." },
-      { q:"Market-based: if the refund is too small, or the refund point is too far away, nothing changes.", a:"Limitation", why:"The incentive has to be big enough and easy enough to reach." },
-      { q:"Community-based: local people know the place and care what happens to it.", a:"Strength", why:"Local knowledge and ownership are hard to buy." },
-      { q:"Legislative: a rule with no inspector behind it changes very little.", a:"Limitation", why:"Enforcement costs money, and it is the first thing cut." },
-      { q:"Legislative: it can force a large company to stop.", a:"Strength", why:"No volunteer group can do this." },
-      { q:"Community-based: it cannot make a major polluter change its behaviour.", a:"Limitation", why:"Scale is the ceiling on what community action can achieve." }
+    name:"Patrol 3 &middot; Assessment",
+    tab:"Patrol 03",
+    title:"Strength or limitation?",
+    blurb:"Eight findings from the monitoring reports. Which side of the evaluation does each belong on?",
+    fixed:["Strength","Limitation"],
+    items:[
+      { q:"Coral trout biomass averaged 81 per cent higher inside no-take zones than in fished areas between 2006 and 2024.", a:"Strength", why:"A measured comparison over nearly twenty years. This is your best evidence that zoning works." },
+      { q:"Green zones bleached along with everywhere else in 2016 and 2017.", a:"Limitation", why:"Zoning stops fishing. It cannot stop a marine heatwave generated globally." },
+      { q:"Commercial and recreational fishers lost access to grounds they had used for years.", a:"Limitation", why:"The costs of protection fall on particular groups, which is why consultation matters." },
+      { q:"Protected reefs recovered better after cyclone damage than fished reefs did.", a:"Strength", why:"Bigger, older fish and healthier populations mean faster recovery." },
+      { q:"Victoria protects only 5.3 per cent of its marine waters, and under 1 per cent of Port Phillip Bay.", a:"Limitation", why:"Against a widely used target of 30 per cent by 2030, the network has real gaps." },
+      { q:"The boundaries and rules are set in law, so they cannot be changed on a whim.", a:"Strength", why:"Legal protection is durable in a way a policy or a promise is not." },
+      { q:"A reserve is declared, then the ranger budget is cut and nobody patrols it.", a:"Limitation", why:"This is a paper park. Step five decides whether the first four mattered." },
+      { q:"Fish numbers rose in nearby areas that were still open to fishing.", a:"Strength", why:"Spillover means protection can benefit the people who lost access." }
     ]
   },
   {
-    name: "Round 4 &middot; Case files",
-    tab: "File 04",
-    title: "Choose the response",
-    blurb: "Six problems land on your desk. Pick the response that fits the problem.",
-    items: [
-      { q:"Drink containers blow from a shopping strip into a creek every windy week.",
-        o:["Fine every shopper caught dropping litter",
-           "Make the empty container worth money and put a refund point nearby",
-           "Declare the creek a national park"],
-        a:1, why:"Market-based. You cannot police thousands of people, but you can change what an empty can is worth." },
-      { q:"A rare native grassland survives on privately owned farmland.",
-        o:["Pay the landholder for a permanent conservation covenant",
-           "Hope the landholder protects it voluntarily",
-           "Ban all farming in the district"],
-        a:0, why:"A covenant is permanent, compensated and voluntary. Over 6,770 private protected areas work this way." },
-      { q:"Illegal dumping in a bush reserve continues, even though it is already against the law.",
-        o:["Pass the same law again with a bigger fine on paper",
-           "Fund patrols, cameras and someone to follow up reports",
-           "Ask the community to feel better about the reserve"],
-        a:1, why:"The law already exists. What is missing is enforcement, which is step five and the step that gets cut." },
-      { q:"A creek needs 4,000 plants in the ground before spring and the council has no spare staff.",
-        o:["A community planting program run with a local group",
-           "A fine for residents who do not plant",
-           "Selling carbon credits from the creek"],
-        a:0, why:"Community-based management is at its best doing hands-on work that agencies cannot staff." },
-      { q:"A company wants to expand a plant next to a wetland listed as nationally important.",
-        o:["A Clean Up Australia Day at the wetland",
-           "Assessment and approval under the national environment law",
-           "A container refund scheme"],
-        a:1, why:"Legislative. Nationally important places are assessed under the EPBC Act and its regulator." },
-      { q:"Emissions come from thousands of small businesses, none of them large enough to inspect.",
-        o:["Inspect every business weekly",
-           "Put a price on emissions so cutting them saves money",
-           "Publish a request asking businesses to try harder"],
-        a:1, why:"Market-based tools work exactly where enforcement does not scale." }
+    name:"Patrol 4 &middot; Park files",
+    tab:"Patrol 04",
+    title:"Diagnose the problem",
+    blurb:"Six parks are not working as planned. Name what has actually gone wrong.",
+    items:[
+      { q:"A reserve was declared eight years ago. Weeds and feral goats have spread every year since, and no one has visited to check.",
+        o:["The boundary was drawn in the wrong place",
+           "The park was never funded, patrolled or monitored",
+           "The park is too popular with visitors"],
+        a:1, why:"A textbook paper park. Steps one to four were done and step five was skipped." },
+      { q:"A marine park protects a stretch of reef, but the seagrass beds next door, where the young fish grow, sit outside the boundary.",
+        o:["A gap in what the network actually protects",
+           "Weak enforcement inside the park",
+           "Too much community involvement"],
+        a:0, why:"This is why the Great Barrier Reef plan protected at least 20 per cent of every habitat type, not just reefs." },
+      { q:"Fishing has been banned in a river reserve for a decade, yet fish numbers keep falling. Upstream, the catchment drains straight into the river after every storm.",
+        o:["The ban needs bigger fines",
+           "The pressure is crossing the boundary from outside",
+           "The reserve should be made smaller"],
+        a:1, why:"Runoff is generated outside the line. A boundary manages what happens inside it and nothing else." },
+      { q:"A park is declared over Country without talking to its Traditional Owners. The management plan is now being challenged.",
+        o:["The consultation step was skipped",
+           "The declaration step was skipped",
+           "The park needs a bigger budget"],
+        a:0, why:"Step two exists because protection imposed on people rarely holds. It is also the right thing to do." },
+      { q:"A draft zoning plan makes every single zone no-take. Fishers, tour operators and local councils campaign hard against it and it is shelved.",
+        o:["Protection always fails when anyone objects",
+           "A multiple-use design, where different zones allow different activities, is what makes protection survivable",
+           "The park should have been declared without a plan"],
+        a:1, why:"The Great Barrier Reef plan protected a third of the park precisely because the rest remained usable." },
+      { q:"A government announces thirty new protected areas and cuts the ranger budget in the same year.",
+        o:["Thirty new paper parks",
+           "A genuine increase in protection",
+           "A market-based approach to conservation"],
+        a:0, why:"Protected area statistics measure what is declared, not what is defended." }
     ]
   }
 ];
 
 /* ============================ ENGINE ============================ */
-const S = { round:0, index:0, correct:0, total:0, streak:0, best:0, fund:0, mistakes:[], log:[] };
+const S = { round:0, index:0, correct:0, total:0, streak:0, best:0, health:45, mistakes:[] };
 const TOTAL_Q = ROUNDS.reduce((n,r)=>n+r.items.length,0);
 const panel = document.getElementById('panel');
-const money = n => "$" + n.toLocaleString('en-AU');
 
 function shuffle(a){ const b=a.slice(); for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; }
 
-function updateLedger(delta,label){
-  document.getElementById('fund').textContent = money(S.fund);
+function updateGauge(entry){
+  document.getElementById('health').textContent = S.health;
+  document.getElementById('track').style.width = S.health + "%";
   document.getElementById('roundNum').textContent = (S.round+1>4?4:S.round+1) + "/4";
   document.getElementById('correctNum').textContent = S.correct;
   document.getElementById('streakNum').textContent = S.streak;
-  document.getElementById('bar').style.width = Math.round((S.total/TOTAL_Q)*100) + "%";
-  const f = document.getElementById('fund');
-  f.classList.remove('up','down');
-  if(delta>0) f.classList.add('up'); else if(delta<0) f.classList.add('down');
-  if(label){
-    const box = document.getElementById('entries');
-    box.classList.add('show');
+  if(entry){
+    const lb = document.getElementById('logbook');
+    lb.classList.add('show');
     const row = document.createElement('div');
-    row.className = 'entry' + (delta<0?' minus':'');
-    row.innerHTML = '<span>'+label+'</span><b>'+(delta<0?'-':'+')+money(Math.abs(delta))+'</b>';
-    box.prepend(row);
-    while(box.children.length>4) box.removeChild(box.lastChild);
+    row.className = 'log' + (entry.ok?'':' bad');
+    row.innerHTML = '<span class="mark">'+(entry.ok?'PASS':'MISS')+'</span><span class="txt">'+entry.label+'</span><span>'+(entry.delta>0?'+':'')+entry.delta+'</span>';
+    lb.prepend(row);
+    while(lb.children.length>4) lb.removeChild(lb.lastChild);
   }
 }
 
 function startScreen(){
   panel.innerHTML = `
-    <h2>Before you start</h2>
-    <p class="lede">Four rounds, ${TOTAL_Q} decisions. You are releasing funding for environmental management, and the department is watching.</p>
+    <div class="patrol">Duty roster</div>
+    <h2>Before you head out</h2>
+    <p class="lede">Four patrols, ${TOTAL_Q} calls. The park you are managing starts at 45 out of 100, which is exactly where most protected areas sit: declared, but under pressure.</p>
     <ul class="brief">
-      <li><b>Correct decision:</b> $5,000 released.</li>
-      <li><b>Three or more in a row:</b> $10,000 per decision while the streak holds.</li>
-      <li><b>Wrong decision:</b> $2,000 lost, and the streak resets.</li>
-      <li>Every answer is explained, and anything you miss comes back for review at the end.</li>
+      <li><b>Correct call:</b> park health rises 6 points.</li>
+      <li><b>Three or more in a row:</b> 9 points per call while the streak holds.</li>
+      <li><b>Wrong call:</b> a pressure gets through and health drops 7 points.</li>
+      <li>Every call is explained, and anything you miss comes back for review at the end.</li>
     </ul>
-    <div class="btnrow"><button class="btn" id="go">Open file 01</button></div>`;
+    <div class="btnrow"><button class="btn" id="go">Start patrol 01</button></div>`;
   document.getElementById('go').onclick = roundIntro;
 }
 
 function roundIntro(){
   const r = ROUNDS[S.round];
   panel.innerHTML = `
-    <div class="filetab">${r.tab}</div>
-    <div style="border-top:1px solid var(--line);padding-top:16px">
-      <div class="roundtag">${r.name}</div>
-      <h2>${r.title}</h2>
-      <p class="lede">${r.blurb}</p>
-      <div class="btnrow"><button class="btn" id="go">Start round</button></div>
-    </div>`;
+    <div class="patrol">${r.tab}</div>
+    <div class="roundtag">${r.name}</div>
+    <h2>${r.title}</h2>
+    <p class="lede">${r.blurb}</p>
+    <div class="btnrow"><button class="btn" id="go">Begin</button></div>`;
   document.getElementById('go').onclick = ()=>{ S.index=0; question(); };
 }
 
 function question(){
   const r = ROUNDS[S.round];
   const it = r.items[S.index];
-  const options = r.fixed ? r.fixed.slice() : shuffle(it.o.map((t,i)=>({t, ok:i===it.a})));
   const isFixed = !!r.fixed;
+  const options = isFixed ? r.fixed.slice() : shuffle(it.o.map((t,i)=>({t, ok:i===it.a})));
   const keys = ["A","B","C","D"];
+  const gridClass = isFixed ? (r.fixed.length===2 ? 'two' : 'four') : '';
 
   panel.innerHTML = `
     <div class="qhead">
-      <span class="qcount">${r.tab} &middot; Question ${S.index+1} of ${r.items.length}</span>
-      <span class="streak">${S.streak>=3 ? "Streak x2 active ("+S.streak+")" : (S.streak>0? "Streak "+S.streak : "")}</span>
+      <span class="qcount">${r.tab} &middot; Call ${S.index+1} of ${r.items.length}</span>
+      <span class="streak">${S.streak>=3 ? "Streak bonus active ("+S.streak+")" : (S.streak>0? "Streak "+S.streak : "")}</span>
     </div>
     <p class="prompt">${it.q}</p>
     ${isFixed ? '<div class="context">Choose the correct label.</div>' : ''}
-    <div class="opts ${isFixed && r.fixed.length===2 ? 'two':''}" id="opts"></div>
+    <div class="opts ${gridClass}" id="opts"></div>
     <div class="feedback" id="fb"></div>
     <div class="btnrow hide" id="nextrow"><button class="btn" id="next">Next</button></div>`;
 
@@ -388,32 +353,33 @@ function question(){
     const b = document.createElement('button');
     b.className='opt'; b.type='button';
     b.innerHTML = '<span class="key">'+keys[i]+'</span>'+label;
-    b.onclick = ()=>answer(b, correct, it, label);
+    b.onclick = ()=>answer(b, correct, it);
     box.appendChild(b);
   });
 }
 
-function answer(btn, correct, it, chosen){
+function answer(btn, correct, it){
   const r = ROUNDS[S.round];
   document.querySelectorAll('.opt').forEach(b=>{ b.disabled = true; });
   S.total++;
   let delta;
   if(correct){
     S.correct++; S.streak++; S.best=Math.max(S.best,S.streak);
-    delta = S.streak>=3 ? 10000 : 5000;
-    S.fund += delta;
+    delta = S.streak>=3 ? 9 : 6;
+    S.health = Math.min(100, S.health + delta);
     btn.classList.add('correct');
   } else {
-    S.streak = 0; delta = -2000; S.fund = Math.max(0, S.fund-2000);
+    S.streak = 0; delta = -7;
+    S.health = Math.max(0, S.health - 7);
     btn.classList.add('wrong');
+    const right = r.fixed ? it.a : it.o[it.a];
     document.querySelectorAll('.opt').forEach(b=>{
       const txt = b.textContent.replace(/^[A-D]/,'').trim();
-      const right = r.fixed ? it.a : it.o[it.a];
       if(txt === right) b.classList.add('correct');
     });
-    S.mistakes.push({ q: it.q, a: r.fixed ? it.a : it.o[it.a], why: it.why });
+    S.mistakes.push({ q: it.q, a: right, why: it.why });
   }
-  updateLedger(delta, r.tab + " Q" + (S.index+1));
+  updateGauge({ ok:correct, delta, label:r.tab+" call "+(S.index+1) });
 
   const fb = document.getElementById('fb');
   fb.className = 'feedback show ' + (correct?'right':'wrong');
@@ -421,7 +387,7 @@ function answer(btn, correct, it, chosen){
   const row = document.getElementById('nextrow');
   row.classList.remove('hide');
   const nb = document.getElementById('next');
-  nb.textContent = (S.index+1 < r.items.length) ? 'Next' : (S.round+1 < ROUNDS.length ? 'Close this file' : 'See your result');
+  nb.textContent = (S.index+1 < r.items.length) ? 'Next' : (S.round+1 < ROUNDS.length ? 'End patrol' : 'See your result');
   nb.onclick = ()=>{
     if(S.index+1 < r.items.length){ S.index++; question(); }
     else if(S.round+1 < ROUNDS.length){ S.round++; roundIntro(); }
@@ -430,20 +396,27 @@ function answer(btn, correct, it, chosen){
   nb.focus();
 }
 
+function bandFor(h){
+  if(h>=90) return "Healthy";
+  if(h>=70) return "Recovering";
+  if(h>=45) return "At risk";
+  return "Degraded";
+}
 function badgeFor(pct){
-  if(pct>=95) return "Chief Environmental Officer";
-  if(pct>=85) return "Senior Policy Adviser";
-  if(pct>=70) return "Management Officer";
-  if(pct>=55) return "Graduate Analyst";
-  return "Work Experience, Week One";
+  if(pct>=95) return "Chief Ranger";
+  if(pct>=85) return "Senior Ranger";
+  if(pct>=70) return "Field Ranger";
+  if(pct>=55) return "Trainee Ranger";
+  return "Volunteer, First Shift";
 }
 
 function results(){
   const pct = Math.round((S.correct/TOTAL_Q)*100);
   const badge = badgeFor(pct);
+  const band = bandFor(S.health);
   panel.innerHTML = `
-    <div class="roundtag">Desk closed</div>
-    <h2>${money(S.fund)} released for management</h2>
+    <div class="patrol">Shift complete</div>
+    <h2>Park health: ${S.health}/100 &middot; ${band}</h2>
     <div class="badge">${badge}</div>
     <div class="scoregrid">
       <div class="scorebox"><b>${S.correct}/${TOTAL_Q}</b><span>Correct</span></div>
@@ -451,30 +424,30 @@ function results(){
       <div class="scorebox"><b>${S.best}</b><span>Best streak</span></div>
     </div>
     ${S.mistakes.length ? `
-      <h3>Worth another look</h3>
+      <h3>Back to the logbook</h3>
       <div class="review">${S.mistakes.map(m=>`
         <div class="item">
           <div class="q">${m.q}</div>
           <div class="a">Correct answer: <b>${m.a}</b>. ${m.why}</div>
         </div>`).join('')}</div>` :
-      `<h3>Nothing to review</h3><p class="lede">You did not miss a single decision. Take the certificate.</p>`}
+      `<h3>Clean log</h3><p class="lede">Not one pressure got through. Take the certificate.</p>`}
     <div class="btnrow">
       <button class="btn" id="cert">Make certificate</button>
-      <button class="btn ghost" id="again">Run the desk again</button>
+      <button class="btn ghost" id="again">Run the patrol again</button>
     </div>
     <div class="cert" id="certbox">
       <div class="cdept">Year 10 Geography &middot; Environmental Change and Management</div>
-      <h3>Certificate of Environmental Management</h3>
+      <h3>Ranger Station Field Certificate</h3>
       <div class="line">awarded to</div>
       <div class="name" id="certname">&nbsp;</div>
-      <div class="line">for releasing <b>${money(S.fund)}</b> in management funding with ${pct}% accuracy</div>
-      <div class="line">Lesson 26 &middot; Managing Environmental Change &middot; VCGGK145</div>
-      <div class="seal"><b>${badge.split(',')[0]}</b>The Management Desk</div>
+      <div class="line">for finishing the shift with a park health index of <b>${S.health}/100</b> at ${pct}% accuracy</div>
+      <div class="line">Lesson 27 &middot; Protected Areas and Conservation &middot; VCGGK145</div>
+      <div class="seal"><b>${badge.split(',')[0]}</b>Ranger Station</div>
     </div>`;
   document.getElementById('again').onclick = ()=>{
-    S.round=0;S.index=0;S.correct=0;S.total=0;S.streak=0;S.best=0;S.fund=0;S.mistakes=[];
-    document.getElementById('entries').innerHTML='';
-    updateLedger(0,null); startScreen();
+    S.round=0;S.index=0;S.correct=0;S.total=0;S.streak=0;S.best=0;S.health=45;S.mistakes=[];
+    document.getElementById('logbook').innerHTML='';
+    updateGauge(null); startScreen();
   };
   document.getElementById('cert').onclick = ()=>{
     const nm = prompt("Type your name for the certificate:");
@@ -483,10 +456,10 @@ function results(){
     document.getElementById('certbox').classList.add('show');
     setTimeout(()=>window.print(), 250);
   };
-  updateLedger(0,null);
+  updateGauge(null);
 }
 
-updateLedger(0,null);
+updateGauge(null);
 startScreen();
 </script>
 </body>
