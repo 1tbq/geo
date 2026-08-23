@@ -3,696 +3,568 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Regrowth &middot; Gariwerd | Year 10 Geography</title>
+<title>Standpoint | Lesson 31 Environmental Worldviews</title>
 <style>
 :root{
-  --paper:#FBFAF7; --card:#FFFFFF; --ink:#16332A; --euc:#2F7A55; --sage:#9BC0A6;
-  --sagelite:#EAF3EC; --earth:#C05A2B; --earthlite:#FBEDE5; --amber:#D9A43B;
-  --amberlite:#FFF3C4; --char:#4A3B33; --grey:#5C6862; --line:#DCE5DF;
-  --disp:"Cambria","Georgia","Times New Roman",serif;
-  --body:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --ink:#1F2333; --plum:#6B4A7A; --amber:#D98A25; --teal:#3F7F76; --clay:#B4553F;
+  --grey:#6B7280; --mid:#9AA0AC; --line:#DDDCE4; --pale:#F5F4F8; --hl:#FFF3A6; --white:#fff;
+  --ok:#2E7D5B; --no:#B4553F;
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.5;
-  -webkit-font-smoothing:antialiased}
-.wrap{max-width:920px;margin:0 auto;padding:20px 18px 60px}
-h1,h2,h3{font-family:var(--disp);font-weight:700;margin:0;line-height:1.15}
-.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--euc)}
-.muted{color:var(--grey)}
-button{font-family:inherit;font-size:inherit;cursor:pointer;border:none;background:none}
-button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--white);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:20px 18px 60px}
 
-/* ---------- signature: regrowth strip ---------- */
-.strip-wrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px 12px;margin:14px 0 18px}
-.strip-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
-.strip-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--grey)}
-.ha{font-family:var(--disp);font-size:26px;font-weight:700;color:var(--euc);font-variant-numeric:tabular-nums}
-.ha small{font-size:13px;color:var(--grey);font-family:var(--body);font-weight:400}
-.strip{display:flex;align-items:flex-end;gap:2px;height:56px;border-bottom:2px solid var(--char);padding-bottom:0}
-.blade{flex:1 1 0;background:var(--char);height:7px;border-radius:2px 2px 0 0;
-  transition:height .5s cubic-bezier(.22,1,.36,1),background-color .5s ease}
-.blade.live{background:var(--euc)}
-.blade.mid{background:var(--sage)}
+/* header */
+header{border-bottom:2px solid var(--line);padding-bottom:14px;margin-bottom:18px}
+.kicker{font-size:11px;letter-spacing:1.6px;font-weight:700;color:var(--mid);text-transform:uppercase}
+h1{font-size:32px;line-height:1.12;margin:6px 0 4px;letter-spacing:-.5px}
+.sub{color:var(--grey);font-size:15px}
 
-/* ---------- panels ---------- */
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
-.hero{background:var(--ink);color:#fff;border-radius:16px;padding:30px 26px;position:relative;overflow:hidden}
-.hero h1{font-size:clamp(30px,6vw,46px);color:#fff;margin-bottom:6px}
-.hero .sub{color:var(--sage);font-family:var(--disp);font-size:clamp(17px,3vw,22px);margin-bottom:16px}
-.hero p{color:#C9DCD0;max-width:56ch;margin:0 0 8px}
-.hero .eyebrow{color:var(--sage)}
-.hero:after{content:"";position:absolute;right:-70px;top:-70px;width:240px;height:240px;border-radius:50%;
-  background:#1E4436;z-index:0}
-.hero>*{position:relative;z-index:1}
+/* hud */
+.hud{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch;margin:16px 0 6px}
+.stat{flex:1;min-width:88px;border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:var(--white)}
+.stat .lab{font-size:10px;letter-spacing:1.1px;text-transform:uppercase;color:var(--mid);font-weight:700}
+.stat .val{font-size:22px;font-weight:800;letter-spacing:-.5px}
+.stat.s-score .val{color:var(--plum)}
+.stat.s-streak .val{color:var(--amber)}
+.stat.s-acc .val{color:var(--teal)}
 
-.rounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:18px 0}
-.rnd{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-.rnd b{display:block;font-family:var(--disp);font-size:17px;margin-bottom:3px}
-.rnd span{font-size:13px;color:var(--grey)}
+/* clarity meter (signature) */
+.clarity{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px;background:var(--pale)}
+.clarity .top{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;
+  letter-spacing:1.1px;text-transform:uppercase;color:var(--mid);font-weight:700}
+.clarity .pct{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:0}
+.bar{height:12px;border-radius:6px;background:#E4E2EA;overflow:hidden;margin-top:8px;position:relative}
+.bar i{display:block;height:100%;width:20%;border-radius:6px;
+  background:linear-gradient(90deg,var(--clay),var(--amber) 40%,var(--plum) 72%,var(--teal));
+  transition:width .45s cubic-bezier(.2,.8,.3,1)}
+.ends{display:flex;justify-content:space-between;font-size:10.5px;color:var(--mid);margin-top:6px;font-weight:600}
 
-.btn{display:inline-block;background:var(--euc);color:#fff;padding:13px 26px;border-radius:9px;
-  font-weight:700;font-size:16px;transition:transform .12s ease,background-color .2s ease}
-.btn:hover{background:#256444;transform:translateY(-1px)}
-.btn.ghost{background:transparent;color:var(--euc);border:2px solid var(--sage)}
-.btn.ghost:hover{background:var(--sagelite);color:var(--ink)}
-.btn.earth{background:var(--earth)}
-.btn.earth:hover{background:#A64A22}
+/* round strip */
+.rounds{display:flex;gap:6px;margin:16px 0 10px}
+.rd{flex:1;text-align:center;border:1px solid var(--line);border-radius:8px;padding:7px 4px;
+  font-size:11px;font-weight:700;color:var(--mid);background:var(--white)}
+.rd.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.rd.done{border-color:var(--teal);color:var(--teal)}
 
-/* ---------- hud ---------- */
-.hud{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
-.chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600}
-.chip b{font-variant-numeric:tabular-nums}
-.chip.streak{background:var(--sagelite);border-color:var(--sage);color:var(--ink)}
-.chip.round{background:var(--ink);color:#fff;border-color:var(--ink)}
+/* cards */
+.card{border:1px solid var(--line);border-radius:12px;padding:20px;margin-top:16px;background:var(--white)}
+.tagline{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;font-weight:700;color:var(--mid);margin-bottom:8px}
+.q{font-size:20px;line-height:1.35;font-weight:600;margin-bottom:4px}
+.q .quote{font-style:italic;font-weight:500}
+.hint{font-size:13.5px;color:var(--grey);margin-top:6px}
 
-/* ---------- question ---------- */
-.qhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}
-.qnum{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--grey)}
-.qtext{font-family:var(--disp);font-size:clamp(19px,3.4vw,25px);margin:6px 0 18px}
-.qfig{font-family:var(--disp);font-size:clamp(34px,8vw,54px);color:var(--euc);font-weight:700;
-  display:block;margin:2px 0 6px;letter-spacing:-.01em}
-.opts{display:grid;gap:9px}
-.opt{text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:10px;
-  padding:14px 16px;font-size:15.5px;color:var(--ink);transition:border-color .15s,background-color .15s;width:100%}
-.opt:hover:not(:disabled){border-color:var(--sage);background:var(--sagelite)}
-.opt:disabled{cursor:default}
-.opt .key{display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--sagelite);
-  color:var(--ink);font-weight:700;font-size:12.5px;align-items:center;justify-content:center;margin-right:10px;flex:none}
-.opt.right{border-color:var(--euc);background:var(--sagelite)}
-.opt.right .key{background:var(--euc);color:#fff}
-.opt.wrong{border-color:var(--earth);background:var(--earthlite)}
-.opt.wrong .key{background:var(--earth);color:#fff}
-.opts.two{grid-template-columns:1fr 1fr}
-.opts.three{grid-template-columns:repeat(3,1fr)}
-@media(max-width:640px){.opts.two,.opts.three{grid-template-columns:1fr}}
+.opts{display:grid;gap:9px;margin-top:16px}
+button.opt{display:flex;gap:11px;align-items:flex-start;text-align:left;width:100%;
+  border:1px solid var(--line);background:var(--white);border-radius:10px;padding:13px 14px;
+  font:inherit;font-size:15.5px;color:var(--ink);cursor:pointer;transition:.14s}
+button.opt:hover:not(:disabled){border-color:var(--plum);background:var(--pale)}
+button.opt:disabled{cursor:default}
+button.opt .key{flex:none;width:24px;height:24px;border-radius:50%;background:var(--pale);
+  border:1px solid var(--line);font-size:12px;font-weight:800;display:flex;align-items:center;
+  justify-content:center;color:var(--grey);margin-top:1px}
+button.opt.right{border-color:var(--ok);background:#EAF5EF}
+button.opt.right .key{background:var(--ok);color:#fff;border-color:var(--ok)}
+button.opt.wrong{border-color:var(--no);background:#FBEEEA}
+button.opt.wrong .key{background:var(--no);color:#fff;border-color:var(--no)}
 
-.fb{margin-top:16px;border-radius:10px;padding:15px 17px;font-size:15px;display:none}
+.fb{margin-top:14px;border-radius:10px;padding:13px 15px;font-size:15px;display:none}
 .fb.show{display:block}
-.fb.ok{background:var(--sagelite);border:1px solid var(--sage)}
-.fb.no{background:var(--earthlite);border:1px solid #EBCDBB}
-.fb b{display:block;font-family:var(--disp);font-size:17px;margin-bottom:4px}
-.fbrow{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+.fb.good{background:#EAF5EF;border:1px solid #BEE0CE}
+.fb.bad{background:#FBEEEA;border:1px solid #EBC9BE}
+.fb b{display:block;margin-bottom:3px;font-size:13px;letter-spacing:.4px;text-transform:uppercase}
+.fb.good b{color:var(--ok)} .fb.bad b{color:var(--no)}
+.bonus{display:inline-block;margin-top:7px;font-size:12.5px;font-weight:700;color:var(--amber)}
 
-.badge-pop{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
-  background:var(--ink);color:#fff;padding:12px 22px;border-radius:999px;font-weight:700;font-size:14.5px;
-  opacity:0;transition:opacity .3s,transform .3s;z-index:50;pointer-events:none}
-.badge-pop.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.btn{border:0;border-radius:9px;padding:12px 20px;font:inherit;font-size:15px;font-weight:700;
+  cursor:pointer;background:var(--ink);color:#fff;transition:.14s}
+.btn:hover{opacity:.87}
+.btn.ghost{background:var(--white);color:var(--ink);border:1px solid var(--line)}
+.btn.plum{background:var(--plum)}
+.btn:disabled{opacity:.4;cursor:default}
 
-/* ---------- results ---------- */
-.score-big{font-family:var(--disp);font-size:clamp(52px,13vw,86px);font-weight:700;color:var(--euc);line-height:1;
-  font-variant-numeric:tabular-nums}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}
-.stat{background:var(--sagelite);border-radius:11px;padding:15px 16px}
-.stat b{display:block;font-family:var(--disp);font-size:26px;color:var(--euc)}
-.stat span{font-size:12.5px;color:var(--grey)}
-.badges{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
-.bdg{background:var(--amberlite);border:1px solid var(--amber);border-radius:999px;padding:7px 15px;font-size:13.5px;font-weight:700}
-.bdg.off{background:#F3F4F2;border-color:var(--line);color:#AAB4AE;font-weight:500}
-.miss{border-left:4px solid var(--earth);background:var(--card);border-radius:0 10px 10px 0;padding:13px 16px;margin-bottom:10px}
-.miss p{margin:3px 0;font-size:14.5px}
-.miss .q{font-weight:700}
-.miss .a{color:var(--euc)}
+.prog{font-size:12.5px;color:var(--mid);font-weight:600;margin-top:14px}
 
-/* ---------- certificate ---------- */
-#cert{display:none}
-.cert{border:3px double var(--ink);border-radius:6px;padding:34px 32px;text-align:center;background:#fff}
-.cert h2{font-size:30px;margin-bottom:4px}
-.cert .name{font-family:var(--disp);font-size:26px;border-bottom:1.5px solid var(--ink);
-  display:inline-block;min-width:280px;padding:14px 12px 4px;margin:16px 0 10px}
-.cert .line{font-size:14.5px;color:var(--grey);margin:4px 0}
-.cert .sc{font-family:var(--disp);font-size:44px;color:var(--euc);font-weight:700;margin:12px 0 2px}
+/* intro + results */
+.lead{font-size:16.5px;color:var(--ink);margin-bottom:6px}
+ul.plain{margin:12px 0 0 18px;font-size:15px;color:var(--ink)}
+ul.plain li{margin-bottom:5px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.badge{border:1px solid var(--line);border-radius:20px;padding:7px 14px;font-size:13px;font-weight:700;
+  color:var(--mid);background:var(--pale)}
+.badge.won{background:var(--hl);border-color:#E8C93B;color:var(--ink)}
+.big{font-size:52px;font-weight:800;letter-spacing:-1.5px;line-height:1}
+.rank{font-size:19px;font-weight:800;color:var(--plum);margin-top:4px}
+.miss{border-left:3px solid var(--clay);padding:11px 0 11px 14px;margin-top:12px}
+.miss .qq{font-size:14.5px;font-weight:600}
+.miss .aa{font-size:13.5px;color:var(--grey);margin-top:3px}
+.miss .aa em{color:var(--teal);font-style:normal;font-weight:700}
+.hide{display:none}
+
+/* certificate */
+#cert{border:3px double var(--ink);border-radius:6px;padding:34px 30px;text-align:center;margin-top:18px}
+#cert .ct{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--grey);font-weight:700}
+#cert h2{font-size:30px;margin:10px 0 6px;letter-spacing:-.5px}
+#cert .nm{font-size:22px;font-weight:800;border-bottom:2px solid var(--line);display:inline-block;
+  padding:0 26px 6px;margin:14px 0 12px;min-width:240px}
+#cert .dt{font-size:13px;color:var(--grey);margin-top:12px}
+input.name{border:1px solid var(--line);border-radius:8px;padding:11px 13px;font:inherit;font-size:15px;
+  width:100%;max-width:320px}
+
 @media print{
   body{background:#fff}
-  .noprint,#start,#quiz,#results,.badge-pop{display:none !important}
-  #cert{display:block !important}
-  .wrap{padding:0;max-width:100%}
+  .noprint{display:none !important}
+  #cert{border-color:#000}
 }
-@media (prefers-reduced-motion: reduce){
-  *{transition:none !important;animation:none !important;scroll-behavior:auto !important}
+@media(max-width:560px){
+  h1{font-size:26px}
+  .q{font-size:17.5px}
+  .stat .val{font-size:19px}
+  .rd{font-size:10px;padding:6px 2px}
 }
-.hide{display:none !important}
-.footnote{font-size:12.5px;color:var(--grey);margin-top:26px;line-height:1.6}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<!-- ============ START ============ -->
-<section id="start">
-  <div class="hero">
-    <div class="eyebrow">Lesson 28 &middot; Year 10 Geography &middot; VCGGK145</div>
-    <h1>Regrowth</h1>
-    <div class="sub">Gariwerd: does a national park actually protect biodiversity?</div>
-    <p>In the summer of 2024-25, fire burnt about 135,000 hectares of Gariwerd, close to 80 per cent of the park. Your job is to bring it back.</p>
-    <p>Every correct answer restores about 3,550 hectares. Every wrong answer chars a strip back. Get all 38 right and the whole 135,000 comes back green.</p>
-  </div>
+<header>
+  <div class="kicker">Year 10 Geography &nbsp;|&nbsp; Week 7 Monday &nbsp;|&nbsp; VCGGK146</div>
+  <h1>Standpoint</h1>
+  <div class="sub">Lesson 31: name the worldview, find the trade-off.</div>
+</header>
 
-  <div class="strip-wrap">
-    <div class="strip-top">
-      <span class="strip-label">Habitat recovered</span>
-      <span class="ha" id="haStart">0 <small>/ 135,000 ha</small></span>
+<div id="app"></div>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="card">
+    <div class="tagline">How this works</div>
+    <p class="lead">Four rounds, 38 questions. Every correct answer sharpens your lens. Every wrong answer blurs it.</p>
+    <ul class="plain">
+      <li><b>Round 1 &middot; Rapid Recall</b>: 10 questions on last week and today's definitions.</li>
+      <li><b>Round 2 &middot; Name the Worldview</b>: 12 real-sounding statements. Who is talking?</li>
+      <li><b>Round 3 &middot; The Trade-off</b>: 8 questions on what each worldview will sacrifice.</li>
+      <li><b>Round 4 &middot; Weak Spot</b>: 8 questions on where each position is vulnerable.</li>
+    </ul>
+    <p class="hint" style="margin-top:14px">Answer three in a row and your streak doubles the points. Get one wrong and the streak resets. You can use the number keys 1 to 4.</p>
+    <div class="row">
+      <button class="btn plum" onclick="start()">Start</button>
     </div>
-    <div class="strip" id="stripStart"></div>
   </div>
+</div>
 
-  <div class="rounds">
-    <div class="rnd"><b>1. Rapid recall</b><span>10 questions on management, protected areas and biodiversity</span></div>
-    <div class="rnd"><b>2. Threat or response</b><span>10 calls: is this hurting Gariwerd or helping it?</span></div>
-    <div class="rnd"><b>3. Figure file</b><span>9 numbers. Say what each one actually measures</span></div>
-    <div class="rnd"><b>4. Judge it</b><span>9 statements. Evidence it works, evidence of limits, or neither</span></div>
-  </div>
-
-  <p class="muted" style="font-size:14.5px;max-width:62ch">Three or more correct in a row doubles your points. Nothing is saved, so if you close the tab you start again. Have your book open, you will want these figures on Friday.</p>
-  <p style="margin-top:18px"><button class="btn" id="go">Start restoring</button></p>
-</section>
-
-<!-- ============ QUIZ ============ -->
-<section id="quiz" class="hide">
+<!-- QUIZ -->
+<div id="quiz" class="hide">
   <div class="hud">
-    <span class="chip round" id="cRound">Round 1</span>
-    <span class="chip">Score <b id="cScore">0</b></span>
-    <span class="chip streak" id="cStreak">Streak <b>0</b></span>
-    <span class="chip" id="cProg">1 / 38</span>
+    <div class="stat s-score"><div class="lab">Score</div><div class="val" id="score">0</div></div>
+    <div class="stat s-streak"><div class="lab">Streak</div><div class="val" id="streak">0</div></div>
+    <div class="stat s-acc"><div class="lab">Correct</div><div class="val" id="acc">0/0</div></div>
   </div>
 
-  <div class="strip-wrap">
-    <div class="strip-top">
-      <span class="strip-label">Habitat recovered</span>
-      <span class="ha" id="ha">0 <small>/ 135,000 ha</small></span>
-    </div>
-    <div class="strip" id="strip"></div>
+  <div class="clarity">
+    <div class="top"><span>Clarity of your lens</span><span class="pct" id="cpct">20%</span></div>
+    <div class="bar"><i id="cbar" style="width:20%"></i></div>
+    <div class="ends"><span>BLURRED</span><span>SHARP</span></div>
   </div>
+
+  <div class="rounds" id="rstrip"></div>
 
   <div class="card">
-    <div class="qhead"><span class="qnum" id="qLabel"></span></div>
-    <div class="qtext" id="qText"></div>
+    <div class="tagline" id="rlabel">Round 1</div>
+    <div class="q" id="qtext"></div>
+    <div class="hint" id="qhint"></div>
     <div class="opts" id="opts"></div>
-    <div class="fb" id="fb">
-      <b id="fbTitle"></b>
-      <span id="fbText"></span>
-      <div class="fbrow">
-        <span class="muted" id="fbPts"></span>
-        <button class="btn" id="next">Next</button>
-      </div>
-    </div>
+    <div class="fb" id="fb"></div>
+    <div class="row noprint"><button class="btn hide" id="next" onclick="next()">Next</button></div>
+    <div class="prog" id="prog"></div>
   </div>
-</section>
+</div>
 
-<!-- ============ RESULTS ============ -->
-<section id="results" class="hide">
+<!-- RESULTS -->
+<div id="results" class="hide">
   <div class="card">
-    <div class="eyebrow">Final report</div>
-    <div class="score-big" id="rScore">0</div>
-    <h2 id="rVerdict" style="margin:6px 0 4px"></h2>
-    <p class="muted" id="rBlurb" style="margin:0"></p>
+    <div class="tagline">Final result</div>
+    <div class="big" id="fscore">0</div>
+    <div class="rank" id="frank"></div>
+    <p class="hint" id="fline" style="margin-top:8px"></p>
+    <div class="badges" id="fbadges"></div>
+  </div>
 
-    <div class="grid2">
-      <div class="stat"><b id="rCorrect">0/38</b><span>correct</span></div>
-      <div class="stat"><b id="rHa">0 ha</b><span>habitat recovered</span></div>
-      <div class="stat"><b id="rPct">0%</b><span>of the burnt area</span></div>
-      <div class="stat"><b id="rStreak">0</b><span>best streak</span></div>
+  <div class="card" id="missbox">
+    <div class="tagline">What to go back over</div>
+    <div id="misslist"></div>
+  </div>
+
+  <div class="card noprint">
+    <div class="tagline">Certificate</div>
+    <p class="hint">Type your name, then print or save as PDF.</p>
+    <div class="row">
+      <input class="name" id="nm" placeholder="Your name" oninput="document.getElementById('cnm').textContent=this.value||'\u00a0'">
     </div>
-
-    <div class="eyebrow" style="margin-top:6px">Badges</div>
-    <div class="badges" id="rBadges"></div>
+    <div class="row">
+      <button class="btn" onclick="window.print()">Print / Save PDF</button>
+      <button class="btn ghost" onclick="location.reload()">Play again</button>
+    </div>
   </div>
 
-  <div id="reviewBlock" class="card" style="margin-top:16px">
-    <h2 style="font-size:22px;margin-bottom:4px">What to fix</h2>
-    <p class="muted" style="margin:0 0 14px;font-size:14.5px">These are the ones you missed. Write the correct answers into your book before Friday.</p>
-    <div id="review"></div>
+  <div id="cert">
+    <div class="ct">Manor Lakes College &middot; Year 10 Geography</div>
+    <h2>Standpoint</h2>
+    <div class="ct" style="letter-spacing:1px">Environmental Worldviews &middot; Lesson 31</div>
+    <div class="nm" id="cnm">&nbsp;</div>
+    <div style="font-size:15px">scored <b id="cscore">0</b> points with <b id="cacc">0%</b> accuracy</div>
+    <div class="ct" style="letter-spacing:1px;margin-top:6px" id="crank"></div>
+    <div class="dt" id="cdate"></div>
   </div>
-
-  <p style="margin-top:18px" class="noprint">
-    <button class="btn" id="printCert">Print your certificate</button>
-    <button class="btn ghost" id="again" style="margin-left:8px">Play again</button>
-  </p>
-
-  <p class="footnote">
-    Figures from Parks Victoria, DCCEEW, the Victorian Department of Energy, Environment and Climate Action,
-    and reporting on the 2024-25 Grampians (Gariwerd) fires, current as at 2026.
-    Gariwerd is on the Country of the Djab Wurrung and Jardwadjali peoples, and the park is jointly managed
-    with the Barengi Gadjin, Eastern Maar and Gunditj Mirring peoples.
-  </p>
-</section>
-
-<!-- ============ CERTIFICATE (print only) ============ -->
-<section id="cert">
-  <div class="cert">
-    <div class="eyebrow">Year 10 Geography &middot; Environmental Change and Management</div>
-    <h2>Gariwerd Recovery Certificate</h2>
-    <p class="line">Lesson 28 &middot; National parks and biodiversity &middot; VCGGK145</p>
-    <div class="name">&nbsp;</div>
-    <p class="line">name</p>
-    <div class="sc" id="certScore">0</div>
-    <p class="line" id="certLine">points</p>
-    <p class="line" id="certHa"></p>
-    <p class="line" id="certBadges" style="margin-top:14px"></p>
-    <p class="line" style="margin-top:22px">Teacher signature ______________________&nbsp;&nbsp;&nbsp;Date ____________</p>
-  </div>
-</section>
+</div>
 
 </div>
-<div class="badge-pop" id="pop"></div>
 
 <script>
-"use strict";
+/* ============ DATA ============ */
+const W = {
+  dev:  "Development first",
+  tech: "Technology will fix it",
+  stew: "Stewardship",
+  nat:  "Nature first"
+};
 
-/* ===================== CONTENT ===================== */
-// type: "mcq" | "binary" | "figure" | "judge"
 const ROUNDS = [
   {
-    name: "Rapid recall",
-    kind: "mcq",
+    name: "Rapid Recall",
     items: [
-      { q:"What does biodiversity mean?",
-        opts:["The variety of life in a place, at genetic, species and ecosystem level",
-              "The total number of animals living in a place",
-              "How healthy the plants in an area are",
-              "The number of national parks in a state"],
-        a:0, why:"Three levels: genetic variety inside a species, the number of different species, and the variety of habitats." },
-      { q:"A species that is found nowhere else on Earth is described as:",
-        opts:["Endemic","Endangered","Introduced","Migratory"],
-        a:0, why:"Endemic means found nowhere else. It is about location, not rarity. An endemic species can still be locally common." },
-      { q:"Which of these does declaring a national park guarantee on its own?",
-        opts:["Legal protection from clearing, mining and development",
-              "Protection from bushfire",
-              "Removal of foxes and feral cats",
-              "Protection from climate change"],
-        a:0, why:"Legal protection is job 1. Fire, feral animals and climate change all cross the boundary, so job 4, active management, is still needed." },
-      { q:"Name the three broad approaches to environmental management from Monday's lesson.",
-        opts:["Legislative, community-based and market-based",
-              "National, state and local",
-              "Protective, restorative and preventative",
-              "Public, private and Indigenous"],
-        a:0, why:"Legislative (laws and regulation), community-based (Landcare, volunteers, ranger groups) and market-based (container deposit schemes, incentives)." },
-      { q:"About what share of Australia's landmass sat inside protected areas at 30 June 2024?",
-        opts:["22.57 per cent","5 per cent","48.9 per cent","70 per cent"],
-        a:0, why:"CAPAD 2024 put it at 22.57 per cent of the landmass, lifted to about 24.9 per cent in the September 2025 update. Marine protection is much higher at about 49 per cent." },
-      { q:"A \"paper park\" is a protected area that:",
-        opts:["Exists legally but has no funding, staff or active management",
-              "Is only shown on maps and does not physically exist",
-              "Is managed entirely by volunteers",
-              "Protects only plant species"],
-        a:0, why:"The boundary exists on paper, but nothing is being done inside it. That is job 1 without job 4." },
-      { q:"Why is a large protected area usually better for biodiversity than several small ones of the same total size?",
-        opts:["Large areas support species that need big territories and let animals move between habitats",
-              "Large areas are cheaper to fence",
-              "Small areas cannot legally be protected",
-              "Large areas always have better soil"],
-        a:0, why:"Big intact areas hold wide-ranging species, keep more habitat away from the edges, and allow movement, which keeps genetic diversity up." },
-      { q:"Which level of biodiversity is reduced when a species is left with only one small isolated population?",
-        opts:["Genetic diversity","Ecosystem diversity","Species diversity","None of them"],
-        a:0, why:"A small isolated population loses genetic variety, so it is far more vulnerable to disease and to changing conditions." },
-      { q:"Gariwerd is jointly managed by Parks Victoria and:",
-        opts:["The Barengi Gadjin, Eastern Maar and Gunditj Mirring peoples",
-              "The federal Department of Agriculture",
-              "The Victorian National Parks Association",
-              "A private tourism operator"],
-        a:0, why:"The Greater Gariwerd Landscape Management Plan was written jointly by Parks Victoria and those three Traditional Owner groups." },
-      { q:"Cultural burning supports biodiversity mainly because it:",
-        opts:["Creates a patchy mosaic of recently burnt and long unburnt vegetation",
-              "Removes all fuel from the landscape permanently",
-              "Kills introduced predators such as foxes",
-              "Stops any fire from ever occurring again"],
-        a:0, why:"Small, cool, patchy burns leave vegetation at different stages. Different species need different stages, so a mosaic holds more species than one big even-aged burn." }
+      { q:"What is an environmental worldview?",
+        o:["The set of beliefs and values someone holds about the natural world and how humans should relate to it",
+           "A scientific measurement of environmental damage",
+           "A government policy about the environment",
+           "Someone's opinion about one particular project"],
+        a:0, e:"It is the lens, not the opinion. An opinion is about one issue; a worldview shapes how you read every issue." },
+      { q:"Which is the difference between an opinion and a worldview?",
+        o:["An opinion is about one issue; a worldview is the values you judge every issue with",
+           "There is no difference, they are the same thing",
+           "An opinion is written down; a worldview is not",
+           "A worldview only applies to scientists"],
+        a:0, e:"You can change your opinion on a project in an afternoon. A worldview takes years to shift." },
+      { q:"Name the three questions used to identify someone's worldview.",
+        o:["What do they value most? What is nature for? What would they trade away?",
+           "Who are they? Where do they live? How old are they?",
+           "What do they earn? Who do they vote for? What do they drive?",
+           "What is the problem? What is the cause? What is the solution?"],
+        a:0, e:"Question three does the heavy lifting. Everyone says they care; the trade-off is where they differ." },
+      { q:"Which of these is the strongest test of someone's actual worldview?",
+        o:["What they are willing to give up",
+           "What they say they care about",
+           "Whether they recycle",
+           "Which political party they support"],
+        a:0, e:"Anyone will say they care about the environment. What they will sacrifice is the honest test." },
+      { q:"Order the spectrum from people first to nature first.",
+        o:["Development first, technology first, stewardship, nature first",
+           "Nature first, stewardship, technology first, development first",
+           "Stewardship, development first, nature first, technology first",
+           "Technology first, nature first, development first, stewardship"],
+        a:0, e:"Development first sits at the people end, nature first at the other, with the other two between." },
+      { q:"Which factor shaping a worldview is usually the most powerful?",
+        o:["Livelihood, where your income comes from",
+           "Your favourite subject at school",
+           "How much you use social media",
+           "Your height"],
+        a:0, e:"If your family income depends on an industry, you hear arguments about that industry differently. That is not corruption, it is how people work." },
+      { q:"In the 2026 Lowy Institute Poll, what share of Australians said climate change is serious and pressing and we should act now even if it costs?",
+        o:["49%","89%","12%","72%"], a:0,
+        e:"49%, which was down eight points since 2024." },
+      { q:"On net zero and the economy, the same poll found Australians were:",
+        o:["Evenly split, 38% said better off and 38% said worse off",
+           "Almost unanimous that it would help",
+           "Almost unanimous that it would hurt",
+           "Not asked about it"],
+        a:0, e:"A dead-even split. Same country, same evidence, different values." },
+      { q:"Last week: name the three approaches to environmental management.",
+        o:["Legislative, community-based, market-based",
+           "Local, state, federal",
+           "Scientific, political, economic",
+           "Short-term, medium-term, long-term"],
+        a:0, e:"Laws and regulation; community and volunteer action; and pricing or incentives." },
+      { q:"Roughly what share of Australia's landmass is inside protected areas?",
+        o:["About 25%","About 5%","About 50%","About 70%"], a:0,
+        e:"It passed 25% in July 2026 when the Simpson Desert Indigenous Protected Area was declared." }
     ]
   },
   {
-    name: "Threat or response",
-    kind: "binary",
-    labels: ["Threat","Management response"],
+    name: "Name the Worldview",
     items: [
-      { q:"European red foxes hunting Brush-tailed Rock-wallabies", a:0,
-        why:"Foxes are the single biggest threat to the rock-wallaby population in Gariwerd." },
-      { q:"Grampians Ark baiting foxes across 226,000 hectares", a:1,
-        why:"A long-running Parks Victoria program, going for more than 20 years, covering park, state forest and neighbouring private land." },
-      { q:"Feral deer and goats eating fresh regrowth after fire", a:0,
-        why:"Introduced herbivores eat and trample the regrowth that native species depend on to recover." },
-      { q:"Emergency food drops for rock-wallabies after the 2024-25 fires", a:1,
-        why:"Ground feeding stations and food drops kept the surviving colony alive while there was nothing left to eat." },
-      { q:"Hotter, drier conditions making fire more frequent", a:0,
-        why:"Climate change shortens the recovery time between fires, so species that need long unburnt habitat never get it." },
-      { q:"Cultural burning guided by Traditional Owners", a:1,
-        why:"Cool, patchy burning protects cultural sites and creates the habitat mosaic that supports more species." },
-      { q:"Introduced weeds spreading into freshly burnt ground", a:0,
-        why:"Burnt ground is bare and open, which is exactly the conditions weeds need to outcompete slower native regrowth." },
-      { q:"Remote monitoring cameras recording small mammals", a:1,
-        why:"Over 10,000 camera trap nights a year. You cannot manage what you are not measuring." },
-      { q:"Land clearing on the plains surrounding the park", a:0,
-        why:"Clearing outside the boundary is why the park became a refuge in the first place, and it leaves the park isolated." },
-      { q:"Temporary habitat pods placed out for small mammals and reptiles", a:1,
-        why:"Artificial shelter buys surviving animals cover while burnt vegetation grows back." }
+      { q:"\u201cYou can't eat scenery. Those jobs feed the whole town and there are three hundred of them.\u201d",
+        o:[W.dev,W.tech,W.stew,W.nat], a:0,
+        e:"Development first. The argument is entirely economic and immediate." },
+      { q:"\u201cGive it a decade. Solar and batteries get cheaper every year and this whole argument disappears.\u201d",
+        o:[W.tech,W.dev,W.stew,W.nat], a:0,
+        e:"Technology will fix it. The bet is on an invention arriving in time." },
+      { q:"\u201cUse the water, but never take more in a year than the river can replace. Our kids need it too.\u201d",
+        o:[W.stew,W.nat,W.dev,W.tech], a:0,
+        e:"Stewardship. Use is allowed, but within a limit set by handing it on." },
+      { q:"\u201cThat forest was here four hundred years before us. It doesn't need to be useful to anyone.\u201d",
+        o:[W.nat,W.stew,W.tech,W.dev], a:0,
+        e:"Nature first. Value is given independently of usefulness to humans." },
+      { q:"\u201cKeep mining. Put the money into carbon capture and in twenty years we'll run it clean.\u201d",
+        o:[W.tech,W.dev,W.stew,W.nat], a:0,
+        e:"Technology will fix it. Not defending mining on jobs, defending it on a future fix." },
+      { q:"\u201cApprove it. Regional Victoria needs the investment far more than Melbourne needs another park.\u201d",
+        o:[W.dev,W.stew,W.nat,W.tech], a:0,
+        e:"Development first. Economic need is weighed above the conservation value." },
+      { q:"\u201cI don't care what it costs. Once that wetland is drained it is gone forever.\u201d",
+        o:[W.nat,W.stew,W.dev,W.tech], a:0,
+        e:"Nature first. Cost is explicitly dismissed and irreversibility is the whole argument." },
+      { q:"\u201cWe're borrowing this from our grandchildren. Use it, but leave it in decent condition.\u201d",
+        o:[W.stew,W.nat,W.dev,W.tech], a:0,
+        e:"Stewardship. The classic formulation, and where most government policy claims to sit." },
+      { q:"\u201cFish it, but set a quota based on the science and actually enforce it.\u201d",
+        o:[W.stew,W.dev,W.nat,W.tech], a:0,
+        e:"Stewardship. Harvest continues, but a limit is imposed to keep the stock going." },
+      { q:"\u201cEvery problem we've ever had, we've engineered our way out of. This one is no different.\u201d",
+        o:[W.tech,W.dev,W.nat,W.stew], a:0,
+        e:"Technology will fix it. Historical confidence in human invention." },
+      { q:"\u201cShut the whole fishery. If a species is collapsing, no quota is small enough.\u201d",
+        o:[W.nat,W.stew,W.tech,W.dev], a:0,
+        e:"Nature first. It rejects managed use altogether once the species is at risk." },
+      { q:"\u201cThe mine will fund the hospital, the road and half the shire's rates. Environmental cost is manageable.\u201d",
+        o:[W.dev,W.tech,W.stew,W.nat], a:0,
+        e:"Development first. Environmental damage is accepted because the economic return is judged bigger." }
     ]
   },
   {
-    name: "Figure file",
-    kind: "figure",
+    name: "The Trade-off",
     items: [
-      { fig:"975+", q:"What does this figure measure in Gariwerd?",
-        opts:["Native plant species in the park, about one third of Victoria's flora",
-              "Hectares of the park burnt in 2024-25",
-              "Bird species recorded in the park",
-              "Fox bait stations across the landscape"],
-        a:0, why:"Over 975 native plant species, roughly a third of the whole state's flora, in a park covering under one per cent of Victoria." },
-      { fig:"49", q:"What does this figure measure?",
-        opts:["Species endemic to Gariwerd, found nowhere else on Earth",
-              "Threatened species in Victoria",
-              "Kilometres of walking track in the park",
-              "Years since the park was declared"],
-        a:0, why:"About 49 endemic species. If they are lost here, they are lost everywhere." },
-      { fig:"167,219 ha", q:"What does this figure measure?",
-        opts:["The total area of Gariwerd National Park",
-              "The area burnt in the 2024-25 fires",
-              "The area under fox control",
-              "Victoria's total protected area"],
-        a:0, why:"167,219 hectares, which is about 0.7 per cent of Victoria. Do not confuse it with the 226,000 hectares of fox control, which is larger than the park." },
-      { fig:"135,000 ha", q:"What does this figure measure?",
-        opts:["Area burnt in the 2024-25 Gariwerd fires, close to 80 per cent of the park",
-              "The total area of the park",
-              "Area of Victoria's marine national parks",
-              "Area protected under the National Reserve System"],
-        a:0, why:"Fires from 17 December 2024 and a second lightning band on 27 January 2025 burnt about 135,000 hectares." },
-      { fig:"226,000 ha", q:"What does this figure measure?",
-        opts:["Area covered by the Grampians Ark fox control program",
-              "The size of the national park",
-              "Area of land cleared in western Victoria",
-              "Area burnt across Victoria in 2024-25"],
-        a:0, why:"Larger than the park itself, because foxes do not stay inside boundaries. It includes state forest and neighbouring private land." },
-      { fig:"~450", q:"What does this figure measure each year?",
-        opts:["Foxes removed through the Grampians Ark program",
-              "Rock-wallabies remaining in the park",
-              "Rock art sites in the park",
-              "Volunteers working in the park"],
-        a:0, why:"Roughly 450 foxes controlled per year, using about 15,000 baits across around 1,020 bait stations." },
-      { fig:"172", q:"What does this figure measure?",
-        opts:["Known rock art places, around 90 per cent of Victoria's recorded rock art",
-              "Bird species in the park",
-              "Threatened plant species in the park",
-              "Campsites along the Grampians Peaks Trail"],
-        a:0, why:"Gariwerd is a cultural landscape as well as a biodiversity refuge. That is why it is on the National Heritage List for both." },
-      { fig:"33 of 36", q:"What does this figure describe?",
-        opts:["Small mammal monitoring sites that burnt in the 2024-25 fires",
-              "Threatened species that survived the fires",
-              "Bait stations destroyed by fire",
-              "Walking tracks closed after the fires"],
-        a:0, why:"Researchers were monitoring 36 small mammal sites. 33 of them burnt, which shows how little unburnt refuge was left." },
-      { fig:"1 July 1984", q:"What happened on this date?",
-        opts:["Gariwerd was declared a national park",
-              "The Greater Gariwerd Landscape Management Plan was released",
-              "The Grampians Ark program began",
-              "The park was added to the National Heritage List"],
-        a:0, why:"Declared 1 July 1984 after a long campaign. It was National Heritage listed much later, in 2006." }
+      { q:"A development first worldview is most willing to trade away:",
+        o:["Environmental quality, when the economic gain is judged large enough",
+           "Jobs, to protect habitat",
+           "Economic growth, to reduce emissions",
+           "Nothing at all"],
+        a:0, e:"That is the defining trade. Damage is accepted in return for economic benefit." },
+      { q:"A nature first worldview is most willing to trade away:",
+        o:["Real economic gain and jobs, to keep an ecosystem intact",
+           "Habitat, if the payment is high enough",
+           "Species, if the technology is promising",
+           "Nothing at all"],
+        a:0, e:"They accept genuine economic loss. Their weak spot is who ends up carrying that loss." },
+      { q:"A technology first worldview is essentially betting that:",
+        o:["A solution will arrive before the damage becomes irreversible",
+           "Nobody will notice the damage",
+           "The environment will repair itself with no help",
+           "Governments will ban the activity anyway"],
+        a:0, e:"It accepts damage now on the assumption of a future fix. If the fix is late, the bet fails." },
+      { q:"A stewardship worldview is most willing to trade away:",
+        o:["Faster growth and lower costs now, to keep options open later",
+           "Every species, if jobs are at stake",
+           "All economic activity",
+           "Future generations' interests"],
+        a:0, e:"It slows things down and pays more now so that the resource is still there later." },
+      { q:"Two people both back the same gas project, one for the jobs and one because carbon capture will handle it. This shows that:",
+        o:["Different worldviews can reach the same position for different reasons",
+           "They must have the same worldview",
+           "One of them is lying",
+           "Worldviews do not affect decisions"],
+        a:0, e:"Same answer, different reasoning. Always check the reason, not just the position." },
+      { q:"Two stewardship supporters argue about whether one transmission route does enough damage to matter. This shows:",
+        o:["People with the same worldview can still disagree about specific projects",
+           "One of them has changed worldview",
+           "Stewardship is not a real worldview",
+           "They must both be nature first"],
+        a:0, e:"Shared values, different reading of the facts. Worldview does not settle every detail." },
+      { q:"On the western Victorian transmission line, who would say \u201cbuild it, but route around remnant vegetation and pay host farmers a fair long-term share\u201d?",
+        o:[W.stew,W.dev,W.nat,W.tech], a:0,
+        e:"Stewardship. The project proceeds, but with limits and fair distribution of the cost." },
+      { q:"On the same line, who would say \u201cbuild it, but underground the worst sections and use better tower design\u201d?",
+        o:[W.tech,W.nat,W.dev,W.stew], a:0,
+        e:"Technology first. The objection is treated as an engineering problem to be solved." }
     ]
   },
   {
-    name: "Judge it",
-    kind: "judge",
-    labels: ["Protection works","Shows limits","Neither"],
+    name: "Weak Spot",
     items: [
-      { q:"Gariwerd still holds over 975 native plant species while the plains around it were cleared for farming.", a:0,
-        why:"Strong evidence the park has worked as a refuge. The comparison with the cleared land outside is what makes it evidence." },
-      { q:"Fire burnt close to 80 per cent of the park in a single summer.", a:1,
-        why:"Clear evidence of limits. Legal protection cannot stop fire crossing a boundary." },
-      { q:"Grampians Ark has controlled foxes across 226,000 hectares for more than 20 years.", a:0,
-        why:"Evidence that active management is real, sustained and measurable, not just a line on a map." },
-      { q:"The long-footed potoroo was confirmed in Gariwerd for the first time in over a decade, then not found again after the fires.", a:1,
-        why:"Evidence of limits. Being inside a protected area did not save the population." },
-      { q:"More than a million people visit the park each year.", a:2,
-        why:"On its own this is neither. Visitors bring funding and public support, but also pressure. Without more detail it does not prove either case." },
-      { q:"The Greater Gariwerd Landscape Management Plan is written jointly with three Traditional Owner groups and covers 15 nearby reserves as one landscape.", a:0,
-        why:"Evidence protection is improving, because it treats the area as a connected landscape rather than one isolated park." },
-      { q:"Rock-wallabies needed emergency food drops to survive after the fires.", a:1,
-        why:"Evidence of limits. The population only persisted because of emergency intervention, which is not a stable situation." },
-      { q:"Mount William is the highest peak in the range at 1,167 metres.", a:2,
-        why:"Neither. It is a fact about the landscape, but it says nothing about whether biodiversity is being protected." },
-      { q:"Fox control extends onto neighbouring private land in partnership with local Landcare groups.", a:0,
-        why:"Evidence protection works, because it addresses the core weakness that threats come from outside the boundary." }
+      { q:"\u201cIt discounts costs that arrive later, and that other people end up paying.\u201d Whose weak spot?",
+        o:[W.dev,W.stew,W.nat,W.tech], a:0,
+        e:"Development first. The benefit is now and local; the cost is often later and elsewhere." },
+      { q:"\u201cThe fix might not arrive, or arrives after the damage is already irreversible.\u201d Whose weak spot?",
+        o:[W.tech,W.dev,W.nat,W.stew], a:0,
+        e:"Technology first. Link this to Week 3, irreversible change." },
+      { q:"\u201cBalance is easy to say and very hard to measure. Who decides what counts as decent?\u201d Whose weak spot?",
+        o:[W.stew,W.nat,W.tech,W.dev], a:0,
+        e:"Stewardship. Almost everyone claims it, which makes it hard to hold anyone to." },
+      { q:"\u201cIt can ask one small community to carry a cost the whole country enjoys the benefit of.\u201d Whose weak spot?",
+        o:[W.nat,W.dev,W.tech,W.stew], a:0,
+        e:"Nature first. Think of a timber town after a logging ban." },
+      { q:"Why is it wrong to write \u201cnature first is the correct worldview\u201d in an exam answer?",
+        o:["Every position has a genuine strength and a genuine weakness; the task is to analyse, not to barrack",
+           "Because nature first is actually the worst one",
+           "Because you are not allowed to mention it",
+           "Because only stewardship is on the curriculum"],
+        a:0, e:"You are being marked on whether you can explain the values and trade-offs, not on which side you pick." },
+      { q:"A student writes: \u201cIf two people disagree about a project they must have different worldviews.\u201d This is:",
+        o:["False, because people who share a worldview can read the same facts differently",
+           "True, disagreement always means different values",
+           "True, but only for climate issues",
+           "Impossible to judge"],
+        a:0, e:"False. And the reverse is also true: different worldviews can land on the same answer." },
+      { q:"Which worldview would be most comfortable with the statement \u201chuman wellbeing is the point of environmental protection\u201d?",
+        o:[W.dev,W.nat,W.stew,W.tech], a:0,
+        e:"Development first sits most easily here, though stewardship also treats human benefit as central. Nature first rejects it outright." },
+      { q:"The best reason to study worldviews in Geography is:",
+        o:["It explains why people who accept the same evidence still disagree about what to do",
+           "It tells you which side is right",
+           "It replaces the need for data",
+           "It is only useful for the exam"],
+        a:0, e:"Evidence tells you what is happening. Worldviews explain what people decide to do about it." }
     ]
   }
 ];
 
-/* ===================== STATE ===================== */
-const TOTAL = ROUNDS.reduce((n,r)=>n+r.items.length,0);
-const HA_TOTAL = 135000;
-const HA_PER = HA_TOTAL / TOTAL;
-const BLADES = 48;
+/* ============ STATE ============ */
+let flat=[], idx=0, score=0, streak=0, best=0, correct=0, answered=0, clarity=20, misses=[], locked=false;
 
-let flat = [];
-let idx = 0, score = 0, streak = 0, bestStreak = 0, correct = 0;
-let missed = [], badges = new Set(), answered = false;
-let roundMiss = {};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;}
 
-const $ = id => document.getElementById(id);
-
-function shuffle(a){
-  const b = a.slice();
-  for(let i=b.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [b[i],b[j]]=[b[j],b[i]]; }
-  return b;
-}
-
-function buildFlat(){
-  flat = [];
-  ROUNDS.forEach((r, ri) => {
-    r.items.forEach(it => {
-      const item = { round: ri, roundName: r.name, kind: r.kind, why: it.why, q: it.q, fig: it.fig || null };
-      if (r.kind === "mcq" || r.kind === "figure") {
-        const paired = it.opts.map((t,i)=>({t, ok:i===it.a}));
-        item.opts = shuffle(paired);
-        item.wide = true;
-      } else {
-        item.opts = r.labels.map((t,i)=>({t, ok:i===it.a}));
-        item.wide = false;
-        item.cols = r.labels.length;
-      }
-      item.answer = it.opts ? it.opts[it.a] : r.labels[it.a];
-      flat.push(item);
+function build(){
+  flat=[];
+  ROUNDS.forEach((r,ri)=>{
+    r.items.forEach(it=>{
+      const pairs = it.o.map((t,i)=>({t,ok:i===it.a}));
+      const sh = shuffle(pairs);
+      flat.push({round:ri, rname:r.name, q:it.q, e:it.e, opts:sh, ansIdx:sh.findIndex(p=>p.ok)});
     });
   });
 }
 
-/* ---------- regrowth strip ---------- */
-function makeStrip(el){
-  el.innerHTML = "";
-  for(let i=0;i<BLADES;i++){
-    const b = document.createElement("div");
-    b.className = "blade";
-    el.appendChild(b);
-  }
-}
-function paintStrip(){
-  const el = $("strip");
-  if(!el) return;
-  const ratio = Math.max(0, correct) / TOTAL;
-  const lit = Math.round(ratio * BLADES);
-  [...el.children].forEach((b,i)=>{
-    b.classList.remove("live","mid");
-    if(i < lit){
-      const tall = 18 + ((i*37)%26);
-      b.style.height = tall + "px";
-      b.classList.add(i % 4 === 0 ? "mid" : "live");
-    } else {
-      b.style.height = "7px";
-    }
-  });
-  const ha = Math.round(correct * HA_PER);
-  $("ha").innerHTML = ha.toLocaleString("en-AU") + ' <small>/ 135,000 ha</small>';
+function start(){
+  build();
+  document.getElementById('intro').classList.add('hide');
+  document.getElementById('quiz').classList.remove('hide');
+  renderStrip(); render();
 }
 
-/* ---------- badges ---------- */
-const BADGE_LIST = [
-  ["locked",   "Locked in",        "Hit a streak of 5"],
-  ["aura",     "Aura farming",     "Hit a streak of 10"],
-  ["receipts", "Reads the receipts","All 9 figures correct"],
-  ["calls",    "Good calls",       "All 10 threat/response correct"],
-  ["ranger",   "Certified ranger", "90 per cent or better overall"],
-  ["full",     "Full regrowth",    "All 135,000 hectares back"]
-];
-function pop(text){
-  const p = $("pop");
-  p.textContent = text;
-  p.classList.add("on");
-  clearTimeout(p._t);
-  p._t = setTimeout(()=>p.classList.remove("on"), 2100);
-}
-function award(key, label){
-  if(badges.has(key)) return;
-  badges.add(key);
-  pop("Badge unlocked: " + label);
+function renderStrip(){
+  const s=document.getElementById('rstrip');
+  s.innerHTML = ROUNDS.map((r,i)=>{
+    const cur = flat[idx] ? flat[idx].round : ROUNDS.length;
+    const cls = i===cur ? 'rd on' : (i<cur ? 'rd done' : 'rd');
+    return '<div class="'+cls+'">'+(i+1)+'. '+r.name+'</div>';
+  }).join('');
 }
 
-/* ---------- render ---------- */
 function render(){
-  answered = false;
-  const it = flat[idx];
-  $("cRound").textContent = "Round " + (it.round+1) + " \u00b7 " + it.roundName;
-  $("cProg").textContent = (idx+1) + " / " + TOTAL;
-  $("qLabel").textContent = it.kind === "figure" ? "What is this number?" :
-                            it.kind === "binary" ? "Threat or response?" :
-                            it.kind === "judge"  ? "What does this show?" : "Question";
-  $("qText").innerHTML = (it.fig ? '<span class="qfig">' + it.fig + "</span>" : "") + it.q;
-
-  const box = $("opts");
-  box.className = "opts" + (it.wide ? "" : (it.cols === 3 ? " three" : " two"));
-  box.innerHTML = "";
-  const keys = ["A","B","C","D"];
-  it.opts.forEach((o,i)=>{
-    const b = document.createElement("button");
-    b.className = "opt";
-    b.innerHTML = '<span class="key">' + keys[i] + "</span>" + o.t;
-    b.addEventListener("click", ()=>choose(i));
-    box.appendChild(b);
-  });
-  $("fb").className = "fb";
-  window.scrollTo({top:0, behavior:"smooth"});
+  locked=false;
+  const it=flat[idx];
+  document.getElementById('rlabel').textContent='Round '+(it.round+1)+' \u00b7 '+it.rname;
+  document.getElementById('qtext').innerHTML = it.q.trim().startsWith('\u201c')
+      ? '<span class="quote">'+it.q+'</span>' : it.q;
+  document.getElementById('qhint').textContent = it.q.trim().startsWith('\u201c') ? 'Which worldview is speaking?' : '';
+  const keys=['1','2','3','4'];
+  document.getElementById('opts').innerHTML = it.opts.map((p,i)=>
+    '<button class="opt" data-i="'+i+'" onclick="pick('+i+')"><span class="key">'+keys[i]+'</span><span>'+p.t+'</span></button>'
+  ).join('');
+  const fb=document.getElementById('fb'); fb.className='fb'; fb.innerHTML='';
+  document.getElementById('next').classList.add('hide');
+  document.getElementById('prog').textContent='Question '+(idx+1)+' of '+flat.length;
+  renderStrip(); hud();
 }
 
-function choose(i){
-  if(answered) return;
-  answered = true;
-  const it = flat[idx];
+function hud(){
+  document.getElementById('score').textContent=score;
+  document.getElementById('streak').textContent=streak;
+  document.getElementById('acc').textContent=correct+'/'+answered;
+  document.getElementById('cbar').style.width=clarity+'%';
+  document.getElementById('cpct').textContent=Math.round(clarity)+'%';
+}
+
+function pick(i){
+  if(locked) return; locked=true;
+  const it=flat[idx];
   const ok = it.opts[i].ok;
-  const btns = [...$("opts").children];
-  btns.forEach((b,j)=>{
-    b.disabled = true;
-    if(it.opts[j].ok) b.classList.add("right");
-    else if(j === i) b.classList.add("wrong");
-  });
+  answered++;
+  const btns=[...document.querySelectorAll('button.opt')];
+  btns.forEach(b=>b.disabled=true);
+  btns[i].classList.add(ok?'right':'wrong');
+  if(!ok) btns[it.ansIdx].classList.add('right');
 
-  let pts = 0;
+  const fb=document.getElementById('fb');
+  let bonusTxt='';
   if(ok){
-    correct++;
-    streak++;
-    bestStreak = Math.max(bestStreak, streak);
-    pts = streak >= 3 ? 200 : 100;
-    score += pts;
-    if(streak >= 5) award("locked", "Locked in");
-    if(streak >= 10) award("aura", "Aura farming");
+    correct++; streak++; best=Math.max(best,streak);
+    let pts=10;
+    if(streak>=3){ pts=20; bonusTxt='<span class="bonus">Streak x2 \u00b7 '+streak+' in a row</span>'; }
+    if(streak>=6){ pts=30; bonusTxt='<span class="bonus">Streak x3 \u00b7 '+streak+' in a row</span>'; }
+    score+=pts;
+    clarity=Math.min(100, clarity + 3.2);
+    fb.className='fb show good';
+    fb.innerHTML='<b>Correct, +'+pts+'</b>'+it.e+bonusTxt;
   } else {
-    streak = 0;
-    roundMiss[it.round] = (roundMiss[it.round] || 0) + 1;
-    missed.push({ q: it.fig ? it.fig + " \u2014 " + it.q : it.q, a: it.answer, why: it.why });
+    streak=0;
+    clarity=Math.max(0, clarity - 4);
+    misses.push({q:it.q, a:it.opts[it.ansIdx].t, e:it.e});
+    fb.className='fb show bad';
+    fb.innerHTML='<b>Not quite</b>The answer is <em>'+it.opts[it.ansIdx].t+'</em>. '+it.e;
   }
-
-  $("cScore").textContent = score;
-  $("cStreak").innerHTML = "Streak <b>" + streak + "</b>";
-  paintStrip();
-
-  const fb = $("fb");
-  fb.className = "fb show " + (ok ? "ok" : "no");
-  $("fbTitle").textContent = ok
-    ? (streak >= 3 ? "Correct, and that's a streak." : "Correct.")
-    : "Not this time.";
-  $("fbText").innerHTML = (ok ? "" : "<b style='display:inline;font-family:var(--body);font-size:15px'>Answer: </b>" + it.answer + ". ") + it.why;
-  $("fbPts").textContent = ok
-    ? "+" + pts + " points" + (pts === 200 ? " (streak bonus)" : "") + "  \u00b7  +" + Math.round(HA_PER).toLocaleString("en-AU") + " ha"
-    : "No points. Streak reset.";
-  $("next").textContent = (idx === TOTAL-1) ? "See your report" : "Next";
+  hud();
+  const n=document.getElementById('next');
+  n.classList.remove('hide');
+  n.textContent = idx===flat.length-1 ? 'See results' : 'Next';
+  n.focus();
 }
 
 function next(){
-  if(!answered) return;
-  // round-complete badges
-  const it = flat[idx];
-  const isLastOfRound = (idx === TOTAL-1) || flat[idx+1].round !== it.round;
-  if(isLastOfRound && (roundMiss[it.round] || 0) === 0){
-    if(it.round === 1) award("calls", "Good calls");
-    if(it.round === 2) award("receipts", "Reads the receipts");
-  }
-
-  if(idx === TOTAL-1){ finish(); return; }
   idx++;
+  if(idx>=flat.length){ finish(); return; }
   render();
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function finish(){
-  const pct = Math.round(correct / TOTAL * 100);
-  if(pct >= 90) badges.add("ranger");
-  if(correct === TOTAL) badges.add("full");
+  document.getElementById('quiz').classList.add('hide');
+  document.getElementById('results').classList.remove('hide');
+  const pct=Math.round(correct/flat.length*100);
+  let rank, line;
+  if(pct>=90){rank='Crystal clear';line='You can name a worldview from a single sentence and say what it would sacrifice. That is exactly the skill.';}
+  else if(pct>=75){rank='Sharp';line='Strong. Check the ones below, they are usually the trade-off questions.';}
+  else if(pct>=55){rank='Coming into focus';line='You have the four positions. The gap is the trade-off, what each one is willing to give up.';}
+  else {rank='Still blurry';line='Go back to the four definitions and the three-question test, then run this again.';}
+  document.getElementById('fscore').textContent=score;
+  document.getElementById('frank').textContent=rank+' \u00b7 '+pct+'% correct';
+  document.getElementById('fline').textContent=line;
 
-  $("quiz").classList.add("hide");
-  $("results").classList.remove("hide");
+  const badges=[
+    ['Full house', correct===flat.length],
+    ['Streak of 6+', best>=6],
+    ['Streak of 10+', best>=10],
+    ['Clear lens (80%+ clarity)', clarity>=80],
+    ['Worldview reader (Round 2 perfect)', roundPerfect(1)],
+    ['Trade-off spotter (Round 3 perfect)', roundPerfect(2)],
+    ['500 points', score>=500]
+  ];
+  document.getElementById('fbadges').innerHTML = badges.map(([t,w])=>
+    '<div class="badge'+(w?' won':'')+'">'+(w?'\u2713 ':'')+t+'</div>').join('');
 
-  $("rScore").textContent = score;
-  $("rCorrect").textContent = correct + "/" + TOTAL;
-  const ha = Math.round(correct * HA_PER);
-  $("rHa").textContent = ha.toLocaleString("en-AU");
-  $("rPct").textContent = pct + "%";
-  $("rStreak").textContent = bestStreak;
-
-  let v, blurb;
-  if(pct >= 90){ v = "The park is back."; blurb = "You can quote the figures and you can judge the evidence both ways. That is exactly what Friday's written response needs."; }
-  else if(pct >= 70){ v = "Solid regrowth."; blurb = "You have the case study. Tighten up the figures you missed below and you are in good shape."; }
-  else if(pct >= 50){ v = "Patchy recovery."; blurb = "The ideas are there but the evidence is thin. Go back through the misses and write the figures into your book."; }
-  else { v = "Still mostly char."; blurb = "Worth another run. Read the answers below first, then start again."; }
-  $("rVerdict").textContent = v;
-  $("rBlurb").textContent = blurb;
-
-  const bWrap = $("rBadges");
-  bWrap.innerHTML = "";
-  BADGE_LIST.forEach(([k,label,how])=>{
-    const s = document.createElement("span");
-    const got = badges.has(k);
-    s.className = "bdg" + (got ? "" : " off");
-    s.textContent = got ? label : label + " \u00b7 " + how;
-    bWrap.appendChild(s);
-  });
-
-  const rev = $("review");
-  if(missed.length === 0){
-    $("reviewBlock").innerHTML = '<h2 style="font-size:22px;margin-bottom:4px">Nothing to fix</h2>' +
-      '<p class="muted" style="margin:0;font-size:14.5px">Every question correct. Go and write your evaluation paragraph.</p>';
-  } else {
-    rev.innerHTML = "";
-    missed.forEach(m=>{
-      const d = document.createElement("div");
-      d.className = "miss";
-      d.innerHTML = '<p class="q">' + m.q + '</p><p class="a"><b>Answer:</b> ' + m.a + '</p><p class="muted">' + m.why + '</p>';
-      rev.appendChild(d);
-    });
+  const mb=document.getElementById('missbox');
+  if(misses.length===0){ mb.classList.add('hide'); }
+  else {
+    document.getElementById('misslist').innerHTML = misses.map(m=>
+      '<div class="miss"><div class="qq">'+m.q+'</div><div class="aa">Answer: <em>'+m.a+'</em>. '+m.e+'</div></div>').join('');
   }
-
-  // certificate
-  $("certScore").textContent = score;
-  $("certLine").textContent = "points \u00b7 " + correct + " of " + TOTAL + " correct (" + pct + "%)";
-  $("certHa").textContent = ha.toLocaleString("en-AU") + " of 135,000 hectares recovered";
-  const earned = BADGE_LIST.filter(b=>badges.has(b[0])).map(b=>b[1]);
-  $("certBadges").textContent = earned.length ? "Badges: " + earned.join(" \u00b7 ") : "";
-
-  window.scrollTo({top:0, behavior:"smooth"});
+  document.getElementById('cscore').textContent=score;
+  document.getElementById('cacc').textContent=pct+'%';
+  document.getElementById('crank').textContent=rank;
+  document.getElementById('cdate').textContent=new Date().toLocaleDateString('en-AU',{day:'numeric',month:'long',year:'numeric'});
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* ---------- wiring ---------- */
-makeStrip($("stripStart"));
-makeStrip($("strip"));
+function roundPerfect(ri){
+  const qs=flat.filter(f=>f.round===ri).map(f=>f.q);
+  return !misses.some(m=>qs.includes(m.q));
+}
 
-$("go").addEventListener("click", ()=>{
-  buildFlat();
-  idx = 0; score = 0; streak = 0; bestStreak = 0; correct = 0;
-  missed = []; badges = new Set(); roundMiss = {};
-  $("cScore").textContent = "0";
-  $("cStreak").innerHTML = "Streak <b>0</b>";
-  $("start").classList.add("hide");
-  $("results").classList.add("hide");
-  $("quiz").classList.remove("hide");
-  makeStrip($("strip"));
-  paintStrip();
-  render();
-});
-
-$("next").addEventListener("click", next);
-$("again").addEventListener("click", ()=>{ $("results").classList.add("hide"); $("start").classList.remove("hide"); window.scrollTo({top:0}); });
-$("printCert").addEventListener("click", ()=>window.print());
-
-document.addEventListener("keydown", e=>{
-  if($("quiz").classList.contains("hide")) return;
-  if(e.key === "Enter" && answered){ next(); return; }
-  const map = {"1":0,"2":1,"3":2,"4":3,"a":0,"b":1,"c":2,"d":3,"A":0,"B":1,"C":2,"D":3};
-  if(!answered && map[e.key] !== undefined){
-    const b = $("opts").children[map[e.key]];
-    if(b) b.click();
-  }
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('quiz').classList.contains('hide')) return;
+  if(['1','2','3','4'].includes(e.key)){ const b=document.querySelectorAll('button.opt')[+e.key-1]; if(b&&!b.disabled) b.click(); }
+  if(e.key==='Enter'&&locked){ const n=document.getElementById('next'); if(!n.classList.contains('hide')) n.click(); }
 });
 </script>
 </body>
