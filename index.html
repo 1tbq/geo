@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Standpoint | Lesson 31 Environmental Worldviews</title>
+<title>Caring for Country | Lesson 32 Indigenous Perspectives</title>
 <style>
 :root{
   --ink:#1F2333; --plum:#6B4A7A; --amber:#D98A25; --teal:#3F7F76; --clay:#B4553F;
@@ -15,51 +15,47 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
   background:var(--white);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
 .wrap{max-width:860px;margin:0 auto;padding:20px 18px 60px}
 
-/* header */
-header{border-bottom:2px solid var(--line);padding-bottom:14px;margin-bottom:18px}
+header{border-bottom:2px solid var(--line);padding-bottom:14px;margin-bottom:16px}
 .kicker{font-size:11px;letter-spacing:1.6px;font-weight:700;color:var(--mid);text-transform:uppercase}
 h1{font-size:32px;line-height:1.12;margin:6px 0 4px;letter-spacing:-.5px}
 .sub{color:var(--grey);font-size:15px}
 
-/* hud */
-.hud{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch;margin:16px 0 6px}
-.stat{flex:1;min-width:88px;border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:var(--white)}
+.ack{border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:8px;
+  padding:14px 16px;background:var(--pale);font-size:14px;color:var(--ink);margin-bottom:6px}
+.ack b{display:block;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--teal);margin-bottom:5px}
+
+.hud{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 6px}
+.stat{flex:1;min-width:88px;border:1px solid var(--line);border-radius:10px;padding:9px 12px}
 .stat .lab{font-size:10px;letter-spacing:1.1px;text-transform:uppercase;color:var(--mid);font-weight:700}
 .stat .val{font-size:22px;font-weight:800;letter-spacing:-.5px}
-.stat.s-score .val{color:var(--plum)}
+.stat.s-score .val{color:var(--teal)}
 .stat.s-streak .val{color:var(--amber)}
-.stat.s-acc .val{color:var(--teal)}
+.stat.s-acc .val{color:var(--plum)}
 
-/* clarity meter (signature) */
-.clarity{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px;background:var(--pale)}
-.clarity .top{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;
+.pbar{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px}
+.pbar .top{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;
   letter-spacing:1.1px;text-transform:uppercase;color:var(--mid);font-weight:700}
-.clarity .pct{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:0}
-.bar{height:12px;border-radius:6px;background:#E4E2EA;overflow:hidden;margin-top:8px;position:relative}
-.bar i{display:block;height:100%;width:20%;border-radius:6px;
-  background:linear-gradient(90deg,var(--clay),var(--amber) 40%,var(--plum) 72%,var(--teal));
+.pbar .pct{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:0}
+.bar{height:10px;border-radius:5px;background:#E4E2EA;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;width:0;border-radius:5px;background:var(--teal);
   transition:width .45s cubic-bezier(.2,.8,.3,1)}
-.ends{display:flex;justify-content:space-between;font-size:10.5px;color:var(--mid);margin-top:6px;font-weight:600}
 
-/* round strip */
 .rounds{display:flex;gap:6px;margin:16px 0 10px}
 .rd{flex:1;text-align:center;border:1px solid var(--line);border-radius:8px;padding:7px 4px;
-  font-size:11px;font-weight:700;color:var(--mid);background:var(--white)}
+  font-size:11px;font-weight:700;color:var(--mid)}
 .rd.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 .rd.done{border-color:var(--teal);color:var(--teal)}
 
-/* cards */
-.card{border:1px solid var(--line);border-radius:12px;padding:20px;margin-top:16px;background:var(--white)}
+.card{border:1px solid var(--line);border-radius:12px;padding:20px;margin-top:16px}
 .tagline{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;font-weight:700;color:var(--mid);margin-bottom:8px}
-.q{font-size:20px;line-height:1.35;font-weight:600;margin-bottom:4px}
-.q .quote{font-style:italic;font-weight:500}
+.q{font-size:20px;line-height:1.35;font-weight:600}
 .hint{font-size:13.5px;color:var(--grey);margin-top:6px}
 
 .opts{display:grid;gap:9px;margin-top:16px}
 button.opt{display:flex;gap:11px;align-items:flex-start;text-align:left;width:100%;
   border:1px solid var(--line);background:var(--white);border-radius:10px;padding:13px 14px;
   font:inherit;font-size:15.5px;color:var(--ink);cursor:pointer;transition:.14s}
-button.opt:hover:not(:disabled){border-color:var(--plum);background:var(--pale)}
+button.opt:hover:not(:disabled){border-color:var(--teal);background:var(--pale)}
 button.opt:disabled{cursor:default}
 button.opt .key{flex:none;width:24px;height:24px;border-radius:50%;background:var(--pale);
   border:1px solid var(--line);font-size:12px;font-weight:800;display:flex;align-items:center;
@@ -82,28 +78,24 @@ button.opt.wrong .key{background:var(--no);color:#fff;border-color:var(--no)}
   cursor:pointer;background:var(--ink);color:#fff;transition:.14s}
 .btn:hover{opacity:.87}
 .btn.ghost{background:var(--white);color:var(--ink);border:1px solid var(--line)}
-.btn.plum{background:var(--plum)}
-.btn:disabled{opacity:.4;cursor:default}
-
+.btn.teal{background:var(--teal)}
 .prog{font-size:12.5px;color:var(--mid);font-weight:600;margin-top:14px}
 
-/* intro + results */
-.lead{font-size:16.5px;color:var(--ink);margin-bottom:6px}
-ul.plain{margin:12px 0 0 18px;font-size:15px;color:var(--ink)}
+.lead{font-size:16.5px;margin-bottom:6px}
+ul.plain{margin:12px 0 0 18px;font-size:15px}
 ul.plain li{margin-bottom:5px}
 .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .badge{border:1px solid var(--line);border-radius:20px;padding:7px 14px;font-size:13px;font-weight:700;
   color:var(--mid);background:var(--pale)}
 .badge.won{background:var(--hl);border-color:#E8C93B;color:var(--ink)}
 .big{font-size:52px;font-weight:800;letter-spacing:-1.5px;line-height:1}
-.rank{font-size:19px;font-weight:800;color:var(--plum);margin-top:4px}
+.rank{font-size:19px;font-weight:800;color:var(--teal);margin-top:4px}
 .miss{border-left:3px solid var(--clay);padding:11px 0 11px 14px;margin-top:12px}
 .miss .qq{font-size:14.5px;font-weight:600}
 .miss .aa{font-size:13.5px;color:var(--grey);margin-top:3px}
 .miss .aa em{color:var(--teal);font-style:normal;font-weight:700}
 .hide{display:none}
 
-/* certificate */
 #cert{border:3px double var(--ink);border-radius:6px;padding:34px 30px;text-align:center;margin-top:18px}
 #cert .ct{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--grey);font-weight:700}
 #cert h2{font-size:30px;margin:10px 0 6px;letter-spacing:-.5px}
@@ -112,17 +104,11 @@ ul.plain li{margin-bottom:5px}
 #cert .dt{font-size:13px;color:var(--grey);margin-top:12px}
 input.name{border:1px solid var(--line);border-radius:8px;padding:11px 13px;font:inherit;font-size:15px;
   width:100%;max-width:320px}
+.src{font-size:12px;color:var(--mid);margin-top:26px;border-top:1px solid var(--line);padding-top:12px;line-height:1.6}
 
-@media print{
-  body{background:#fff}
-  .noprint{display:none !important}
-  #cert{border-color:#000}
-}
+@media print{ body{background:#fff} .noprint{display:none!important} #cert{border-color:#000} }
 @media(max-width:560px){
-  h1{font-size:26px}
-  .q{font-size:17.5px}
-  .stat .val{font-size:19px}
-  .rd{font-size:10px;padding:6px 2px}
+  h1{font-size:26px} .q{font-size:17.5px} .stat .val{font-size:19px} .rd{font-size:10px;padding:6px 2px}
 }
 </style>
 </head>
@@ -130,28 +116,31 @@ input.name{border:1px solid var(--line);border-radius:8px;padding:11px 13px;font
 <div class="wrap">
 
 <header>
-  <div class="kicker">Year 10 Geography &nbsp;|&nbsp; Week 7 Monday &nbsp;|&nbsp; VCGGK146</div>
-  <h1>Standpoint</h1>
-  <div class="sub">Lesson 31: name the worldview, find the trade-off.</div>
+  <div class="kicker">Year 10 Geography &nbsp;|&nbsp; Week 7 Tuesday &nbsp;|&nbsp; VCGGK146</div>
+  <h1>Caring for Country</h1>
+  <div class="sub">Lesson 32: custodianship, and what it changes on the ground.</div>
 </header>
 
-<div id="app"></div>
+<div class="ack">
+  <b>Acknowledgement of Country</b>
+  We acknowledge the Wadawurrung people as the Traditional Owners of the land on which our school stands,
+  and pay respect to Elders past and present. Every example in this activity comes from material published
+  by Traditional Owner organisations, Parks Victoria, the Victorian Government, DCCEEW or UNESCO.
+</div>
 
 <!-- INTRO -->
 <div id="intro">
   <div class="card">
     <div class="tagline">How this works</div>
-    <p class="lead">Four rounds, 38 questions. Every correct answer sharpens your lens. Every wrong answer blurs it.</p>
+    <p class="lead">Four rounds, 38 questions, drawn straight from today's lesson.</p>
     <ul class="plain">
-      <li><b>Round 1 &middot; Rapid Recall</b>: 10 questions on last week and today's definitions.</li>
-      <li><b>Round 2 &middot; Name the Worldview</b>: 12 real-sounding statements. Who is talking?</li>
-      <li><b>Round 3 &middot; The Trade-off</b>: 8 questions on what each worldview will sacrifice.</li>
-      <li><b>Round 4 &middot; Weak Spot</b>: 8 questions on where each position is vulnerable.</li>
+      <li><b>Round 1 &middot; Rapid Recall</b>: 10 questions on yesterday and today's key terms.</li>
+      <li><b>Round 2 &middot; True or False</b>: 10 common misconceptions. Some of these sound right.</li>
+      <li><b>Round 3 &middot; Figure File</b>: 8 questions on the numbers you can quote in writing.</li>
+      <li><b>Round 4 &middot; What Changes on the Ground</b>: 10 questions on practice, not attitude.</li>
     </ul>
-    <p class="hint" style="margin-top:14px">Answer three in a row and your streak doubles the points. Get one wrong and the streak resets. You can use the number keys 1 to 4.</p>
-    <div class="row">
-      <button class="btn plum" onclick="start()">Start</button>
-    </div>
+    <p class="hint" style="margin-top:14px">Three correct in a row doubles your points. One wrong resets the streak. Number keys 1 to 4 work.</p>
+    <div class="row"><button class="btn teal" onclick="start()">Start</button></div>
   </div>
 </div>
 
@@ -163,10 +152,9 @@ input.name{border:1px solid var(--line);border-radius:8px;padding:11px 13px;font
     <div class="stat s-acc"><div class="lab">Correct</div><div class="val" id="acc">0/0</div></div>
   </div>
 
-  <div class="clarity">
-    <div class="top"><span>Clarity of your lens</span><span class="pct" id="cpct">20%</span></div>
-    <div class="bar"><i id="cbar" style="width:20%"></i></div>
-    <div class="ends"><span>BLURRED</span><span>SHARP</span></div>
+  <div class="pbar">
+    <div class="top"><span>Progress</span><span class="pct" id="ppct">0%</span></div>
+    <div class="bar"><i id="pfill"></i></div>
   </div>
 
   <div class="rounds" id="rstrip"></div>
@@ -211,296 +199,290 @@ input.name{border:1px solid var(--line);border-radius:8px;padding:11px 13px;font
 
   <div id="cert">
     <div class="ct">Manor Lakes College &middot; Year 10 Geography</div>
-    <h2>Standpoint</h2>
-    <div class="ct" style="letter-spacing:1px">Environmental Worldviews &middot; Lesson 31</div>
+    <h2>Caring for Country</h2>
+    <div class="ct" style="letter-spacing:1px">Indigenous Perspectives &middot; Lesson 32</div>
     <div class="nm" id="cnm">&nbsp;</div>
     <div style="font-size:15px">scored <b id="cscore">0</b> points with <b id="cacc">0%</b> accuracy</div>
     <div class="ct" style="letter-spacing:1px;margin-top:6px" id="crank"></div>
     <div class="dt" id="cdate"></div>
+  </div>
+
+  <div class="src">
+    Sources for the figures used: UNESCO World Heritage Centre and Parks Victoria (Budj Bim);
+    Victorian Traditional Owner Cultural Fire Strategy and Forest Fire Management Victoria (cultural fire);
+    First Peoples State Relations and the Dhelkunya Dja Land Management Board (Dja Dja Wurrung joint management);
+    DCCEEW and the National Indigenous Australians Agency (Indigenous Protected Areas). Figures current as at August 2026.
   </div>
 </div>
 
 </div>
 
 <script>
-/* ============ DATA ============ */
-const W = {
-  dev:  "Development first",
-  tech: "Technology will fix it",
-  stew: "Stewardship",
-  nat:  "Nature first"
-};
-
 const ROUNDS = [
   {
-    name: "Rapid Recall",
-    items: [
-      { q:"What is an environmental worldview?",
-        o:["The set of beliefs and values someone holds about the natural world and how humans should relate to it",
-           "A scientific measurement of environmental damage",
-           "A government policy about the environment",
-           "Someone's opinion about one particular project"],
-        a:0, e:"It is the lens, not the opinion. An opinion is about one issue; a worldview shapes how you read every issue." },
-      { q:"Which is the difference between an opinion and a worldview?",
-        o:["An opinion is about one issue; a worldview is the values you judge every issue with",
-           "There is no difference, they are the same thing",
-           "An opinion is written down; a worldview is not",
-           "A worldview only applies to scientists"],
-        a:0, e:"You can change your opinion on a project in an afternoon. A worldview takes years to shift." },
-      { q:"Name the three questions used to identify someone's worldview.",
-        o:["What do they value most? What is nature for? What would they trade away?",
-           "Who are they? Where do they live? How old are they?",
-           "What do they earn? Who do they vote for? What do they drive?",
-           "What is the problem? What is the cause? What is the solution?"],
-        a:0, e:"Question three does the heavy lifting. Everyone says they care; the trade-off is where they differ." },
-      { q:"Which of these is the strongest test of someone's actual worldview?",
-        o:["What they are willing to give up",
-           "What they say they care about",
-           "Whether they recycle",
-           "Which political party they support"],
-        a:0, e:"Anyone will say they care about the environment. What they will sacrifice is the honest test." },
-      { q:"Order the spectrum from people first to nature first.",
-        o:["Development first, technology first, stewardship, nature first",
-           "Nature first, stewardship, technology first, development first",
-           "Stewardship, development first, nature first, technology first",
-           "Technology first, nature first, development first, stewardship"],
-        a:0, e:"Development first sits at the people end, nature first at the other, with the other two between." },
-      { q:"Which factor shaping a worldview is usually the most powerful?",
-        o:["Livelihood, where your income comes from",
-           "Your favourite subject at school",
-           "How much you use social media",
-           "Your height"],
-        a:0, e:"If your family income depends on an industry, you hear arguments about that industry differently. That is not corruption, it is how people work." },
-      { q:"In the 2026 Lowy Institute Poll, what share of Australians said climate change is serious and pressing and we should act now even if it costs?",
-        o:["49%","89%","12%","72%"], a:0,
-        e:"49%, which was down eight points since 2024." },
-      { q:"On net zero and the economy, the same poll found Australians were:",
-        o:["Evenly split, 38% said better off and 38% said worse off",
-           "Almost unanimous that it would help",
-           "Almost unanimous that it would hurt",
-           "Not asked about it"],
-        a:0, e:"A dead-even split. Same country, same evidence, different values." },
-      { q:"Last week: name the three approaches to environmental management.",
-        o:["Legislative, community-based, market-based",
-           "Local, state, federal",
-           "Scientific, political, economic",
-           "Short-term, medium-term, long-term"],
-        a:0, e:"Laws and regulation; community and volunteer action; and pricing or incentives." },
-      { q:"Roughly what share of Australia's landmass is inside protected areas?",
-        o:["About 25%","About 5%","About 50%","About 70%"], a:0,
-        e:"It passed 25% in July 2026 when the Simpson Desert Indigenous Protected Area was declared." }
+    name:"Rapid Recall",
+    items:[
+      { q:"What does Country (with a capital C) mean?",
+        o:["Land, water, sky, animals, plants, stories, ancestors and people as one connected living thing that a group belongs to",
+           "A nation with borders, like Japan or Australia",
+           "Any area of bushland",
+           "A national park with cultural significance"],
+        a:0, e:"Capital C matters. Lower case country means a nation. Country means all of the above." },
+      { q:"What does custodianship mean?",
+        o:["Holding responsibility to care for Country on behalf of those before and those coming after",
+           "Legally owning land and being able to sell it",
+           "Working as a park ranger",
+           "Visiting a place regularly"],
+        a:0, e:"And the relationship runs both ways: you look after Country, and Country looks after you." },
+      { q:"Which is the key difference between ownership and custodianship?",
+        o:["Ownership asks what I can get from the land; custodianship asks what Country needs from me",
+           "Ownership is legal and custodianship is illegal",
+           "There is no real difference",
+           "Custodianship only applies to national parks"],
+        a:0, e:"That reversal of direction is the core idea of the whole lesson." },
+      { q:"Whose Country is Budj Bim on?",
+        o:["Gunditjmara","Wadawurrung","Dja Dja Wurrung","Yolngu"], a:0,
+        e:"Gunditjmara Country, in south-west Victoria." },
+      { q:"Whose Country does Manor Lakes College stand on?",
+        o:["Wadawurrung","Gunditjmara","Taungurung","Barengi Gadjin"], a:0,
+        e:"Wadawurrung Country, including the Werribee River." },
+      { q:"Which of these is the correct way to write about Indigenous perspectives in an essay?",
+        o:["\u201cThe Gunditjmara people built and managed this aquaculture system.\u201d",
+           "\u201cThe Aborigines built fish traps.\u201d",
+           "\u201cAboriginal people all believe the land is sacred.\u201d",
+           "\u201cThe Aboriginal way of managing land is...\u201d"],
+        a:0, e:"Name the specific nation wherever you can. Generalising across hundreds of nations is a geography error, not just a wording one." },
+      { q:"What is the phrase Victorian Traditional Owners use to describe cultural burning?",
+        o:["Right fire, right time, right way, and for the right reasons, according to Lore",
+           "Burn early, burn often",
+           "Fight fire with fire",
+           "Reduce the fuel, reduce the risk"],
+        a:0, e:"It appears in the Victorian Traditional Owner Cultural Fire Strategy, released in 2020." },
+      { q:"On yesterday's spectrum, which worldview is custodianship closest to?",
+        o:["Stewardship, but it does not accept the human/nature split at all",
+           "Development first",
+           "Technology will fix it",
+           "It is exactly the same as nature first"],
+        a:0, e:"Stewardship still has you standing outside the system managing it. Custodianship has you inside it, with obligations to it." },
+      { q:"What is the chain we use to write about this?",
+        o:["Value, then practice, then outcome",
+           "Cause, effect, solution",
+           "Where, when, why",
+           "Problem, goal, tool"],
+        a:0, e:"What they believe, what they therefore do, and what results from it. Three sentences." },
+      { q:"Joint management means:",
+        o:["Traditional Owners sit on the body that makes the decisions",
+           "Traditional Owners are asked for their views before government decides",
+           "The park is closed to the public",
+           "Two government departments share the budget"],
+        a:0, e:"Consultation means you ask and then decide anyway. Joint management means they are on the deciding body." }
     ]
   },
   {
-    name: "Name the Worldview",
-    items: [
-      { q:"\u201cYou can't eat scenery. Those jobs feed the whole town and there are three hundred of them.\u201d",
-        o:[W.dev,W.tech,W.stew,W.nat], a:0,
-        e:"Development first. The argument is entirely economic and immediate." },
-      { q:"\u201cGive it a decade. Solar and batteries get cheaper every year and this whole argument disappears.\u201d",
-        o:[W.tech,W.dev,W.stew,W.nat], a:0,
-        e:"Technology will fix it. The bet is on an invention arriving in time." },
-      { q:"\u201cUse the water, but never take more in a year than the river can replace. Our kids need it too.\u201d",
-        o:[W.stew,W.nat,W.dev,W.tech], a:0,
-        e:"Stewardship. Use is allowed, but within a limit set by handing it on." },
-      { q:"\u201cThat forest was here four hundred years before us. It doesn't need to be useful to anyone.\u201d",
-        o:[W.nat,W.stew,W.tech,W.dev], a:0,
-        e:"Nature first. Value is given independently of usefulness to humans." },
-      { q:"\u201cKeep mining. Put the money into carbon capture and in twenty years we'll run it clean.\u201d",
-        o:[W.tech,W.dev,W.stew,W.nat], a:0,
-        e:"Technology will fix it. Not defending mining on jobs, defending it on a future fix." },
-      { q:"\u201cApprove it. Regional Victoria needs the investment far more than Melbourne needs another park.\u201d",
-        o:[W.dev,W.stew,W.nat,W.tech], a:0,
-        e:"Development first. Economic need is weighed above the conservation value." },
-      { q:"\u201cI don't care what it costs. Once that wetland is drained it is gone forever.\u201d",
-        o:[W.nat,W.stew,W.dev,W.tech], a:0,
-        e:"Nature first. Cost is explicitly dismissed and irreversibility is the whole argument." },
-      { q:"\u201cWe're borrowing this from our grandchildren. Use it, but leave it in decent condition.\u201d",
-        o:[W.stew,W.nat,W.dev,W.tech], a:0,
-        e:"Stewardship. The classic formulation, and where most government policy claims to sit." },
-      { q:"\u201cFish it, but set a quota based on the science and actually enforce it.\u201d",
-        o:[W.stew,W.dev,W.nat,W.tech], a:0,
-        e:"Stewardship. Harvest continues, but a limit is imposed to keep the stock going." },
-      { q:"\u201cEvery problem we've ever had, we've engineered our way out of. This one is no different.\u201d",
-        o:[W.tech,W.dev,W.nat,W.stew], a:0,
-        e:"Technology will fix it. Historical confidence in human invention." },
-      { q:"\u201cShut the whole fishery. If a species is collapsing, no quota is small enough.\u201d",
-        o:[W.nat,W.stew,W.tech,W.dev], a:0,
-        e:"Nature first. It rejects managed use altogether once the species is at risk." },
-      { q:"\u201cThe mine will fund the hospital, the road and half the shire's rates. Environmental cost is manageable.\u201d",
-        o:[W.dev,W.tech,W.stew,W.nat], a:0,
-        e:"Development first. Environmental damage is accepted because the economic return is judged bigger." }
+    name:"True or False",
+    items:[
+      { q:"TRUE or FALSE: All Aboriginal nations share the same environmental practices.",
+        o:["False","True"], a:0,
+        e:"Hundreds of distinct nations, each with their own Country, languages, laws and practices. Practices are developed for a specific place and do not simply transfer." },
+      { q:"TRUE or FALSE: Cultural burning and agency fuel reduction burning have the same goal.",
+        o:["False","True"], a:0,
+        e:"Agency burning targets fuel loads to lower bushfire risk. Cultural burning aims at healthy Country, and reduced fuel is one outcome among several." },
+      { q:"TRUE or FALSE: Budj Bim shows Aboriginal people in this region lived in permanent settlements.",
+        o:["True","False"], a:0,
+        e:"The remains of stone houses across the landscape point to permanent settlement, not seasonal camps." },
+      { q:"TRUE or FALSE: Indigenous Protected Areas make up more than half of Australia's National Reserve System.",
+        o:["True","False"], a:0,
+        e:"More than 55 per cent. Most of what Australia counts as protected area is Traditional Owner managed." },
+      { q:"TRUE or FALSE: Custodianship simply means Aboriginal people care about the environment more than other people do.",
+        o:["False","True"], a:0,
+        e:"That turns a worldview into a personality trait, and it is a stereotype. Custodianship is about being part of Country and responsible to it, which changes what actually gets done to the land." },
+      { q:"TRUE or FALSE: Cultural burns are deliberately patchy, leaving unburnt areas.",
+        o:["True","False"], a:0,
+        e:"Patchiness is intentional so animals can escape and unburnt refuges remain to recolonise from." },
+      { q:"TRUE or FALSE: Budj Bim was World Heritage listed for its natural landscape values.",
+        o:["False","True"], a:0,
+        e:"It was listed in 2019 and it is the first Australian place listed solely for its Aboriginal cultural values." },
+      { q:"TRUE or FALSE: Aboriginal title over the six Dja Dja Wurrung parks means the public can no longer visit them.",
+        o:["False","True"], a:0,
+        e:"Transfer to Aboriginal title does not change existing public use and access. The parks remain reserved under the same Acts." },
+      { q:"TRUE or FALSE: Indigenous land management in Australia is mainly of historical interest.",
+        o:["False","True"], a:0,
+        e:"It is current, funded government policy. The Simpson Desert Indigenous Protected Area was declared in July 2026." },
+      { q:"TRUE or FALSE: Saying \u201cAboriginal people think the land is sacred\u201d is a safe generalisation to use in an essay.",
+        o:["False","True"], a:0,
+        e:"It flattens hundreds of nations into one voice. Name the nation and the practice instead." }
     ]
   },
   {
-    name: "The Trade-off",
-    items: [
-      { q:"A development first worldview is most willing to trade away:",
-        o:["Environmental quality, when the economic gain is judged large enough",
-           "Jobs, to protect habitat",
-           "Economic growth, to reduce emissions",
-           "Nothing at all"],
-        a:0, e:"That is the defining trade. Damage is accepted in return for economic benefit." },
-      { q:"A nature first worldview is most willing to trade away:",
-        o:["Real economic gain and jobs, to keep an ecosystem intact",
-           "Habitat, if the payment is high enough",
-           "Species, if the technology is promising",
-           "Nothing at all"],
-        a:0, e:"They accept genuine economic loss. Their weak spot is who ends up carrying that loss." },
-      { q:"A technology first worldview is essentially betting that:",
-        o:["A solution will arrive before the damage becomes irreversible",
-           "Nobody will notice the damage",
-           "The environment will repair itself with no help",
-           "Governments will ban the activity anyway"],
-        a:0, e:"It accepts damage now on the assumption of a future fix. If the fix is late, the bet fails." },
-      { q:"A stewardship worldview is most willing to trade away:",
-        o:["Faster growth and lower costs now, to keep options open later",
-           "Every species, if jobs are at stake",
-           "All economic activity",
-           "Future generations' interests"],
-        a:0, e:"It slows things down and pays more now so that the resource is still there later." },
-      { q:"Two people both back the same gas project, one for the jobs and one because carbon capture will handle it. This shows that:",
-        o:["Different worldviews can reach the same position for different reasons",
-           "They must have the same worldview",
-           "One of them is lying",
-           "Worldviews do not affect decisions"],
-        a:0, e:"Same answer, different reasoning. Always check the reason, not just the position." },
-      { q:"Two stewardship supporters argue about whether one transmission route does enough damage to matter. This shows:",
-        o:["People with the same worldview can still disagree about specific projects",
-           "One of them has changed worldview",
-           "Stewardship is not a real worldview",
-           "They must both be nature first"],
-        a:0, e:"Shared values, different reading of the facts. Worldview does not settle every detail." },
-      { q:"On the western Victorian transmission line, who would say \u201cbuild it, but route around remnant vegetation and pay host farmers a fair long-term share\u201d?",
-        o:[W.stew,W.dev,W.nat,W.tech], a:0,
-        e:"Stewardship. The project proceeds, but with limits and fair distribution of the cost." },
-      { q:"On the same line, who would say \u201cbuild it, but underground the worst sections and use better tower design\u201d?",
-        o:[W.tech,W.nat,W.dev,W.stew], a:0,
-        e:"Technology first. The objection is treated as an engineering problem to be solved." }
+    name:"Figure File",
+    items:[
+      { q:"How old is the aquaculture system at Budj Bim?",
+        o:["At least 6,600 years","About 600 years","About 200 years","About 60,000 years"], a:0,
+        e:"At least 6,600 years, which makes it older than Stonehenge and the Egyptian pyramids." },
+      { q:"When was Budj Bim inscribed on the UNESCO World Heritage list?",
+        o:["2019","1984","2004","2024"], a:0,
+        e:"July 2019, the first Australian place listed solely for Aboriginal cultural values." },
+      { q:"How many Indigenous Protected Areas are there across Australia?",
+        o:["95","12","240","7"], a:0,
+        e:"95, as at early 2026." },
+      { q:"How much land do Indigenous Protected Areas cover?",
+        o:["Over 108 million hectares, plus 6 million hectares of sea Country",
+           "About 1 million hectares",
+           "About 12 million hectares",
+           "Over 500 million hectares"], a:0,
+        e:"Over 108 million hectares on land and about 6 million hectares of sea Country." },
+      { q:"What proportion of Australia's National Reserve System is Indigenous Protected Areas?",
+        o:["More than 55%","About 5%","About 20%","About 90%"], a:0,
+        e:"More than 55 per cent, which is the single most useful figure from today." },
+      { q:"How much land was transferred to Dja Dja Wurrung as Aboriginal title under the 2013 agreement?",
+        o:["About 47,523 hectares across six parks","About 500 hectares across one park",
+           "About 2 million hectares","About 167,000 hectares"], a:0,
+        e:"Around 47,523 hectares across six parks and reserves in central Victoria." },
+      { q:"What did the Victorian Government commit to reinvigorate Traditional Owner-led cultural land and fire management?",
+        o:["$22.5 million","$225,000","$1.2 billion","$50,000"], a:0,
+        e:"$22.5 million, plus an ongoing Cultural Fire Grants program." },
+      { q:"What happened in July 2026 with the Simpson Desert Indigenous Protected Area?",
+        o:["It added over 4.7 million hectares and took Australia past 25% of its landmass protected",
+           "It was closed to the public",
+           "It was the first IPA ever declared",
+           "It replaced a national park"], a:0,
+        e:"Over 4.7 million hectares, and three ranger groups will look after 21 threatened animal species on it." }
     ]
   },
   {
-    name: "Weak Spot",
-    items: [
-      { q:"\u201cIt discounts costs that arrive later, and that other people end up paying.\u201d Whose weak spot?",
-        o:[W.dev,W.stew,W.nat,W.tech], a:0,
-        e:"Development first. The benefit is now and local; the cost is often later and elsewhere." },
-      { q:"\u201cThe fix might not arrive, or arrives after the damage is already irreversible.\u201d Whose weak spot?",
-        o:[W.tech,W.dev,W.nat,W.stew], a:0,
-        e:"Technology first. Link this to Week 3, irreversible change." },
-      { q:"\u201cBalance is easy to say and very hard to measure. Who decides what counts as decent?\u201d Whose weak spot?",
-        o:[W.stew,W.nat,W.tech,W.dev], a:0,
-        e:"Stewardship. Almost everyone claims it, which makes it hard to hold anyone to." },
-      { q:"\u201cIt can ask one small community to carry a cost the whole country enjoys the benefit of.\u201d Whose weak spot?",
-        o:[W.nat,W.dev,W.tech,W.stew], a:0,
-        e:"Nature first. Think of a timber town after a logging ban." },
-      { q:"Why is it wrong to write \u201cnature first is the correct worldview\u201d in an exam answer?",
-        o:["Every position has a genuine strength and a genuine weakness; the task is to analyse, not to barrack",
-           "Because nature first is actually the worst one",
-           "Because you are not allowed to mention it",
-           "Because only stewardship is on the curriculum"],
-        a:0, e:"You are being marked on whether you can explain the values and trade-offs, not on which side you pick." },
-      { q:"A student writes: \u201cIf two people disagree about a project they must have different worldviews.\u201d This is:",
-        o:["False, because people who share a worldview can read the same facts differently",
-           "True, disagreement always means different values",
-           "True, but only for climate issues",
-           "Impossible to judge"],
-        a:0, e:"False. And the reverse is also true: different worldviews can land on the same answer." },
-      { q:"Which worldview would be most comfortable with the statement \u201chuman wellbeing is the point of environmental protection\u201d?",
-        o:[W.dev,W.nat,W.stew,W.tech], a:0,
-        e:"Development first sits most easily here, though stewardship also treats human benefit as central. Nature first rejects it outright." },
-      { q:"The best reason to study worldviews in Geography is:",
-        o:["It explains why people who accept the same evidence still disagree about what to do",
-           "It tells you which side is right",
-           "It replaces the need for data",
-           "It is only useful for the exam"],
-        a:0, e:"Evidence tells you what is happening. Worldviews explain what people decide to do about it." }
+    name:"What Changes on the Ground",
+    items:[
+      { q:"A cultural burn is kept cool, slow and low to the ground. Why?",
+        o:["So it does not destroy the whole system, and unburnt refuges survive for animals and seed",
+           "Because it is safer for the people lighting it, and nothing else",
+           "Because equipment is limited",
+           "To make it look better for tourists"],
+        a:0, e:"A hot fast fire takes everything. A cool patchy fire leaves the structure of Country intact." },
+      { q:"Cultural burns are timed to season, plant cycles and animal breeding. What worldview does this reflect?",
+        o:["That people are part of Country and have obligations to everything living in it",
+           "That fire is only about property protection",
+           "That the calendar is more convenient in autumn",
+           "That technology will fix any damage"],
+        a:0, e:"The timing is the worldview showing up as a practice." },
+      { q:"An agency burn measures success in hectares treated. A cultural burn measures success by:",
+        o:["How Country responds afterwards",
+           "How quickly the burn was completed",
+           "How much money was saved",
+           "How many people attended"],
+        a:0, e:"Same tool, different question, so you end up with a different fire." },
+      { q:"Budj Bim sustained a harvest for at least 6,600 years. Applying last week's RATE test, this means:",
+        o:["The take never exceeded what the system could replace",
+           "The eels were farmed in tanks",
+           "Harvesting only happened once a century",
+           "The system was abandoned regularly"],
+        a:0, e:"If take had outrun regrowth for any sustained period, the fishery would have collapsed long ago." },
+      { q:"Applying last week's RIPPLE test to Budj Bim:",
+        o:["The system enhanced the wetland and supported other food resources rather than degrading it",
+           "It destroyed the surrounding wetland",
+           "It had no effect on anything else",
+           "It caused the lava flow"],
+        a:0, e:"The engineering modified the wetland in a way that increased its productivity over millennia." },
+      { q:"Why would a development first worldview probably NOT have built something like Budj Bim?",
+        o:["It optimises for return now, so the take would be set by demand rather than by long-term obligation",
+           "It would not have had the technology",
+           "It would have preferred to protect the eels entirely",
+           "It would have needed government approval"],
+        a:0, e:"That is a design difference, not a spiritual one. The cap comes from obligation instead of market demand." },
+      { q:"The Dhelkunya Dja Land Management Board has a majority of members nominated by Traditional Owners. Why does that matter?",
+        o:["It means Traditional Owners hold decision-making power, not just an advisory voice",
+           "It reduces the cost of running the parks",
+           "It means the government cannot be involved at all",
+           "It only affects tourism"],
+        a:0, e:"This is the practical difference between consultation and joint management." },
+      { q:"Which of these is the strongest evidence that a worldview changes management outcomes?",
+        o:["A resource harvested continuously for 6,600 years without collapsing",
+           "People saying they respect the environment",
+           "A park being given a new name",
+           "A poll showing high levels of environmental concern"],
+        a:0, e:"Evidence in Geography means measurable outcomes on the ground, not stated attitudes." },
+      { q:"Which sentence would earn the most marks in an extended response?",
+        o:["Because custodianship treats people as responsible to Country rather than owners of it, burns are kept cool and patchy, so unburnt refuges survive and food plants regenerate.",
+           "Aboriginal people have always looked after the land really well.",
+           "Cultural burning is a traditional practice that is very important.",
+           "Indigenous people care a lot about the environment."],
+        a:0, e:"Value, practice, outcome, all in one sentence, with a specific detail. The other three are assertions with no evidence." },
+      { q:"Gariwerd (the Grampians) is managed under a plan written jointly with:",
+        o:["The Barengi Gadjin, Eastern Maar and Gunditj Mirring peoples",
+           "The Dja Dja Wurrung people only",
+           "The Wadawurrung people only",
+           "No Traditional Owner group"],
+        a:0, e:"You met this last week in the national parks and biodiversity lesson." }
     ]
   }
 ];
 
-/* ============ STATE ============ */
-let flat=[], idx=0, score=0, streak=0, best=0, correct=0, answered=0, clarity=20, misses=[], locked=false;
-
+let flat=[], idx=0, score=0, streak=0, best=0, correct=0, answered=0, misses=[], locked=false;
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;}
 
 function build(){
   flat=[];
   ROUNDS.forEach((r,ri)=>{
     r.items.forEach(it=>{
-      const pairs = it.o.map((t,i)=>({t,ok:i===it.a}));
-      const sh = shuffle(pairs);
-      flat.push({round:ri, rname:r.name, q:it.q, e:it.e, opts:sh, ansIdx:sh.findIndex(p=>p.ok)});
+      const pairs=it.o.map((t,i)=>({t,ok:i===it.a}));
+      const sh = pairs.length===2 ? pairs.slice() : shuffle(pairs);
+      flat.push({round:ri,rname:r.name,q:it.q,e:it.e,opts:sh,ansIdx:sh.findIndex(p=>p.ok)});
     });
   });
 }
-
 function start(){
   build();
   document.getElementById('intro').classList.add('hide');
   document.getElementById('quiz').classList.remove('hide');
   renderStrip(); render();
 }
-
 function renderStrip(){
-  const s=document.getElementById('rstrip');
-  s.innerHTML = ROUNDS.map((r,i)=>{
-    const cur = flat[idx] ? flat[idx].round : ROUNDS.length;
+  const cur = flat[idx] ? flat[idx].round : ROUNDS.length;
+  document.getElementById('rstrip').innerHTML = ROUNDS.map((r,i)=>{
     const cls = i===cur ? 'rd on' : (i<cur ? 'rd done' : 'rd');
     return '<div class="'+cls+'">'+(i+1)+'. '+r.name+'</div>';
   }).join('');
 }
-
 function render(){
   locked=false;
   const it=flat[idx];
   document.getElementById('rlabel').textContent='Round '+(it.round+1)+' \u00b7 '+it.rname;
-  document.getElementById('qtext').innerHTML = it.q.trim().startsWith('\u201c')
-      ? '<span class="quote">'+it.q+'</span>' : it.q;
-  document.getElementById('qhint').textContent = it.q.trim().startsWith('\u201c') ? 'Which worldview is speaking?' : '';
+  document.getElementById('qtext').textContent=it.q;
+  document.getElementById('qhint').textContent = it.opts.length===2 ? 'Two options.' : '';
   const keys=['1','2','3','4'];
-  document.getElementById('opts').innerHTML = it.opts.map((p,i)=>
-    '<button class="opt" data-i="'+i+'" onclick="pick('+i+')"><span class="key">'+keys[i]+'</span><span>'+p.t+'</span></button>'
-  ).join('');
+  document.getElementById('opts').innerHTML=it.opts.map((p,i)=>
+    '<button class="opt" onclick="pick('+i+')"><span class="key">'+keys[i]+'</span><span>'+p.t+'</span></button>').join('');
   const fb=document.getElementById('fb'); fb.className='fb'; fb.innerHTML='';
   document.getElementById('next').classList.add('hide');
   document.getElementById('prog').textContent='Question '+(idx+1)+' of '+flat.length;
   renderStrip(); hud();
 }
-
 function hud(){
   document.getElementById('score').textContent=score;
   document.getElementById('streak').textContent=streak;
   document.getElementById('acc').textContent=correct+'/'+answered;
-  document.getElementById('cbar').style.width=clarity+'%';
-  document.getElementById('cpct').textContent=Math.round(clarity)+'%';
+  const p=Math.round(answered/flat.length*100);
+  document.getElementById('pfill').style.width=p+'%';
+  document.getElementById('ppct').textContent=p+'%';
 }
-
 function pick(i){
   if(locked) return; locked=true;
-  const it=flat[idx];
-  const ok = it.opts[i].ok;
-  answered++;
+  const it=flat[idx], ok=it.opts[i].ok; answered++;
   const btns=[...document.querySelectorAll('button.opt')];
   btns.forEach(b=>b.disabled=true);
   btns[i].classList.add(ok?'right':'wrong');
   if(!ok) btns[it.ansIdx].classList.add('right');
-
-  const fb=document.getElementById('fb');
-  let bonusTxt='';
+  const fb=document.getElementById('fb'); let bonus='';
   if(ok){
     correct++; streak++; best=Math.max(best,streak);
     let pts=10;
-    if(streak>=3){ pts=20; bonusTxt='<span class="bonus">Streak x2 \u00b7 '+streak+' in a row</span>'; }
-    if(streak>=6){ pts=30; bonusTxt='<span class="bonus">Streak x3 \u00b7 '+streak+' in a row</span>'; }
+    if(streak>=3){pts=20;bonus='<span class="bonus">Streak x2 \u00b7 '+streak+' in a row</span>';}
+    if(streak>=6){pts=30;bonus='<span class="bonus">Streak x3 \u00b7 '+streak+' in a row</span>';}
     score+=pts;
-    clarity=Math.min(100, clarity + 3.2);
     fb.className='fb show good';
-    fb.innerHTML='<b>Correct, +'+pts+'</b>'+it.e+bonusTxt;
+    fb.innerHTML='<b>Correct, +'+pts+'</b>'+it.e+bonus;
   } else {
     streak=0;
-    clarity=Math.max(0, clarity - 4);
-    misses.push({q:it.q, a:it.opts[it.ansIdx].t, e:it.e});
+    misses.push({q:it.q,a:it.opts[it.ansIdx].t,e:it.e});
     fb.className='fb show bad';
     fb.innerHTML='<b>Not quite</b>The answer is <em>'+it.opts[it.ansIdx].t+'</em>. '+it.e;
   }
@@ -510,61 +492,52 @@ function pick(i){
   n.textContent = idx===flat.length-1 ? 'See results' : 'Next';
   n.focus();
 }
-
 function next(){
   idx++;
-  if(idx>=flat.length){ finish(); return; }
-  render();
-  window.scrollTo({top:0,behavior:'smooth'});
+  if(idx>=flat.length){finish();return;}
+  render(); window.scrollTo({top:0,behavior:'smooth'});
 }
-
+function roundPerfect(ri){
+  const qs=flat.filter(f=>f.round===ri).map(f=>f.q);
+  return !misses.some(m=>qs.includes(m.q));
+}
 function finish(){
   document.getElementById('quiz').classList.add('hide');
   document.getElementById('results').classList.remove('hide');
   const pct=Math.round(correct/flat.length*100);
-  let rank, line;
-  if(pct>=90){rank='Crystal clear';line='You can name a worldview from a single sentence and say what it would sacrifice. That is exactly the skill.';}
-  else if(pct>=75){rank='Sharp';line='Strong. Check the ones below, they are usually the trade-off questions.';}
-  else if(pct>=55){rank='Coming into focus';line='You have the four positions. The gap is the trade-off, what each one is willing to give up.';}
-  else {rank='Still blurry';line='Go back to the four definitions and the three-question test, then run this again.';}
+  let rank,line;
+  if(pct>=90){rank='Ready to write';line='You can name the value, the practice and the outcome, and you have the figures to back it. That is a full extended response.';}
+  else if(pct>=75){rank='Strong';line='Solid. Check the ones below, they are usually the figures.';}
+  else if(pct>=55){rank='Getting there';line='You have the concepts. Go back over the numbers, they are what turns an assertion into evidence.';}
+  else {rank='Go back over it';line='Re-read the custodianship definition and the three examples, then run this again.';}
   document.getElementById('fscore').textContent=score;
   document.getElementById('frank').textContent=rank+' \u00b7 '+pct+'% correct';
   document.getElementById('fline').textContent=line;
-
   const badges=[
     ['Full house', correct===flat.length],
     ['Streak of 6+', best>=6],
     ['Streak of 10+', best>=10],
-    ['Clear lens (80%+ clarity)', clarity>=80],
-    ['Worldview reader (Round 2 perfect)', roundPerfect(1)],
-    ['Trade-off spotter (Round 3 perfect)', roundPerfect(2)],
+    ['Myth buster (Round 2 perfect)', roundPerfect(1)],
+    ['Figure file (Round 3 perfect)', roundPerfect(2)],
+    ['Evidence ready (Round 4 perfect)', roundPerfect(3)],
     ['500 points', score>=500]
   ];
-  document.getElementById('fbadges').innerHTML = badges.map(([t,w])=>
+  document.getElementById('fbadges').innerHTML=badges.map(([t,w])=>
     '<div class="badge'+(w?' won':'')+'">'+(w?'\u2713 ':'')+t+'</div>').join('');
-
   const mb=document.getElementById('missbox');
-  if(misses.length===0){ mb.classList.add('hide'); }
-  else {
-    document.getElementById('misslist').innerHTML = misses.map(m=>
-      '<div class="miss"><div class="qq">'+m.q+'</div><div class="aa">Answer: <em>'+m.a+'</em>. '+m.e+'</div></div>').join('');
-  }
+  if(misses.length===0) mb.classList.add('hide');
+  else document.getElementById('misslist').innerHTML=misses.map(m=>
+    '<div class="miss"><div class="qq">'+m.q+'</div><div class="aa">Answer: <em>'+m.a+'</em>. '+m.e+'</div></div>').join('');
   document.getElementById('cscore').textContent=score;
   document.getElementById('cacc').textContent=pct+'%';
   document.getElementById('crank').textContent=rank;
   document.getElementById('cdate').textContent=new Date().toLocaleDateString('en-AU',{day:'numeric',month:'long',year:'numeric'});
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
-function roundPerfect(ri){
-  const qs=flat.filter(f=>f.round===ri).map(f=>f.q);
-  return !misses.some(m=>qs.includes(m.q));
-}
-
 document.addEventListener('keydown',e=>{
   if(document.getElementById('quiz').classList.contains('hide')) return;
-  if(['1','2','3','4'].includes(e.key)){ const b=document.querySelectorAll('button.opt')[+e.key-1]; if(b&&!b.disabled) b.click(); }
-  if(e.key==='Enter'&&locked){ const n=document.getElementById('next'); if(!n.classList.contains('hide')) n.click(); }
+  if(['1','2','3','4'].includes(e.key)){const b=document.querySelectorAll('button.opt')[+e.key-1]; if(b&&!b.disabled) b.click();}
+  if(e.key==='Enter'&&locked){const n=document.getElementById('next'); if(!n.classList.contains('hide')) n.click();}
 });
 </script>
 </body>
