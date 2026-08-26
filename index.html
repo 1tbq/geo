@@ -3,542 +3,758 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Caring for Country | Lesson 32 Indigenous Perspectives</title>
+<title>The Approvals Desk — Lesson 33</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1F2333; --plum:#6B4A7A; --amber:#D98A25; --teal:#3F7F76; --clay:#B4553F;
-  --grey:#6B7280; --mid:#9AA0AC; --line:#DDDCE4; --pale:#F5F4F8; --hl:#FFF3A6; --white:#fff;
-  --ok:#2E7D5B; --no:#B4553F;
+  --ink:#1F2333;
+  --plum:#6B4A7A;
+  --amber:#D98A25;
+  --amber-dk:#9C6410;
+  --teal:#3F7F76;
+  --clay:#B4553F;
+  --paper:#F3EFE6;
+  --manila:#E4D9C3;
+  --rule:#CFC5AE;
+  --white:#FFFFFF;
+  --grey:#6C7280;
+  --shadow:0 2px 0 rgba(31,35,51,.06), 0 10px 24px rgba(31,35,51,.10);
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  background:var(--white);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
-.wrap{max-width:860px;margin:0 auto;padding:20px 18px 60px}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  background-image:
+    repeating-linear-gradient(0deg,rgba(31,35,51,.022) 0 1px,transparent 1px 26px);
+  color:var(--ink);
+  font-family:"Source Sans 3",system-ui,sans-serif;
+  font-size:17px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:920px;margin:0 auto;padding:20px 18px 70px}
 
-header{border-bottom:2px solid var(--line);padding-bottom:14px;margin-bottom:16px}
-.kicker{font-size:11px;letter-spacing:1.6px;font-weight:700;color:var(--mid);text-transform:uppercase}
-h1{font-size:32px;line-height:1.12;margin:6px 0 4px;letter-spacing:-.5px}
-.sub{color:var(--grey);font-size:15px}
+/* ---------- masthead ---------- */
+.masthead{
+  background:var(--ink);color:var(--paper);
+  border-radius:6px;padding:22px 24px 20px;position:relative;overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.masthead:before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--amber)}
+.filecode{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;
+  color:var(--amber);text-transform:uppercase;
+}
+.masthead h1{
+  font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(28px,6vw,42px);
+  margin:6px 0 4px;letter-spacing:-.01em;line-height:1.05;
+}
+.masthead p{margin:0;color:#B9BECB;font-size:15px;max-width:52ch}
 
-.ack{border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:8px;
-  padding:14px 16px;background:var(--pale);font-size:14px;color:var(--ink);margin-bottom:6px}
-.ack b{display:block;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--teal);margin-bottom:5px}
+/* ---------- desk strip (signature) ---------- */
+.desk{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:6px;margin-top:14px;overflow:hidden;
+}
+.desk .cell{background:var(--manila);padding:11px 14px}
+.desk .lab{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:#7A6B4F;
+}
+.desk .val{font-family:Archivo,sans-serif;font-weight:800;font-size:26px;line-height:1.1;margin-top:2px}
+#conditions{color:var(--teal)}
+#score{color:var(--ink)}
+#streak{color:var(--clay)}
+.gauge{height:7px;background:#D3C7AC;border-radius:99px;margin-top:8px;overflow:hidden}
+.gauge span{display:block;height:100%;width:0;background:var(--teal);transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.tiny{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:#7A6B4F;margin-top:5px;letter-spacing:.04em}
 
-.hud{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 6px}
-.stat{flex:1;min-width:88px;border:1px solid var(--line);border-radius:10px;padding:9px 12px}
-.stat .lab{font-size:10px;letter-spacing:1.1px;text-transform:uppercase;color:var(--mid);font-weight:700}
-.stat .val{font-size:22px;font-weight:800;letter-spacing:-.5px}
-.stat.s-score .val{color:var(--teal)}
-.stat.s-streak .val{color:var(--amber)}
-.stat.s-acc .val{color:var(--plum)}
+/* ---------- panels ---------- */
+.panel{
+  background:var(--white);border:1px solid var(--rule);border-radius:6px;
+  padding:22px 24px;margin-top:16px;box-shadow:var(--shadow);
+}
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--plum);margin-bottom:6px;
+}
+h2{font-family:Archivo,sans-serif;font-weight:800;font-size:24px;margin:0 0 8px;letter-spacing:-.01em}
+h3{font-family:Archivo,sans-serif;font-weight:700;font-size:18px;margin:18px 0 6px}
+p{margin:0 0 10px}
+.muted{color:var(--grey);font-size:15px}
 
-.pbar{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px}
-.pbar .top{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;
-  letter-spacing:1.1px;text-transform:uppercase;color:var(--mid);font-weight:700}
-.pbar .pct{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:0}
-.bar{height:10px;border-radius:5px;background:#E4E2EA;overflow:hidden;margin-top:8px}
-.bar i{display:block;height:100%;width:0;border-radius:5px;background:var(--teal);
-  transition:width .45s cubic-bezier(.2,.8,.3,1)}
+ol.brief{margin:8px 0 0;padding-left:20px}
+ol.brief li{margin-bottom:6px}
 
-.rounds{display:flex;gap:6px;margin:16px 0 10px}
-.rd{flex:1;text-align:center;border:1px solid var(--line);border-radius:8px;padding:7px 4px;
-  font-size:11px;font-weight:700;color:var(--mid)}
-.rd.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-.rd.done{border-color:var(--teal);color:var(--teal)}
+.btn{
+  font-family:Archivo,sans-serif;font-weight:700;font-size:16px;
+  background:var(--ink);color:var(--paper);border:none;border-radius:5px;
+  padding:13px 26px;cursor:pointer;letter-spacing:.01em;
+  transition:transform .12s ease, background .15s ease;
+}
+.btn:hover{background:#2C3145;transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn.alt{background:var(--white);color:var(--ink);border:1.5px solid var(--ink)}
+.btn.alt:hover{background:var(--manila)}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 
-.card{border:1px solid var(--line);border-radius:12px;padding:20px;margin-top:16px}
-.tagline{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;font-weight:700;color:var(--mid);margin-bottom:8px}
-.q{font-size:20px;line-height:1.35;font-weight:600}
-.hint{font-size:13.5px;color:var(--grey);margin-top:6px}
+/* ---------- rounds map ---------- */
+.rounds{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.rd{border:1px solid var(--rule);border-radius:5px;padding:10px 12px;background:var(--manila)}
+.rd .n{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;color:#7A6B4F}
+.rd .t{font-family:Archivo,sans-serif;font-weight:700;font-size:14px;margin-top:3px;line-height:1.25}
+.rd.done{background:var(--teal);border-color:var(--teal)}
+.rd.done .n,.rd.done .t{color:#fff}
+.rd.now{background:var(--white);border-color:var(--ink);border-width:2px}
 
-.opts{display:grid;gap:9px;margin-top:16px}
-button.opt{display:flex;gap:11px;align-items:flex-start;text-align:left;width:100%;
-  border:1px solid var(--line);background:var(--white);border-radius:10px;padding:13px 14px;
-  font:inherit;font-size:15.5px;color:var(--ink);cursor:pointer;transition:.14s}
-button.opt:hover:not(:disabled){border-color:var(--teal);background:var(--pale)}
-button.opt:disabled{cursor:default}
-button.opt .key{flex:none;width:24px;height:24px;border-radius:50%;background:var(--pale);
-  border:1px solid var(--line);font-size:12px;font-weight:800;display:flex;align-items:center;
-  justify-content:center;color:var(--grey);margin-top:1px}
-button.opt.right{border-color:var(--ok);background:#EAF5EF}
-button.opt.right .key{background:var(--ok);color:#fff;border-color:var(--ok)}
-button.opt.wrong{border-color:var(--no);background:#FBEEEA}
-button.opt.wrong .key{background:var(--no);color:#fff;border-color:var(--no)}
+/* ---------- question ---------- */
+.qhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.qcount{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--grey);text-transform:uppercase}
+.progress{height:4px;background:var(--manila);border-radius:99px;margin:12px 0 18px;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:var(--amber);transition:width .3s ease}
+.qtext{font-family:Archivo,sans-serif;font-weight:700;font-size:clamp(19px,3.4vw,23px);line-height:1.3;margin:0 0 16px}
+.opts{display:grid;gap:9px}
+.opt{
+  text-align:left;font-family:"Source Sans 3",sans-serif;font-size:16.5px;
+  background:var(--white);border:1.5px solid var(--rule);border-radius:5px;
+  padding:13px 15px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;
+  transition:border-color .12s ease, background .12s ease, transform .12s ease;
+}
+.opt:hover:not(:disabled){border-color:var(--ink);transform:translateX(2px)}
+.opt:disabled{cursor:default}
+.opt .key{
+  font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12px;
+  background:var(--manila);color:#7A6B4F;border-radius:3px;
+  min-width:24px;height:24px;display:grid;place-items:center;flex:0 0 auto;margin-top:1px;
+}
+.opt.right{border-color:var(--teal);background:#EDF5F3}
+.opt.right .key{background:var(--teal);color:#fff}
+.opt.wrong{border-color:var(--clay);background:#FAEFEC}
+.opt.wrong .key{background:var(--clay);color:#fff}
 
-.fb{margin-top:14px;border-radius:10px;padding:13px 15px;font-size:15px;display:none}
-.fb.show{display:block}
-.fb.good{background:#EAF5EF;border:1px solid #BEE0CE}
-.fb.bad{background:#FBEEEA;border:1px solid #EBC9BE}
-.fb b{display:block;margin-bottom:3px;font-size:13px;letter-spacing:.4px;text-transform:uppercase}
-.fb.good b{color:var(--ok)} .fb.bad b{color:var(--no)}
-.bonus{display:inline-block;margin-top:7px;font-size:12.5px;font-weight:700;color:var(--amber)}
+.verdict{margin-top:16px;border-left:4px solid var(--rule);padding:10px 0 10px 14px;display:none}
+.verdict.show{display:block;animation:fade .25s ease}
+.verdict.ok{border-color:var(--teal)}
+.verdict.no{border-color:var(--clay)}
+.verdict .vlab{font-family:Archivo,sans-serif;font-weight:800;font-size:15px;letter-spacing:.02em}
+.verdict.ok .vlab{color:var(--teal)}
+.verdict.no .vlab{color:var(--clay)}
+.verdict p{margin:4px 0 0;font-size:16px}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
-.row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
-.btn{border:0;border-radius:9px;padding:12px 20px;font:inherit;font-size:15px;font-weight:700;
-  cursor:pointer;background:var(--ink);color:#fff;transition:.14s}
-.btn:hover{opacity:.87}
-.btn.ghost{background:var(--white);color:var(--ink);border:1px solid var(--line)}
-.btn.teal{background:var(--teal)}
-.prog{font-size:12.5px;color:var(--mid);font-weight:600;margin-top:14px}
+.nextrow{margin-top:16px;display:flex;justify-content:flex-end}
 
-.lead{font-size:16.5px;margin-bottom:6px}
-ul.plain{margin:12px 0 0 18px;font-size:15px}
-ul.plain li{margin-bottom:5px}
-.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.badge{border:1px solid var(--line);border-radius:20px;padding:7px 14px;font-size:13px;font-weight:700;
-  color:var(--mid);background:var(--pale)}
-.badge.won{background:var(--hl);border-color:#E8C93B;color:var(--ink)}
-.big{font-size:52px;font-weight:800;letter-spacing:-1.5px;line-height:1}
-.rank{font-size:19px;font-weight:800;color:var(--teal);margin-top:4px}
-.miss{border-left:3px solid var(--clay);padding:11px 0 11px 14px;margin-top:12px}
-.miss .qq{font-size:14.5px;font-weight:600}
-.miss .aa{font-size:13.5px;color:var(--grey);margin-top:3px}
-.miss .aa em{color:var(--teal);font-style:normal;font-weight:700}
-.hide{display:none}
+/* ---------- stamp ---------- */
+.stamp{
+  position:fixed;top:50%;left:50%;z-index:60;pointer-events:none;
+  font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(30px,8vw,58px);
+  letter-spacing:.06em;padding:12px 26px;border:5px solid currentColor;border-radius:6px;
+  opacity:0;transform:translate(-50%,-50%) rotate(-13deg) scale(2.1);
+}
+.stamp.go{animation:thud .75s cubic-bezier(.2,1.2,.3,1) forwards}
+.stamp.ok{color:rgba(63,127,118,.85)}
+.stamp.no{color:rgba(180,85,63,.85)}
+@keyframes thud{
+  0%{opacity:0;transform:translate(-50%,-50%) rotate(-13deg) scale(2.1)}
+  35%{opacity:1;transform:translate(-50%,-50%) rotate(-13deg) scale(.95)}
+  55%{transform:translate(-50%,-50%) rotate(-13deg) scale(1.03)}
+  100%{opacity:0;transform:translate(-50%,-50%) rotate(-13deg) scale(1)}
+}
+@media (prefers-reduced-motion:reduce){
+  .stamp.go{animation:none}
+  *{transition:none!important}
+}
 
-#cert{border:3px double var(--ink);border-radius:6px;padding:34px 30px;text-align:center;margin-top:18px}
-#cert .ct{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--grey);font-weight:700}
-#cert h2{font-size:30px;margin:10px 0 6px;letter-spacing:-.5px}
-#cert .nm{font-size:22px;font-weight:800;border-bottom:2px solid var(--line);display:inline-block;
-  padding:0 26px 6px;margin:14px 0 12px;min-width:240px}
-#cert .dt{font-size:13px;color:var(--grey);margin-top:12px}
-input.name{border:1px solid var(--line);border-radius:8px;padding:11px 13px;font:inherit;font-size:15px;
-  width:100%;max-width:320px}
-.src{font-size:12px;color:var(--mid);margin-top:26px;border-top:1px solid var(--line);padding-top:12px;line-height:1.6}
+/* ---------- badges ---------- */
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.badge{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;
+  border:1px dashed var(--rule);color:#9A9384;border-radius:99px;padding:5px 12px;background:var(--paper);
+}
+.badge.won{border-style:solid;border-color:var(--plum);color:var(--plum);background:#F4EFF6;font-weight:600}
 
-@media print{ body{background:#fff} .noprint{display:none!important} #cert{border-color:#000} }
-@media(max-width:560px){
-  h1{font-size:26px} .q{font-size:17.5px} .stat .val{font-size:19px} .rd{font-size:10px;padding:6px 2px}
+/* ---------- results ---------- */
+.bigscore{font-family:Archivo,sans-serif;font-weight:800;font-size:56px;line-height:1;margin:4px 0}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px}
+.sbox{border:1px solid var(--rule);border-radius:5px;padding:12px 14px;background:var(--manila)}
+.sbox .lab{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#7A6B4F}
+.sbox .val{font-family:Archivo,sans-serif;font-weight:800;font-size:24px;margin-top:2px}
+.review{margin-top:8px}
+.rev{border:1px solid var(--rule);border-left:4px solid var(--clay);border-radius:5px;padding:12px 14px;margin-top:9px;background:var(--white)}
+.rev .q{font-weight:700;margin-bottom:4px}
+.rev .a{font-size:15px;color:var(--grey)}
+.rev .a b{color:var(--teal)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+
+/* ---------- certificate ---------- */
+#cert{display:none}
+.cert{
+  border:3px double var(--ink);border-radius:4px;padding:32px 30px;background:var(--white);text-align:center;
+}
+.cert .seal{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.24em;color:var(--plum);text-transform:uppercase;
+}
+.cert h2{font-size:30px;margin:8px 0 2px}
+.cert .name{
+  font-family:Archivo,sans-serif;font-weight:700;font-size:24px;border-bottom:1.5px solid var(--rule);
+  display:inline-block;min-width:280px;padding:6px 10px;margin:14px 0 6px;
+}
+.cert .line{font-size:15px;color:var(--grey)}
+.cert .stats{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin-top:16px}
+.cert .stats div{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink)}
+.cert .stats b{display:block;font-family:Archivo,sans-serif;font-size:22px;margin-top:2px}
+input.nameIn{
+  font-family:"Source Sans 3",sans-serif;font-size:16px;padding:10px 12px;
+  border:1.5px solid var(--rule);border-radius:5px;width:100%;max-width:340px;background:var(--white);
+}
+
+.hidden{display:none}
+@media (max-width:640px){
+  .desk{grid-template-columns:1fr 1fr}
+  .desk .cell:last-child{grid-column:1/-1}
+  .rounds{grid-template-columns:1fr 1fr}
+  .panel{padding:18px 16px}
+}
+@media print{
+  body{background:#fff}
+  .noprint{display:none!important}
+  .panel{box-shadow:none;border:none}
+  .wrap{max-width:100%;padding:0}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<header>
-  <div class="kicker">Year 10 Geography &nbsp;|&nbsp; Week 7 Tuesday &nbsp;|&nbsp; VCGGK146</div>
-  <h1>Caring for Country</h1>
-  <div class="sub">Lesson 32: custodianship, and what it changes on the ground.</div>
-</header>
+  <header class="masthead">
+    <div class="filecode">Year 10 Geography &middot; Lesson 33 &middot; VCGGK146</div>
+    <h1>The Approvals Desk</h1>
+    <p>A project is on your desk. Government wants it safe, industry wants it signed. Get the calls right and you build a file strong enough to hold: 48 conditions.</p>
+  </header>
 
-<div class="ack">
-  <b>Acknowledgement of Country</b>
-  We acknowledge the Wadawurrung people as the Traditional Owners of the land on which our school stands,
-  and pay respect to Elders past and present. Every example in this activity comes from material published
-  by Traditional Owner organisations, Parks Victoria, the Victorian Government, DCCEEW or UNESCO.
-</div>
+  <section class="desk" aria-label="Running totals">
+    <div class="cell">
+      <div class="lab">Conditions imposed</div>
+      <div class="val"><span id="conditions">0</span> <span style="font-size:15px;color:#7A6B4F">/ 48</span></div>
+      <div class="gauge"><span id="condBar"></span></div>
+    </div>
+    <div class="cell">
+      <div class="lab">Score</div>
+      <div class="val" id="score">0</div>
+      <div class="tiny" id="accuracy">no answers yet</div>
+    </div>
+    <div class="cell">
+      <div class="lab">Streak</div>
+      <div class="val" id="streak">0</div>
+      <div class="tiny" id="multi">multiplier x1</div>
+    </div>
+  </section>
 
-<!-- INTRO -->
-<div id="intro">
-  <div class="card">
-    <div class="tagline">How this works</div>
-    <p class="lead">Four rounds, 38 questions, drawn straight from today's lesson.</p>
-    <ul class="plain">
-      <li><b>Round 1 &middot; Rapid Recall</b>: 10 questions on yesterday and today's key terms.</li>
-      <li><b>Round 2 &middot; True or False</b>: 10 common misconceptions. Some of these sound right.</li>
-      <li><b>Round 3 &middot; Figure File</b>: 8 questions on the numbers you can quote in writing.</li>
-      <li><b>Round 4 &middot; What Changes on the Ground</b>: 10 questions on practice, not attitude.</li>
-    </ul>
-    <p class="hint" style="margin-top:14px">Three correct in a row doubles your points. One wrong resets the streak. Number keys 1 to 4 work.</p>
-    <div class="row"><button class="btn teal" onclick="start()">Start</button></div>
-  </div>
-</div>
+  <!-- ---------------- BRIEFING ---------------- -->
+  <section class="panel" id="briefing">
+    <div class="eyebrow">Briefing note</div>
+    <h2>How this desk works</h2>
+    <p class="muted">Thirty-eight decisions across four rounds. You are the officer assessing them.</p>
+    <ol class="brief">
+      <li>Every correct call <b>imposes one condition</b> on the file. Three or more in a row and each call imposes two.</li>
+      <li>A wrong call imposes nothing, and your streak resets to zero.</li>
+      <li>Score is 10 points a call, doubled at a streak of three, quadrupled at a streak of six.</li>
+      <li>Reach 48 conditions and the file is fully protected. Anything you get wrong comes back for review at the end.</li>
+    </ol>
+    <div class="rounds" id="roundmap"></div>
+    <div style="margin-top:18px"><button class="btn" id="startBtn">Open the first file</button></div>
+  </section>
 
-<!-- QUIZ -->
-<div id="quiz" class="hide">
-  <div class="hud">
-    <div class="stat s-score"><div class="lab">Score</div><div class="val" id="score">0</div></div>
-    <div class="stat s-streak"><div class="lab">Streak</div><div class="val" id="streak">0</div></div>
-    <div class="stat s-acc"><div class="lab">Correct</div><div class="val" id="acc">0/0</div></div>
-  </div>
-
-  <div class="pbar">
-    <div class="top"><span>Progress</span><span class="pct" id="ppct">0%</span></div>
-    <div class="bar"><i id="pfill"></i></div>
-  </div>
-
-  <div class="rounds" id="rstrip"></div>
-
-  <div class="card">
-    <div class="tagline" id="rlabel">Round 1</div>
-    <div class="q" id="qtext"></div>
-    <div class="hint" id="qhint"></div>
+  <!-- ---------------- QUIZ ---------------- -->
+  <section class="panel hidden" id="quiz">
+    <div class="qhead">
+      <div>
+        <div class="eyebrow" id="roundName">Round 1</div>
+        <div class="qcount" id="qcount">Decision 1 of 10</div>
+      </div>
+    </div>
+    <div class="progress"><span id="progBar"></span></div>
+    <p class="qtext" id="qtext">—</p>
     <div class="opts" id="opts"></div>
-    <div class="fb" id="fb"></div>
-    <div class="row noprint"><button class="btn hide" id="next" onclick="next()">Next</button></div>
-    <div class="prog" id="prog"></div>
-  </div>
-</div>
-
-<!-- RESULTS -->
-<div id="results" class="hide">
-  <div class="card">
-    <div class="tagline">Final result</div>
-    <div class="big" id="fscore">0</div>
-    <div class="rank" id="frank"></div>
-    <p class="hint" id="fline" style="margin-top:8px"></p>
-    <div class="badges" id="fbadges"></div>
-  </div>
-
-  <div class="card" id="missbox">
-    <div class="tagline">What to go back over</div>
-    <div id="misslist"></div>
-  </div>
-
-  <div class="card noprint">
-    <div class="tagline">Certificate</div>
-    <p class="hint">Type your name, then print or save as PDF.</p>
-    <div class="row">
-      <input class="name" id="nm" placeholder="Your name" oninput="document.getElementById('cnm').textContent=this.value||'\u00a0'">
+    <div class="verdict" id="verdict">
+      <div class="vlab" id="vlab">—</div>
+      <p id="vtext">—</p>
     </div>
-    <div class="row">
-      <button class="btn" onclick="window.print()">Print / Save PDF</button>
-      <button class="btn ghost" onclick="location.reload()">Play again</button>
+    <div class="nextrow"><button class="btn hidden" id="nextBtn">Next decision</button></div>
+  </section>
+
+  <!-- ---------------- RESULTS ---------------- -->
+  <section class="panel hidden" id="results">
+    <div class="eyebrow">File closed</div>
+    <h2 id="verdictTitle">Decision recorded</h2>
+    <div class="bigscore" id="finalScore">0</div>
+    <p class="muted" id="finalLine">—</p>
+
+    <div class="summary">
+      <div class="sbox"><div class="lab">Correct calls</div><div class="val" id="sCorrect">0</div></div>
+      <div class="sbox"><div class="lab">Conditions imposed</div><div class="val" id="sCond">0</div></div>
+      <div class="sbox"><div class="lab">Best streak</div><div class="val" id="sStreak">0</div></div>
+      <div class="sbox"><div class="lab">Accuracy</div><div class="val" id="sAcc">0%</div></div>
     </div>
-  </div>
 
-  <div id="cert">
-    <div class="ct">Manor Lakes College &middot; Year 10 Geography</div>
-    <h2>Caring for Country</h2>
-    <div class="ct" style="letter-spacing:1px">Indigenous Perspectives &middot; Lesson 32</div>
-    <div class="nm" id="cnm">&nbsp;</div>
-    <div style="font-size:15px">scored <b id="cscore">0</b> points with <b id="cacc">0%</b> accuracy</div>
-    <div class="ct" style="letter-spacing:1px;margin-top:6px" id="crank"></div>
-    <div class="dt" id="cdate"></div>
-  </div>
+    <h3>Badges</h3>
+    <div class="badges" id="badgeRow"></div>
 
-  <div class="src">
-    Sources for the figures used: UNESCO World Heritage Centre and Parks Victoria (Budj Bim);
-    Victorian Traditional Owner Cultural Fire Strategy and Forest Fire Management Victoria (cultural fire);
-    First Peoples State Relations and the Dhelkunya Dja Land Management Board (Dja Dja Wurrung joint management);
-    DCCEEW and the National Indigenous Australians Agency (Indigenous Protected Areas). Figures current as at August 2026.
-  </div>
+    <div id="reviewWrap">
+      <h3>Sent back for review</h3>
+      <p class="muted">These are the calls that did not hold up. Read the reason, then have another go.</p>
+      <div class="review" id="review"></div>
+    </div>
+
+    <div class="actions noprint">
+      <button class="btn" id="certBtn">Print a certificate</button>
+      <button class="btn alt" id="againBtn">Run it again</button>
+    </div>
+  </section>
+
+  <!-- ---------------- CERTIFICATE ---------------- -->
+  <section class="panel hidden" id="cert">
+    <div class="noprint" style="margin-bottom:16px">
+      <div class="eyebrow">Sign the file</div>
+      <label for="nameIn" class="muted">Type your name, then print.</label>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+        <input class="nameIn" id="nameIn" placeholder="Your name" autocomplete="off">
+        <button class="btn" id="printBtn">Print</button>
+        <button class="btn alt" id="backBtn">Back</button>
+      </div>
+    </div>
+    <div class="cert">
+      <div class="seal">Year 10 Geography &middot; Environmental Change and Management</div>
+      <h2>The Approvals Desk</h2>
+      <div class="line">Government and industry perspectives &middot; Lesson 33</div>
+      <div class="name" id="certName">&nbsp;</div>
+      <div class="line" id="certLine">completed the file review</div>
+      <div class="stats">
+        <div>SCORE<b id="certScore">0</b></div>
+        <div>CONDITIONS<b id="certCond">0</b></div>
+        <div>ACCURACY<b id="certAcc">0%</b></div>
+        <div>DATE<b id="certDate">—</b></div>
+      </div>
+    </div>
+  </section>
+
 </div>
 
-</div>
+<div class="stamp" id="stamp">APPROVED</div>
 
 <script>
+"use strict";
+
+/* ============ QUESTION BANK ============ */
 const ROUNDS = [
   {
-    name:"Rapid Recall",
-    items:[
-      { q:"What does Country (with a capital C) mean?",
-        o:["Land, water, sky, animals, plants, stories, ancestors and people as one connected living thing that a group belongs to",
-           "A nation with borders, like Japan or Australia",
-           "Any area of bushland",
-           "A national park with cultural significance"],
-        a:0, e:"Capital C matters. Lower case country means a nation. Country means all of the above." },
-      { q:"What does custodianship mean?",
-        o:["Holding responsibility to care for Country on behalf of those before and those coming after",
-           "Legally owning land and being able to sell it",
-           "Working as a park ranger",
-           "Visiting a place regularly"],
-        a:0, e:"And the relationship runs both ways: you look after Country, and Country looks after you." },
-      { q:"Which is the key difference between ownership and custodianship?",
-        o:["Ownership asks what I can get from the land; custodianship asks what Country needs from me",
-           "Ownership is legal and custodianship is illegal",
-           "There is no real difference",
-           "Custodianship only applies to national parks"],
-        a:0, e:"That reversal of direction is the core idea of the whole lesson." },
-      { q:"Whose Country is Budj Bim on?",
-        o:["Gunditjmara","Wadawurrung","Dja Dja Wurrung","Yolngu"], a:0,
-        e:"Gunditjmara Country, in south-west Victoria." },
-      { q:"Whose Country does Manor Lakes College stand on?",
-        o:["Wadawurrung","Gunditjmara","Taungurung","Barengi Gadjin"], a:0,
-        e:"Wadawurrung Country, including the Werribee River." },
-      { q:"Which of these is the correct way to write about Indigenous perspectives in an essay?",
-        o:["\u201cThe Gunditjmara people built and managed this aquaculture system.\u201d",
-           "\u201cThe Aborigines built fish traps.\u201d",
-           "\u201cAboriginal people all believe the land is sacred.\u201d",
-           "\u201cThe Aboriginal way of managing land is...\u201d"],
-        a:0, e:"Name the specific nation wherever you can. Generalising across hundreds of nations is a geography error, not just a wording one." },
-      { q:"What is the phrase Victorian Traditional Owners use to describe cultural burning?",
-        o:["Right fire, right time, right way, and for the right reasons, according to Lore",
-           "Burn early, burn often",
-           "Fight fire with fire",
-           "Reduce the fuel, reduce the risk"],
-        a:0, e:"It appears in the Victorian Traditional Owner Cultural Fire Strategy, released in 2020." },
-      { q:"On yesterday's spectrum, which worldview is custodianship closest to?",
-        o:["Stewardship, but it does not accept the human/nature split at all",
-           "Development first",
-           "Technology will fix it",
-           "It is exactly the same as nature first"],
-        a:0, e:"Stewardship still has you standing outside the system managing it. Custodianship has you inside it, with obligations to it." },
-      { q:"What is the chain we use to write about this?",
-        o:["Value, then practice, then outcome",
-           "Cause, effect, solution",
-           "Where, when, why",
-           "Problem, goal, tool"],
-        a:0, e:"What they believe, what they therefore do, and what results from it. Three sentences." },
-      { q:"Joint management means:",
-        o:["Traditional Owners sit on the body that makes the decisions",
-           "Traditional Owners are asked for their views before government decides",
-           "The park is closed to the public",
-           "Two government departments share the budget"],
-        a:0, e:"Consultation means you ask and then decide anyway. Joint management means they are on the deciding body." }
+    name: "Round 1 — Briefing",
+    short: "Briefing",
+    blurb: "What you already know",
+    q: [
+      { t:"An environmental worldview is best described as:",
+        o:["The beliefs and values that shape how a person or group treats the environment",
+           "A scientific measurement of environmental damage",
+           "A government policy for protecting national parks",
+           "An opinion about the weather"],
+        a:0, e:"A worldview sits underneath opinions. It is the set of values that decides what a person thinks the environment is for." },
+      { t:"Custodianship means:",
+        o:["Land is looked after and passed on, not owned to be used up",
+           "Land is owned privately and can be sold",
+           "Land is locked up so nobody may enter",
+           "Land is managed only by government rangers"],
+        a:0, e:"Ownership asks what I can take. Custodianship asks what I must hand on." },
+      { t:"Australia's main national environment law is:",
+        o:["The EPBC Act","The Safeguard Mechanism","The Australian Consumer Law","The Native Title Act"],
+        a:0, e:"The EPBC Act decides which places, species and heritage sites need federal approval before anything is built." },
+      { t:"The National Environmental Protection Agency started work on:",
+        o:["1 July 2026","28 November 2025","1 January 2020","19 August 2026"],
+        a:0, e:"The laws passed on 28 November 2025, but the agency itself started operating on 1 July 2026." },
+      { t:"The Safeguard Mechanism does what?",
+        o:["Sets a legal emissions ceiling on Australia's biggest industrial facilities",
+           "Bans all new gas and coal projects",
+           "Pays households to install solar panels",
+           "Lists which species are threatened"],
+        a:0, e:"It is a limit, not a ban. Facilities get a ceiling, and the ceiling falls 4.9 per cent every year to 2030." },
+      { t:"Greenwashing is:",
+        o:["Claiming to be more environmentally friendly than you actually are",
+           "Cleaning up a polluted site",
+           "Planting trees to offset emissions",
+           "Painting a factory green to reflect heat"],
+        a:0, e:"It is a marketing problem, not a pollution problem, which is why the corporate regulator handles it." },
+      { t:"Government's four tools for managing the environment are:",
+        o:["Laws, limits, conditions and penalties",
+           "Taxes, fines, grants and subsidies",
+           "Parks, rangers, fences and signs",
+           "Reports, surveys, plans and meetings"],
+        a:0, e:"Laws say what is protected, limits cap how much is allowed, conditions attach rules to an approval, penalties punish breaches." },
+      { t:"The three things that most drive a business's environmental decisions are:",
+        o:["Profit, rules and reputation",
+           "Profit, politics and publicity",
+           "Rules, rangers and recycling",
+           "Reputation, research and rainfall"],
+        a:0, e:"A business will usually act to protect the environment when doing so also protects profit, compliance or reputation." },
+      { t:"The North West Shelf gas plant extension was approved to run until:",
+        o:["2070","2030","2050","2100"],
+        a:0, e:"The plant was due to close around 2030. The 2025 approval extended it by forty years, to 2070." },
+      { t:"Murujuga, next to that plant, is significant because it holds:",
+        o:["Some of the oldest rock carvings on Earth, World Heritage listed in July 2025",
+           "Australia's largest remaining rainforest",
+           "The country's biggest solar farm",
+           "A Ramsar listed wetland"],
+        a:0, e:"Some carvings are thought to be up to 50,000 years old. That is what the 48 conditions were written to protect." }
     ]
   },
   {
-    name:"True or False",
-    items:[
-      { q:"TRUE or FALSE: All Aboriginal nations share the same environmental practices.",
-        o:["False","True"], a:0,
-        e:"Hundreds of distinct nations, each with their own Country, languages, laws and practices. Practices are developed for a specific place and do not simply transfer." },
-      { q:"TRUE or FALSE: Cultural burning and agency fuel reduction burning have the same goal.",
-        o:["False","True"], a:0,
-        e:"Agency burning targets fuel loads to lower bushfire risk. Cultural burning aims at healthy Country, and reduced fuel is one outcome among several." },
-      { q:"TRUE or FALSE: Budj Bim shows Aboriginal people in this region lived in permanent settlements.",
-        o:["True","False"], a:0,
-        e:"The remains of stone houses across the landscape point to permanent settlement, not seasonal camps." },
-      { q:"TRUE or FALSE: Indigenous Protected Areas make up more than half of Australia's National Reserve System.",
-        o:["True","False"], a:0,
-        e:"More than 55 per cent. Most of what Australia counts as protected area is Traditional Owner managed." },
-      { q:"TRUE or FALSE: Custodianship simply means Aboriginal people care about the environment more than other people do.",
-        o:["False","True"], a:0,
-        e:"That turns a worldview into a personality trait, and it is a stereotype. Custodianship is about being part of Country and responsible to it, which changes what actually gets done to the land." },
-      { q:"TRUE or FALSE: Cultural burns are deliberately patchy, leaving unburnt areas.",
-        o:["True","False"], a:0,
-        e:"Patchiness is intentional so animals can escape and unburnt refuges remain to recolonise from." },
-      { q:"TRUE or FALSE: Budj Bim was World Heritage listed for its natural landscape values.",
-        o:["False","True"], a:0,
-        e:"It was listed in 2019 and it is the first Australian place listed solely for its Aboriginal cultural values." },
-      { q:"TRUE or FALSE: Aboriginal title over the six Dja Dja Wurrung parks means the public can no longer visit them.",
-        o:["False","True"], a:0,
-        e:"Transfer to Aboriginal title does not change existing public use and access. The parks remain reserved under the same Acts." },
-      { q:"TRUE or FALSE: Indigenous land management in Australia is mainly of historical interest.",
-        o:["False","True"], a:0,
-        e:"It is current, funded government policy. The Simpson Desert Indigenous Protected Area was declared in July 2026." },
-      { q:"TRUE or FALSE: Saying \u201cAboriginal people think the land is sacred\u201d is a safe generalisation to use in an essay.",
-        o:["False","True"], a:0,
-        e:"It flattens hundreds of nations into one voice. Name the nation and the practice instead." }
+    name: "Round 2 — Whose desk?",
+    short: "Whose desk",
+    blurb: "Government or industry",
+    q: [
+      { t:"Passing a law that lists which species need federal approval before development.", o:["Government","Industry"], a:0,
+        e:"Only government can write law. This is tool one." },
+      { t:"Putting solar panels on a warehouse roof because the power bill drops.", o:["Government","Industry"], a:1,
+        e:"Green outcome, commercial reason. Profit and the environment happened to point the same way." },
+      { t:"Setting an emissions ceiling that falls 4.9 per cent every year.", o:["Government","Industry"], a:0,
+        e:"A limit. Businesses do not set their own ceilings, or they would not be ceilings." },
+      { t:"Running an advertising campaign about a new carbon neutral product range.", o:["Government","Industry"], a:1,
+        e:"Reputation at work. It is legitimate when the claim is true, and greenwashing when it is not." },
+      { t:"Taking a super fund to court over misleading claims about what it invests in.", o:["Government","Industry"], a:0,
+        e:"That is the corporate regulator using tool four, penalties." },
+      { t:"Signing a twenty year contract to supply gas to overseas buyers.", o:["Government","Industry"], a:1,
+        e:"This is why certainty matters so much to a company. You cannot promise twenty years of supply without approval." },
+      { t:"Attaching 48 conditions to a project approval.", o:["Government","Industry"], a:0,
+        e:"Conditions are how a government says yes and no at the same time." },
+      { t:"Arguing that a proposed condition would make the whole project unworkable.", o:["Government","Industry"], a:1,
+        e:"This happened on the North West Shelf. Some proposed conditions were softened afterwards." },
+      { t:"Creating an independent regulator that can audit a site without warning.", o:["Government","Industry"], a:0,
+        e:"The National EPA. Surprise audits matter because you cannot tidy up first." },
+      { t:"Publishing a sustainability report to reassure investors.", o:["Government","Industry"], a:1,
+        e:"Investors increasingly ask for it, so reputation and access to money are the drivers here." }
     ]
   },
   {
-    name:"Figure File",
-    items:[
-      { q:"How old is the aquaculture system at Budj Bim?",
-        o:["At least 6,600 years","About 600 years","About 200 years","About 60,000 years"], a:0,
-        e:"At least 6,600 years, which makes it older than Stonehenge and the Egyptian pyramids." },
-      { q:"When was Budj Bim inscribed on the UNESCO World Heritage list?",
-        o:["2019","1984","2004","2024"], a:0,
-        e:"July 2019, the first Australian place listed solely for Aboriginal cultural values." },
-      { q:"How many Indigenous Protected Areas are there across Australia?",
-        o:["95","12","240","7"], a:0,
-        e:"95, as at early 2026." },
-      { q:"How much land do Indigenous Protected Areas cover?",
-        o:["Over 108 million hectares, plus 6 million hectares of sea Country",
-           "About 1 million hectares",
-           "About 12 million hectares",
-           "Over 500 million hectares"], a:0,
-        e:"Over 108 million hectares on land and about 6 million hectares of sea Country." },
-      { q:"What proportion of Australia's National Reserve System is Indigenous Protected Areas?",
-        o:["More than 55%","About 5%","About 20%","About 90%"], a:0,
-        e:"More than 55 per cent, which is the single most useful figure from today." },
-      { q:"How much land was transferred to Dja Dja Wurrung as Aboriginal title under the 2013 agreement?",
-        o:["About 47,523 hectares across six parks","About 500 hectares across one park",
-           "About 2 million hectares","About 167,000 hectares"], a:0,
-        e:"Around 47,523 hectares across six parks and reserves in central Victoria." },
-      { q:"What did the Victorian Government commit to reinvigorate Traditional Owner-led cultural land and fire management?",
-        o:["$22.5 million","$225,000","$1.2 billion","$50,000"], a:0,
-        e:"$22.5 million, plus an ongoing Cultural Fire Grants program." },
-      { q:"What happened in July 2026 with the Simpson Desert Indigenous Protected Area?",
-        o:["It added over 4.7 million hectares and took Australia past 25% of its landmass protected",
-           "It was closed to the public",
-           "It was the first IPA ever declared",
-           "It replaced a national park"], a:0,
-        e:"Over 4.7 million hectares, and three ranger groups will look after 21 threatened animal species on it." }
+    name: "Round 3 — Name the tool",
+    short: "Name the tool",
+    blurb: "Law, limit, condition or penalty",
+    q: [
+      { t:"An Act of Parliament lists which places and species need federal approval.", o:["Law","Limit","Condition","Penalty"], a:0,
+        e:"A law sets the boundaries of the whole system before any single project is looked at." },
+      { t:"A facility may not emit more than its baseline this financial year.", o:["Law","Limit","Condition","Penalty"], a:1,
+        e:"A number, applied every year, to a whole class of facilities. That is a limit." },
+      { t:"Approval granted, but only if the creek is fenced and water quality is tested every three months.", o:["Law","Limit","Condition","Penalty"], a:2,
+        e:"The giveaway is \u201Conly if\u201D. Conditions are attached to one approval, not to everyone." },
+      { t:"The Federal Court orders a company to pay $12.9 million for misleading ESG claims.", o:["Law","Limit","Condition","Penalty"], a:3,
+        e:"Vanguard, September 2024. It was the largest greenwashing penalty in Australia at the time." },
+      { t:"Parliament creates an independent agency to police environmental approvals.", o:["Law","Limit","Condition","Penalty"], a:0,
+        e:"Setting up a regulator takes legislation, so it is a law, even though the agency then uses the other three tools." },
+      { t:"Emissions baselines drop 4.9 per cent each year until 2030.", o:["Law","Limit","Condition","Penalty"], a:1,
+        e:"A shrinking ceiling is still a ceiling." },
+      { t:"The plant may continue operating only if certain emissions fall 60 per cent by 2030.", o:["Law","Limit","Condition","Penalty"], a:2,
+        e:"This is one of the 48 conditions on the North West Shelf extension. Note it applies to that plant alone." },
+      { t:"A company is ordered to publish a public notice admitting it misled customers.", o:["Law","Limit","Condition","Penalty"], a:3,
+        e:"Courts order these alongside fines, because reputational damage often bites harder than the money." },
+      { t:"A facility is only covered by the scheme once it emits over 100,000 tonnes a year.", o:["Law","Limit","Condition","Penalty"], a:1,
+        e:"A threshold is a limit that decides who is in and who is out." }
     ]
   },
   {
-    name:"What Changes on the Ground",
-    items:[
-      { q:"A cultural burn is kept cool, slow and low to the ground. Why?",
-        o:["So it does not destroy the whole system, and unburnt refuges survive for animals and seed",
-           "Because it is safer for the people lighting it, and nothing else",
-           "Because equipment is limited",
-           "To make it look better for tourists"],
-        a:0, e:"A hot fast fire takes everything. A cool patchy fire leaves the structure of Country intact." },
-      { q:"Cultural burns are timed to season, plant cycles and animal breeding. What worldview does this reflect?",
-        o:["That people are part of Country and have obligations to everything living in it",
-           "That fire is only about property protection",
-           "That the calendar is more convenient in autumn",
-           "That technology will fix any damage"],
-        a:0, e:"The timing is the worldview showing up as a practice." },
-      { q:"An agency burn measures success in hectares treated. A cultural burn measures success by:",
-        o:["How Country responds afterwards",
-           "How quickly the burn was completed",
-           "How much money was saved",
-           "How many people attended"],
-        a:0, e:"Same tool, different question, so you end up with a different fire." },
-      { q:"Budj Bim sustained a harvest for at least 6,600 years. Applying last week's RATE test, this means:",
-        o:["The take never exceeded what the system could replace",
-           "The eels were farmed in tanks",
-           "Harvesting only happened once a century",
-           "The system was abandoned regularly"],
-        a:0, e:"If take had outrun regrowth for any sustained period, the fishery would have collapsed long ago." },
-      { q:"Applying last week's RIPPLE test to Budj Bim:",
-        o:["The system enhanced the wetland and supported other food resources rather than degrading it",
-           "It destroyed the surrounding wetland",
-           "It had no effect on anything else",
-           "It caused the lava flow"],
-        a:0, e:"The engineering modified the wetland in a way that increased its productivity over millennia." },
-      { q:"Why would a development first worldview probably NOT have built something like Budj Bim?",
-        o:["It optimises for return now, so the take would be set by demand rather than by long-term obligation",
-           "It would not have had the technology",
-           "It would have preferred to protect the eels entirely",
-           "It would have needed government approval"],
-        a:0, e:"That is a design difference, not a spiritual one. The cap comes from obligation instead of market demand." },
-      { q:"The Dhelkunya Dja Land Management Board has a majority of members nominated by Traditional Owners. Why does that matter?",
-        o:["It means Traditional Owners hold decision-making power, not just an advisory voice",
-           "It reduces the cost of running the parks",
-           "It means the government cannot be involved at all",
-           "It only affects tourism"],
-        a:0, e:"This is the practical difference between consultation and joint management." },
-      { q:"Which of these is the strongest evidence that a worldview changes management outcomes?",
-        o:["A resource harvested continuously for 6,600 years without collapsing",
-           "People saying they respect the environment",
-           "A park being given a new name",
-           "A poll showing high levels of environmental concern"],
-        a:0, e:"Evidence in Geography means measurable outcomes on the ground, not stated attitudes." },
-      { q:"Which sentence would earn the most marks in an extended response?",
-        o:["Because custodianship treats people as responsible to Country rather than owners of it, burns are kept cool and patchy, so unburnt refuges survive and food plants regenerate.",
-           "Aboriginal people have always looked after the land really well.",
-           "Cultural burning is a traditional practice that is very important.",
-           "Indigenous people care a lot about the environment."],
-        a:0, e:"Value, practice, outcome, all in one sentence, with a specific detail. The other three are assertions with no evidence." },
-      { q:"Gariwerd (the Grampians) is managed under a plan written jointly with:",
-        o:["The Barengi Gadjin, Eastern Maar and Gunditj Mirring peoples",
-           "The Dja Dja Wurrung people only",
-           "The Wadawurrung people only",
-           "No Traditional Owner group"],
-        a:0, e:"You met this last week in the national parks and biodiversity lesson." }
+    name: "Round 4 — Align or conflict",
+    short: "Align or conflict",
+    blurb: "Where interests meet, and where they do not",
+    q: [
+      { t:"Both sides want approval decisions made faster instead of after a six year wait.", o:["Align","Conflict"], a:0,
+        e:"Uncertainty is expensive for a company and politically awkward for a government. Neither one enjoys a six year assessment." },
+      { t:"Government wants the strictest workable conditions; the company wants the cheapest ones.", o:["Align","Conflict"], a:1,
+        e:"Both agree there should be conditions. They disagree on how much they should cost." },
+      { t:"Both want shoppers to trust an environmental label on a product.", o:["Align","Conflict"], a:0,
+        e:"Honest labels protect genuinely green businesses from being undercut, so the honest end of industry backs enforcement too." },
+      { t:"The cost of protecting the site falls on the company, while the cost of damage falls on the public.", o:["Align","Conflict"], a:1,
+        e:"This is the heart of it. Private cost, public benefit. Almost every environmental argument sits on this split." },
+      { t:"Both benefit when a plant is seen to be well run.", o:["Align","Conflict"], a:0,
+        e:"One side gets votes, the other gets sales, but the behaviour they want is the same." },
+      { t:"Exporters want emissions counted where the gas is burnt overseas, not where it is dug up here.", o:["Align","Conflict"], a:1,
+        e:"Where you draw the boundary decides whose problem it is. That is exactly what happened with the North West Shelf decision." },
+      { t:"Both support monitoring air quality near a heritage site.", o:["Align","Conflict"], a:0,
+        e:"Monitoring is cheap and it protects both sides. Acting on what the monitoring finds is where it gets harder." },
+      { t:"A company says a proposed condition makes the whole project unviable and asks for it to be dropped.", o:["Align","Conflict"], a:1,
+        e:"Sometimes true, sometimes tactical. A regulator has to judge which, and it rarely has the company's own numbers." },
+      { t:"Both prefer clear written rules over case-by-case guesswork.", o:["Align","Conflict"], a:0,
+        e:"Business can plan against a clear rule. Government can defend one in court. Vague rules serve nobody." }
     ]
   }
 ];
 
-let flat=[], idx=0, score=0, streak=0, best=0, correct=0, answered=0, misses=[], locked=false;
-function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;}
+/* ============ STATE ============ */
+const S = {
+  r:0, i:0, score:0, streak:0, best:0, correct:0, answered:0,
+  conditions:0, missed:[], roundClean:true, badges:new Set(), locked:false
+};
+const TARGET = 48;
+const KEYS = ["A","B","C","D"];
 
-function build(){
-  flat=[];
-  ROUNDS.forEach((r,ri)=>{
-    r.items.forEach(it=>{
-      const pairs=it.o.map((t,i)=>({t,ok:i===it.a}));
-      const sh = pairs.length===2 ? pairs.slice() : shuffle(pairs);
-      flat.push({round:ri,rname:r.name,q:it.q,e:it.e,opts:sh,ansIdx:sh.findIndex(p=>p.ok)});
+const $ = id => document.getElementById(id);
+
+/* ============ SETUP ============ */
+function shuffle(a){
+  const x = a.slice();
+  for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];}
+  return x;
+}
+// pre-shuffle option order per question, keeping track of the right answer
+function prepare(){
+  ROUNDS.forEach(r=>{
+    r.q.forEach(q=>{
+      const answerText = q.o[q.a];
+      const order = q.o.length > 2 ? shuffle(q.o) : q.o.slice();
+      q._o = order;
+      q._a = order.indexOf(answerText);
     });
   });
 }
+
+function drawRoundMap(){
+  const wrap = $("roundmap");
+  wrap.innerHTML = "";
+  ROUNDS.forEach((r,idx)=>{
+    const d = document.createElement("div");
+    d.className = "rd" + (idx < S.r ? " done" : "") + (idx === S.r ? " now" : "");
+    d.innerHTML = '<div class="n">ROUND '+(idx+1)+'</div><div class="t">'+r.short+'</div>';
+    wrap.appendChild(d);
+  });
+}
+
+/* ============ DESK ============ */
+function updateDesk(){
+  $("conditions").textContent = S.conditions;
+  $("condBar").style.width = Math.min(100, (S.conditions/TARGET)*100) + "%";
+  $("score").textContent = S.score;
+  $("streak").textContent = S.streak;
+  $("multi").textContent = "multiplier x" + mult();
+  $("accuracy").textContent = S.answered
+    ? S.correct + " of " + S.answered + " correct"
+    : "no answers yet";
+}
+function mult(){ return S.streak >= 6 ? 4 : S.streak >= 3 ? 2 : 1; }
+
+/* ============ FLOW ============ */
 function start(){
-  build();
-  document.getElementById('intro').classList.add('hide');
-  document.getElementById('quiz').classList.remove('hide');
-  renderStrip(); render();
+  $("briefing").classList.add("hidden");
+  $("quiz").classList.remove("hidden");
+  render();
 }
-function renderStrip(){
-  const cur = flat[idx] ? flat[idx].round : ROUNDS.length;
-  document.getElementById('rstrip').innerHTML = ROUNDS.map((r,i)=>{
-    const cls = i===cur ? 'rd on' : (i<cur ? 'rd done' : 'rd');
-    return '<div class="'+cls+'">'+(i+1)+'. '+r.name+'</div>';
-  }).join('');
-}
+
 function render(){
-  locked=false;
-  const it=flat[idx];
-  document.getElementById('rlabel').textContent='Round '+(it.round+1)+' \u00b7 '+it.rname;
-  document.getElementById('qtext').textContent=it.q;
-  document.getElementById('qhint').textContent = it.opts.length===2 ? 'Two options.' : '';
-  const keys=['1','2','3','4'];
-  document.getElementById('opts').innerHTML=it.opts.map((p,i)=>
-    '<button class="opt" onclick="pick('+i+')"><span class="key">'+keys[i]+'</span><span>'+p.t+'</span></button>').join('');
-  const fb=document.getElementById('fb'); fb.className='fb'; fb.innerHTML='';
-  document.getElementById('next').classList.add('hide');
-  document.getElementById('prog').textContent='Question '+(idx+1)+' of '+flat.length;
-  renderStrip(); hud();
+  S.locked = false;
+  const round = ROUNDS[S.r];
+  const q = round.q[S.i];
+  $("roundName").textContent = round.name + " — " + round.blurb;
+  $("qcount").textContent = "Decision " + (S.i+1) + " of " + round.q.length;
+  $("qtext").textContent = q.t;
+
+  const total = ROUNDS.reduce((n,r)=>n+r.q.length,0);
+  const donePrev = ROUNDS.slice(0,S.r).reduce((n,r)=>n+r.q.length,0);
+  $("progBar").style.width = (((donePrev + S.i) / total) * 100) + "%";
+
+  const box = $("opts");
+  box.innerHTML = "";
+  q._o.forEach((text, idx)=>{
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.innerHTML = '<span class="key">'+KEYS[idx]+'</span><span>'+text+'</span>';
+    b.addEventListener("click", ()=>answer(idx, b));
+    box.appendChild(b);
+  });
+
+  $("verdict").className = "verdict";
+  $("nextBtn").classList.add("hidden");
+  $("quiz").scrollIntoView({behavior:"smooth", block:"nearest"});
 }
-function hud(){
-  document.getElementById('score').textContent=score;
-  document.getElementById('streak').textContent=streak;
-  document.getElementById('acc').textContent=correct+'/'+answered;
-  const p=Math.round(answered/flat.length*100);
-  document.getElementById('pfill').style.width=p+'%';
-  document.getElementById('ppct').textContent=p+'%';
-}
-function pick(i){
-  if(locked) return; locked=true;
-  const it=flat[idx], ok=it.opts[i].ok; answered++;
-  const btns=[...document.querySelectorAll('button.opt')];
-  btns.forEach(b=>b.disabled=true);
-  btns[i].classList.add(ok?'right':'wrong');
-  if(!ok) btns[it.ansIdx].classList.add('right');
-  const fb=document.getElementById('fb'); let bonus='';
-  if(ok){
-    correct++; streak++; best=Math.max(best,streak);
-    let pts=10;
-    if(streak>=3){pts=20;bonus='<span class="bonus">Streak x2 \u00b7 '+streak+' in a row</span>';}
-    if(streak>=6){pts=30;bonus='<span class="bonus">Streak x3 \u00b7 '+streak+' in a row</span>';}
-    score+=pts;
-    fb.className='fb show good';
-    fb.innerHTML='<b>Correct, +'+pts+'</b>'+it.e+bonus;
+
+function answer(picked, btn){
+  if(S.locked) return;
+  S.locked = true;
+  const q = ROUNDS[S.r].q[S.i];
+  const right = picked === q._a;
+  const buttons = [...$("opts").children];
+  buttons.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === q._a) b.classList.add("right");
+    if(idx === picked && !right) b.classList.add("wrong");
+  });
+
+  S.answered++;
+  if(right){
+    S.correct++;
+    S.streak++;
+    S.best = Math.max(S.best, S.streak);
+    S.score += 10 * mult();
+    S.conditions = Math.min(TARGET, S.conditions + (S.streak >= 3 ? 2 : 1));
+    if(S.streak >= 5) S.badges.add("cross");
+    if(S.conditions >= TARGET) S.badges.add("full");
   } else {
-    streak=0;
-    misses.push({q:it.q,a:it.opts[it.ansIdx].t,e:it.e});
-    fb.className='fb show bad';
-    fb.innerHTML='<b>Not quite</b>The answer is <em>'+it.opts[it.ansIdx].t+'</em>. '+it.e;
+    S.streak = 0;
+    S.roundClean = false;
+    S.missed.push({ q:q.t, a:q._o[q._a], e:q.e });
   }
-  hud();
-  const n=document.getElementById('next');
-  n.classList.remove('hide');
-  n.textContent = idx===flat.length-1 ? 'See results' : 'Next';
-  n.focus();
+  updateDesk();
+  stamp(right);
+
+  const v = $("verdict");
+  v.className = "verdict show " + (right ? "ok" : "no");
+  $("vlab").textContent = right
+    ? (S.streak >= 3 ? "Upheld. Two conditions imposed." : "Upheld. One condition imposed.")
+    : "Sent back. No condition imposed.";
+  $("vtext").textContent = right ? q.e : "The call was: " + q._o[q._a] + ". " + q.e;
+
+  const nb = $("nextBtn");
+  const last = (S.r === ROUNDS.length-1) && (S.i === ROUNDS[S.r].q.length-1);
+  nb.textContent = last ? "Close the file" : (S.i === ROUNDS[S.r].q.length-1 ? "Start the next round" : "Next decision");
+  nb.classList.remove("hidden");
 }
+
 function next(){
-  idx++;
-  if(idx>=flat.length){finish();return;}
-  render(); window.scrollTo({top:0,behavior:'smooth'});
+  const round = ROUNDS[S.r];
+  if(S.i < round.q.length - 1){
+    S.i++;
+    render();
+    return;
+  }
+  if(S.roundClean) S.badges.add("clean");
+  S.roundClean = true;
+  if(S.r === 0) S.badges.add("first");
+  if(S.r < ROUNDS.length - 1){
+    S.r++; S.i = 0;
+    drawRoundMap();
+    render();
+  } else {
+    S.badges.add("portfolio");
+    finish();
+  }
 }
-function roundPerfect(ri){
-  const qs=flat.filter(f=>f.round===ri).map(f=>f.q);
-  return !misses.some(m=>qs.includes(m.q));
+
+function stamp(ok){
+  const el = $("stamp");
+  el.textContent = ok ? "APPROVED" : "SENT BACK";
+  el.className = "stamp " + (ok ? "ok" : "no");
+  void el.offsetWidth;
+  el.classList.add("go");
 }
+
+/* ============ RESULTS ============ */
+const BADGES = [
+  ["first","First reading","finish round one"],
+  ["cross","Cross-examiner","five correct in a row"],
+  ["clean","Clean record","a round with no errors"],
+  ["portfolio","Full portfolio","all four rounds"],
+  ["full","Full bench","48 conditions imposed"],
+  ["precedent","Precedent set","90 per cent or better"]
+];
+
 function finish(){
-  document.getElementById('quiz').classList.add('hide');
-  document.getElementById('results').classList.remove('hide');
-  const pct=Math.round(correct/flat.length*100);
-  let rank,line;
-  if(pct>=90){rank='Ready to write';line='You can name the value, the practice and the outcome, and you have the figures to back it. That is a full extended response.';}
-  else if(pct>=75){rank='Strong';line='Solid. Check the ones below, they are usually the figures.';}
-  else if(pct>=55){rank='Getting there';line='You have the concepts. Go back over the numbers, they are what turns an assertion into evidence.';}
-  else {rank='Go back over it';line='Re-read the custodianship definition and the three examples, then run this again.';}
-  document.getElementById('fscore').textContent=score;
-  document.getElementById('frank').textContent=rank+' \u00b7 '+pct+'% correct';
-  document.getElementById('fline').textContent=line;
-  const badges=[
-    ['Full house', correct===flat.length],
-    ['Streak of 6+', best>=6],
-    ['Streak of 10+', best>=10],
-    ['Myth buster (Round 2 perfect)', roundPerfect(1)],
-    ['Figure file (Round 3 perfect)', roundPerfect(2)],
-    ['Evidence ready (Round 4 perfect)', roundPerfect(3)],
-    ['500 points', score>=500]
-  ];
-  document.getElementById('fbadges').innerHTML=badges.map(([t,w])=>
-    '<div class="badge'+(w?' won':'')+'">'+(w?'\u2713 ':'')+t+'</div>').join('');
-  const mb=document.getElementById('missbox');
-  if(misses.length===0) mb.classList.add('hide');
-  else document.getElementById('misslist').innerHTML=misses.map(m=>
-    '<div class="miss"><div class="qq">'+m.q+'</div><div class="aa">Answer: <em>'+m.a+'</em>. '+m.e+'</div></div>').join('');
-  document.getElementById('cscore').textContent=score;
-  document.getElementById('cacc').textContent=pct+'%';
-  document.getElementById('crank').textContent=rank;
-  document.getElementById('cdate').textContent=new Date().toLocaleDateString('en-AU',{day:'numeric',month:'long',year:'numeric'});
-  window.scrollTo({top:0,behavior:'smooth'});
+  const total = ROUNDS.reduce((n,r)=>n+r.q.length,0);
+  const acc = Math.round((S.correct/total)*100);
+  if(acc >= 90) S.badges.add("precedent");
+
+  $("quiz").classList.add("hidden");
+  $("results").classList.remove("hidden");
+
+  $("finalScore").textContent = S.score;
+  $("sCorrect").textContent = S.correct + " / " + total;
+  $("sCond").textContent = S.conditions + " / " + TARGET;
+  $("sStreak").textContent = S.best;
+  $("sAcc").textContent = acc + "%";
+
+  $("verdictTitle").textContent =
+    S.conditions >= TARGET ? "File fully protected" :
+    acc >= 75 ? "Approved with conditions" :
+    acc >= 50 ? "Approved, but the file is thin" : "Sent back for reassessment";
+
+  $("finalLine").textContent =
+    S.conditions >= TARGET ? "Every protection you could impose is on the file. That is a decision that will hold up." :
+    acc >= 75 ? "Solid work. A few calls would not survive a challenge, so read the review below." :
+    "The conditions on this file would not hold. Read the review, then run it again.";
+
+  const row = $("badgeRow");
+  row.innerHTML = "";
+  BADGES.forEach(([key,name,how])=>{
+    const b = document.createElement("span");
+    const won = S.badges.has(key);
+    b.className = "badge" + (won ? " won" : "");
+    b.textContent = won ? name : name + " — " + how;
+    row.appendChild(b);
+  });
+
+  const rev = $("review");
+  rev.innerHTML = "";
+  if(!S.missed.length){
+    $("reviewWrap").innerHTML = '<h3>Sent back for review</h3><p class="muted">Nothing came back. Every call held.</p>';
+  } else {
+    S.missed.forEach(m=>{
+      const d = document.createElement("div");
+      d.className = "rev";
+      d.innerHTML = '<div class="q">'+m.q+'</div><div class="a">Correct call: <b>'+m.a+'</b>. '+m.e+'</div>';
+      rev.appendChild(d);
+    });
+  }
+  $("results").scrollIntoView({behavior:"smooth", block:"start"});
 }
-document.addEventListener('keydown',e=>{
-  if(document.getElementById('quiz').classList.contains('hide')) return;
-  if(['1','2','3','4'].includes(e.key)){const b=document.querySelectorAll('button.opt')[+e.key-1]; if(b&&!b.disabled) b.click();}
-  if(e.key==='Enter'&&locked){const n=document.getElementById('next'); if(!n.classList.contains('hide')) n.click();}
+
+function showCert(){
+  const total = ROUNDS.reduce((n,r)=>n+r.q.length,0);
+  $("results").classList.add("hidden");
+  $("cert").classList.remove("hidden");
+  $("cert").style.display = "block";
+  $("certScore").textContent = S.score;
+  $("certCond").textContent = S.conditions + "/" + TARGET;
+  $("certAcc").textContent = Math.round((S.correct/total)*100) + "%";
+  $("certDate").textContent = new Date().toLocaleDateString("en-AU");
+  $("nameIn").focus();
+}
+
+function reset(){
+  S.r=0; S.i=0; S.score=0; S.streak=0; S.best=0; S.correct=0; S.answered=0;
+  S.conditions=0; S.missed=[]; S.roundClean=true; S.badges=new Set(); S.locked=false;
+  prepare();
+  updateDesk();
+  drawRoundMap();
+  $("results").classList.add("hidden");
+  $("cert").classList.add("hidden");
+  $("cert").style.display = "none";
+  $("quiz").classList.remove("hidden");
+  render();
+}
+
+/* ============ WIRING ============ */
+$("startBtn").addEventListener("click", start);
+$("nextBtn").addEventListener("click", next);
+$("certBtn").addEventListener("click", showCert);
+$("againBtn").addEventListener("click", reset);
+$("printBtn").addEventListener("click", ()=>window.print());
+$("backBtn").addEventListener("click", ()=>{
+  $("cert").classList.add("hidden");
+  $("cert").style.display = "none";
+  $("results").classList.remove("hidden");
 });
+$("nameIn").addEventListener("input", e=>{
+  $("certName").textContent = e.target.value.trim() || "\u00A0";
+});
+
+document.addEventListener("keydown", e=>{
+  if($("quiz").classList.contains("hidden")) return;
+  const k = e.key.toUpperCase();
+  const idx = KEYS.indexOf(k);
+  if(idx > -1){
+    const b = $("opts").children[idx];
+    if(b && !b.disabled) b.click();
+  }
+  if(e.key === "Enter" && !$("nextBtn").classList.contains("hidden")) next();
+});
+
+prepare();
+drawRoundMap();
+updateDesk();
 </script>
 </body>
 </html>
