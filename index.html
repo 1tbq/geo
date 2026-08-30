@@ -3,758 +3,273 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Approvals Desk — Lesson 33</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Canopy - Lesson 36 - Ecological importance of the Amazon</title>
 <style>
 :root{
-  --ink:#1F2333;
-  --plum:#6B4A7A;
-  --amber:#D98A25;
-  --amber-dk:#9C6410;
-  --teal:#3F7F76;
-  --clay:#B4553F;
-  --paper:#F3EFE6;
-  --manila:#E4D9C3;
-  --rule:#CFC5AE;
-  --white:#FFFFFF;
-  --grey:#6C7280;
-  --shadow:0 2px 0 rgba(31,35,51,.06), 0 10px 24px rgba(31,35,51,.10);
+  --accent:#1E7A4E;
+  --accent2:#C08A2E;
+  --ink:#12291E;
+  --grey:#5A6660;
+  --mist:#EAF1EA;
+  --line:#D6E2D6;
+  --good:#1E7A4E;
+  --bad:#C0442F;
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{
-  background:var(--paper);
-  background-image:
-    repeating-linear-gradient(0deg,rgba(31,35,51,.022) 0 1px,transparent 1px 26px);
-  color:var(--ink);
-  font-family:"Source Sans 3",system-ui,sans-serif;
-  font-size:17px;
-  line-height:1.5;
-  -webkit-font-smoothing:antialiased;
-}
-.wrap{max-width:920px;margin:0 auto;padding:20px 18px 70px}
-
-/* ---------- masthead ---------- */
-.masthead{
-  background:var(--ink);color:var(--paper);
-  border-radius:6px;padding:22px 24px 20px;position:relative;overflow:hidden;
-  box-shadow:var(--shadow);
-}
-.masthead:before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--amber)}
-.filecode{
-  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;
-  color:var(--amber);text-transform:uppercase;
-}
-.masthead h1{
-  font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(28px,6vw,42px);
-  margin:6px 0 4px;letter-spacing:-.01em;line-height:1.05;
-}
-.masthead p{margin:0;color:#B9BECB;font-size:15px;max-width:52ch}
-
-/* ---------- desk strip (signature) ---------- */
-.desk{
-  display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--rule);
-  border:1px solid var(--rule);border-radius:6px;margin-top:14px;overflow:hidden;
-}
-.desk .cell{background:var(--manila);padding:11px 14px}
-.desk .lab{
-  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;
-  text-transform:uppercase;color:#7A6B4F;
-}
-.desk .val{font-family:Archivo,sans-serif;font-weight:800;font-size:26px;line-height:1.1;margin-top:2px}
-#conditions{color:var(--teal)}
-#score{color:var(--ink)}
-#streak{color:var(--clay)}
-.gauge{height:7px;background:#D3C7AC;border-radius:99px;margin-top:8px;overflow:hidden}
-.gauge span{display:block;height:100%;width:0;background:var(--teal);transition:width .45s cubic-bezier(.2,.8,.2,1)}
-.tiny{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:#7A6B4F;margin-top:5px;letter-spacing:.04em}
-
-/* ---------- panels ---------- */
-.panel{
-  background:var(--white);border:1px solid var(--rule);border-radius:6px;
-  padding:22px 24px;margin-top:16px;box-shadow:var(--shadow);
-}
-.eyebrow{
-  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--plum);margin-bottom:6px;
-}
-h2{font-family:Archivo,sans-serif;font-weight:800;font-size:24px;margin:0 0 8px;letter-spacing:-.01em}
-h3{font-family:Archivo,sans-serif;font-weight:700;font-size:18px;margin:18px 0 6px}
-p{margin:0 0 10px}
-.muted{color:var(--grey);font-size:15px}
-
-ol.brief{margin:8px 0 0;padding-left:20px}
-ol.brief li{margin-bottom:6px}
-
-.btn{
-  font-family:Archivo,sans-serif;font-weight:700;font-size:16px;
-  background:var(--ink);color:var(--paper);border:none;border-radius:5px;
-  padding:13px 26px;cursor:pointer;letter-spacing:.01em;
-  transition:transform .12s ease, background .15s ease;
-}
-.btn:hover{background:#2C3145;transform:translateY(-1px)}
-.btn:active{transform:translateY(0)}
-.btn.alt{background:var(--white);color:var(--ink);border:1.5px solid var(--ink)}
-.btn.alt:hover{background:var(--manila)}
-.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
-
-/* ---------- rounds map ---------- */
-.rounds{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
-.rd{border:1px solid var(--rule);border-radius:5px;padding:10px 12px;background:var(--manila)}
-.rd .n{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;color:#7A6B4F}
-.rd .t{font-family:Archivo,sans-serif;font-weight:700;font-size:14px;margin-top:3px;line-height:1.25}
-.rd.done{background:var(--teal);border-color:var(--teal)}
-.rd.done .n,.rd.done .t{color:#fff}
-.rd.now{background:var(--white);border-color:var(--ink);border-width:2px}
-
-/* ---------- question ---------- */
-.qhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
-.qcount{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--grey);text-transform:uppercase}
-.progress{height:4px;background:var(--manila);border-radius:99px;margin:12px 0 18px;overflow:hidden}
-.progress span{display:block;height:100%;width:0;background:var(--amber);transition:width .3s ease}
-.qtext{font-family:Archivo,sans-serif;font-weight:700;font-size:clamp(19px,3.4vw,23px);line-height:1.3;margin:0 0 16px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:#F7FAF7;color:var(--ink);line-height:1.5;padding:16px}
+.wrap{max-width:860px;margin:0 auto}
+header{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:14px}
+header h1{font-size:26px;letter-spacing:-.4px}
+header p{color:var(--grey);font-size:14px;margin-top:2px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.stat{background:var(--mist);border-radius:9px;padding:7px 13px;font-size:13px;font-weight:600}
+.stat span{color:var(--accent);font-weight:700}
+.gauge{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-bottom:14px}
+.gauge .lab{font-size:12px;text-transform:uppercase;letter-spacing:1.1px;color:var(--grey);font-weight:700}
+.gauge .val{font-size:30px;font-weight:800;color:var(--accent);margin:2px 0 8px}
+.track{position:relative;height:16px;background:#E4EAE4;border-radius:8px;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .45s ease}
+.mark{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--bad)}
+.gauge .note{font-size:12px;color:var(--grey);margin-top:9px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:14px}
+.round{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent2);font-weight:800}
+.prompt{font-size:20px;font-weight:700;margin:8px 0 18px;line-height:1.35}
 .opts{display:grid;gap:9px}
-.opt{
-  text-align:left;font-family:"Source Sans 3",sans-serif;font-size:16.5px;
-  background:var(--white);border:1.5px solid var(--rule);border-radius:5px;
-  padding:13px 15px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;
-  transition:border-color .12s ease, background .12s ease, transform .12s ease;
-}
-.opt:hover:not(:disabled){border-color:var(--ink);transform:translateX(2px)}
+.opt{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1.5px solid var(--line);
+  border-radius:10px;padding:12px 14px;cursor:pointer;text-align:left;font-size:15.5px;
+  font-family:inherit;color:var(--ink);transition:.14s;width:100%}
+.opt:hover:not(:disabled){border-color:var(--accent);background:#FAFDFA}
 .opt:disabled{cursor:default}
-.opt .key{
-  font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12px;
-  background:var(--manila);color:#7A6B4F;border-radius:3px;
-  min-width:24px;height:24px;display:grid;place-items:center;flex:0 0 auto;margin-top:1px;
-}
-.opt.right{border-color:var(--teal);background:#EDF5F3}
-.opt.right .key{background:var(--teal);color:#fff}
-.opt.wrong{border-color:var(--clay);background:#FAEFEC}
-.opt.wrong .key{background:var(--clay);color:#fff}
-
-.verdict{margin-top:16px;border-left:4px solid var(--rule);padding:10px 0 10px 14px;display:none}
-.verdict.show{display:block;animation:fade .25s ease}
-.verdict.ok{border-color:var(--teal)}
-.verdict.no{border-color:var(--clay)}
-.verdict .vlab{font-family:Archivo,sans-serif;font-weight:800;font-size:15px;letter-spacing:.02em}
-.verdict.ok .vlab{color:var(--teal)}
-.verdict.no .vlab{color:var(--clay)}
-.verdict p{margin:4px 0 0;font-size:16px}
-@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-
-.nextrow{margin-top:16px;display:flex;justify-content:flex-end}
-
-/* ---------- stamp ---------- */
-.stamp{
-  position:fixed;top:50%;left:50%;z-index:60;pointer-events:none;
-  font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(30px,8vw,58px);
-  letter-spacing:.06em;padding:12px 26px;border:5px solid currentColor;border-radius:6px;
-  opacity:0;transform:translate(-50%,-50%) rotate(-13deg) scale(2.1);
-}
-.stamp.go{animation:thud .75s cubic-bezier(.2,1.2,.3,1) forwards}
-.stamp.ok{color:rgba(63,127,118,.85)}
-.stamp.no{color:rgba(180,85,63,.85)}
-@keyframes thud{
-  0%{opacity:0;transform:translate(-50%,-50%) rotate(-13deg) scale(2.1)}
-  35%{opacity:1;transform:translate(-50%,-50%) rotate(-13deg) scale(.95)}
-  55%{transform:translate(-50%,-50%) rotate(-13deg) scale(1.03)}
-  100%{opacity:0;transform:translate(-50%,-50%) rotate(-13deg) scale(1)}
-}
-@media (prefers-reduced-motion:reduce){
-  .stamp.go{animation:none}
-  *{transition:none!important}
-}
-
-/* ---------- badges ---------- */
-.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.badge{
-  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;
-  border:1px dashed var(--rule);color:#9A9384;border-radius:99px;padding:5px 12px;background:var(--paper);
-}
-.badge.won{border-style:solid;border-color:var(--plum);color:var(--plum);background:#F4EFF6;font-weight:600}
-
-/* ---------- results ---------- */
-.bigscore{font-family:Archivo,sans-serif;font-weight:800;font-size:56px;line-height:1;margin:4px 0}
-.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px}
-.sbox{border:1px solid var(--rule);border-radius:5px;padding:12px 14px;background:var(--manila)}
-.sbox .lab{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#7A6B4F}
-.sbox .val{font-family:Archivo,sans-serif;font-weight:800;font-size:24px;margin-top:2px}
-.review{margin-top:8px}
-.rev{border:1px solid var(--rule);border-left:4px solid var(--clay);border-radius:5px;padding:12px 14px;margin-top:9px;background:var(--white)}
-.rev .q{font-weight:700;margin-bottom:4px}
-.rev .a{font-size:15px;color:var(--grey)}
-.rev .a b{color:var(--teal)}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-
-/* ---------- certificate ---------- */
-#cert{display:none}
-.cert{
-  border:3px double var(--ink);border-radius:4px;padding:32px 30px;background:var(--white);text-align:center;
-}
-.cert .seal{
-  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.24em;color:var(--plum);text-transform:uppercase;
-}
-.cert h2{font-size:30px;margin:8px 0 2px}
-.cert .name{
-  font-family:Archivo,sans-serif;font-weight:700;font-size:24px;border-bottom:1.5px solid var(--rule);
-  display:inline-block;min-width:280px;padding:6px 10px;margin:14px 0 6px;
-}
-.cert .line{font-size:15px;color:var(--grey)}
-.cert .stats{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin-top:16px}
-.cert .stats div{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink)}
-.cert .stats b{display:block;font-family:Archivo,sans-serif;font-size:22px;margin-top:2px}
-input.nameIn{
-  font-family:"Source Sans 3",sans-serif;font-size:16px;padding:10px 12px;
-  border:1.5px solid var(--rule);border-radius:5px;width:100%;max-width:340px;background:var(--white);
-}
-
-.hidden{display:none}
-@media (max-width:640px){
-  .desk{grid-template-columns:1fr 1fr}
-  .desk .cell:last-child{grid-column:1/-1}
-  .rounds{grid-template-columns:1fr 1fr}
-  .panel{padding:18px 16px}
-}
+.key{flex:none;width:25px;height:25px;border-radius:50%;background:var(--ink);color:#fff;
+  font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.opt.right{border-color:var(--good);background:#E9F4EE}
+.opt.right .key{background:var(--good)}
+.opt.wrong{border-color:var(--bad);background:#FBEAE7}
+.opt.wrong .key{background:var(--bad)}
+.fb{margin-top:16px;padding:14px 16px;border-radius:10px;font-size:15px;display:none}
+.fb.show{display:block}
+.fb.ok{background:#E9F4EE;border-left:4px solid var(--good)}
+.fb.no{background:#FBEAE7;border-left:4px solid var(--bad)}
+.fb b{display:block;margin-bottom:3px}
+button.go{margin-top:16px;background:var(--accent);color:#fff;border:0;border-radius:9px;
+  padding:12px 26px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+button.go:hover{opacity:.9}
+button.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:9px;margin-top:14px}
+.badge{border:1.5px dashed var(--line);border-radius:10px;padding:11px;font-size:12.5px;color:#B4BDB6}
+.badge.won{border-style:solid;border-color:var(--accent);color:var(--ink);background:var(--mist)}
+.badge b{display:block;font-size:13.5px;margin-bottom:2px}
+.miss{border-left:3px solid var(--bad);padding:9px 13px;margin-bottom:9px;background:#FDF6F5;
+  border-radius:0 8px 8px 0;font-size:14px}
+.miss .qq{font-weight:600}
+.miss .aa{color:var(--good);font-size:13px;margin-top:3px}
+.hint{font-size:12.5px;color:var(--grey);margin-top:12px}
+.big{font-size:44px;font-weight:800;color:var(--accent);line-height:1.1}
 @media print{
   body{background:#fff}
-  .noprint{display:none!important}
-  .panel{box-shadow:none;border:none}
-  .wrap{max-width:100%;padding:0}
+  .noprint{display:none !important}
+  .cert{border:4px double var(--accent);padding:40px;text-align:center}
 }
+.cert{display:none}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <header class="masthead">
-    <div class="filecode">Year 10 Geography &middot; Lesson 33 &middot; VCGGK146</div>
-    <h1>The Approvals Desk</h1>
-    <p>A project is on your desk. Government wants it safe, industry wants it signed. Get the calls right and you build a file strong enough to hold: 48 conditions.</p>
-  </header>
+<header>
+  <h1>Canopy</h1>
+  <p>Lesson 36 - Ecological importance of the Amazon</p>
+  <div class="bar">
+    <div class="stat">Round <span id="sRound">1</span> of 4</div>
+    <div class="stat">Question <span id="sQ">1</span></div>
+    <div class="stat">Score <span id="sScore">0</span></div>
+    <div class="stat">Streak <span id="sStreak">0</span></div>
+  </div>
+</header>
 
-  <section class="desk" aria-label="Running totals">
-    <div class="cell">
-      <div class="lab">Conditions imposed</div>
-      <div class="val"><span id="conditions">0</span> <span style="font-size:15px;color:#7A6B4F">/ 48</span></div>
-      <div class="gauge"><span id="condBar"></span></div>
-    </div>
-    <div class="cell">
-      <div class="lab">Score</div>
-      <div class="val" id="score">0</div>
-      <div class="tiny" id="accuracy">no answers yet</div>
-    </div>
-    <div class="cell">
-      <div class="lab">Streak</div>
-      <div class="val" id="streak">0</div>
-      <div class="tiny" id="multi">multiplier x1</div>
-    </div>
-  </section>
-
-  <!-- ---------------- BRIEFING ---------------- -->
-  <section class="panel" id="briefing">
-    <div class="eyebrow">Briefing note</div>
-    <h2>How this desk works</h2>
-    <p class="muted">Thirty-eight decisions across four rounds. You are the officer assessing them.</p>
-    <ol class="brief">
-      <li>Every correct call <b>imposes one condition</b> on the file. Three or more in a row and each call imposes two.</li>
-      <li>A wrong call imposes nothing, and your streak resets to zero.</li>
-      <li>Score is 10 points a call, doubled at a streak of three, quadrupled at a streak of six.</li>
-      <li>Reach 48 conditions and the file is fully protected. Anything you get wrong comes back for review at the end.</li>
-    </ol>
-    <div class="rounds" id="roundmap"></div>
-    <div style="margin-top:18px"><button class="btn" id="startBtn">Open the first file</button></div>
-  </section>
-
-  <!-- ---------------- QUIZ ---------------- -->
-  <section class="panel hidden" id="quiz">
-    <div class="qhead">
-      <div>
-        <div class="eyebrow" id="roundName">Round 1</div>
-        <div class="qcount" id="qcount">Decision 1 of 10</div>
-      </div>
-    </div>
-    <div class="progress"><span id="progBar"></span></div>
-    <p class="qtext" id="qtext">—</p>
-    <div class="opts" id="opts"></div>
-    <div class="verdict" id="verdict">
-      <div class="vlab" id="vlab">—</div>
-      <p id="vtext">—</p>
-    </div>
-    <div class="nextrow"><button class="btn hidden" id="nextBtn">Next decision</button></div>
-  </section>
-
-  <!-- ---------------- RESULTS ---------------- -->
-  <section class="panel hidden" id="results">
-    <div class="eyebrow">File closed</div>
-    <h2 id="verdictTitle">Decision recorded</h2>
-    <div class="bigscore" id="finalScore">0</div>
-    <p class="muted" id="finalLine">—</p>
-
-    <div class="summary">
-      <div class="sbox"><div class="lab">Correct calls</div><div class="val" id="sCorrect">0</div></div>
-      <div class="sbox"><div class="lab">Conditions imposed</div><div class="val" id="sCond">0</div></div>
-      <div class="sbox"><div class="lab">Best streak</div><div class="val" id="sStreak">0</div></div>
-      <div class="sbox"><div class="lab">Accuracy</div><div class="val" id="sAcc">0%</div></div>
-    </div>
-
-    <h3>Badges</h3>
-    <div class="badges" id="badgeRow"></div>
-
-    <div id="reviewWrap">
-      <h3>Sent back for review</h3>
-      <p class="muted">These are the calls that did not hold up. Read the reason, then have another go.</p>
-      <div class="review" id="review"></div>
-    </div>
-
-    <div class="actions noprint">
-      <button class="btn" id="certBtn">Print a certificate</button>
-      <button class="btn alt" id="againBtn">Run it again</button>
-    </div>
-  </section>
-
-  <!-- ---------------- CERTIFICATE ---------------- -->
-  <section class="panel hidden" id="cert">
-    <div class="noprint" style="margin-bottom:16px">
-      <div class="eyebrow">Sign the file</div>
-      <label for="nameIn" class="muted">Type your name, then print.</label>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
-        <input class="nameIn" id="nameIn" placeholder="Your name" autocomplete="off">
-        <button class="btn" id="printBtn">Print</button>
-        <button class="btn alt" id="backBtn">Back</button>
-      </div>
-    </div>
-    <div class="cert">
-      <div class="seal">Year 10 Geography &middot; Environmental Change and Management</div>
-      <h2>The Approvals Desk</h2>
-      <div class="line">Government and industry perspectives &middot; Lesson 33</div>
-      <div class="name" id="certName">&nbsp;</div>
-      <div class="line" id="certLine">completed the file review</div>
-      <div class="stats">
-        <div>SCORE<b id="certScore">0</b></div>
-        <div>CONDITIONS<b id="certCond">0</b></div>
-        <div>ACCURACY<b id="certAcc">0%</b></div>
-        <div>DATE<b id="certDate">—</b></div>
-      </div>
-    </div>
-  </section>
-
+<div class="gauge noprint">
+  <div class="lab">Tree species logged in this hectare</div>
+  <div class="val" id="gVal">-</div>
+  <div class="track"><div class="fill" id="gFill"></div><div class="mark" id="gMark" style="display:none"></div></div>
+  <div class="note">A single Amazon hectare can hold more than 500 tree species. Log them all.</div>
 </div>
 
-<div class="stamp" id="stamp">APPROVED</div>
+<div class="card" id="stage"></div>
+
+<div class="cert" id="cert"></div>
+</div>
 
 <script>
-"use strict";
+const CFG = {"slug":"lesson-36","file":"Lesson36_Canopy_Activity.html","title":"Canopy","subtitle":"Lesson 36 - Ecological importance of the Amazon","accent":"#1E7A4E","accent2":"#C08A2E","gauge":"species","gaugeLabel":"Tree species logged in this hectare","gaugeTarget":500,"gaugeNote":"A single Amazon hectare can hold more than 500 tree species. Log them all.","badges":[["Understorey","Finish Round 1"],["Canopy","Finish Round 2"],["Emergent","Finish Round 3"],["Full survey","Finish all four rounds"],["Streak of five","Get five right in a row"],["Clean sweep","Finish a round with no mistakes"]],"rounds":[{"name":"Rapid Recall","blurb":"Last week and today. Ten quick ones.","q":[["An environmental worldview is best described as...",["The beliefs and values that shape how a person relates to the environment","A law about protecting the environment","A scientific measurement of pollution","A type of national park"],0,"It is about values and beliefs, not rules or measurements."],["Which government tool sets a maximum amount that can be taken or released?",["LIMITS","LAWS","PENALTIES","CONDITIONS"],0,"LIMITS cap the quantity. LAWS make it illegal, CONDITIONS attach requirements, PENALTIES punish breaches."],["Industry asks two questions first. They are...",["Does it make money, and does it break the rules?","Is it popular, and is it fair?","Is it legal, and is it traditional?","Does it help wildlife, and does it help people?"],0,"Profit and compliance. Reputation comes third."],["Roughly how large is the Amazon rainforest?",["About 5.5 million square kilometres","About 550,000 square kilometres","About 55 million square kilometres","About 1.2 million square kilometres"],0,"About 5.5 million km2, roughly 70 per cent of the size of Australia."],["How many countries share the Amazon basin?",["9","3","15","1"],0,"Nine countries, which means no single government controls it."],["\"The Amazon produces 20 per cent of the world's oxygen.\" This claim is...",["A myth. The forest uses almost all the oxygen it makes, so its net contribution is close to zero","Correct, and that is why it is called the lungs of the planet","An underestimate. The real figure is closer to 40 per cent","Correct only during the wet season"],0,"Plants release oxygen by day and use it by night, and decomposition uses more. Net contribution is near zero."],["The three real reasons the Amazon matters globally are...",["Biodiversity, carbon storage and the water cycle","Oxygen, timber and tourism","Rainfall, rivers and fish","Medicine, mining and farmland"],0,"Biodiversity, carbon, water. These are the three headings for the whole case study."],["Roughly what share of all known species live in the Amazon?",["At least 10 per cent","About 1 per cent","About 40 per cent","About 75 per cent"],0,"At least one in every ten known species on Earth."],["Evapotranspiration means...",["Water taken up by plants and released into the air as vapour","Water running off the land into rivers","Water soaking down into groundwater","Water freezing in the upper atmosphere"],0,"Evaporation plus transpiration. It is how the forest puts water back into the air."],["Storing carbon is which environmental function?",["Sink","Source","Service","Spiritual"],0,"A sink absorbs and holds something. A source provides materials."]]},{"name":"Function Sort","blurb":"Source, sink, service or spiritual. Week 1 is still working for you.","opts":["Source","Sink","Service","Spiritual"],"q":[["Brazil nuts harvested from the forest and sold",null,0,"The forest is providing a material. That is a source."],["90 to 200 billion tonnes of carbon locked in trunks, roots and soil",null,1,"Absorbing and holding carbon is the classic sink."],["Flying rivers delivering rain to farms 2,000 km away",null,2,"The forest is doing a job for people, for free, at a distance. Service."],["Sacred sites of Amazonian Indigenous peoples",null,3,"Cultural and spiritual value. It cannot be rebuilt."],["Timber cut and milled for construction",null,0,"A material taken out of the environment. Source."],["The forest absorbing about 1.2 billion tonnes of carbon each year",null,1,"Taking carbon out of the atmosphere and holding it. Sink."],["Tree roots holding soil in place during heavy rain",null,2,"Erosion control is a service the environment performs."],["Medicines developed from rainforest plants",null,0,"The forest supplies the raw material. Source."],["Ancestral homeland of hundreds of Indigenous groups",null,3,"Spiritual and cultural connection to Country."],["Rainfall recycling that keeps the western Amazon wet",null,2,"A process the environment performs that people benefit from. Service."]]},{"name":"Figure File","blurb":"Numbers you can quote on Friday. Get them exact.","q":[["Area of the Amazon rainforest",["About 5.5 million km2","About 2.5 million km2","About 9.1 million km2","About 800,000 km2"],0,"5.5 million km2, the largest tropical rainforest on Earth."],["Approximate number of trees in the Amazon",["About 390 billion","About 39 billion","About 3.9 billion","About 3.9 trillion"],0,"Roughly 390 billion trees."],["Carbon stored in the Amazon",["An estimated 90 to 200 billion tonnes","About 5 billion tonnes","About 1,500 billion tonnes","About 900 million tonnes"],0,"Estimates vary by source. Quote the range and name your source."],["Carbon absorbed by the Amazon each year",["About 1.2 billion tonnes","About 12 billion tonnes","About 120 million tonnes","About 60 billion tonnes"],0,"Roughly 1.2 billion tonnes of carbon a year."],["Moisture the Amazon releases into the air each day",["About 20 billion tonnes","About 200 million tonnes","About 2 billion tonnes","About 500 billion tonnes"],0,"About 20 billion tonnes daily, more than the river discharges to the sea."],["Share of Amazon rainfall that is recycled by the forest",["At least 75 per cent","About 25 per cent","About 5 per cent","About 99 per cent"],0,"At least 75 per cent, cycling five or six times before reaching the Andes."],["Tree species possible in a single Amazon hectare",["More than 500","About 50","About 5","About 5,000"],0,"More than 500 in one hectare. All of Europe has about 250."],["Share of their annual rainfall that south-western Amazon forests get from flying rivers",["More than 70 per cent","About 20 per cent","About 5 per cent","About 100 per cent"],0,"More than 70 per cent, which is why clearing in the east matters in the west."],["Estimated number of insect species in the Amazon",["About 2.5 million, most never described","About 25,000","About 250","About 250 million"],0,"An estimate, not a count. Most have never been formally described."]]},{"name":"Myth or Fact","blurb":"Nine claims. Which ones survive contact with the evidence?","opts":["Myth","Fact"],"q":[["The Amazon is the lungs of the planet, producing 20 per cent of the world's oxygen.",null,0,"Myth. The forest consumes almost all the oxygen it produces."],["Parts of the Brazilian Amazon now release more carbon than they absorb.",null,1,"Fact. Clearing and fire have flipped some areas from sink to source."],["A flying river is a river that floods across the forest floor in the wet season.",null,0,"Myth. A flying river is moisture moving through the air, not water on the ground."],["A single Amazon river may contain more fish species than all of Europe's rivers combined.",null,1,"Fact. The scale of Amazon biodiversity is genuinely hard to picture."],["All nine Amazon countries are governed by one shared environmental law.",null,0,"Myth. Nine separate governments, nine sets of rules."],["Sources disagree on Amazon carbon figures because they use different boundaries, methods and dates.",null,1,"Fact. That is why you quote a range and name your source."],["The Amazon generates a large share of its own rainfall.",null,1,"Fact. At least 75 per cent of its rainfall is recycled by the forest itself."],["The Amazon River runs about 6,400 km from source to sea.",null,1,"Fact. One of the two longest rivers in the world."],["Clearing forest in the eastern Amazon has no effect on rainfall in the west.",null,0,"Myth. Break the recycling chain in the middle and the rain never reaches the far end."]]}]};
 
-/* ============ QUESTION BANK ============ */
-const ROUNDS = [
-  {
-    name: "Round 1 — Briefing",
-    short: "Briefing",
-    blurb: "What you already know",
-    q: [
-      { t:"An environmental worldview is best described as:",
-        o:["The beliefs and values that shape how a person or group treats the environment",
-           "A scientific measurement of environmental damage",
-           "A government policy for protecting national parks",
-           "An opinion about the weather"],
-        a:0, e:"A worldview sits underneath opinions. It is the set of values that decides what a person thinks the environment is for." },
-      { t:"Custodianship means:",
-        o:["Land is looked after and passed on, not owned to be used up",
-           "Land is owned privately and can be sold",
-           "Land is locked up so nobody may enter",
-           "Land is managed only by government rangers"],
-        a:0, e:"Ownership asks what I can take. Custodianship asks what I must hand on." },
-      { t:"Australia's main national environment law is:",
-        o:["The EPBC Act","The Safeguard Mechanism","The Australian Consumer Law","The Native Title Act"],
-        a:0, e:"The EPBC Act decides which places, species and heritage sites need federal approval before anything is built." },
-      { t:"The National Environmental Protection Agency started work on:",
-        o:["1 July 2026","28 November 2025","1 January 2020","19 August 2026"],
-        a:0, e:"The laws passed on 28 November 2025, but the agency itself started operating on 1 July 2026." },
-      { t:"The Safeguard Mechanism does what?",
-        o:["Sets a legal emissions ceiling on Australia's biggest industrial facilities",
-           "Bans all new gas and coal projects",
-           "Pays households to install solar panels",
-           "Lists which species are threatened"],
-        a:0, e:"It is a limit, not a ban. Facilities get a ceiling, and the ceiling falls 4.9 per cent every year to 2030." },
-      { t:"Greenwashing is:",
-        o:["Claiming to be more environmentally friendly than you actually are",
-           "Cleaning up a polluted site",
-           "Planting trees to offset emissions",
-           "Painting a factory green to reflect heat"],
-        a:0, e:"It is a marketing problem, not a pollution problem, which is why the corporate regulator handles it." },
-      { t:"Government's four tools for managing the environment are:",
-        o:["Laws, limits, conditions and penalties",
-           "Taxes, fines, grants and subsidies",
-           "Parks, rangers, fences and signs",
-           "Reports, surveys, plans and meetings"],
-        a:0, e:"Laws say what is protected, limits cap how much is allowed, conditions attach rules to an approval, penalties punish breaches." },
-      { t:"The three things that most drive a business's environmental decisions are:",
-        o:["Profit, rules and reputation",
-           "Profit, politics and publicity",
-           "Rules, rangers and recycling",
-           "Reputation, research and rainfall"],
-        a:0, e:"A business will usually act to protect the environment when doing so also protects profit, compliance or reputation." },
-      { t:"The North West Shelf gas plant extension was approved to run until:",
-        o:["2070","2030","2050","2100"],
-        a:0, e:"The plant was due to close around 2030. The 2025 approval extended it by forty years, to 2070." },
-      { t:"Murujuga, next to that plant, is significant because it holds:",
-        o:["Some of the oldest rock carvings on Earth, World Heritage listed in July 2025",
-           "Australia's largest remaining rainforest",
-           "The country's biggest solar farm",
-           "A Ramsar listed wetland"],
-        a:0, e:"Some carvings are thought to be up to 50,000 years old. That is what the 48 conditions were written to protect." }
-    ]
-  },
-  {
-    name: "Round 2 — Whose desk?",
-    short: "Whose desk",
-    blurb: "Government or industry",
-    q: [
-      { t:"Passing a law that lists which species need federal approval before development.", o:["Government","Industry"], a:0,
-        e:"Only government can write law. This is tool one." },
-      { t:"Putting solar panels on a warehouse roof because the power bill drops.", o:["Government","Industry"], a:1,
-        e:"Green outcome, commercial reason. Profit and the environment happened to point the same way." },
-      { t:"Setting an emissions ceiling that falls 4.9 per cent every year.", o:["Government","Industry"], a:0,
-        e:"A limit. Businesses do not set their own ceilings, or they would not be ceilings." },
-      { t:"Running an advertising campaign about a new carbon neutral product range.", o:["Government","Industry"], a:1,
-        e:"Reputation at work. It is legitimate when the claim is true, and greenwashing when it is not." },
-      { t:"Taking a super fund to court over misleading claims about what it invests in.", o:["Government","Industry"], a:0,
-        e:"That is the corporate regulator using tool four, penalties." },
-      { t:"Signing a twenty year contract to supply gas to overseas buyers.", o:["Government","Industry"], a:1,
-        e:"This is why certainty matters so much to a company. You cannot promise twenty years of supply without approval." },
-      { t:"Attaching 48 conditions to a project approval.", o:["Government","Industry"], a:0,
-        e:"Conditions are how a government says yes and no at the same time." },
-      { t:"Arguing that a proposed condition would make the whole project unworkable.", o:["Government","Industry"], a:1,
-        e:"This happened on the North West Shelf. Some proposed conditions were softened afterwards." },
-      { t:"Creating an independent regulator that can audit a site without warning.", o:["Government","Industry"], a:0,
-        e:"The National EPA. Surprise audits matter because you cannot tidy up first." },
-      { t:"Publishing a sustainability report to reassure investors.", o:["Government","Industry"], a:1,
-        e:"Investors increasingly ask for it, so reputation and access to money are the drivers here." }
-    ]
-  },
-  {
-    name: "Round 3 — Name the tool",
-    short: "Name the tool",
-    blurb: "Law, limit, condition or penalty",
-    q: [
-      { t:"An Act of Parliament lists which places and species need federal approval.", o:["Law","Limit","Condition","Penalty"], a:0,
-        e:"A law sets the boundaries of the whole system before any single project is looked at." },
-      { t:"A facility may not emit more than its baseline this financial year.", o:["Law","Limit","Condition","Penalty"], a:1,
-        e:"A number, applied every year, to a whole class of facilities. That is a limit." },
-      { t:"Approval granted, but only if the creek is fenced and water quality is tested every three months.", o:["Law","Limit","Condition","Penalty"], a:2,
-        e:"The giveaway is \u201Conly if\u201D. Conditions are attached to one approval, not to everyone." },
-      { t:"The Federal Court orders a company to pay $12.9 million for misleading ESG claims.", o:["Law","Limit","Condition","Penalty"], a:3,
-        e:"Vanguard, September 2024. It was the largest greenwashing penalty in Australia at the time." },
-      { t:"Parliament creates an independent agency to police environmental approvals.", o:["Law","Limit","Condition","Penalty"], a:0,
-        e:"Setting up a regulator takes legislation, so it is a law, even though the agency then uses the other three tools." },
-      { t:"Emissions baselines drop 4.9 per cent each year until 2030.", o:["Law","Limit","Condition","Penalty"], a:1,
-        e:"A shrinking ceiling is still a ceiling." },
-      { t:"The plant may continue operating only if certain emissions fall 60 per cent by 2030.", o:["Law","Limit","Condition","Penalty"], a:2,
-        e:"This is one of the 48 conditions on the North West Shelf extension. Note it applies to that plant alone." },
-      { t:"A company is ordered to publish a public notice admitting it misled customers.", o:["Law","Limit","Condition","Penalty"], a:3,
-        e:"Courts order these alongside fines, because reputational damage often bites harder than the money." },
-      { t:"A facility is only covered by the scheme once it emits over 100,000 tonnes a year.", o:["Law","Limit","Condition","Penalty"], a:1,
-        e:"A threshold is a limit that decides who is in and who is out." }
-    ]
-  },
-  {
-    name: "Round 4 — Align or conflict",
-    short: "Align or conflict",
-    blurb: "Where interests meet, and where they do not",
-    q: [
-      { t:"Both sides want approval decisions made faster instead of after a six year wait.", o:["Align","Conflict"], a:0,
-        e:"Uncertainty is expensive for a company and politically awkward for a government. Neither one enjoys a six year assessment." },
-      { t:"Government wants the strictest workable conditions; the company wants the cheapest ones.", o:["Align","Conflict"], a:1,
-        e:"Both agree there should be conditions. They disagree on how much they should cost." },
-      { t:"Both want shoppers to trust an environmental label on a product.", o:["Align","Conflict"], a:0,
-        e:"Honest labels protect genuinely green businesses from being undercut, so the honest end of industry backs enforcement too." },
-      { t:"The cost of protecting the site falls on the company, while the cost of damage falls on the public.", o:["Align","Conflict"], a:1,
-        e:"This is the heart of it. Private cost, public benefit. Almost every environmental argument sits on this split." },
-      { t:"Both benefit when a plant is seen to be well run.", o:["Align","Conflict"], a:0,
-        e:"One side gets votes, the other gets sales, but the behaviour they want is the same." },
-      { t:"Exporters want emissions counted where the gas is burnt overseas, not where it is dug up here.", o:["Align","Conflict"], a:1,
-        e:"Where you draw the boundary decides whose problem it is. That is exactly what happened with the North West Shelf decision." },
-      { t:"Both support monitoring air quality near a heritage site.", o:["Align","Conflict"], a:0,
-        e:"Monitoring is cheap and it protects both sides. Acting on what the monitoring finds is where it gets harder." },
-      { t:"A company says a proposed condition makes the whole project unviable and asks for it to be dropped.", o:["Align","Conflict"], a:1,
-        e:"Sometimes true, sometimes tactical. A regulator has to judge which, and it rarely has the company's own numbers." },
-      { t:"Both prefer clear written rules over case-by-case guesswork.", o:["Align","Conflict"], a:0,
-        e:"Business can plan against a clear rule. Government can defend one in court. Vague rules serve nobody." }
-    ]
+let ri=0, qi=0, score=0, streak=0, best=0, roundErrors=0, misses=[], won={}, answered=false;
+let gauge = CFG.gauge==='cover' ? CFG.gaugeStart : 0;
+
+const $=id=>document.getElementById(id);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const LETTERS=['A','B','C','D','E','F'];
+
+function total(){return CFG.rounds.reduce((n,r)=>n+r.q.length,0);}
+
+function drawGauge(){
+  if(CFG.gauge==='cover'){
+    $('gVal').textContent=gauge.toFixed(1)+'%';
+    $('gFill').style.width=gauge+'%';
+    $('gMark').style.display='block';
+    $('gMark').style.left=CFG.gaugeFloor+'%';
+    $('gVal').style.color = gauge<CFG.gaugeFloor ? 'var(--bad)' : 'var(--accent)';
+  }else{
+    $('gVal').textContent=Math.round(gauge)+' / '+CFG.gaugeTarget;
+    $('gFill').style.width=Math.min(100,(gauge/CFG.gaugeTarget)*100)+'%';
   }
-];
-
-/* ============ STATE ============ */
-const S = {
-  r:0, i:0, score:0, streak:0, best:0, correct:0, answered:0,
-  conditions:0, missed:[], roundClean:true, badges:new Set(), locked:false
-};
-const TARGET = 48;
-const KEYS = ["A","B","C","D"];
-
-const $ = id => document.getElementById(id);
-
-/* ============ SETUP ============ */
-function shuffle(a){
-  const x = a.slice();
-  for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];}
-  return x;
 }
-// pre-shuffle option order per question, keeping track of the right answer
-function prepare(){
-  ROUNDS.forEach(r=>{
-    r.q.forEach(q=>{
-      const answerText = q.o[q.a];
-      const order = q.o.length > 2 ? shuffle(q.o) : q.o.slice();
-      q._o = order;
-      q._a = order.indexOf(answerText);
-    });
+
+function stats(){
+  $('sRound').textContent=ri+1;
+  $('sQ').textContent=qi+1;
+  $('sScore').textContent=score;
+  $('sStreak').textContent=streak;
+}
+
+function question(){
+  const R=CFG.rounds[ri], item=R.q[qi];
+  const rawOpts = item[1] ? item[1] : R.opts;
+  const correctText = rawOpts[item[2]];
+  const opts = shuffle(rawOpts);
+  answered=false;
+  stats(); drawGauge();
+
+  $('stage').innerHTML =
+    '<div class="round">Round '+(ri+1)+' &middot; '+R.name+'</div>'+
+    '<div class="prompt">'+item[0]+'</div>'+
+    '<div class="opts" id="opts"></div>'+
+    '<div class="fb" id="fb"></div>'+
+    '<div class="hint noprint">Tap an answer, or press '+LETTERS.slice(0,opts.length).join(', ')+' on a keyboard.</div>';
+
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'; b.dataset.i=i;
+    b.innerHTML='<span class="key">'+LETTERS[i]+'</span><span>'+o+'</span>';
+    b.onclick=()=>choose(i,o,correctText,item[3],opts);
+    $('opts').appendChild(b);
   });
 }
 
-function drawRoundMap(){
-  const wrap = $("roundmap");
-  wrap.innerHTML = "";
-  ROUNDS.forEach((r,idx)=>{
-    const d = document.createElement("div");
-    d.className = "rd" + (idx < S.r ? " done" : "") + (idx === S.r ? " now" : "");
-    d.innerHTML = '<div class="n">ROUND '+(idx+1)+'</div><div class="t">'+r.short+'</div>';
-    wrap.appendChild(d);
-  });
-}
-
-/* ============ DESK ============ */
-function updateDesk(){
-  $("conditions").textContent = S.conditions;
-  $("condBar").style.width = Math.min(100, (S.conditions/TARGET)*100) + "%";
-  $("score").textContent = S.score;
-  $("streak").textContent = S.streak;
-  $("multi").textContent = "multiplier x" + mult();
-  $("accuracy").textContent = S.answered
-    ? S.correct + " of " + S.answered + " correct"
-    : "no answers yet";
-}
-function mult(){ return S.streak >= 6 ? 4 : S.streak >= 3 ? 2 : 1; }
-
-/* ============ FLOW ============ */
-function start(){
-  $("briefing").classList.add("hidden");
-  $("quiz").classList.remove("hidden");
-  render();
-}
-
-function render(){
-  S.locked = false;
-  const round = ROUNDS[S.r];
-  const q = round.q[S.i];
-  $("roundName").textContent = round.name + " — " + round.blurb;
-  $("qcount").textContent = "Decision " + (S.i+1) + " of " + round.q.length;
-  $("qtext").textContent = q.t;
-
-  const total = ROUNDS.reduce((n,r)=>n+r.q.length,0);
-  const donePrev = ROUNDS.slice(0,S.r).reduce((n,r)=>n+r.q.length,0);
-  $("progBar").style.width = (((donePrev + S.i) / total) * 100) + "%";
-
-  const box = $("opts");
-  box.innerHTML = "";
-  q._o.forEach((text, idx)=>{
-    const b = document.createElement("button");
-    b.className = "opt";
-    b.innerHTML = '<span class="key">'+KEYS[idx]+'</span><span>'+text+'</span>';
-    b.addEventListener("click", ()=>answer(idx, b));
-    box.appendChild(b);
+function choose(i,picked,correctText,why,opts){
+  if(answered) return;
+  answered=true;
+  const right = picked===correctText;
+  const btns=[...document.querySelectorAll('.opt')];
+  btns.forEach((b,j)=>{
+    b.disabled=true;
+    if(opts[j]===correctText) b.classList.add('right');
+    else if(j===i) b.classList.add('wrong');
   });
 
-  $("verdict").className = "verdict";
-  $("nextBtn").classList.add("hidden");
-  $("quiz").scrollIntoView({behavior:"smooth", block:"nearest"});
-}
-
-function answer(picked, btn){
-  if(S.locked) return;
-  S.locked = true;
-  const q = ROUNDS[S.r].q[S.i];
-  const right = picked === q._a;
-  const buttons = [...$("opts").children];
-  buttons.forEach((b,idx)=>{
-    b.disabled = true;
-    if(idx === q._a) b.classList.add("right");
-    if(idx === picked && !right) b.classList.add("wrong");
-  });
-
-  S.answered++;
   if(right){
-    S.correct++;
-    S.streak++;
-    S.best = Math.max(S.best, S.streak);
-    S.score += 10 * mult();
-    S.conditions = Math.min(TARGET, S.conditions + (S.streak >= 3 ? 2 : 1));
-    if(S.streak >= 5) S.badges.add("cross");
-    if(S.conditions >= TARGET) S.badges.add("full");
-  } else {
-    S.streak = 0;
-    S.roundClean = false;
-    S.missed.push({ q:q.t, a:q._o[q._a], e:q.e });
+    streak++; best=Math.max(best,streak);
+    const bonus = streak>=5 ? 20 : streak>=3 ? 15 : 10;
+    score+=bonus;
+    if(CFG.gauge==='cover') gauge=Math.min(CFG.gaugeStart, gauge+0.4);
+    else gauge+=CFG.gaugeTarget/total();
+    if(streak>=5) won['Streak of five']=true;
+    $('fb').className='fb ok show';
+    $('fb').innerHTML='<b>Correct. +'+bonus+(streak>=3?' (streak bonus)':'')+'</b>'+why;
+  }else{
+    streak=0; roundErrors++;
+    if(CFG.gauge==='cover') gauge=Math.max(0,gauge-1.2);
+    misses.push({q:CFG.rounds[ri].q[qi][0], a:correctText, why:why});
+    $('fb').className='fb no show';
+    $('fb').innerHTML='<b>Not this time. The answer is: '+correctText+'</b>'+why;
   }
-  updateDesk();
-  stamp(right);
 
-  const v = $("verdict");
-  v.className = "verdict show " + (right ? "ok" : "no");
-  $("vlab").textContent = right
-    ? (S.streak >= 3 ? "Upheld. Two conditions imposed." : "Upheld. One condition imposed.")
-    : "Sent back. No condition imposed.";
-  $("vtext").textContent = right ? q.e : "The call was: " + q._o[q._a] + ". " + q.e;
-
-  const nb = $("nextBtn");
-  const last = (S.r === ROUNDS.length-1) && (S.i === ROUNDS[S.r].q.length-1);
-  nb.textContent = last ? "Close the file" : (S.i === ROUNDS[S.r].q.length-1 ? "Start the next round" : "Next decision");
-  nb.classList.remove("hidden");
+  const b=document.createElement('button');
+  b.className='go'; b.textContent='Next';
+  b.onclick=next;
+  $('fb').appendChild(b);
+  stats(); drawGauge();
 }
 
 function next(){
-  const round = ROUNDS[S.r];
-  if(S.i < round.q.length - 1){
-    S.i++;
-    render();
-    return;
-  }
-  if(S.roundClean) S.badges.add("clean");
-  S.roundClean = true;
-  if(S.r === 0) S.badges.add("first");
-  if(S.r < ROUNDS.length - 1){
-    S.r++; S.i = 0;
-    drawRoundMap();
-    render();
-  } else {
-    S.badges.add("portfolio");
-    finish();
-  }
+  qi++;
+  if(qi<CFG.rounds[ri].q.length){ question(); return; }
+  if(roundErrors===0) won['Clean sweep']=true;
+  won[CFG.badges[Math.min(ri,2)][0]]=true;
+  roundEnd();
 }
 
-function stamp(ok){
-  const el = $("stamp");
-  el.textContent = ok ? "APPROVED" : "SENT BACK";
-  el.className = "stamp " + (ok ? "ok" : "no");
-  void el.offsetWidth;
-  el.classList.add("go");
+function roundEnd(){
+  const last = ri===CFG.rounds.length-1;
+  if(last){ won['Full survey']=true; if(CFG.gauge==='cover'&&gauge>=CFG.gaugeFloor) won['Above the line']=true; }
+  $('stage').innerHTML=
+    '<div class="round">Round '+(ri+1)+' complete</div>'+
+    '<div class="big">'+score+'</div>'+
+    '<p style="color:var(--grey);margin-top:6px">'+
+      (roundErrors===0?'Clean sweep. No mistakes at all.':roundErrors+' to review at the end.')+'</p>'+
+    '<button class="go" id="nx">'+(last?'See your results':'Start Round '+(ri+2)+': '+CFG.rounds[ri+1].name)+'</button>'+
+    (last?'':'<p class="hint">'+CFG.rounds[ri+1].blurb+'</p>');
+  $('nx').onclick=()=>{ if(last){results();} else {ri++;qi=0;roundErrors=0;question();} };
 }
 
-/* ============ RESULTS ============ */
-const BADGES = [
-  ["first","First reading","finish round one"],
-  ["cross","Cross-examiner","five correct in a row"],
-  ["clean","Clean record","a round with no errors"],
-  ["portfolio","Full portfolio","all four rounds"],
-  ["full","Full bench","48 conditions imposed"],
-  ["precedent","Precedent set","90 per cent or better"]
-];
+function results(){
+  const t=total(), max=t*10;
+  let html='<div class="round">Finished</div><div class="big">'+score+'</div>'+
+    '<p style="color:var(--grey);margin-top:6px">'+(t-misses.length)+' of '+t+
+    ' correct. Longest streak: '+best+'. Base score out of '+max+', streak bonuses on top.</p>';
 
-function finish(){
-  const total = ROUNDS.reduce((n,r)=>n+r.q.length,0);
-  const acc = Math.round((S.correct/total)*100);
-  if(acc >= 90) S.badges.add("precedent");
-
-  $("quiz").classList.add("hidden");
-  $("results").classList.remove("hidden");
-
-  $("finalScore").textContent = S.score;
-  $("sCorrect").textContent = S.correct + " / " + total;
-  $("sCond").textContent = S.conditions + " / " + TARGET;
-  $("sStreak").textContent = S.best;
-  $("sAcc").textContent = acc + "%";
-
-  $("verdictTitle").textContent =
-    S.conditions >= TARGET ? "File fully protected" :
-    acc >= 75 ? "Approved with conditions" :
-    acc >= 50 ? "Approved, but the file is thin" : "Sent back for reassessment";
-
-  $("finalLine").textContent =
-    S.conditions >= TARGET ? "Every protection you could impose is on the file. That is a decision that will hold up." :
-    acc >= 75 ? "Solid work. A few calls would not survive a challenge, so read the review below." :
-    "The conditions on this file would not hold. Read the review, then run it again.";
-
-  const row = $("badgeRow");
-  row.innerHTML = "";
-  BADGES.forEach(([key,name,how])=>{
-    const b = document.createElement("span");
-    const won = S.badges.has(key);
-    b.className = "badge" + (won ? " won" : "");
-    b.textContent = won ? name : name + " — " + how;
-    row.appendChild(b);
+  html+='<h3 style="margin:22px 0 4px;font-size:17px">Badges</h3><div class="badges">';
+  CFG.badges.forEach(b=>{
+    html+='<div class="badge'+(won[b[0]]?' won':'')+'"><b>'+b[0]+'</b>'+b[1]+'</div>';
   });
+  html+='</div>';
 
-  const rev = $("review");
-  rev.innerHTML = "";
-  if(!S.missed.length){
-    $("reviewWrap").innerHTML = '<h3>Sent back for review</h3><p class="muted">Nothing came back. Every call held.</p>';
-  } else {
-    S.missed.forEach(m=>{
-      const d = document.createElement("div");
-      d.className = "rev";
-      d.innerHTML = '<div class="q">'+m.q+'</div><div class="a">Correct call: <b>'+m.a+'</b>. '+m.e+'</div>';
-      rev.appendChild(d);
+  if(misses.length){
+    html+='<h3 style="margin:22px 0 8px;font-size:17px">Worth another look</h3>';
+    misses.forEach(m=>{
+      html+='<div class="miss"><div class="qq">'+m.q+'</div><div class="aa">'+m.a+' &mdash; '+m.why+'</div></div>';
     });
+  }else{
+    html+='<p style="margin-top:20px;color:var(--good);font-weight:700">Nothing to review. Every single one correct.</p>';
   }
-  $("results").scrollIntoView({behavior:"smooth", block:"start"});
+
+  html+='<div class="noprint"><button class="go" id="pr">Print certificate</button>'+
+        '<button class="go ghost" id="rs" style="margin-left:8px">Play again</button></div>';
+  $('stage').innerHTML=html;
+
+  $('pr').onclick=()=>{
+    $('cert').innerHTML=
+      '<h1 style="font-size:30px">'+CFG.title+'</h1>'+
+      '<p style="color:#5A6660;margin-bottom:20px">'+CFG.subtitle+'</p>'+
+      '<p style="font-size:16px">This certifies that</p>'+
+      '<p style="border-bottom:1px solid #999;width:70%;margin:22px auto;height:34px"></p>'+
+      '<p style="font-size:16px">scored</p>'+
+      '<p style="font-size:52px;font-weight:800;color:'+CFG.accent+'">'+score+'</p>'+
+      '<p style="font-size:15px">'+(t-misses.length)+' of '+t+' correct, longest streak '+best+'</p>'+
+      '<p style="margin-top:26px;font-size:13px;color:#5A6660">Year 10 Geography &middot; Environmental Change and Management</p>';
+    $('cert').style.display='block';
+    window.print();
+    setTimeout(()=>{$('cert').style.display='none';},400);
+  };
+  $('rs').onclick=()=>location.reload();
 }
 
-function showCert(){
-  const total = ROUNDS.reduce((n,r)=>n+r.q.length,0);
-  $("results").classList.add("hidden");
-  $("cert").classList.remove("hidden");
-  $("cert").style.display = "block";
-  $("certScore").textContent = S.score;
-  $("certCond").textContent = S.conditions + "/" + TARGET;
-  $("certAcc").textContent = Math.round((S.correct/total)*100) + "%";
-  $("certDate").textContent = new Date().toLocaleDateString("en-AU");
-  $("nameIn").focus();
-}
-
-function reset(){
-  S.r=0; S.i=0; S.score=0; S.streak=0; S.best=0; S.correct=0; S.answered=0;
-  S.conditions=0; S.missed=[]; S.roundClean=true; S.badges=new Set(); S.locked=false;
-  prepare();
-  updateDesk();
-  drawRoundMap();
-  $("results").classList.add("hidden");
-  $("cert").classList.add("hidden");
-  $("cert").style.display = "none";
-  $("quiz").classList.remove("hidden");
-  render();
-}
-
-/* ============ WIRING ============ */
-$("startBtn").addEventListener("click", start);
-$("nextBtn").addEventListener("click", next);
-$("certBtn").addEventListener("click", showCert);
-$("againBtn").addEventListener("click", reset);
-$("printBtn").addEventListener("click", ()=>window.print());
-$("backBtn").addEventListener("click", ()=>{
-  $("cert").classList.add("hidden");
-  $("cert").style.display = "none";
-  $("results").classList.remove("hidden");
-});
-$("nameIn").addEventListener("input", e=>{
-  $("certName").textContent = e.target.value.trim() || "\u00A0";
+document.addEventListener('keydown',e=>{
+  if(answered) return;
+  const k=LETTERS.indexOf(e.key.toUpperCase());
+  if(k>-1){ const b=document.querySelectorAll('.opt')[k]; if(b) b.click(); }
 });
 
-document.addEventListener("keydown", e=>{
-  if($("quiz").classList.contains("hidden")) return;
-  const k = e.key.toUpperCase();
-  const idx = KEYS.indexOf(k);
-  if(idx > -1){
-    const b = $("opts").children[idx];
-    if(b && !b.disabled) b.click();
-  }
-  if(e.key === "Enter" && !$("nextBtn").classList.contains("hidden")) next();
-});
-
-prepare();
-drawRoundMap();
-updateDesk();
+// intro
+$('stage').innerHTML=
+  '<div class="round">Before you start</div>'+
+  '<div class="prompt">'+CFG.rounds.length+' rounds, '+total()+' questions.</div>'+
+  '<p style="color:var(--grey)">Answers are shuffled every time, so learn the content, not the position. '+
+  'Three in a row is worth 15, five in a row is worth 20. Everything you get wrong is saved for review at the end.</p>'+
+  '<button class="go" id="st">Start Round 1: '+CFG.rounds[0].name+'</button>'+
+  '<p class="hint">'+CFG.rounds[0].blurb+'</p>';
+$('st').onclick=question;
+drawGauge();
 </script>
 </body>
 </html>
