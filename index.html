@@ -3,273 +3,616 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Frontier - Lesson 37 - Deforestation and agriculture</title>
+<title>The Fix List - Lesson 38</title>
 <style>
 :root{
-  --accent:#C0442F;
-  --accent2:#C08A2E;
+  --forest:#12291E;
+  --forest-2:#1B382A;
+  --canopy:#1E7A4E;
+  --canopy-lt:#5FA37C;
+  --ochre:#C08A2E;
+  --scarlet:#C0442F;
+  --paper:#F3F7F4;
   --ink:#12291E;
-  --grey:#5A6660;
-  --mist:#EAF1EA;
-  --line:#D6E2D6;
-  --good:#1E7A4E;
-  --bad:#C0442F;
+  --mute:#8FA79A;
+  --line:rgba(255,255,255,.12);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  background:#F7FAF7;color:var(--ink);line-height:1.5;padding:16px}
-.wrap{max-width:860px;margin:0 auto}
-header{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:14px}
-header h1{font-size:26px;letter-spacing:-.4px}
-header p{color:var(--grey);font-size:14px;margin-top:2px}
-.bar{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.stat{background:var(--mist);border-radius:9px;padding:7px 13px;font-size:13px;font-weight:600}
-.stat span{color:var(--accent);font-weight:700}
-.gauge{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-bottom:14px}
-.gauge .lab{font-size:12px;text-transform:uppercase;letter-spacing:1.1px;color:var(--grey);font-weight:700}
-.gauge .val{font-size:30px;font-weight:800;color:var(--accent);margin:2px 0 8px}
-.track{position:relative;height:16px;background:#E4EAE4;border-radius:8px;overflow:hidden}
-.fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .45s ease}
-.mark{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--bad)}
-.gauge .note{font-size:12px;color:var(--grey);margin-top:9px}
-.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:14px}
-.round{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent2);font-weight:800}
-.prompt{font-size:20px;font-weight:700;margin:8px 0 18px;line-height:1.35}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--forest);
+  color:#EAF2EC;
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:960px;margin:0 auto;padding:22px 18px 60px}
+
+/* ---------- header ---------- */
+header.top{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:18px}
+.brand h1{font-family:var(--serif);font-size:2.5rem;line-height:1.05;margin:0;letter-spacing:-.01em}
+.brand p{margin:.35rem 0 0;color:var(--mute);font-size:.95rem}
+.meta{color:var(--mute);font-size:.82rem;text-align:right;line-height:1.6}
+.meta b{color:var(--ochre);font-weight:600}
+
+/* ---------- canopy meter (signature) ---------- */
+.meter{
+  display:grid;grid-template-columns:118px 1fr;gap:16px;align-items:stretch;
+  background:var(--forest-2);border:1px solid var(--line);border-radius:12px;
+  padding:14px;margin-bottom:18px;
+}
+.stack{display:flex;flex-direction:column;gap:4px;justify-content:flex-end}
+.band{height:22px;border-radius:4px;background:rgba(255,255,255,.07);position:relative;overflow:hidden}
+.band span{position:absolute;inset:0;width:0;transition:width .55s cubic-bezier(.2,.7,.3,1)}
+.band:nth-child(1) span{background:#1E5C3B}
+.band:nth-child(2) span{background:var(--canopy)}
+.band:nth-child(3) span{background:var(--canopy-lt)}
+.band:nth-child(4) span{background:var(--ochre)}
+.band em{position:absolute;left:7px;top:2px;font-style:normal;font-size:.62rem;letter-spacing:.06em;color:rgba(255,255,255,.75)}
+.readout{display:flex;flex-direction:column;justify-content:center;gap:6px}
+.ha{font-family:var(--serif);font-size:2.35rem;line-height:1;color:#fff}
+.ha small{font-size:.95rem;color:var(--mute);font-family:var(--sans)}
+.readnote{color:var(--mute);font-size:.8rem;max-width:44ch}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.pill{background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:.76rem;color:#CFE0D5}
+.pill b{color:#fff}
+
+/* ---------- rounds ---------- */
+.roundbar{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.rtab{flex:1 1 140px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:.78rem;color:var(--mute)}
+.rtab b{display:block;color:#DCEBE1;font-size:.9rem;font-weight:600}
+.rtab.on{background:var(--canopy);border-color:var(--canopy);color:#D8EFE2}
+.rtab.on b{color:#fff}
+.rtab.done{border-color:var(--canopy-lt)}
+
+/* ---------- card ---------- */
+.card{background:#F7FAF8;color:var(--ink);border-radius:14px;padding:22px;box-shadow:0 14px 34px rgba(0,0,0,.28)}
+.qhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
+.qnum{font-size:.78rem;letter-spacing:.06em;color:#6A7A70;font-weight:600}
+.qtag{font-size:.72rem;background:#E4EFE8;color:#1E5C3B;border-radius:999px;padding:3px 10px;font-weight:600}
+.qtext{font-family:var(--serif);font-size:1.32rem;line-height:1.32;margin:0 0 16px}
 .opts{display:grid;gap:9px}
-.opt{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1.5px solid var(--line);
-  border-radius:10px;padding:12px 14px;cursor:pointer;text-align:left;font-size:15.5px;
-  font-family:inherit;color:var(--ink);transition:.14s;width:100%}
-.opt:hover:not(:disabled){border-color:var(--accent);background:#FAFDFA}
-.opt:disabled{cursor:default}
-.key{flex:none;width:25px;height:25px;border-radius:50%;background:var(--ink);color:#fff;
-  font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.opt.right{border-color:var(--good);background:#E9F4EE}
-.opt.right .key{background:var(--good)}
-.opt.wrong{border-color:var(--bad);background:#FBEAE7}
-.opt.wrong .key{background:var(--bad)}
-.fb{margin-top:16px;padding:14px 16px;border-radius:10px;font-size:15px;display:none}
-.fb.show{display:block}
-.fb.ok{background:#E9F4EE;border-left:4px solid var(--good)}
-.fb.no{background:#FBEAE7;border-left:4px solid var(--bad)}
-.fb b{display:block;margin-bottom:3px}
-button.go{margin-top:16px;background:var(--accent);color:#fff;border:0;border-radius:9px;
-  padding:12px 26px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
-button.go:hover{opacity:.9}
-button.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
-.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:9px;margin-top:14px}
-.badge{border:1.5px dashed var(--line);border-radius:10px;padding:11px;font-size:12.5px;color:#B4BDB6}
-.badge.won{border-style:solid;border-color:var(--accent);color:var(--ink);background:var(--mist)}
-.badge b{display:block;font-size:13.5px;margin-bottom:2px}
-.miss{border-left:3px solid var(--bad);padding:9px 13px;margin-bottom:9px;background:#FDF6F5;
-  border-radius:0 8px 8px 0;font-size:14px}
-.miss .qq{font-weight:600}
-.miss .aa{color:var(--good);font-size:13px;margin-top:3px}
-.hint{font-size:12.5px;color:var(--grey);margin-top:12px}
-.big{font-size:44px;font-weight:800;color:var(--accent);line-height:1.1}
-@media print{
-  body{background:#fff}
-  .noprint{display:none !important}
-  .cert{border:4px double var(--accent);padding:40px;text-align:center}
+.opt{
+  display:grid;grid-template-columns:30px 1fr;gap:11px;align-items:center;
+  background:#fff;border:1.5px solid #D9E3DC;border-radius:9px;padding:11px 13px;
+  cursor:pointer;text-align:left;font:inherit;color:inherit;transition:border-color .12s,background .12s;
 }
-.cert{display:none}
+.opt:hover:not(:disabled){border-color:var(--canopy);background:#F2F9F5}
+.opt:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
+.opt .key{width:30px;height:30px;border-radius:7px;background:#E9F1EC;color:#33564A;display:grid;place-items:center;font-weight:700;font-size:.88rem}
+.opt.right{border-color:var(--canopy);background:#E9F6EE}
+.opt.right .key{background:var(--canopy);color:#fff}
+.opt.wrong{border-color:var(--scarlet);background:#FBEDEA}
+.opt.wrong .key{background:var(--scarlet);color:#fff}
+.opt:disabled{cursor:default}
+.feedback{margin-top:14px;border-left:4px solid var(--canopy);background:#EDF5F0;padding:11px 14px;border-radius:0 8px 8px 0;font-size:.94rem}
+.feedback.no{border-left-color:var(--scarlet);background:#FBEEEB}
+.feedback b{display:block;margin-bottom:3px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap}
+.hint{color:#6A7A70;font-size:.8rem}
+button.go{
+  background:var(--forest);color:#fff;border:0;border-radius:9px;padding:11px 22px;
+  font:600 .95rem var(--sans);cursor:pointer;
+}
+button.go:hover{background:var(--canopy)}
+button.go:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
+button.ghost{background:transparent;color:#DCEBE1;border:1px solid var(--line);border-radius:9px;padding:10px 18px;font:600 .9rem var(--sans);cursor:pointer}
+button.ghost:hover{background:rgba(255,255,255,.08)}
+
+/* ---------- badges ---------- */
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.badge{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:.78rem;color:#6E8478}
+.badge.won{background:rgba(192,138,46,.16);border-color:var(--ochre);color:#F0DDB8}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:#3B4E45}
+.badge.won .dot{background:var(--ochre)}
+
+/* ---------- results ---------- */
+.result h2{font-family:var(--serif);font-size:2rem;margin:0 0 6px}
+.scoreline{font-size:1.05rem;color:#33473D;margin-bottom:14px}
+.review{margin-top:18px}
+.review h3{font-family:var(--serif);font-size:1.15rem;margin:0 0 8px}
+.miss{border:1px solid #E2D3CF;background:#FDF6F4;border-radius:9px;padding:11px 13px;margin-bottom:8px;font-size:.9rem}
+.miss .q{font-weight:600;display:block;margin-bottom:4px}
+.miss .a{color:#1E5C3B}
+.miss .y{color:#9A3826}
+.cert{border:2px solid var(--canopy);border-radius:12px;padding:20px;margin-top:20px;background:#fff}
+.cert h3{font-family:var(--serif);font-size:1.4rem;margin:0 0 4px;color:var(--forest)}
+.cert .name{border-bottom:1.5px dotted #8FA79A;min-height:1.7rem;margin:14px 0 6px;font-size:1.1rem}
+.cert .row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.85rem;color:#4A5C52;margin-top:10px}
+.hide{display:none !important}
+@media print{
+  body{background:#fff;color:#000}
+  .noprint{display:none !important}
+  .card{box-shadow:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .band span{transition:none}
+}
+@media (max-width:620px){
+  .brand h1{font-size:1.9rem}
+  .meter{grid-template-columns:88px 1fr}
+  .qtext{font-size:1.14rem}
+  .meta{text-align:left}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<header>
-  <h1>Frontier</h1>
-  <p>Lesson 37 - Deforestation and agriculture</p>
-  <div class="bar">
-    <div class="stat">Round <span id="sRound">1</span> of 4</div>
-    <div class="stat">Question <span id="sQ">1</span></div>
-    <div class="stat">Score <span id="sScore">0</span></div>
-    <div class="stat">Streak <span id="sStreak">0</span></div>
-  </div>
-</header>
+  <header class="top">
+    <div class="brand">
+      <h1>The Fix List</h1>
+      <p>Sustainable agriculture and management responses in the Amazon</p>
+    </div>
+    <div class="meta noprint">
+      Lesson 38 &middot; Year 10 Geography<br>
+      <b>VCGGK147 &amp; VCGGK145</b><br>
+      38 questions &middot; 4 rounds
+    </div>
+  </header>
 
-<div class="gauge noprint">
-  <div class="lab">Forest cover remaining</div>
-  <div class="val" id="gVal">-</div>
-  <div class="track"><div class="fill" id="gFill"></div><div class="mark" id="gMark" style="display:none"></div></div>
-  <div class="note">You start at 86.8 per cent, where the Amazon is today. The red line at 75 per cent is the tipping-point danger zone. Wrong answers clear forest.</div>
-</div>
+  <section class="meter noprint" aria-label="Restoration meter">
+    <div class="stack" id="stack">
+      <div class="band"><span></span><em>CANOPY</em></div>
+      <div class="band"><span></span><em>MID</em></div>
+      <div class="band"><span></span><em>SHRUB</em></div>
+      <div class="band"><span></span><em>GROUND</em></div>
+    </div>
+    <div class="readout">
+      <div class="ha"><span id="ha">0</span> <small>of 18,000 ha restored</small></div>
+      <div class="readnote">Every correct answer plants part of the Par&aacute; restoration target. Wrong answers do not plant anything, so the target only fills if you earn it.</div>
+      <div class="pill-row">
+        <span class="pill">Score <b id="pScore">0</b></span>
+        <span class="pill">Streak <b id="pStreak">0</b></span>
+        <span class="pill">Best streak <b id="pBest">0</b></span>
+      </div>
+    </div>
+  </section>
 
-<div class="card" id="stage"></div>
+  <nav class="roundbar noprint" id="roundbar" aria-label="Rounds"></nav>
 
-<div class="cert" id="cert"></div>
+  <main class="card" id="card"></main>
+
+  <div class="badges noprint" id="badges"></div>
+
 </div>
 
 <script>
-const CFG = {"slug":"lesson-37","file":"Lesson37_Frontier_Activity.html","title":"Frontier","subtitle":"Lesson 37 - Deforestation and agriculture","accent":"#C0442F","accent2":"#C08A2E","gauge":"cover","gaugeLabel":"Forest cover remaining","gaugeStart":86.8,"gaugeFloor":75,"gaugeNote":"You start at 86.8 per cent, where the Amazon is today. The red line at 75 per cent is the tipping-point danger zone. Wrong answers clear forest.","badges":[["Frontier scout","Finish Round 1"],["Driver spotter","Finish Round 2"],["Figure keeper","Finish Round 3"],["Full survey","Finish all four rounds"],["Streak of five","Get five right in a row"],["Above the line","Finish with cover still above 75 per cent"]],"rounds":[{"name":"Rapid Recall","blurb":"Yesterday and today. Ten quick ones.","q":[["The three reasons the Amazon matters globally are...",["Biodiversity, carbon storage and the water cycle","Oxygen, timber and tourism","Fish, gold and farmland","Rainfall, rivers and roads"],0,"Same three headings as Lesson 36."],["Storing carbon is which environmental function?",["Sink","Source","Service","Spiritual"],0,"A sink absorbs and holds."],["A flying river is...",["Moisture carried across the basin in the air and recycled by trees","A river that changes course each wet season","An underground river beneath the forest","A river used to transport logs"],0,"Moisture highways in the sky, running east to west."],["The single biggest driver of Amazon deforestation is...",["Cattle ranching","Soy farming","Gold mining","Selective logging"],0,"Cattle, by a long way."],["Roughly what share of Brazil's deforestation is driven by cattle?",["About 72 per cent","About 22 per cent","About 95 per cent","About 40 per cent"],0,"Around 72 per cent of Brazil's deforestation."],["Roughly what share of the original Amazon has already been cleared?",["About 13.2 per cent","About 45 per cent","About 2 per cent","About 60 per cent"],0,"About 13.2 per cent overall, but 31 per cent in the eastern Amazon."],["How much Amazon forest was cleared in the year to July 2025?",["5,796 km2","57,960 km2","579 km2","15,796 km2"],0,"5,796 km2, down 11 per cent and the lowest in 11 years."],["Degradation means...",["The forest is damaged but still standing","The forest has been completely removed","The forest is legally protected","The forest is being replanted"],0,"Burnt, thinned or dried out, but still there. Mostly not counted in official figures."],["The fishbone effect describes...",["Side tracks branching off a new road, multiplying clearing","Fish species disappearing from Amazon rivers","The shape of the Amazon river system","Soil erosion patterns after clearing"],0,"From the air the pattern looks like a fish skeleton."],["A tipping point is...",["A threshold past which change becomes self-sustaining and very hard to reverse","The moment deforestation stops","The point where a forest is half cleared","A government target for protection"],0,"For the Amazon it means rainforest shifting to savanna."]]},{"name":"Name the Driver","blurb":"Six drivers. Which one is doing the work here?","opts":["Cattle","Soy","Logging","Mining","Roads","Fire"],"q":[["A rancher clears 200 hectares and puts 40 cows on it, mainly to establish a claim to the land.",null,0,"Cattle. The cows are the land claim as much as the product."],["From 2006, traders refused to buy the crop if it came from land cleared after 2008.",null,1,"Soy. That was the Amazon Soy Moratorium."],["Mercury is poisoning rivers near remote, often illegal pits.",null,3,"Mining, particularly for gold."],["Side tracks branch off a new highway, then more tracks branch off those.",null,4,"Roads, and the fishbone effect."],["The most valuable trees are removed while the rest of the forest is left standing.",null,2,"Selective logging. It degrades rather than clears, and opens access."],["Land is cleared by burning, and in a drought year the burn escapes into standing forest.",null,5,"Fire. In 2024 about 60 per cent of Brazil's primary forest loss came from fire."],["BR-319, nicknamed \"the tipping point road\".",null,4,"Roads. It would open intact central Amazon forest."],["Responsible for about 41 per cent of all tropical deforestation worldwide.",null,0,"Cattle pasture, globally the biggest converted land use."],["A crop grown mostly as animal feed, expanding onto land that was already pasture.",null,1,"Soy. Its effect is mostly indirect: it pushes ranchers deeper in."],["Thousands of small operators rather than one large company, which makes enforcement extremely hard.",null,0,"Cattle. The driver is spread across thousands of people, which is exactly why laws alone struggle to stop it."]]},{"name":"Figure File","blurb":"The numbers that will carry your assessment.","q":[["Amazon forest cleared in the year to July 2025",["5,796 km2","11,796 km2","796 km2","25,796 km2"],0,"Down 11 per cent, the lowest in 11 years."],["Share of the original Amazon cleared so far",["About 13.2 per cent","About 31 per cent","About 3 per cent","About 50 per cent"],0,"13.2 per cent overall. The east is worse."],["Share of the eastern Amazon already cleared",["About 31 per cent","About 13 per cent","About 5 per cent","About 60 per cent"],0,"The eastern Amazon is already past the danger range."],["Cattle's share of Brazil's deforestation",["About 72 per cent","About 41 per cent","About 20 per cent","About 90 per cent"],0,"Around 72 per cent within Brazil."],["Cattle's share of tropical deforestation worldwide",["About 41 per cent","About 72 per cent","About 10 per cent","About 65 per cent"],0,"41 per cent globally, about 2.1 million hectares a year."],["Direct soy-driven clearing while the Soy Moratorium was in force",["Under 1 per cent of new soy area","About 30 per cent of new soy area","About 15 per cent of new soy area","About 50 per cent of new soy area"],0,"Down from about 30 per cent before the moratorium."],["Primary forest Brazil lost in 2024",["2.78 million hectares","278,000 hectares","27.8 million hectares","78,000 hectares"],0,"The highest since 2019, with about 60 per cent from fire."],["Amazon deforestation alerts, August 2025 to July 2026",["2,874 km2","5,796 km2","12,874 km2","874 km2"],0,"Down 36 per cent and the lowest since 2012-13."],["Where scientists roughly place the Amazon danger zone",["About 20 to 25 per cent cleared","About 50 to 60 per cent cleared","About 5 to 10 per cent cleared","About 80 per cent cleared"],0,"Around 20 to 25 per cent cleared. We are at 13.2 per cent."]]},{"name":"Deforestation or Degradation","blurb":"The distinction that separates a C from an A.","opts":["Deforestation","Degradation"],"q":[["Forest clear-cut and replaced with pasture for cattle.",null,0,"Deforestation. The forest is gone."],["Fire burning through standing forest during a drought year.",null,1,"Degradation. Damaged but still standing, and mostly uncounted."],["Selective logging removing only the largest, most valuable trees.",null,1,"Degradation. The forest remains but is thinned and opened up."],["Bulldozers stripping all vegetation to prepare a soy field.",null,0,"Deforestation. Complete removal."],["Forest edges drying out where they meet a newly cleared paddock.",null,1,"Degradation, known as the edge effect."],["A strip of forest cut and removed to build a new highway.",null,0,"Deforestation along the road corridor itself."],["The process that official Brazilian deforestation figures mostly count.",null,0,"Deforestation. Clear-cutting is what PRODES measures."],["The thing that rose 163 per cent between 2022 and 2024 while deforestation fell 54 per cent.",null,1,"Degradation. This is why a falling deforestation figure can mislead."],["Forest still standing but thinned, burnt and losing its ability to hold carbon.",null,1,"Degradation."]]}]};
+"use strict";
 
-let ri=0, qi=0, score=0, streak=0, best=0, roundErrors=0, misses=[], won={}, answered=false;
-let gauge = CFG.gauge==='cover' ? CFG.gaugeStart : 0;
-
-const $=id=>document.getElementById(id);
-const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
-const LETTERS=['A','B','C','D','E','F'];
-
-function total(){return CFG.rounds.reduce((n,r)=>n+r.q.length,0);}
-
-function drawGauge(){
-  if(CFG.gauge==='cover'){
-    $('gVal').textContent=gauge.toFixed(1)+'%';
-    $('gFill').style.width=gauge+'%';
-    $('gMark').style.display='block';
-    $('gMark').style.left=CFG.gaugeFloor+'%';
-    $('gVal').style.color = gauge<CFG.gaugeFloor ? 'var(--bad)' : 'var(--accent)';
-  }else{
-    $('gVal').textContent=Math.round(gauge)+' / '+CFG.gaugeTarget;
-    $('gFill').style.width=Math.min(100,(gauge/CFG.gaugeTarget)*100)+'%';
+/* ------------------------------------------------------------------ DATA */
+const ROUNDS = [
+  {
+    name: "Rapid recall",
+    blurb: "Lessons 36 to 38",
+    qs: [
+      { q: "What is agroforestry?",
+        a: "Farming that grows crops and trees together in layers on land that is already cleared",
+        d: ["Clearing rainforest to plant a single high-value crop",
+            "Abandoning farmland completely so forest grows back on its own",
+            "Paying farmers a yearly fee to stop farming altogether"],
+        why: "The point is that it keeps the land producing income without clearing more forest." },
+      { q: "Which Week 6 approach uses money rather than law to change behaviour?",
+        a: "Market-based",
+        d: ["Legislative", "Community-based", "Protected areas"],
+        why: "Market-based responses work by making the damaging option the unprofitable one." },
+      { q: "In a beef supply chain, what does traceability mean?",
+        a: "A system that follows a product back through every step to the land it came from",
+        d: ["A promise from the seller that no forest was cleared",
+            "A satellite image of the farm taken once a year",
+            "A label a shopper can scan to see the price history"],
+        why: "Without traceability a buyer cannot tell clean beef from beef raised on cleared forest, so the rule cannot be enforced." },
+      { q: "What happened to the Amazon Soy Moratorium at the start of 2026?",
+        a: "It was suspended, and most traders ended their commitments",
+        d: ["It was expanded to cover cattle as well as soy",
+            "It was written into Brazilian law",
+            "It was extended to every country in the Amazon basin"],
+        why: "Brazil's competition regulator moved against it and traders walked. Voluntary schemes can be abandoned." },
+      { q: "When does the EU deforestation law actually start applying to large operators?",
+        a: "30 December 2026",
+        d: ["30 December 2024, as originally planned",
+            "It started in 2023 when it entered into force",
+            "It has been cancelled altogether"],
+        why: "It entered into force in 2023 but has been postponed twice. Small operators get until mid 2027." },
+      { q: "What did the governor of Par&aacute; do in December 2025?",
+        a: "Postponed the compulsory cattle tagging scheme from 2026 to the end of 2030",
+        d: ["Made cattle tagging compulsory across all of Brazil",
+            "Banned all cattle ranching in the state",
+            "Handed the tagging scheme over to the meat companies to run"],
+        why: "One day after the agency confirmed a January start, the whole scheme was pushed back five years." },
+      { q: "Which of these is NOT one of the three tests for judging a management response?",
+        a: "Does it sound convincing when you explain it?",
+        d: ["Does it change what pays?",
+            "Is anyone enforcing it?",
+            "Who carries the cost?"],
+        why: "How good a scheme sounds is exactly what the three tests are designed to see past." },
+      { q: "Why does legally recognised Indigenous land hold forest better than an unmarked boundary?",
+        a: "It has a boundary a court will enforce, and people living there who notice clearing early",
+        d: ["It is fenced along its whole perimeter",
+            "Satellites only monitor recognised territories",
+            "The soil inside recognised territories is less suitable for farming"],
+        why: "Legal standing plus people on the ground. Satellites see clearing after it happens, residents see it starting." },
+      { q: "What is a moratorium, in the supply chain sense?",
+        a: "A voluntary agreement among buyers not to purchase from newly cleared land",
+        d: ["A government ban on exporting a commodity",
+            "A tax added to goods linked to deforestation",
+            "A court order stopping a company from trading"],
+        why: "Voluntary is the key word. Fast to set up, and just as fast to abandon." },
+      { q: "Why do agroforestry systems deliberately grow several crops at once?",
+        a: "If one crop's price falls, the farm still has income from the others",
+        d: ["Mixed crops are cheaper to harvest by machine",
+            "Buyers will only purchase from mixed farms",
+            "It is a legal requirement in the Brazilian Amazon"],
+        why: "Diversity is a financial safety net as much as an ecological one." }
+    ]
+  },
+  {
+    name: "Name the approach",
+    blurb: "Legislative, community-based or market-based",
+    qs: [
+      { q: "The EU passes a law banning the sale of beef that cannot be shown to be deforestation-free.",
+        a: "Legislative",
+        d: ["Market-based", "Community-based", "Not a management response"],
+        why: "A parliament wrote it and it is enforceable, so the main lever is legislative. It works through the market, which makes it a hybrid." },
+      { q: "A supermarket chain drops any supplier who cannot trace beef back to the farm.",
+        a: "Market-based",
+        d: ["Legislative", "Community-based", "Not a management response"],
+        why: "A shop is not a parliament. It has no legal power, only the power to stop buying." },
+      { q: "Soy traders agree among themselves not to buy from land cleared after 2006.",
+        a: "Market-based",
+        d: ["Legislative", "Community-based", "Not a management response"],
+        why: "The Soy Moratorium. Buyers acting together, with no law behind them." },
+      { q: "Brazil formally demarcates an Indigenous territory so outsiders cannot legally clear it.",
+        a: "Legislative",
+        d: ["Market-based", "Community-based", "Not a management response"],
+        why: "Legal recognition, with community management operating inside it. Another hybrid worth naming." },
+      { q: "A cooperative of family farmers converts its degraded pasture into cacao agroforestry.",
+        a: "Community-based",
+        d: ["Legislative", "Market-based", "Not a management response"],
+        why: "People who live and work on the land changing how they use it, voluntarily." },
+      { q: "Par&aacute; issues a state decree requiring every animal to carry an electronic ear tag.",
+        a: "Legislative",
+        d: ["Market-based", "Community-based", "Not a management response"],
+        why: "A state government rule, driven by market pressure from supermarkets. Name the law first, then the second lever." },
+      { q: "A certification label lets shoppers pay a little more for deforestation-free chocolate.",
+        a: "Market-based",
+        d: ["Legislative", "Community-based", "Not a management response"],
+        why: "The whole mechanism is price. It only works if enough shoppers actually pay the premium." },
+      { q: "Villagers run a seedling nursery and train young people in agroforestry management.",
+        a: "Community-based",
+        d: ["Legislative", "Market-based", "Not a management response"],
+        why: "Local, voluntary, small in scale and slow to grow, which is the standard weak spot for this approach." },
+      { q: "An inspector issues a fine to a rancher for clearing inside a protected area.",
+        a: "Legislative",
+        d: ["Market-based", "Community-based", "Not a management response"],
+        why: "A penalty enforced by the state. This is the enforcement half that a moratorium does not have." },
+      { q: "A stretch of rainforest is cleared and burnt to create new cattle pasture.",
+        a: "Not a management response",
+        d: ["Legislative", "Market-based", "Community-based"],
+        why: "That is a cause of environmental change, not a response to it. Do not confuse the two on Friday week." }
+    ]
+  },
+  {
+    name: "Figure file",
+    blurb: "Numbers you can quote",
+    qs: [
+      { q: "About what share of the original Amazon biome has already been cleared?",
+        a: "About 13 per cent",
+        d: ["About 3 per cent", "About 35 per cent", "About 55 per cent"],
+        why: "Roughly 13.2 per cent overall, and about 31 per cent in the east where clearing started earliest." },
+      { q: "Between 1985 and 2020, what share of Amazon deforestation happened OUTSIDE Indigenous lands?",
+        a: "90 per cent",
+        d: ["45 per cent", "62 per cent", "99 per cent"],
+        why: "The single best figure in this lesson. Pair it with the 1.2 per cent below." },
+      { q: "How much native vegetation was lost INSIDE Indigenous lands over that same 35 years?",
+        a: "1.2 per cent",
+        d: ["12 per cent", "24 per cent", "None at all"],
+        why: "Not zero, but tiny. Quote both numbers together and the comparison does the arguing for you." },
+      { q: "Compared with land outside them, how much lower is the forest loss rate inside protected areas and Indigenous territories?",
+        a: "About 3 times lower",
+        d: ["About 1.2 times lower", "About 10 times lower", "The same"],
+        why: "Measured across all nine Amazon countries from 2017 to 2021." },
+      { q: "What share of Brazil's roughly 160 million hectares of pasture is already degraded?",
+        a: "About 63 per cent",
+        d: ["About 15 per cent", "About 35 per cent", "About 90 per cent"],
+        why: "That degraded land is exactly what agroforestry is meant to use, instead of clearing new forest." },
+      { q: "How many cattle were to be tagged under Par&aacute;'s traceability scheme?",
+        a: "About 24 million",
+        d: ["About 240,000", "About 2 million", "About 240 million"],
+        why: "One state, more cattle than there are people in Australia." },
+      { q: "Under the EU deforestation law, land cleared after which date disqualifies a product?",
+        a: "31 December 2020",
+        d: ["31 December 2015", "30 December 2026", "1 January 2024"],
+        why: "The cut-off is 2020. The 2026 date is when enforcement finally starts, which is a different thing." },
+      { q: "What minimum share of Tropical Forest Forever Facility payments is guaranteed to Indigenous peoples and local communities?",
+        a: "At least 20 per cent",
+        d: ["At least 5 per cent", "At least 50 per cent", "There is no guarantee"],
+        why: "Launched at the Bel&eacute;m climate summit in November 2025 with more than US$5.5 billion pledged." }
+    ]
+  },
+  {
+    name: "Which test does it fail?",
+    blurb: "Changes what pays, enforcement, or who carries the cost",
+    qs: [
+      { q: "The Soy Moratorium was voluntary, and once the regulator moved, traders simply stopped honouring it.",
+        a: "Is anyone enforcing it?",
+        d: ["Does it change what pays?", "Who carries the cost?", "It does not fail any of the three"],
+        why: "Nobody could be fined or sued for walking away. That is the difference between a promise and a law." },
+      { q: "Ranchers were told to buy ear tags and readers, while overseas buyers paid nothing extra for traceable beef.",
+        a: "Who carries the cost?",
+        d: ["Does it change what pays?", "Is anyone enforcing it?", "It does not fail any of the three"],
+        why: "The governor said this outright when he postponed the scheme. Cost down, benefit somewhere else." },
+      { q: "For most ranchers, clearing another patch of forest for cattle is still the most profitable thing they can do.",
+        a: "Does it change what pays?",
+        d: ["Is anyone enforcing it?", "Who carries the cost?", "It does not fail any of the three"],
+        why: "If the response is fighting the money and does not change it, the money usually wins." },
+      { q: "A smallholder must wait about five years before agroforestry trees produce income, and cannot get credit to bridge the gap.",
+        a: "Who carries the cost?",
+        d: ["Does it change what pays?", "Is anyone enforcing it?", "It does not fail any of the three"],
+        why: "Agroforestry pays well eventually. The poorest link in the chain is the one asked to wait." },
+      { q: "A territory is demarcated on the map, but nobody patrols it and illegal miners move in anyway.",
+        a: "Is anyone enforcing it?",
+        d: ["Does it change what pays?", "Who carries the cost?", "It does not fail any of the three"],
+        why: "Deforestation inside Brazilian Indigenous territories rose 129 per cent between 2013 and 2021, mostly this way." },
+      { q: "The EU rule is written into law, applies to the world's largest importer of soy and cocoa, and requires GPS proof of the exact plot.",
+        a: "It does not fail any of the three",
+        d: ["Does it change what pays?", "Is anyone enforcing it?", "Who carries the cost?"],
+        why: "On paper it passes all three. Its real weak spot is different: the start date keeps moving." },
+      { q: "A deforestation-free label exists, but shoppers will not pay any more for the certified product.",
+        a: "Does it change what pays?",
+        d: ["Is anyone enforcing it?", "Who carries the cost?", "It does not fail any of the three"],
+        why: "A market-based scheme with no price signal is just a sticker." },
+      { q: "Soy farmers blocked by the moratorium cleared the land for cattle instead, so the forest still came down.",
+        a: "Does it change what pays?",
+        d: ["Is anyone enforcing it?", "Who carries the cost?", "It does not fail any of the three"],
+        why: "Clearing still paid, just through a different door. Closing one use without closing the others moves the damage rather than stopping it." },
+      { q: "Cacao agroforestry out-earns degraded cattle pasture per hectare, and uses land that is already cleared.",
+        a: "It does not fail any of the three",
+        d: ["Does it change what pays?", "Is anyone enforcing it?", "Who carries the cost?"],
+        why: "This is why agroforestry is promising. Its problem is scale, not design: 18,000 hectares against 30 million needing restoration." },
+      { q: "A rule bans clearing, but there is no traceability, so no buyer can tell which beef came from land that broke it.",
+        a: "Is anyone enforcing it?",
+        d: ["Does it change what pays?", "Who carries the cost?", "It does not fail any of the three"],
+        why: "You cannot enforce a rule you cannot check. Traceability is what turns a rule into a working rule." }
+    ]
   }
+];
+
+const BADGES = [
+  { id:"seedling", label:"Seedling",   test:s=>s.correct>=1 },
+  { id:"layered",  label:"Layered",    test:s=>s.best>=5 },
+  { id:"canopy",   label:"Canopy",     test:s=>s.best>=10 },
+  { id:"receipts", label:"Receipts",   test:s=>s.roundPerfect[2]===true },
+  { id:"auditor",  label:"Auditor",    test:s=>s.roundPerfect[3]===true },
+  { id:"fullcov",  label:"Full cover", test:s=>s.correct>=34 }
+];
+
+const TOTAL = ROUNDS.reduce((n,r)=>n+r.qs.length,0);
+const TARGET_HA = 18000;
+
+/* ------------------------------------------------------------------ STATE */
+const state = {
+  r:0, i:0, correct:0, streak:0, best:0, points:0,
+  answered:false, misses:[], roundWrong:[0,0,0,0], roundPerfect:[null,null,null,null],
+  won:new Set()
+};
+
+/* ------------------------------------------------------------------ UTIL */
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+function el(id){ return document.getElementById(id); }
+
+/* ------------------------------------------------------------------ RENDER */
+function renderRounds(){
+  el("roundbar").innerHTML = ROUNDS.map((r,ix)=>{
+    const cls = ix===state.r ? "rtab on" : (ix<state.r ? "rtab done" : "rtab");
+    return `<div class="${cls}"><b>Round ${ix+1}</b>${r.name}</div>`;
+  }).join("");
 }
 
-function stats(){
-  $('sRound').textContent=ri+1;
-  $('sQ').textContent=qi+1;
-  $('sScore').textContent=score;
-  $('sStreak').textContent=streak;
-}
-
-function question(){
-  const R=CFG.rounds[ri], item=R.q[qi];
-  const rawOpts = item[1] ? item[1] : R.opts;
-  const correctText = rawOpts[item[2]];
-  const opts = shuffle(rawOpts);
-  answered=false;
-  stats(); drawGauge();
-
-  $('stage').innerHTML =
-    '<div class="round">Round '+(ri+1)+' &middot; '+R.name+'</div>'+
-    '<div class="prompt">'+item[0]+'</div>'+
-    '<div class="opts" id="opts"></div>'+
-    '<div class="fb" id="fb"></div>'+
-    '<div class="hint noprint">Tap an answer, or press '+LETTERS.slice(0,opts.length).join(', ')+' on a keyboard.</div>';
-
-  opts.forEach((o,i)=>{
-    const b=document.createElement('button');
-    b.className='opt'; b.dataset.i=i;
-    b.innerHTML='<span class="key">'+LETTERS[i]+'</span><span>'+o+'</span>';
-    b.onclick=()=>choose(i,o,correctText,item[3],opts);
-    $('opts').appendChild(b);
+function renderMeter(){
+  const pct = state.correct / TOTAL;
+  const ha = Math.round(pct * TARGET_HA);
+  el("ha").textContent = ha.toLocaleString("en-AU");
+  el("pScore").textContent = state.points;
+  el("pStreak").textContent = state.streak;
+  el("pBest").textContent = state.best;
+  // four bands fill in sequence, bottom (ground) first
+  const bands = document.querySelectorAll("#stack .band span");
+  const order = [3,2,1,0]; // ground, shrub, mid, canopy
+  order.forEach((bandIndex, step)=>{
+    const lo = step*0.25, hi = lo+0.25;
+    let w = 0;
+    if(pct >= hi) w = 100;
+    else if(pct > lo) w = ((pct-lo)/0.25)*100;
+    bands[bandIndex].style.width = w.toFixed(1)+"%";
   });
 }
 
-function choose(i,picked,correctText,why,opts){
-  if(answered) return;
-  answered=true;
-  const right = picked===correctText;
-  const btns=[...document.querySelectorAll('.opt')];
-  btns.forEach((b,j)=>{
-    b.disabled=true;
-    if(opts[j]===correctText) b.classList.add('right');
-    else if(j===i) b.classList.add('wrong');
+function renderBadges(){
+  el("badges").innerHTML = BADGES.map(b=>{
+    const won = state.won.has(b.id);
+    return `<span class="badge ${won?"won":""}"><span class="dot"></span>${b.label}</span>`;
+  }).join("");
+}
+
+function checkBadges(){
+  BADGES.forEach(b=>{ if(!state.won.has(b.id) && b.test(state)) state.won.add(b.id); });
+  renderBadges();
+}
+
+let currentOpts = [];
+
+function renderQuestion(){
+  const round = ROUNDS[state.r];
+  const q = round.qs[state.i];
+  state.answered = false;
+  currentOpts = shuffle([q.a, ...q.d]);
+  const letters = ["A","B","C","D"];
+  const done = ROUNDS.slice(0,state.r).reduce((n,r)=>n+r.qs.length,0) + state.i;
+
+  el("card").innerHTML = `
+    <div class="qhead">
+      <span class="qnum">Question ${done+1} of ${TOTAL}</span>
+      <span class="qtag">Round ${state.r+1}: ${round.name}</span>
+    </div>
+    <p class="qtext">${q.q}</p>
+    <div class="opts" id="opts">
+      ${currentOpts.map((o,ix)=>`
+        <button class="opt" data-ix="${ix}">
+          <span class="key">${letters[ix]}</span><span>${o}</span>
+        </button>`).join("")}
+    </div>
+    <div id="fb"></div>
+    <div class="foot">
+      <span class="hint">Press A, B, C or D, or tap an answer.</span>
+      <span id="nextwrap"></span>
+    </div>`;
+
+  document.querySelectorAll(".opt").forEach(btn=>{
+    btn.addEventListener("click", ()=>answer(parseInt(btn.dataset.ix,10)));
+  });
+  renderMeter();
+}
+
+function answer(ix){
+  if(state.answered) return;
+  state.answered = true;
+  const q = ROUNDS[state.r].qs[state.i];
+  const chosen = currentOpts[ix];
+  const right = chosen === q.a;
+  const btns = document.querySelectorAll(".opt");
+
+  btns.forEach((b,bi)=>{
+    b.disabled = true;
+    if(currentOpts[bi] === q.a) b.classList.add("right");
+    else if(bi === ix) b.classList.add("wrong");
   });
 
   if(right){
-    streak++; best=Math.max(best,streak);
-    const bonus = streak>=5 ? 20 : streak>=3 ? 15 : 10;
-    score+=bonus;
-    if(CFG.gauge==='cover') gauge=Math.min(CFG.gaugeStart, gauge+0.4);
-    else gauge+=CFG.gaugeTarget/total();
-    if(streak>=5) won['Streak of five']=true;
-    $('fb').className='fb ok show';
-    $('fb').innerHTML='<b>Correct. +'+bonus+(streak>=3?' (streak bonus)':'')+'</b>'+why;
-  }else{
-    streak=0; roundErrors++;
-    if(CFG.gauge==='cover') gauge=Math.max(0,gauge-1.2);
-    misses.push({q:CFG.rounds[ri].q[qi][0], a:correctText, why:why});
-    $('fb').className='fb no show';
-    $('fb').innerHTML='<b>Not this time. The answer is: '+correctText+'</b>'+why;
+    state.correct++;
+    state.streak++;
+    state.best = Math.max(state.best, state.streak);
+    const bonus = state.streak >= 5 ? 2 : 1;   // streak doubling from 5
+    state.points += 10 * bonus;
+    el("fb").innerHTML = `<div class="feedback"><b>Correct${bonus>1?" &middot; streak doubled":""}</b>${q.why}</div>`;
+  } else {
+    state.streak = 0;
+    state.roundWrong[state.r]++;
+    state.misses.push({ q:q.q, right:q.a, yours:chosen, why:q.why });
+    el("fb").innerHTML = `<div class="feedback no"><b>Not this time</b>${q.why}</div>`;
   }
 
-  const b=document.createElement('button');
-  b.className='go'; b.textContent='Next';
-  b.onclick=next;
-  $('fb').appendChild(b);
-  stats(); drawGauge();
+  checkBadges();
+  renderMeter();
+
+  const last = (state.r === ROUNDS.length-1) && (state.i === ROUNDS[state.r].qs.length-1);
+  el("nextwrap").innerHTML = `<button class="go" id="next">${last ? "See results" : "Next"}</button>`;
+  el("next").addEventListener("click", next);
+  el("next").focus();
 }
 
 function next(){
-  qi++;
-  if(qi<CFG.rounds[ri].q.length){ question(); return; }
-  if(roundErrors===0) won['Clean sweep']=true;
-  won[CFG.badges[Math.min(ri,2)][0]]=true;
-  roundEnd();
-}
-
-function roundEnd(){
-  const last = ri===CFG.rounds.length-1;
-  if(last){ won['Full survey']=true; if(CFG.gauge==='cover'&&gauge>=CFG.gaugeFloor) won['Above the line']=true; }
-  $('stage').innerHTML=
-    '<div class="round">Round '+(ri+1)+' complete</div>'+
-    '<div class="big">'+score+'</div>'+
-    '<p style="color:var(--grey);margin-top:6px">'+
-      (roundErrors===0?'Clean sweep. No mistakes at all.':roundErrors+' to review at the end.')+'</p>'+
-    '<button class="go" id="nx">'+(last?'See your results':'Start Round '+(ri+2)+': '+CFG.rounds[ri+1].name)+'</button>'+
-    (last?'':'<p class="hint">'+CFG.rounds[ri+1].blurb+'</p>');
-  $('nx').onclick=()=>{ if(last){results();} else {ri++;qi=0;roundErrors=0;question();} };
+  const round = ROUNDS[state.r];
+  if(state.i < round.qs.length-1){
+    state.i++;
+    renderQuestion();
+    return;
+  }
+  state.roundPerfect[state.r] = (state.roundWrong[state.r] === 0);
+  checkBadges();
+  if(state.r < ROUNDS.length-1){
+    state.r++; state.i = 0;
+    renderRounds();
+    renderQuestion();
+  } else {
+    results();
+  }
 }
 
 function results(){
-  const t=total(), max=t*10;
-  let html='<div class="round">Finished</div><div class="big">'+score+'</div>'+
-    '<p style="color:var(--grey);margin-top:6px">'+(t-misses.length)+' of '+t+
-    ' correct. Longest streak: '+best+'. Base score out of '+max+', streak bonuses on top.</p>';
+  renderRounds();
+  const pct = Math.round(state.correct/TOTAL*100);
+  const ha = Math.round(state.correct/TOTAL*TARGET_HA);
+  let verdict;
+  if(pct>=90) verdict = "You can argue this unit with evidence. Take that into the assessment.";
+  else if(pct>=75) verdict = "Solid. Check the misses below, they are the marks you are leaving behind.";
+  else if(pct>=55) verdict = "The ideas are there, the figures are not yet. Go back over the numbers.";
+  else verdict = "Worth another run. Re-read the three tests and the case files first.";
 
-  html+='<h3 style="margin:22px 0 4px;font-size:17px">Badges</h3><div class="badges">';
-  CFG.badges.forEach(b=>{
-    html+='<div class="badge'+(won[b[0]]?' won':'')+'"><b>'+b[0]+'</b>'+b[1]+'</div>';
+  const missHtml = state.misses.length
+    ? state.misses.map(m=>`
+        <div class="miss">
+          <span class="q">${m.q}</span>
+          <span class="y">You chose: ${m.yours}</span><br>
+          <span class="a">Correct: ${m.right}</span><br>
+          <span>${m.why}</span>
+        </div>`).join("")
+    : `<p style="color:#1E5C3B">Nothing missed. Nothing to review.</p>`;
+
+  el("card").innerHTML = `
+    <div class="result">
+      <h2>${state.correct} out of ${TOTAL}</h2>
+      <div class="scoreline">${pct}% &middot; ${state.points} points &middot; best streak ${state.best} &middot; ${ha.toLocaleString("en-AU")} ha restored</div>
+      <p style="margin:0 0 4px;color:#33473D">${verdict}</p>
+
+      <div class="review">
+        <h3>Review: what you missed</h3>
+        ${missHtml}
+      </div>
+
+      <div class="cert">
+        <h3>The Fix List</h3>
+        <div style="font-size:.9rem;color:#4A5C52">Lesson 38 &middot; Sustainable agriculture and management responses &middot; Year 10 Geography</div>
+        <div class="name">&nbsp;</div>
+        <div style="font-size:.8rem;color:#6A7A70">Name</div>
+        <div class="row">
+          <span>Score: <b>${state.correct}/${TOTAL}</b> (${pct}%)</span>
+          <span>Best streak: <b>${state.best}</b></span>
+          <span>Badges: <b>${state.won.size}/${BADGES.length}</b></span>
+          <span>Date: <b>${new Date().toLocaleDateString("en-AU")}</b></span>
+        </div>
+      </div>
+
+      <div class="foot noprint">
+        <button class="ghost" id="again">Run it again</button>
+        <button class="go" id="print">Print certificate</button>
+      </div>
+    </div>`;
+
+  el("again").addEventListener("click", ()=>{
+    state.r=0; state.i=0; state.correct=0; state.streak=0; state.best=0; state.points=0;
+    state.misses=[]; state.roundWrong=[0,0,0,0]; state.roundPerfect=[null,null,null,null];
+    state.won=new Set();
+    renderRounds(); renderBadges(); renderQuestion();
+    window.scrollTo({top:0,behavior:"smooth"});
   });
-  html+='</div>';
-
-  if(misses.length){
-    html+='<h3 style="margin:22px 0 8px;font-size:17px">Worth another look</h3>';
-    misses.forEach(m=>{
-      html+='<div class="miss"><div class="qq">'+m.q+'</div><div class="aa">'+m.a+' &mdash; '+m.why+'</div></div>';
-    });
-  }else{
-    html+='<p style="margin-top:20px;color:var(--good);font-weight:700">Nothing to review. Every single one correct.</p>';
-  }
-
-  html+='<div class="noprint"><button class="go" id="pr">Print certificate</button>'+
-        '<button class="go ghost" id="rs" style="margin-left:8px">Play again</button></div>';
-  $('stage').innerHTML=html;
-
-  $('pr').onclick=()=>{
-    $('cert').innerHTML=
-      '<h1 style="font-size:30px">'+CFG.title+'</h1>'+
-      '<p style="color:#5A6660;margin-bottom:20px">'+CFG.subtitle+'</p>'+
-      '<p style="font-size:16px">This certifies that</p>'+
-      '<p style="border-bottom:1px solid #999;width:70%;margin:22px auto;height:34px"></p>'+
-      '<p style="font-size:16px">scored</p>'+
-      '<p style="font-size:52px;font-weight:800;color:'+CFG.accent+'">'+score+'</p>'+
-      '<p style="font-size:15px">'+(t-misses.length)+' of '+t+' correct, longest streak '+best+'</p>'+
-      '<p style="margin-top:26px;font-size:13px;color:#5A6660">Year 10 Geography &middot; Environmental Change and Management</p>';
-    $('cert').style.display='block';
-    window.print();
-    setTimeout(()=>{$('cert').style.display='none';},400);
-  };
-  $('rs').onclick=()=>location.reload();
+  el("print").addEventListener("click", ()=>window.print());
+  renderMeter();
 }
 
-document.addEventListener('keydown',e=>{
-  if(answered) return;
-  const k=LETTERS.indexOf(e.key.toUpperCase());
-  if(k>-1){ const b=document.querySelectorAll('.opt')[k]; if(b) b.click(); }
+/* ------------------------------------------------------------------ KEYS */
+document.addEventListener("keydown", e=>{
+  const k = e.key.toUpperCase();
+  if(["A","B","C","D"].includes(k) && !state.answered && document.querySelector(".opt")){
+    const ix = "ABCD".indexOf(k);
+    if(ix < currentOpts.length) answer(ix);
+  } else if((e.key === "Enter" || e.key === " ") && state.answered && el("next")){
+    e.preventDefault();
+    el("next").click();
+  }
 });
 
-// intro
-$('stage').innerHTML=
-  '<div class="round">Before you start</div>'+
-  '<div class="prompt">'+CFG.rounds.length+' rounds, '+total()+' questions.</div>'+
-  '<p style="color:var(--grey)">Answers are shuffled every time, so learn the content, not the position. '+
-  'Three in a row is worth 15, five in a row is worth 20. Everything you get wrong is saved for review at the end.</p>'+
-  '<button class="go" id="st">Start Round 1: '+CFG.rounds[0].name+'</button>'+
-  '<p class="hint">'+CFG.rounds[0].blurb+'</p>';
-$('st').onclick=question;
-drawGauge();
+/* ------------------------------------------------------------------ INIT */
+renderRounds();
+renderBadges();
+renderQuestion();
 </script>
 </body>
 </html>
