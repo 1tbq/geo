@@ -1,192 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-AU">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Two Nations Field Desk</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who Helps? | L7 Year 10 Geography</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-/* Layout: a field desk. Live HDI scoreboard for both nations across the top, task panel left, field notebook right; stacks on phones. */
-:root {
-  --bg: #F3EFE8;
-  --panel: #FFFFFF;
-  --ink: #1D2430;
-  --muted: #5F6672;
-  --line: #DCD6CC;
-  --soft: #F6F3EE;
-  --aus: #B5531A;
-  --aus-soft: #F8E6DA;
-  --ind: #1F6F8B;
-  --ind-soft: #DDEEF3;
-  --good: #227A4E;
-  --good-soft: #E1F1E7;
-  --bad: #B83A3A;
-  --bad-soft: #F7E1E1;
-  --hi: #F2C14E;
-  --on: #FFFFFF;
-  --shadow: 0 2px 10px rgba(29,36,48,.09);
-  --f-display: "Archivo", "Arial Black", system-ui, sans-serif;
-  --f-body: "Atkinson Hyperlegible", Calibri, system-ui, sans-serif;
-  --f-mono: "IBM Plex Mono", "Courier New", ui-monospace, monospace;
+:root{
+  --ink:#1E2340; --gov:#2E4A7D; --ngo:#C9741A; --intl:#1F7A72; --rose:#B4453F;
+  --grey:#5B6170; --light:#F2F4F8; --copy:#FFF3B0; --gold:#D9A400; --white:#fff;
+  --ok:#1F7A72; --bad:#B4453F;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #12161D; --panel: #1B212B; --ink: #ECE8E1; --muted: #A7ADB8; --line: #313A48; --soft: #222A36;
-    --aus: #EE8A4C; --aus-soft: #3A2619; --ind: #5FB4D2; --ind-soft: #172F39;
-    --good: #5CC48E; --good-soft: #17332A; --bad: #EE7B7B; --bad-soft: #3A1E22; --hi: #F2C14E; --on: #12161D;
-    --shadow: 0 2px 12px rgba(0,0,0,.4); color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #12161D; --panel: #1B212B; --ink: #ECE8E1; --muted: #A7ADB8; --line: #313A48; --soft: #222A36;
-  --aus: #EE8A4C; --aus-soft: #3A2619; --ind: #5FB4D2; --ind-soft: #172F39;
-  --good: #5CC48E; --good-soft: #17332A; --bad: #EE7B7B; --bad-soft: #3A1E22; --hi: #F2C14E; --on: #12161D;
-  --shadow: 0 2px 12px rgba(0,0,0,.4); color-scheme: dark;
-}
-* { box-sizing: border-box; }
-html, body { margin: 0; }
-body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.5; }
-.wrap { max-width: 1120px; margin: 0 auto; padding-block: 20px 40px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.12; }
-button { font: inherit; cursor: pointer; }
-button:focus-visible, input:focus-visible { outline: 3px solid var(--ind); outline-offset: 2px; }
-
-/* top */
-.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 20px; margin-bottom: 14px; }
-.kicker { font-family: var(--f-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-.top h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; }
-.stats { display: flex; gap: 8px; flex-wrap: wrap; }
-.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 6px 12px; min-width: 88px; }
-.stat .k { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.stat .v { font-family: var(--f-mono); font-weight: 600; font-size: 20px; font-variant-numeric: tabular-nums; }
-.stat.hot { border-color: var(--aus); } .stat.hot .v { color: var(--aus); }
-
-/* HDI scoreboard */
-.board { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px; margin-bottom: 18px; box-shadow: var(--shadow); }
-.scale { position: relative; height: 16px; margin: 4px 0 2px; }
-.band { position: absolute; top: 0; bottom: 0; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; border-left: 1px dashed var(--line); padding-left: 4px; white-space: nowrap; overflow: hidden; }
-.track { position: relative; height: 34px; background: var(--soft); border-radius: 8px; margin: 6px 0; }
-.track .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 8px; transition: width .35s ease; }
-.track .tname { position: absolute; left: 10px; top: 0; bottom: 0; display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--on); font-size: 14px; white-space: nowrap; }
-.track .val { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; font-family: var(--f-mono); font-weight: 600; font-size: 15px; padding-left: 8px; transition: left .35s ease; white-space: nowrap; }
-.track.aus .fill { background: var(--aus); } .track.ind .fill { background: var(--ind); }
-.track .ghost { position: absolute; top: -3px; bottom: -3px; width: 3px; background: var(--ink); opacity: .35; border-radius: 2px; }
-.src { font-size: 12px; color: var(--muted); margin-top: 4px; }
-
-.grid { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 18px; align-items: start; }
-@media (max-width: 840px) { .grid { grid-template-columns: minmax(0, 1fr); } }
-.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: 24px; min-width: 0; }
-@media (max-width: 520px) { .panel { padding: 18px; } }
-
-.rounds { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-.rchip { font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: var(--soft); color: var(--muted); }
-.rchip.on { background: var(--ink); color: var(--panel); }
-.rchip.done { background: var(--good-soft); color: var(--good); }
-.progress { height: 6px; background: var(--soft); border-radius: 99px; overflow: hidden; margin-bottom: 18px; }
-.progress span { display: block; height: 100%; background: var(--ind); transition: width .3s; }
-.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ind); margin-bottom: 6px; }
-.prompt { font-size: clamp(21px, 3vw, 28px); font-weight: 800; margin-bottom: 8px; }
-.sub { color: var(--muted); margin: 0 0 16px; }
-
-.fact { background: var(--soft); border-radius: 14px; padding: 20px; font-size: 21px; font-weight: 700; margin-bottom: 16px; display: flex; gap: 14px; align-items: center; }
-.fact .pin { font-size: 28px; flex: none; }
-
-.choices { display: grid; gap: 10px; }
-.choices.two { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-.choices.four { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-@media (max-width: 540px) { .choices.four { grid-template-columns: minmax(0, 1fr); } .choice.big { font-size: 19px; padding: 16px 10px; } .choice.big .key { display: none; } }
-.choice { display: flex; align-items: center; gap: 12px; text-align: left; border: 2px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 14px; padding: 13px 15px; font-weight: 700; transition: transform .1s, border-color .15s; }
-.choice:hover:not(:disabled) { border-color: var(--ink); transform: translateY(-1px); }
-.choice .key { font-family: var(--f-mono); font-size: 13px; width: 28px; height: 28px; border-radius: 8px; background: var(--soft); color: var(--ink); display: grid; place-items: center; flex: none; }
-.choice.big { justify-content: center; font-family: var(--f-display); font-size: 22px; padding: 18px; }
-.choice.a { border-color: var(--aus); color: var(--aus); }
-.choice.b { border-color: var(--ind); color: var(--ind); }
-.choice.correct { background: var(--good); border-color: var(--good); color: var(--on); }
-.choice.wrong { background: var(--bad); border-color: var(--bad); color: var(--on); }
-.choice.dim { opacity: .45; }
-.choice:disabled { cursor: default; }
-
-.feedback { margin-top: 16px; border-radius: 14px; padding: 14px 16px; display: grid; gap: 4px; }
-.feedback.good { background: var(--good-soft); } .feedback.bad { background: var(--bad-soft); }
-.feedback strong { font-family: var(--f-display); font-size: 18px; }
-.feedback.good strong { color: var(--good); } .feedback.bad strong { color: var(--bad); }
-.row-end { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-.btn { border: 0; border-radius: 12px; padding: 12px 20px; font-weight: 700; background: var(--ink); color: var(--panel); }
-.btn.alt { background: var(--soft); color: var(--ink); }
-.btn.go { background: var(--good); color: var(--on); }
-.btn:disabled { opacity: .4; cursor: default; }
-
-/* lab */
-.lab { border: 2px solid var(--ind); border-radius: 16px; padding: 16px; margin-bottom: 16px; background: var(--ind-soft); }
-.lab-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; }
-.lab-head h3 { font-size: 17px; color: var(--ind); }
-.readout { font-family: var(--f-mono); font-size: 30px; font-weight: 600; color: var(--ind); line-height: 1; }
-.readout small { font-family: var(--f-body); font-size: 13px; color: var(--muted); display: block; text-align: right; font-weight: 700; }
-.slider { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 10px 0; border-top: 1px solid var(--line); }
-.slider label { font-weight: 700; font-size: 15px; }
-.slider .num { font-family: var(--f-mono); font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
-.slider input { grid-column: 1 / -1; width: 100%; accent-color: var(--ind); }
-.slider .ref { grid-column: 1 / -1; font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
-.slider .ref b { color: var(--aus); }
-.pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
-.pill { background: var(--panel); border-radius: 10px; padding: 8px 10px; }
-.pill .k { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-.pill .v { font-family: var(--f-mono); font-weight: 600; }
-.pill .bar { height: 5px; background: var(--soft); border-radius: 9px; margin-top: 4px; overflow: hidden; }
-.pill .bar span { display: block; height: 100%; background: var(--ind); }
-.fixed { font-size: 12px; color: var(--muted); margin-top: 8px; }
-
-/* order */
-.order-list { display: grid; gap: 8px; }
-.order-item { display: flex; align-items: center; gap: 12px; border: 2px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 14px; padding: 12px 14px; font-weight: 700; text-align: left; }
-.order-item .slot { width: 30px; height: 30px; border-radius: 50%; border: 2px dashed var(--line); display: grid; place-items: center; font-family: var(--f-mono); flex: none; }
-.order-item.set .slot { border: 0; background: var(--ind); color: var(--on); }
-
-/* notebook */
-.notebook { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 16px; box-shadow: var(--shadow); min-width: 0;
-}
-.notebook h3 { font-size: 15px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 4px; }
-.notebook .meta { font-family: var(--f-mono); font-size: 11px; color: var(--muted); margin-bottom: 8px; }
-.notes { max-height: 320px; overflow-y: auto; font-size: 14px; }
-.notes .ln { border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; gap: 6px; line-height: 28px; }
-.notes .ln span:nth-child(2) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.notes .ok span:first-child, .notes .ok span:last-child { color: var(--good); font-weight: 700; }
-.notes .no span:first-child, .notes .no span:last-child { color: var(--bad); font-weight: 700; }
-.notes .empty { color: var(--muted); line-height: 28px; }
-.stamps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-.stamp { font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; border: 2px dashed var(--line); color: var(--muted); border-radius: 8px; padding: 4px 8px; background: var(--panel); }
-.stamp.got { border: 2px solid var(--aus); color: var(--aus); transform: rotate(-2deg); }
-
-/* start/end */
-.two-col { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
-@media (max-width: 720px) { .two-col { grid-template-columns: minmax(0, 1fr); } }
-.rcard { background: var(--soft); border-radius: 12px; padding: 12px 14px; display: flex; gap: 12px; align-items: center; }
-.rcard .n { font-family: var(--f-mono); font-weight: 600; background: var(--ink); color: var(--panel); border-radius: 8px; width: 30px; height: 30px; display: grid; place-items: center; flex: none; }
-.rcard small { display: block; color: var(--muted); }
-.rlist { display: grid; gap: 8px; }
-.how { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
-.how b { font-family: var(--f-mono); color: var(--good); display: inline-block; min-width: 56px; }
-label.name { display: block; font-weight: 700; margin: 16px 0 6px; }
-input[type=text] { width: 100%; font: inherit; padding: 12px 14px; border-radius: 12px; border: 2px solid var(--line); background: var(--panel); color: var(--ink); }
-.cert { border: 3px double var(--ink); border-radius: 16px; padding: 24px; text-align: center; background: var(--soft); margin-bottom: 18px; }
-.cert h2 { font-size: clamp(26px, 4vw, 36px); margin: 6px 0; }
-.cert .who { font-family: var(--f-display); font-size: 26px; font-weight: 800; color: var(--ind); overflow-wrap: anywhere; }
-.cert .nums { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 28px; margin-top: 12px; font-family: var(--f-mono); }
-.cert .nums b { display: block; font-size: 24px; }
-.review { display: grid; gap: 8px; }
-.review .mi { background: var(--bad-soft); border-radius: 12px; padding: 10px 14px; }
-.review .mi small { display: block; color: var(--muted); }
-.allgood { background: var(--good-soft); color: var(--good); border-radius: 12px; padding: 12px 14px; font-weight: 700; }
-.write { background: var(--ind-soft); border-radius: 12px; padding: 14px 16px; margin-top: 16px; }
-.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%) translateY(20px); background: var(--ink); color: var(--panel); padding: 10px 16px; border-radius: 12px; font-weight: 700; opacity: 0; transition: .25s; pointer-events: none; max-width: calc(100% - 32px); text-align: center; }
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
-@media print {
-  body * { visibility: hidden; }
-  #cert, #cert * { visibility: visible; }
-  #cert { position: absolute; left: 0; top: 0; width: 100%; }
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Lexend,Calibri,Arial,sans-serif;background:var(--light);color:var(--ink);line-height:1.45}
+button{font-family:inherit}
+.wrap{max-width:980px;margin:0 auto;padding:16px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+header.top h1{font-size:1.5rem;margin:0;font-weight:800}
+header.top .sub{color:var(--grey);font-size:.9rem}
+.grid{display:grid;grid-template-columns:300px 1fr;gap:16px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--white);border-radius:16px;padding:18px;box-shadow:0 2px 10px rgba(30,35,64,.08)}
+/* Village meter */
+.meter h2{font-size:1rem;margin:0 0 6px}
+.hdi{font-size:2.6rem;font-weight:800;line-height:1;margin:4px 0}
+.cat{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.8rem;font-weight:600;color:#fff;background:var(--rose)}
+.bar{position:relative;height:14px;background:#E4E7EE;border-radius:999px;margin:12px 0 4px;overflow:hidden}
+.bar .fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--rose),var(--ngo),var(--intl));border-radius:999px;transition:width .5s}
+.bar .tick{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.5}
+.scale{display:flex;justify-content:space-between;font-size:.7rem;color:var(--grey)}
+svg.village{width:100%;height:auto;margin-top:10px;border-radius:12px;background:#E9EEF6}
+.v-off{opacity:.12;transition:opacity .6s}
+.v-on{opacity:1}
+.unlocks{font-size:.8rem;color:var(--grey);margin:8px 0 0;padding:0;list-style:none}
+.unlocks li{margin:2px 0}
+.unlocks li.got{color:var(--ink);font-weight:600}
+.stats{display:flex;gap:10px;margin-top:12px;font-size:.85rem}
+.stats div{flex:1;background:var(--light);border-radius:10px;padding:8px;text-align:center}
+.stats b{display:block;font-size:1.2rem}
+/* Game area */
+.roundtag{display:inline-block;font-size:.8rem;font-weight:600;color:#fff;padding:3px 10px;border-radius:999px}
+.progress{height:6px;background:#E4E7EE;border-radius:999px;margin:10px 0 16px;overflow:hidden}
+.progress span{display:block;height:100%;background:var(--gov);transition:width .3s}
+.q{font-size:1.3rem;font-weight:600;margin:6px 0 16px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:10px;align-items:center;text-align:left;padding:14px;border-radius:12px;border:2px solid #DDE1EA;background:#fff;font-size:1rem;cursor:pointer;color:var(--ink);min-height:58px}
+.opt:hover:not(:disabled){border-color:var(--gov);background:#F7F9FD}
+.opt .k{flex:none;width:28px;height:28px;border-radius:50%;background:var(--light);display:grid;place-items:center;font-weight:800;font-size:.85rem}
+.opt.right{border-color:var(--ok);background:#E5F3F1}
+.opt.wrong{border-color:var(--bad);background:#F8E6E5}
+.opt:disabled{cursor:default}
+.fb{margin-top:14px;padding:12px 14px;border-radius:12px;display:none}
+.fb.show{display:block}
+.fb.good{background:#E5F3F1}
+.fb.badfb{background:#F8E6E5}
+.fb b{display:block;margin-bottom:2px}
+.actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{border:none;border-radius:12px;padding:12px 18px;font-weight:600;font-size:1rem;cursor:pointer;background:var(--gov);color:#fff}
+.btn.alt{background:var(--light);color:var(--ink)}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.hidden{display:none!important}
+input.name{width:100%;padding:12px;border-radius:12px;border:2px solid #DDE1EA;font-size:1rem;font-family:inherit;margin:8px 0 14px}
+.intro-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0}
+@media (max-width:560px){.intro-cards{grid-template-columns:1fr}}
+.ic{background:var(--light);border-radius:12px;padding:12px}
+.ic b{display:block}
+.ic small{color:var(--grey)}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.badge{font-size:.75rem;padding:5px 10px;border-radius:999px;background:var(--light);color:var(--grey)}
+.badge.got{background:var(--copy);color:var(--ink);font-weight:600;box-shadow:inset 0 0 0 1.5px var(--gold)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-weight:600;transition:transform .35s;z-index:5}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.streak{font-weight:800;color:var(--ngo)}
+.review{margin-top:12px}
+.review .item{border-left:4px solid var(--rose);background:var(--light);padding:10px 12px;border-radius:0 10px 10px 0;margin:8px 0;font-size:.92rem}
+.review .item .ans{color:var(--ok);font-weight:600}
+/* certificate */
+.cert{display:none;border:6px double var(--gov);border-radius:16px;padding:28px;text-align:center;background:#fff;margin-top:16px}
+.cert h2{font-size:1.7rem;margin:4px 0}
+.cert .big{font-size:2.2rem;font-weight:800;color:var(--gov)}
+@media print{
+  body{background:#fff}
+  body *{visibility:hidden}
+  .cert,.cert *{visibility:visible}
+  .cert{display:block!important;position:absolute;left:0;top:0;width:100%;border-color:#000}
 }
 </style>
 </head>
@@ -194,391 +95,335 @@ input[type=text] { width: 100%; font: inherit; padding: 12px 14px; border-radius
 <div class="wrap">
   <header class="top">
     <div>
-      <div class="kicker">Year 10 Geography · Lesson 8</div>
-      <h1>Two Nations Field Desk</h1>
-    </div>
-    <div class="stats" aria-live="polite">
-      <div class="stat"><div class="k">Field points</div><div class="v" id="pts">0</div></div>
-      <div class="stat" id="streakBox"><div class="k">Streak</div><div class="v" id="streak">0</div></div>
-      <div class="stat"><div class="k">Correct</div><div class="v" id="score">0/0</div></div>
+      <h1>Who Helps?</h1>
+      <div class="sub">Year 10 Geography | L7 Improving wellbeing: governments, NGOs and international organisations</div>
     </div>
   </header>
 
-  <section class="board" aria-label="HDI scoreboard">
-    <div class="scale" id="scale"></div>
-    <div class="track aus"><div class="fill" id="ausFill"></div><div class="tname">Australia</div><div class="val" id="ausVal"></div></div>
-    <div class="track ind"><div class="fill" id="indFill"></div><div class="tname">India</div><div class="val" id="indVal"></div><div class="ghost" id="indGhost" hidden></div></div>
-    <div class="src">HDI on a 0 to 1 scale. UNDP Human Development Report 2025 (2023 data): Australia ranked 7th, India 130th of 193.</div>
-  </section>
-
   <div class="grid">
-    <main class="panel" id="stage"></main>
-    <aside class="notebook" aria-label="Field notebook">
-      <h3>Field notebook</h3>
-      <div class="meta" id="nmeta">NOT STARTED</div>
-      <div class="notes" id="notes"><div class="empty">Your answers are logged here.</div></div>
-      <div class="stamps" id="stamps"></div>
+    <aside class="panel meter" aria-live="polite">
+      <h2>Village HDI</h2>
+      <div class="hdi" id="hdi">0.500</div>
+      <span class="cat" id="cat">Low human development</span>
+      <div class="bar"><div class="fill" id="fill"></div>
+        <div class="tick" style="left:37.5%"></div><div class="tick" style="left:75%"></div>
+      </div>
+      <div class="scale"><span>0.400</span><span>0.550</span><span>0.700</span><span>0.800</span></div>
+      <svg class="village" viewBox="0 0 300 170" role="img" aria-label="A village that gains water, a school, a clinic and power as the HDI rises">
+        <rect x="0" y="125" width="300" height="45" fill="#B9C8A0"/>
+        <!-- houses always there -->
+        <g fill="#8C6A4F"><rect x="20" y="95" width="40" height="32"/><rect x="240" y="98" width="40" height="29"/></g>
+        <g fill="#6E4F3A"><polygon points="16,97 40,76 64,97"/><polygon points="236,100 260,80 284,100"/></g>
+        <!-- water tower + tap -->
+        <g id="v-water" class="v-off">
+          <rect x="78" y="70" width="26" height="22" rx="3" fill="#2E7BC4"/>
+          <rect x="82" y="92" width="4" height="34" fill="#55607A"/><rect x="96" y="92" width="4" height="34" fill="#55607A"/>
+          <path d="M60 110 h18" stroke="#2E7BC4" stroke-width="4"/>
+          <circle cx="56" cy="114" r="3" fill="#2E7BC4"/>
+        </g>
+        <!-- school -->
+        <g id="v-school" class="v-off">
+          <rect x="112" y="84" width="60" height="42" fill="#C9741A"/>
+          <polygon points="108,86 142,62 176,86" fill="#8F4F10"/>
+          <rect x="136" y="104" width="12" height="22" fill="#fff"/>
+          <rect x="140" y="50" width="2" height="14" fill="#333"/><rect x="142" y="50" width="10" height="7" fill="#2E4A7D"/>
+        </g>
+        <!-- clinic -->
+        <g id="v-clinic" class="v-off">
+          <rect x="182" y="92" width="48" height="34" fill="#fff" stroke="#1F7A72" stroke-width="2"/>
+          <rect x="202" y="98" width="8" height="20" fill="#B4453F"/><rect x="196" y="104" width="20" height="8" fill="#B4453F"/>
+        </g>
+        <!-- power -->
+        <g id="v-power" class="v-off">
+          <circle cx="262" cy="30" r="16" fill="#F2C94C"/>
+          <rect x="30" y="104" width="10" height="9" fill="#FFE07A"/><rect x="252" y="106" width="10" height="9" fill="#FFE07A"/>
+          <rect x="124" y="92" width="9" height="8" fill="#FFE07A"/><rect x="152" y="92" width="9" height="8" fill="#FFE07A"/>
+        </g>
+      </svg>
+      <ul class="unlocks" id="unlocks">
+        <li data-at="0.550">0.550 Taps and clean water</li>
+        <li data-at="0.620">0.620 A school</li>
+        <li data-at="0.700">0.700 A health clinic</li>
+        <li data-at="0.780">0.780 Electricity</li>
+      </ul>
+      <div class="stats">
+        <div><b id="sCorrect">0</b>correct</div>
+        <div><b id="sStreak" class="streak">0</b>streak</div>
+        <div><b id="sLeft">38</b>left</div>
+      </div>
+      <div class="badges" id="badges"></div>
     </aside>
+
+    <main class="panel" id="game">
+      <!-- start screen -->
+      <section id="start">
+        <p><b>Your village starts at an HDI of 0.500.</b> Every right answer adds to it. Get five in a row and each answer counts double. A wrong answer costs a little. Can you push it past 0.700, high human development?</p>
+        <div class="intro-cards">
+          <div class="ic"><b>Round 1: Rapid recall</b><small>Lessons 1 to 7</small></div>
+          <div class="ic"><b>Round 2: Who's who?</b><small>Government, NGO or international organisation</small></div>
+          <div class="ic"><b>Round 3: Figure file</b><small>Match the number to the fact</small></div>
+          <div class="ic"><b>Round 4: Name the tool</b><small>Fund, deliver, change rules or measure</small></div>
+        </div>
+        <label for="name"><b>Your name</b> (for the certificate)</label>
+        <input id="name" class="name" maxlength="40" placeholder="First name and last initial" autocomplete="off">
+        <button class="btn" id="go">Start</button>
+        <p style="color:var(--grey);font-size:.85rem;margin-top:12px">Tip: press A, B, C or D to answer, and Enter for the next question.</p>
+      </section>
+
+      <!-- round intro -->
+      <section id="roundIntro" class="hidden">
+        <span class="roundtag" id="riTag"></span>
+        <h2 id="riTitle" style="margin:10px 0 4px"></h2>
+        <p id="riText"></p>
+        <button class="btn" id="riGo">Let's go</button>
+      </section>
+
+      <!-- question -->
+      <section id="play" class="hidden">
+        <span class="roundtag" id="tag"></span>
+        <div class="progress"><span id="prog"></span></div>
+        <div class="q" id="qText"></div>
+        <div class="opts" id="opts"></div>
+        <div class="fb" id="fb" role="status"></div>
+        <div class="actions"><button class="btn hidden" id="next">Next</button></div>
+      </section>
+
+      <!-- end -->
+      <section id="end" class="hidden">
+        <h2 style="margin-top:0">Village report</h2>
+        <p id="endText"></p>
+        <div class="actions">
+          <button class="btn" id="printCert">Print certificate</button>
+          <button class="btn alt" id="again">Play again</button>
+        </div>
+        <div class="review" id="review"></div>
+        <div class="cert" id="cert">
+          <div style="letter-spacing:.15em;font-size:.8rem;color:var(--grey)">YEAR 10 GEOGRAPHY | HUMAN WELLBEING</div>
+          <h2>Certificate of Development</h2>
+          <p>This certifies that</p>
+          <div class="big" id="cName"></div>
+          <p id="cLine"></p>
+          <p id="cBadges" style="color:var(--grey)"></p>
+          <p style="font-size:.8rem;color:var(--grey)" id="cDate"></p>
+        </div>
+      </section>
+    </main>
   </div>
 </div>
-<div class="toast" id="toast" role="status"></div>
+<div class="toast" id="toast"></div>
 
 <script>
-// ---------- HDI maths (UNDP method) ----------
-const BASE = {
-  aus: { le: 83.9, eys: 20.7, mys: 12.9, gni: 58277, hdi: 0.958 },
-  ind: { le: 72.0, eys: 13.0, mys: 6.9, gni: 9047, hdi: 0.685 }
-};
-function pillars(c) {
-  const health = Math.max(0, Math.min(1, (c.le - 20) / (85 - 20)));
-  const edu = (Math.min(c.mys, 15) / 15 + Math.min(c.eys, 18) / 18) / 2;
-  const income = Math.max(0, Math.min(1, (Math.log(c.gni) - Math.log(100)) / (Math.log(75000) - Math.log(100))));
-  return { health, edu, income, hdi: Math.cbrt(health * edu * income) };
-}
-const r2 = (x) => Math.round(x * 100) / 100;
-const f3 = (x) => x.toFixed(3);
-const withInd = (o) => pillars({ ...BASE.ind, ...o }).hdi;
+(function(){
+"use strict";
+var GOV="Government", NGO="NGO", INTL="International organisation";
+var TOOLS=["Fund","Deliver","Change rules","Measure"];
 
-// Live India state for the lab
-let LAB = { le: BASE.ind.le, mys: BASE.ind.mys, gni: BASE.ind.gni };
-const GMIN = 1000, GMAX = 75000;
-const gniToPos = (g) => Math.round(1000 * Math.log(g / GMIN) / Math.log(GMAX / GMIN));
-const posToGni = (p) => Math.round(GMIN * Math.pow(GMAX / GMIN, p / 1000) / 100) * 100;
-
-function category(h) { return h >= 0.8 ? "Very high" : h >= 0.7 ? "High" : h >= 0.55 ? "Medium" : "Low"; }
-
-// pre-computed answers for lab questions (from the same maths the sliders use)
-const A_MYS = r2(withInd({ mys: 12.9 }));
-const A_LE = r2(withInd({ le: 83.9 }));
-const A_GNI = r2(withInd({ gni: 58277 }));
-const A_DOUBLE = withInd({ gni: 9047 * 2 }) - BASE.ind.hdi;
-
-// ---------- content ----------
-const ROUNDS = [
-  { name: "Australia or India?", short: "Which nation", blurb: "Read the clue. Which country is it describing?", type: "pair", opts: ["Australia", "India"],
-    items: [
-      ["👥", "About 440 people per km²", "India", "India packs about 1.45 billion people into 3.3 million km². Australia has about 3 people per km²."],
-      ["🏙️", "About 86% of people live in urban areas", "Australia", "Australia is one of the most urbanised countries. India is about 36% urban."],
-      ["🏥", "A universal health scheme (Medicare) covers every citizen", "Australia", "Medicare is Australia's universal safety net. India's system is split between public and private."],
-      ["✈️", "World-class private hospitals attract 'medical tourists' from overseas", "India", "India's big-city private hospitals run a booming medical tourism industry, while rural clinics are under-funded."],
-      ["🌾", "Over 400 million people live on one inland river plain", "India", "The Indo-Gangetic Plain's rich soil and rivers have supported huge inland populations for centuries."],
-      ["🌊", "About 85% of people live within 50 km of the coast", "Australia", "Australia's interior is huge but lightly populated."],
-      ["🎓", "Adults average about 12.9 years of schooling", "Australia", "Australia's mean years of schooling is about 12.9. India's is about 6.9."],
-      ["📖", "One state (Kerala) has far higher literacy than another (Bihar)", "India", "Kerala invested early in public health and girls' education. Bihar's weaker schools pull its HDI down."],
-      ["🚙", "Remote communities can be hours from the nearest GP", "Australia", "Distance is Australia's big challenge, especially for remote and Indigenous communities."],
-      ["💻", "Bengaluru, Hyderabad and Pune host global tech and pharma hubs", "India", "These hubs are driving India's new middle class."]
-    ]},
-  { name: "The HDI Lab", short: "HDI Lab", blurb: "Move India's sliders and watch the score change.", type: "lab",
-    items: [
-      { kind: "mcq", q: "Move India's mean years of schooling up to Australia's 12.9. Leave the others alone. What is India's HDI now?",
-        opts: [A_MYS.toFixed(2), "0.96", "0.69", "0.88"], a: 0,
-        why: `It rises to about ${A_MYS.toFixed(2)}. Better, but nowhere near Australia's 0.958. Schooling is only one of three pillars, and it shares the education pillar with expected years of schooling.` },
-      { kind: "mcq", reset: true, q: "Reset the lab. Now move only life expectancy to Australia's 83.9 years. What is India's HDI now?",
-        opts: ["0.96", "0.79", A_LE.toFixed(2), "0.85"], a: 2,
-        why: `About ${A_LE.toFixed(2)}. A longer life lifts the health pillar, but income and schooling still hold the score down.` },
-      { kind: "mcq", reset: true, q: "Test each pillar on its own at Australia's level. Which single pillar lifts India's HDI the most?",
-        opts: ["Life expectancy", "Mean years of schooling", "Income (GNI per person)", "They all lift it by exactly the same"], a: 2,
-        why: `Income gets India to about ${A_GNI.toFixed(2)}, schooling to about ${A_MYS.toFixed(2)} and health to about ${A_LE.toFixed(2)}. None of them alone closes the gap.` },
-      { kind: "target", reset: true, q: "Move ONLY the income slider until India reaches an HDI of 0.75 or higher. Then press Lock in.",
-        check: () => LAB.le === BASE.ind.le && LAB.mys === BASE.ind.mys && pillars({ ...BASE.ind, ...LAB }).hdi >= 0.75,
-        why: "India needs roughly $37,000 per person, about four times its current income, to reach 0.75 on income alone. That shows how hard it is to close the gap with money only." },
-      { kind: "mcq", reset: true, q: "Double India's income from $9,047 to about $18,100. What happens to the HDI?",
-        opts: ["It doubles to about 1.37", `It rises by only about ${A_DOUBLE.toFixed(2)}`, "It rises by about 0.30", "It does not change"], a: 1,
-        why: "HDI uses the log of income. Each extra dollar counts for less the richer you are, so doubling income only adds a little." },
-      { kind: "mcq", q: "Why does the income slider need such a huge jump to move the score?",
-        opts: ["HDI ignores income completely", "HDI uses the logarithm of income, so extra dollars matter less and less", "Income is capped at India's current level", "The lab is broken"], a: 1,
-        why: "The UNDP uses the log of income because going from $1,000 to $2,000 changes a life far more than going from $50,000 to $51,000." },
-      { kind: "target", reset: true, q: "Use ANY combination of sliders to get India to 0.80 (Very High) or above. Then press Lock in.",
-        check: () => pillars({ ...BASE.ind, ...LAB }).hdi >= 0.8,
-        why: "To reach Very High, India needs progress on more than one pillar at once: longer lives, more schooling and higher incomes together." },
-      { kind: "mcq", reset: true, q: "India's HDI rose from 0.644 (2022 data, the figure on your slides) to 0.685 (2023 data). Which pillar changed the most?",
-        opts: ["Mean years of schooling", "Life expectancy", "Land area", "Population"], a: 1,
-        why: "Life expectancy jumped from about 67.7 to 72.0 years as the effects of COVID-19 faded. Land area and population are not part of HDI at all." }
-    ]},
-  { name: "Distance or density?", short: "Distance/Density", blurb: "Australia's challenge is distance. India's is density. Which is this?", type: "pair", opts: ["Distance", "Density"],
-    items: [
-      ["🚑", "The nearest GP is hours away by road", "Distance", "A small population spread over a huge landmass makes services hard to reach."],
-      ["🚰", "Some neighbourhoods get piped water for only 2 to 4 hours a day", "Density", "Too many people for the pipes and pumps that exist."],
-      ["📡", "Running broadband cable to small outback towns", "Distance", "Each kilometre of cable serves very few people."],
-      ["🌫️", "Air pollution hits 10 times WHO limits on bad days", "Density", "Millions of vehicles, factories and cooking fires packed into one city."],
-      ["🛩️", "Doctors fly in to treat remote communities", "Distance", "The Royal Flying Doctor Service exists because of distance."],
-      ["🏚️", "About 40% of a megacity's residents live in slums", "Density", "Rapid urbanisation outpaces housing."],
-      ["🏫", "Remote schools struggle to attract teachers", "Distance", "Isolation makes staffing hard."],
-      ["🚽", "Sewage systems overwhelmed by rapid city growth", "Density", "Infrastructure can't keep up with population growth."],
-      { order: true, q: "Put the sanitation chain in order, from cause (1) to final effect (4).",
-        items: ["Children miss school when sick", "Lack of clean water and sanitation", "Lower lifelong wellbeing and income", "Spread of waterborne diseases"],
-        answer: ["Lack of clean water and sanitation", "Spread of waterborne diseases", "Children miss school when sick", "Lower lifelong wellbeing and income"],
-        why: "One missing pipe leads to disease, which leads to missed school, which leads to lower lifelong income. That's why pipes matter as much as schools." }
-    ]},
-  { name: "Myth buster", short: "Myth buster", blurb: "True or false? Back yourself.", type: "pair", opts: ["True", "False"],
-    items: [
-      ["🏙️", "Any city in India has higher wellbeing than any city in Australia, because cities are always wealthier.", "False", "Wellbeing depends on whether a city's services reach you. Indian megacities have big sanitation and air quality gaps."],
-      ["📊", "HDI is calculated from a country's total GDP.", "False", "HDI uses income per person (GNI per capita), plus health and education."],
-      ["⚖️", "A country can have one of the world's largest economies but only a Medium or High HDI.", "True", "India's economy is huge, but divided among about 1.45 billion people the per-person figure is much lower."],
-      ["📖", "Kerala's literacy rate is well above Bihar's.", "True", "The gap inside India is as wide as some country-to-country differences."],
-      ["🇦🇺", "Australia has no pockets of disadvantage because its HDI is Very High.", "False", "An average hides gaps. Remote, Indigenous and outer-suburban communities have lower incomes and shorter lives."],
-      ["🗺️", "India's interior is mostly empty, like the Outback.", "False", "Over 400 million people live on the inland Indo-Gangetic Plain."],
-      ["🚰", "Clean water and sanitation can affect how long children stay in school.", "True", "Waterborne disease keeps children home sick, and missed school lowers lifelong income."],
-      ["🎓", "If India matched Australia's mean years of schooling, its HDI would equal Australia's.", "False", `It would only reach about ${A_MYS.toFixed(2)}. Income and health still count for two-thirds of the score.`]
-    ]}
+var ROUNDS=[
+ {name:"Round 1: Rapid recall", color:"#2E4A7D", text:"Eight quick ones from Lessons 1 to 7.", qs:[
+  {q:"The HDI measures health, education and ...", a:"Income (GNI per person)", w:["Happiness","Population size","Rainfall"], e:"HDI uses life expectancy, years of schooling and GNI per person."},
+  {q:"India's HDI is 0.685. Which category is that?", a:"Medium human development", w:["Low human development","High human development","Very high human development"], e:"Medium runs from 0.550 to 0.699. India ranked 130 of 193 in the 2025 report."},
+  {q:"Closing the Gap aims to reduce the wellbeing gap between ...", a:"Aboriginal and Torres Strait Islander people and other Australians", w:["Cities and farms","Australia and India","Rich and poor countries"], e:"It is the Australian Government's national agreement, from Lesson 3."},
+  {q:"Which of these is NOT an economic indicator?", a:"Literacy rate", w:["GDP","GNI per person","Value of exports"], e:"Literacy measures education, not money. That was Lesson 4, beyond the numbers."},
+  {q:"An NGO is ...", a:"A not-for-profit group not run by any government", w:["A government department","A group of countries","A business that makes a profit"], e:"NGO stands for non-government organisation."},
+  {q:"Which one is an international organisation?", a:"The World Health Organization (WHO)", w:["Akshaya Patra","The Government of India","Rotary"], e:"WHO's members are countries. Akshaya Patra and Rotary are NGOs."},
+  {q:"The Sustainable Development Goals are due by ...", a:"2030", w:["2025","2040","2050"], e:"17 goals and 169 targets, agreed in 2015, due in 2030."},
+  {q:"An HDI of 0.700 or more means ...", a:"High human development", w:["Low human development","Medium human development","Very high human development"], e:"High is 0.700 to 0.799. Very high starts at 0.800."}
+ ]},
+ {name:"Round 2: Who's who?", color:"#C9741A", text:"Ten organisations or programs. Is each one run by a government, an NGO or an international organisation?", fixed:[GOV,NGO,INTL], qs:[
+  {q:"Jal Jeevan Mission, putting taps in rural Indian homes", a:GOV, e:"Run by the national Government of India since 2019."},
+  {q:"Akshaya Patra Foundation", a:NGO, e:"A not-for-profit that cooks school lunches."},
+  {q:"UNICEF", a:INTL, e:"Part of the United Nations, so its members are countries."},
+  {q:"Australia's $5.2 billion aid program", a:GOV, e:"Paid for by the Australian Government from taxes."},
+  {q:"Rotary International volunteers", a:NGO, e:"Trick question. It works internationally, but it is a volunteer group, not a group of countries."},
+  {q:"The World Bank", a:INTL, e:"Owned by its member countries."},
+  {q:"Australian Red Cross", a:NGO, e:"A not-for-profit humanitarian group run by members and volunteers."},
+  {q:"The Victorian Department of Education", a:GOV, e:"Part of the Victorian state government."},
+  {q:"The World Health Organization", a:INTL, e:"A UN agency with countries as members."},
+  {q:"The Fred Hollows Foundation, restoring eyesight overseas", a:NGO, e:"An Australian not-for-profit that relies on donations."}
+ ]},
+ {name:"Round 3: Figure file", color:"#1F7A72", text:"Ten figures from today. Pick the right number.", qs:[
+  {q:"Share of rural Indian homes with tap water in 2019", a:"About 17%", w:["About 82%","About 50%","About 36%"], e:"16.7% when Jal Jeevan Mission started."},
+  {q:"Share of rural Indian homes with tap water in 2026", a:"About 82%", w:["About 17%","About 50%","100%"], e:"About 159 million homes, but the target date slipped to 2028."},
+  {q:"Kids Akshaya Patra fed when it started in 2000", a:"1,500", w:["15,000","150","1.5 million"], e:"1,500 kids in five Bengaluru schools."},
+  {q:"Kids Akshaya Patra feeds now", a:"2.35 million", w:["1,500","110 million","235,000"], e:"2.35 million kids in 16 states and 3 territories."},
+  {q:"Polio cases in India in 2009", a:"741", w:["1","42","150,000"], e:"741 in 2009, 42 in 2010, 1 in 2011."},
+  {q:"Year of India's last polio case", a:"2011", w:["1995","2009","2014"], e:"13 January 2011. WHO certified India polio-free in 2014."},
+  {q:"Australia's aid budget for 2026-27", a:"$5.2 billion", w:["$2.2 billion","$742 million","$52 billion"], e:"$2.2 billion of it goes to the Pacific."},
+  {q:"Share of SDG targets on track or making moderate progress (2026)", a:"36%", w:["15%","49%","82%"], e:"49% are too slow and 15% have gone backwards."},
+  {q:"How much global aid fell in 2025", a:"23%", w:["2%","36%","63%"], e:"A record fall, which makes the SDGs harder to reach."},
+  {q:"India's HDI rank in the 2025 report", a:"130 of 193", w:["13 of 193","89 of 193","181 of 193"], e:"Up from 133. Sri Lanka is 89."}
+ ]},
+ {name:"Round 4: Name the tool", color:"#B4453F", text:"Fund, deliver, change rules or measure? Name the tool being used.", fixed:TOOLS, qs:[
+  {q:"Australia gives $2.2 billion to Pacific countries", a:"Fund", e:"Giving money is funding."},
+  {q:"Akshaya Patra trucks hot lunches to schools", a:"Deliver", e:"It provides the service directly."},
+  {q:"India makes a free school meal a legal right for children in Classes 1 to 8", a:"Change rules", e:"A new law or right is changing the rules."},
+  {q:"The UN publishes a report tracking 139 SDG targets", a:"Measure", e:"Tracking progress with data is measuring."},
+  {q:"WHO tests sewage to check whether poliovirus is still around", a:"Measure", e:"Surveillance is collecting data."},
+  {q:"Volunteers give polio drops door to door", a:"Deliver", e:"Handing out the vaccine is delivering a service."},
+  {q:"The Australian Government gives $150 million to Australian NGOs", a:"Fund", e:"Government money, NGO hands."},
+  {q:"UNDP ranks every country by HDI each year", a:"Measure", e:"Ranking with an index is measuring."},
+  {q:"A country bans children working in factories", a:"Change rules", e:"A ban is a law, so it is changing the rules."},
+  {q:"Workers lay pipes and fit a tap in a village home", a:"Deliver", e:"They provide the water service directly."}
+ ]}
 ];
-const TOTAL = ROUNDS.reduce((n, r) => n + r.items.length, 0);
-const STAMPS = [["first", "First find"], ["streak5", "On a roll (5)"], ["clean", "Clean round"], ["lab", "Lab master"], ["very", "Very High achieved"], ["expert", "Field expert"]];
 
-// ---------- state ----------
-let S;
-const fresh = () => ({ name: "", r: 0, i: 0, pts: 0, streak: 0, best: 0, correct: 0, answered: 0, miss: 0, stamps: {}, mistakes: [], notes: [], locked: false, order: [] });
-S = fresh();
-const $ = (id) => document.getElementById(id);
-const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-function toast(m) { const t = $("toast"); t.textContent = m; t.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 1800); }
-function stamp(k) { if (S.stamps[k]) return; S.stamps[k] = true; toast("Stamp earned: " + STAMPS.find((s) => s[0] === k)[1]); }
+var BADGES=[
+ {id:"first",name:"First Steps",test:function(s){return s.correct>=1;}},
+ {id:"roll",name:"On a Roll (5 streak)",test:function(s){return s.bestStreak>=5;}},
+ {id:"med",name:"Medium HD",test:function(s){return s.hdi>=0.55;}},
+ {id:"high",name:"High HD",test:function(s){return s.hdi>=0.70;}},
+ {id:"vhigh",name:"Very High HD",test:function(s){return s.hdi>=0.80;}},
+ {id:"clean",name:"Clean Round",test:function(s){return s.cleanRound;}}
+];
 
-// ---------- scoreboard ----------
-function drawScale() {
-  const bands = [[0.55, "Medium"], [0.70, "High"], [0.80, "Very high"]];
-  $("scale").innerHTML = `<div class="band" style="left:0;width:55%">Low</div>` + bands.map(([v, n], k) => {
-    const next = k < bands.length - 1 ? bands[k + 1][0] : 1;
-    return `<div class="band" style="left:${v * 100}%;width:${(next - v) * 100}%">${n}</div>`;
-  }).join("");
-}
-function placeVal(el, h) {
-  // Beyond 0.85 the number sits inside the bar so it never runs off the edge
-  if (h > 0.85) { el.style.left = "auto"; el.style.right = (1 - h) * 100 + "%"; el.style.padding = "0 10px 0 0"; el.style.color = "var(--on)"; }
-  else { el.style.right = "auto"; el.style.left = h * 100 + "%"; el.style.padding = "0 0 0 8px"; el.style.color = "var(--ink)"; }
-}
-function setBoard(indHdi, showGhost) {
-  const a = BASE.aus.hdi;
-  $("ausFill").style.width = a * 100 + "%";
-  placeVal($("ausVal"), a); $("ausVal").textContent = a.toFixed(3);
-  $("indFill").style.width = indHdi * 100 + "%";
-  placeVal($("indVal"), indHdi); $("indVal").textContent = f3(indHdi);
-  $("indGhost").hidden = !showGhost;
-  $("indGhost").style.left = BASE.ind.hdi * 100 + "%";
+var START=0.5, STEP=0.006, PENALTY=0.003, MIN=0.4, MAX=0.9;
+var st, flat, order;
+var $=function(id){return document.getElementById(id);};
+var LETTERS=["A","B","C","D"];
+
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+function reset(){
+  st={hdi:START,correct:0,streak:0,bestStreak:0,cleanRound:false,got:{},mistakes:[],round:-1,qi:0,roundWrong:0,answered:false};
+  flat=0;
+  renderMeter();renderBadges();
 }
 
-function renderStats() {
-  $("pts").textContent = S.pts;
-  $("streak").textContent = S.streak + (S.streak >= 3 ? " ×2" : "");
-  $("streakBox").classList.toggle("hot", S.streak >= 3);
-  $("score").textContent = S.correct + "/" + S.answered;
-  $("nmeta").textContent = S.name ? S.name.toUpperCase() : "NOT STARTED";
-  const n = $("notes");
-  n.innerHTML = S.notes.length ? S.notes.map((l) => `<div class="ln ${l.ok ? "ok" : "no"}"><span>${l.ok ? "✓" : "✗"}</span><span>${esc(l.label)}</span><span>${l.ok ? "+" + l.p : "0"}</span></div>`).join("") : '<div class="empty">Your answers are logged here.</div>';
-  n.scrollTop = n.scrollHeight;
-  $("stamps").innerHTML = STAMPS.map(([k, t]) => `<span class="stamp ${S.stamps[k] ? "got" : ""}">${t}</span>`).join("");
+function category(h){
+  if(h>=0.8) return ["Very high human development","#1F7A72"];
+  if(h>=0.7) return ["High human development","#2E4A7D"];
+  if(h>=0.55) return ["Medium human development","#C9741A"];
+  return ["Low human development","#B4453F"];
+}
+function renderMeter(){
+  $("hdi").textContent=st.hdi.toFixed(3);
+  var c=category(st.hdi); $("cat").textContent=c[0]; $("cat").style.background=c[1];
+  $("fill").style.width=Math.max(0,Math.min(100,(st.hdi-0.4)/0.4*100))+"%";
+  [["v-water",0.55],["v-school",0.62],["v-clinic",0.70],["v-power",0.78]].forEach(function(p){
+    $(p[0]).setAttribute("class", st.hdi>=p[1]?"v-on":"v-off");
+  });
+  Array.prototype.forEach.call($("unlocks").children,function(li){li.className = st.hdi>=parseFloat(li.dataset.at)?"got":"";});
+  $("sCorrect").textContent=st.correct; $("sStreak").textContent=st.streak; $("sLeft").textContent=38-flat;
+}
+function renderBadges(){
+  var box=$("badges"); box.innerHTML="";
+  BADGES.forEach(function(b){var s=document.createElement("span");s.className="badge"+(st.got[b.id]?" got":"");s.textContent=b.name;box.appendChild(s);});
+}
+function checkBadges(){
+  BADGES.forEach(function(b){ if(!st.got[b.id] && b.test(st)){ st.got[b.id]=true; toast("Badge unlocked: "+b.name); }});
+  renderBadges();
+}
+var tt;
+function toast(msg){var t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("show");},1800);}
+
+function show(id){["start","roundIntro","play","end"].forEach(function(s){$(s).classList.toggle("hidden",s!==id);});}
+
+function startRound(r){
+  st.round=r; st.qi=0; st.roundWrong=0; st.cleanRound=false;
+  var R=ROUNDS[r];
+  order=shuffle(R.qs);
+  $("riTag").textContent="Round "+(r+1)+" of 4"; $("riTag").style.background=R.color;
+  $("riTitle").textContent=R.name; $("riText").textContent=R.text;
+  show("roundIntro"); $("riGo").focus();
 }
 
-const chips = () => `<div class="rounds">${ROUNDS.map((r, k) => `<span class="rchip ${k === S.r ? "on" : k < S.r ? "done" : ""}">${k + 1}. ${r.short}</span>`).join("")}</div>`;
-const prog = () => { const d = ROUNDS.slice(0, S.r).reduce((n, r) => n + r.items.length, 0) + S.i; return `<div class="progress"><span style="width:${d / TOTAL * 100}%"></span></div>`; };
-
-// ---------- lab UI ----------
-function labHTML() {
-  return `<div class="lab">
-    <div class="lab-head"><h3>India HDI lab</h3><div class="readout" id="labHdi"></div></div>
-    <div class="slider"><label for="sLe">Life expectancy</label><span class="num" id="nLe"></span>
-      <input type="range" id="sLe" min="40" max="85" step="0.1">
-      <div class="ref"><span>India now: 72.0 yrs</span><span>Australia: <b>83.9 yrs</b></span></div></div>
-    <div class="slider"><label for="sMys">Mean years of schooling</label><span class="num" id="nMys"></span>
-      <input type="range" id="sMys" min="0" max="15" step="0.1">
-      <div class="ref"><span>India now: 6.9 yrs</span><span>Australia: <b>12.9 yrs</b></span></div></div>
-    <div class="slider"><label for="sGni">Income per person (GNI, PPP $)</label><span class="num" id="nGni"></span>
-      <input type="range" id="sGni" min="0" max="1000" step="1">
-      <div class="ref"><span>India now: $9,047</span><span>Australia: <b>$58,277</b></span></div></div>
-    <div class="pillars" id="pills"></div>
-    <div class="fixed">Expected years of schooling stays fixed at India's 13.0. The UNDP formula is the same one used for the real rankings.</div>
-    <div class="row-end" style="margin-top:8px"><button class="btn alt" id="labReset">Reset to India today</button></div>
-  </div>`;
-}
-function syncLab() {
-  $("sLe").value = LAB.le; $("sMys").value = LAB.mys; $("sGni").value = gniToPos(LAB.gni);
-  updateLab();
-}
-function updateLab() {
-  const p = pillars({ ...BASE.ind, ...LAB });
-  $("nLe").textContent = LAB.le.toFixed(1) + " yrs";
-  $("nMys").textContent = LAB.mys.toFixed(1) + " yrs";
-  $("nGni").textContent = "$" + LAB.gni.toLocaleString("en-AU");
-  $("labHdi").innerHTML = `${f3(p.hdi)}<small>${category(p.hdi)}</small>`;
-  $("pills").innerHTML = [["Health", p.health], ["Education", p.edu], ["Income", p.income]].map(([k, v]) =>
-    `<div class="pill"><div class="k">${k}</div><div class="v">${v.toFixed(2)}</div><div class="bar"><span style="width:${v * 100}%"></span></div></div>`).join("");
-  setBoard(p.hdi, true);
-}
-function bindLab() {
-  $("sLe").oninput = (e) => { LAB.le = Math.round(+e.target.value * 10) / 10; updateLab(); };
-  $("sMys").oninput = (e) => { LAB.mys = Math.round(+e.target.value * 10) / 10; updateLab(); };
-  $("sGni").oninput = (e) => { LAB.gni = posToGni(+e.target.value); if (+e.target.value === gniToPos(BASE.ind.gni)) LAB.gni = BASE.ind.gni; updateLab(); };
-  $("labReset").onclick = () => { LAB = { le: BASE.ind.le, mys: BASE.ind.mys, gni: BASE.ind.gni }; syncLab(); };
-  syncLab();
+function ask(){
+  var R=ROUNDS[st.round], Q=order[st.qi];
+  st.answered=false;
+  $("tag").textContent=R.name+"  |  "+(st.qi+1)+"/"+order.length; $("tag").style.background=R.color;
+  $("prog").style.width=(flat/38*100)+"%";
+  $("qText").textContent=Q.q;
+  var options = R.fixed ? R.fixed.slice() : shuffle([Q.a].concat(Q.w));
+  var box=$("opts"); box.innerHTML="";
+  options.forEach(function(o,i){
+    var b=document.createElement("button"); b.className="opt"; b.type="button";
+    b.innerHTML='<span class="k">'+LETTERS[i]+'</span><span></span>';
+    b.lastChild.textContent=o; b.dataset.v=o;
+    b.addEventListener("click",function(){answer(b);});
+    box.appendChild(b);
+  });
+  $("fb").className="fb"; $("fb").innerHTML="";
+  $("next").classList.add("hidden");
+  show("play");
 }
 
-// ---------- screens ----------
-function start() {
-  setBoard(BASE.ind.hdi, false);
-  $("stage").innerHTML = `
-    <div class="eyebrow">A tale of two nations</div>
-    <h2 class="prompt">Two democracies. One gap of 0.27.</h2>
-    <p class="sub">Work out which nation is which, then take India's HDI apart in the lab and try to close the gap yourself.</p>
-    <div class="two-col">
-      <div class="rlist">${ROUNDS.map((r, k) => `<div class="rcard"><span class="n">${k + 1}</span><div><b>${r.name}</b><small>${r.items.length} tasks · ${r.blurb}</small></div></div>`).join("")}</div>
-      <div>
-        <ul class="how">
-          <li><b>+10</b>for each correct answer</li>
-          <li><b>×2</b>once you get 3 in a row</li>
-          <li><b>Stamps</b>for streaks, clean rounds and lab challenges</li>
-        </ul>
-        <label class="name" for="nameIn">Your name (for the certificate)</label>
-        <input type="text" id="nameIn" maxlength="40" autocomplete="off" placeholder="First name and surname">
-        <div class="row-end"><button class="btn go" id="startBtn">Open the field desk</button></div>
-      </div>
-    </div>`;
-  $("startBtn").onclick = () => { S.name = $("nameIn").value.trim() || "Student"; renderStats(); ask(); };
-  $("nameIn").addEventListener("keydown", (e) => { if (e.key === "Enter") $("startBtn").click(); });
-}
-
-function ask() {
-  S.locked = false; S.order = [];
-  const R = ROUNDS[S.r], it = R.items[S.i];
-  let h = chips() + prog() + `<div class="eyebrow">Round ${S.r + 1} · ${R.name} · ${S.i + 1} of ${R.items.length}</div>`;
-  if (R.type === "lab") {
-    if (it.reset) LAB = { le: BASE.ind.le, mys: BASE.ind.mys, gni: BASE.ind.gni };
-    h += `<h2 class="prompt">${esc(it.q)}</h2>` + labHTML();
-    if (it.kind === "mcq") h += `<div class="choices four">${it.opts.map((o, k) => `<button class="choice" data-k="${k}"><span class="key">${k + 1}</span><span>${esc(o)}</span></button>`).join("")}</div>`;
-    else h += `<div class="row-end"><button class="btn go" id="lockBtn">Lock in</button></div>`;
-  } else if (it.order) {
-    h += `<h2 class="prompt">Cause and effect</h2><p class="sub">${esc(it.q)} Tap again to undo.</p>
-      <div class="order-list">${it.items.map((t, k) => `<button class="order-item" data-k="${k}"><span class="slot"></span><span>${esc(t)}</span></button>`).join("")}</div>
-      <div class="row-end"><button class="btn alt" id="resetOrd">Reset</button><button class="btn go" id="checkOrd" disabled>Check order</button></div>`;
+function answer(btn){
+  if(st.answered) return; st.answered=true;
+  var Q=order[st.qi], ok=btn.dataset.v===Q.a;
+  Array.prototype.forEach.call($("opts").children,function(b){b.disabled=true; if(b.dataset.v===Q.a) b.classList.add("right");});
+  var fb=$("fb");
+  if(ok){
+    st.correct++; st.streak++; st.bestStreak=Math.max(st.bestStreak,st.streak);
+    var gain = st.streak>=5 ? STEP*2 : STEP;
+    st.hdi=Math.min(MAX, st.hdi+gain);
+    fb.className="fb show good";
+    fb.innerHTML="<b>"+(st.streak>=5?"Correct, and doubled! +"+gain.toFixed(3):"Correct. +"+gain.toFixed(3))+"</b>";
   } else {
-    const [ic, text] = it;
-    h += `<h2 class="prompt">${R.type === "pair" && R.opts[0] === "True" ? "True or false?" : R.opts[0] === "Distance" ? "Distance or density?" : "Australia or India?"}</h2><p class="sub">${R.blurb}</p>
-      <div class="fact"><span class="pin" aria-hidden="true">${ic}</span><span>${esc(text)}</span></div>
-      <div class="choices two">${R.opts.map((o, k) => `<button class="choice big ${k ? "b" : "a"}" data-v="${o}">${o}<span class="key" style="margin-left:8px">${k + 1}</span></button>`).join("")}</div>`;
+    btn.classList.add("wrong"); st.streak=0; st.roundWrong++;
+    st.hdi=Math.max(MIN, st.hdi-PENALTY);
+    st.mistakes.push({q:Q.q, mine:btn.dataset.v, a:Q.a, e:Q.e});
+    fb.className="fb show badfb";
+    fb.innerHTML="<b>Not quite. The answer is "+escapeHtml(Q.a)+". -"+PENALTY.toFixed(3)+"</b>";
   }
-  h += `<div id="fb"></div>`;
-  $("stage").innerHTML = h;
-  if (R.type === "lab") bindLab(); else setBoard(BASE.ind.hdi, false);
+  var e=document.createElement("span"); e.textContent=Q.e; fb.appendChild(e);
+  flat++;
+  if(st.qi===order.length-1 && st.roundWrong===0){ st.cleanRound=true; }
+  renderMeter(); checkBadges();
+  var n=$("next"); n.classList.remove("hidden");
+  n.textContent = (st.qi===order.length-1) ? (st.round===3?"See my village report":"Next round") : "Next";
+  n.focus();
+}
 
-  if (it.order) {
-    document.querySelectorAll(".order-item").forEach((b) => b.onclick = () => {
-      if (S.locked) return;
-      const k = +b.dataset.k, at = S.order.indexOf(k);
-      if (at >= 0) S.order.splice(at, 1); else S.order.push(k);
-      document.querySelectorAll(".order-item").forEach((x) => { const p = S.order.indexOf(+x.dataset.k); x.classList.toggle("set", p >= 0); x.querySelector(".slot").textContent = p >= 0 ? p + 1 : ""; });
-      $("checkOrd").disabled = S.order.length !== it.items.length;
+function next(){
+  if(st.qi<order.length-1){ st.qi++; ask(); }
+  else if(st.round<3){ startRound(st.round+1); }
+  else finish();
+}
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+
+function finish(){
+  $("prog").style.width="100%";
+  var c=category(st.hdi);
+  $("endText").innerHTML="You got <b>"+st.correct+" out of 38</b>. Your village finished on an HDI of <b>"+st.hdi.toFixed(3)+"</b>: "+c[0].toLowerCase()+". Best streak: "+st.bestStreak+".";
+  var rv=$("review"); rv.innerHTML="";
+  if(st.mistakes.length){
+    var h=document.createElement("h3"); h.textContent="Mistake review ("+st.mistakes.length+")"; rv.appendChild(h);
+    st.mistakes.forEach(function(m){
+      var d=document.createElement("div"); d.className="item";
+      d.innerHTML="<div><b></b></div><div>You said: <span class='mine'></span></div><div class='ans'></div><div class='ex' style='color:var(--grey)'></div>";
+      d.querySelector("b").textContent=m.q; d.querySelector(".mine").textContent=m.mine;
+      d.querySelector(".ans").textContent="Answer: "+m.a; d.querySelector(".ex").textContent=m.e;
+      rv.appendChild(d);
     });
-    $("resetOrd").onclick = () => { if (!S.locked) ask(); };
-    $("checkOrd").onclick = () => {
-      S.locked = true;
-      const ok = S.order.map((k) => it.items[k]).join("|") === it.answer.join("|");
-      document.querySelectorAll(".order-item").forEach((x) => x.disabled = true);
-      $("checkOrd").disabled = $("resetOrd").disabled = true;
-      resolve(ok, "Sanitation chain", it.answer.map((t, n) => `${n + 1}. ${t}`).join(", "), it.why, it.q);
-    };
-  } else if (R.type === "lab" && it.kind === "target") {
-    $("lockBtn").onclick = () => {
-      if (S.locked) return; S.locked = true;
-      const ok = it.check();
-      $("lockBtn").disabled = true;
-      document.querySelectorAll(".lab input, #labReset").forEach((x) => x.disabled = true);
-      resolve(ok, ok ? "Lab target hit" : "Lab target missed", ok ? "Target reached" : "Target not reached (HDI " + f3(pillars({ ...BASE.ind, ...LAB }).hdi) + ")", it.why, it.q);
-    };
   } else {
-    document.querySelectorAll(".choice").forEach((b) => b.onclick = () => pick(b));
+    var p=document.createElement("p"); p.innerHTML="<b>No mistakes at all. Legend.</b>"; rv.appendChild(p);
   }
+  var nm=($("name").value||"").trim()||"A Year 10 geographer";
+  $("cName").textContent=nm;
+  $("cLine").textContent="scored "+st.correct+"/38 in Who Helps? and raised a village HDI from 0.500 to "+st.hdi.toFixed(3)+" ("+c[0].toLowerCase()+").";
+  var gotNames=BADGES.filter(function(b){return st.got[b.id];}).map(function(b){return b.name;});
+  $("cBadges").textContent=gotNames.length?"Badges: "+gotNames.join(", "):"";
+  $("cDate").textContent=new Date().toLocaleDateString("en-AU",{day:"numeric",month:"long",year:"numeric"});
+  $("cert").style.display="block";
+  show("end");
 }
 
-function pick(btn) {
-  if (S.locked) return; S.locked = true;
-  const R = ROUNDS[S.r], it = R.items[S.i];
-  const btns = [...document.querySelectorAll(".choice")];
-  btns.forEach((b) => b.disabled = true);
-  let ok, right, label, why, q;
-  if (R.type === "lab") {
-    const k = +btn.dataset.k; ok = k === it.a; right = it.opts[it.a]; why = it.why; q = it.q; label = "Lab: " + right;
-    btns.forEach((b, n) => b.classList.add(n === it.a ? "correct" : b === btn ? "wrong" : "dim"));
-    document.querySelectorAll(".lab input, #labReset").forEach((x) => x.disabled = true);
-  } else {
-    right = it[2]; ok = btn.dataset.v === right; why = it[3]; q = it[1]; label = it[1];
-    btns.forEach((b) => b.classList.add(b.dataset.v === right ? "correct" : b === btn ? "wrong" : "dim"));
+$("go").addEventListener("click",function(){reset();startRound(0);});
+$("riGo").addEventListener("click",function(){ask();});
+$("next").addEventListener("click",next);
+$("again").addEventListener("click",function(){$("cert").style.display="none";reset();show("start");$("go").focus();});
+$("printCert").addEventListener("click",function(){window.print();});
+document.addEventListener("keydown",function(e){
+  if(e.target && e.target.tagName==="INPUT"){ if(e.key==="Enter"){$("go").click();} return; }
+  if(!$("play").classList.contains("hidden")){
+    var i=LETTERS.indexOf(e.key.toUpperCase());
+    var opts=$("opts").children;
+    if(i>-1 && i<opts.length && !st.answered){ opts[i].click(); }
   }
-  resolve(ok, label, right, why, q);
-}
-
-function resolve(ok, label, right, why, q) {
-  S.answered++;
-  let p = 0;
-  if (ok) {
-    S.correct++; S.streak++; S.best = Math.max(S.best, S.streak);
-    p = S.streak >= 3 ? 20 : 10; S.pts += p;
-    stamp("first"); if (S.streak >= 5) stamp("streak5");
-    const it = ROUNDS[S.r].items[S.i];
-    if (it && it.kind === "target" && it.q.includes("0.80")) stamp("very");
-  } else {
-    if (S.streak >= 3) toast("Streak ended at " + S.streak);
-    S.streak = 0; S.miss++;
-    S.mistakes.push({ round: ROUNDS[S.r].name, q, right, why });
-  }
-  S.notes.push({ ok, label, p });
-  renderStats();
-  const last = S.i === ROUNDS[S.r].items.length - 1, lastR = S.r === ROUNDS.length - 1;
-  $("fb").innerHTML = `<div class="feedback ${ok ? "good" : "bad"}"><strong>${ok ? (p === 20 ? "Correct! +20 streak bonus" : "Correct! +10") : "Not quite. Answer: " + esc(right) + "."}</strong><span>${esc(why)}</span></div>
-    <div class="row-end"><button class="btn" id="nextBtn">${last ? (lastR ? "See my results" : "Finish round") : "Next"}</button></div>`;
-  $("nextBtn").focus();
-  $("nextBtn").onclick = next;
-}
-
-function next() {
-  const R = ROUNDS[S.r];
-  if (S.i < R.items.length - 1) { S.i++; ask(); return; }
-  if (S.miss === 0) stamp("clean");
-  if (R.type === "lab" && S.miss === 0) stamp("lab");
-  if (S.r === ROUNDS.length - 1) { finish(); return; }
-  const got = R.items.length - S.miss, nx = ROUNDS[S.r + 1];
-  setBoard(BASE.ind.hdi, false);
-  $("stage").innerHTML = chips() + prog() + `
-    <div class="eyebrow">Round ${S.r + 1} complete</div>
-    <h2 class="prompt">${R.name}: ${got} out of ${R.items.length}</h2>
-    <p class="sub">${S.miss === 0 ? "Perfect round. Clean round stamp earned." : "Your misses are saved for the review at the end."}</p>
-    <div class="rcard"><span class="n">${S.r + 2}</span><div><b>Up next: ${nx.name}</b><small>${nx.items.length} tasks · ${nx.blurb}</small></div></div>
-    <div class="row-end"><button class="btn go" id="goBtn">Start round ${S.r + 2}</button></div>`;
-  $("goBtn").focus();
-  $("goBtn").onclick = () => { S.r++; S.i = 0; S.miss = 0; ask(); };
-}
-
-function finish() {
-  const pct = Math.round(S.correct / TOTAL * 100);
-  if (pct >= 90) stamp("expert");
-  renderStats(); setBoard(BASE.ind.hdi, false);
-  const level = pct >= 90 ? "Field Expert" : pct >= 75 ? "Senior Analyst" : pct >= 50 ? "Field Researcher" : "Trainee";
-  const d = new Date().toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric" });
-  $("stage").innerHTML = `
-    <div class="cert" id="cert">
-      <div class="eyebrow" style="color:var(--muted)">Certificate of completion</div>
-      <h2>Two Nations Field Desk</h2>
-      <div>Year 10 Geography · Comparing human wellbeing in Australia and India</div>
-      <div class="who" style="margin-top:8px">${esc(S.name)}</div>
-      <div>earned the rank of <b>${level}</b></div>
-      <div class="nums"><div><b>${S.correct}/${TOTAL}</b>correct</div><div><b>${pct}%</b>score</div><div><b>${S.pts}</b>field points</div><div><b>${S.best}</b>best streak</div></div>
-      <div style="margin-top:10px;font-size:14px;color:var(--muted)">${Object.keys(S.stamps).length} of ${STAMPS.length} stamps · ${d}</div>
-    </div>
-    <h3 style="margin-bottom:10px">Mistake review</h3>
-    <div class="review">${S.mistakes.length ? S.mistakes.map((m) => `<div class="mi"><small>${esc(m.round)}</small><b>${esc(m.q)}</b><br>Answer: ${esc(m.right)}. ${esc(m.why)}</div>`).join("") : '<div class="allgood">No mistakes. Every clue solved.</div>'}</div>
-    <div class="write"><b>In your book:</b> If you could invest in only one HDI pillar for India, which would you choose and why? Use one number from the lab as evidence.</div>
-    <div class="row-end"><button class="btn alt" id="printBtn">Print certificate</button><button class="btn go" id="againBtn">Play again</button></div>`;
-  $("printBtn").onclick = () => window.print();
-  $("againBtn").onclick = () => { const n = S.name; S = fresh(); S.name = n; LAB = { le: BASE.ind.le, mys: BASE.ind.mys, gni: BASE.ind.gni }; renderStats(); ask(); };
-}
-
-document.addEventListener("keydown", (e) => {
-  if (e.target.tagName === "INPUT") return;
-  const n = parseInt(e.key, 10);
-  if (n >= 1 && n <= 4 && !S.locked) { const b = document.querySelectorAll(".choice")[n - 1]; if (b && !b.disabled) b.click(); }
 });
-
-drawScale();
-renderStats();
-start();
+reset();
+})();
 </script>
 </body>
 </html>
