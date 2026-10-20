@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who Helps? | L7 Year 10 Geography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1E2340; --gov:#2E4A7D; --ngo:#C9741A; --intl:#1F7A72; --rose:#B4453F;
+  --grey:#5B6170; --light:#F2F4F8; --copy:#FFF3B0; --gold:#D9A400; --white:#fff;
+  --ok:#1F7A72; --bad:#B4453F;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Lexend,Calibri,Arial,sans-serif;background:var(--light);color:var(--ink);line-height:1.45}
+button{font-family:inherit}
+.wrap{max-width:980px;margin:0 auto;padding:16px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+header.top h1{font-size:1.5rem;margin:0;font-weight:800}
+header.top .sub{color:var(--grey);font-size:.9rem}
+.grid{display:grid;grid-template-columns:300px 1fr;gap:16px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--white);border-radius:16px;padding:18px;box-shadow:0 2px 10px rgba(30,35,64,.08)}
+/* Village meter */
+.meter h2{font-size:1rem;margin:0 0 6px}
+.hdi{font-size:2.6rem;font-weight:800;line-height:1;margin:4px 0}
+.cat{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.8rem;font-weight:600;color:#fff;background:var(--rose)}
+.bar{position:relative;height:14px;background:#E4E7EE;border-radius:999px;margin:12px 0 4px;overflow:hidden}
+.bar .fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--rose),var(--ngo),var(--intl));border-radius:999px;transition:width .5s}
+.bar .tick{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.5}
+.scale{display:flex;justify-content:space-between;font-size:.7rem;color:var(--grey)}
+svg.village{width:100%;height:auto;margin-top:10px;border-radius:12px;background:#E9EEF6}
+.v-off{opacity:.12;transition:opacity .6s}
+.v-on{opacity:1}
+.unlocks{font-size:.8rem;color:var(--grey);margin:8px 0 0;padding:0;list-style:none}
+.unlocks li{margin:2px 0}
+.unlocks li.got{color:var(--ink);font-weight:600}
+.stats{display:flex;gap:10px;margin-top:12px;font-size:.85rem}
+.stats div{flex:1;background:var(--light);border-radius:10px;padding:8px;text-align:center}
+.stats b{display:block;font-size:1.2rem}
+/* Game area */
+.roundtag{display:inline-block;font-size:.8rem;font-weight:600;color:#fff;padding:3px 10px;border-radius:999px}
+.progress{height:6px;background:#E4E7EE;border-radius:999px;margin:10px 0 16px;overflow:hidden}
+.progress span{display:block;height:100%;background:var(--gov);transition:width .3s}
+.q{font-size:1.3rem;font-weight:600;margin:6px 0 16px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:10px;align-items:center;text-align:left;padding:14px;border-radius:12px;border:2px solid #DDE1EA;background:#fff;font-size:1rem;cursor:pointer;color:var(--ink);min-height:58px}
+.opt:hover:not(:disabled){border-color:var(--gov);background:#F7F9FD}
+.opt .k{flex:none;width:28px;height:28px;border-radius:50%;background:var(--light);display:grid;place-items:center;font-weight:800;font-size:.85rem}
+.opt.right{border-color:var(--ok);background:#E5F3F1}
+.opt.wrong{border-color:var(--bad);background:#F8E6E5}
+.opt:disabled{cursor:default}
+.fb{margin-top:14px;padding:12px 14px;border-radius:12px;display:none}
+.fb.show{display:block}
+.fb.good{background:#E5F3F1}
+.fb.badfb{background:#F8E6E5}
+.fb b{display:block;margin-bottom:2px}
+.actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{border:none;border-radius:12px;padding:12px 18px;font-weight:600;font-size:1rem;cursor:pointer;background:var(--gov);color:#fff}
+.btn.alt{background:var(--light);color:var(--ink)}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.hidden{display:none!important}
+input.name{width:100%;padding:12px;border-radius:12px;border:2px solid #DDE1EA;font-size:1rem;font-family:inherit;margin:8px 0 14px}
+.intro-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0}
+@media (max-width:560px){.intro-cards{grid-template-columns:1fr}}
+.ic{background:var(--light);border-radius:12px;padding:12px}
+.ic b{display:block}
+.ic small{color:var(--grey)}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.badge{font-size:.75rem;padding:5px 10px;border-radius:999px;background:var(--light);color:var(--grey)}
+.badge.got{background:var(--copy);color:var(--ink);font-weight:600;box-shadow:inset 0 0 0 1.5px var(--gold)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-weight:600;transition:transform .35s;z-index:5}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.streak{font-weight:800;color:var(--ngo)}
+.review{margin-top:12px}
+.review .item{border-left:4px solid var(--rose);background:var(--light);padding:10px 12px;border-radius:0 10px 10px 0;margin:8px 0;font-size:.92rem}
+.review .item .ans{color:var(--ok);font-weight:600}
+/* certificate */
+.cert{display:none;border:6px double var(--gov);border-radius:16px;padding:28px;text-align:center;background:#fff;margin-top:16px}
+.cert h2{font-size:1.7rem;margin:4px 0}
+.cert .big{font-size:2.2rem;font-weight:800;color:var(--gov)}
+@media print{
+  body{background:#fff}
+  body *{visibility:hidden}
+  .cert,.cert *{visibility:visible}
+  .cert{display:block!important;position:absolute;left:0;top:0;width:100%;border-color:#000}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Who Helps?</h1>
+      <div class="sub">Year 10 Geography | L7 Improving wellbeing: governments, NGOs and international organisations</div>
+    </div>
+  </header>
+
+  <div class="grid">
+    <aside class="panel meter" aria-live="polite">
+      <h2>Village HDI</h2>
+      <div class="hdi" id="hdi">0.500</div>
+      <span class="cat" id="cat">Low human development</span>
+      <div class="bar"><div class="fill" id="fill"></div>
+        <div class="tick" style="left:37.5%"></div><div class="tick" style="left:75%"></div>
+      </div>
+      <div class="scale"><span>0.400</span><span>0.550</span><span>0.700</span><span>0.800</span></div>
+      <svg class="village" viewBox="0 0 300 170" role="img" aria-label="A village that gains water, a school, a clinic and power as the HDI rises">
+        <rect x="0" y="125" width="300" height="45" fill="#B9C8A0"/>
+        <!-- houses always there -->
+        <g fill="#8C6A4F"><rect x="20" y="95" width="40" height="32"/><rect x="240" y="98" width="40" height="29"/></g>
+        <g fill="#6E4F3A"><polygon points="16,97 40,76 64,97"/><polygon points="236,100 260,80 284,100"/></g>
+        <!-- water tower + tap -->
+        <g id="v-water" class="v-off">
+          <rect x="78" y="70" width="26" height="22" rx="3" fill="#2E7BC4"/>
+          <rect x="82" y="92" width="4" height="34" fill="#55607A"/><rect x="96" y="92" width="4" height="34" fill="#55607A"/>
+          <path d="M60 110 h18" stroke="#2E7BC4" stroke-width="4"/>
+          <circle cx="56" cy="114" r="3" fill="#2E7BC4"/>
+        </g>
+        <!-- school -->
+        <g id="v-school" class="v-off">
+          <rect x="112" y="84" width="60" height="42" fill="#C9741A"/>
+          <polygon points="108,86 142,62 176,86" fill="#8F4F10"/>
+          <rect x="136" y="104" width="12" height="22" fill="#fff"/>
+          <rect x="140" y="50" width="2" height="14" fill="#333"/><rect x="142" y="50" width="10" height="7" fill="#2E4A7D"/>
+        </g>
+        <!-- clinic -->
+        <g id="v-clinic" class="v-off">
+          <rect x="182" y="92" width="48" height="34" fill="#fff" stroke="#1F7A72" stroke-width="2"/>
+          <rect x="202" y="98" width="8" height="20" fill="#B4453F"/><rect x="196" y="104" width="20" height="8" fill="#B4453F"/>
+        </g>
+        <!-- power -->
+        <g id="v-power" class="v-off">
+          <circle cx="262" cy="30" r="16" fill="#F2C94C"/>
+          <rect x="30" y="104" width="10" height="9" fill="#FFE07A"/><rect x="252" y="106" width="10" height="9" fill="#FFE07A"/>
+          <rect x="124" y="92" width="9" height="8" fill="#FFE07A"/><rect x="152" y="92" width="9" height="8" fill="#FFE07A"/>
+        </g>
+      </svg>
+      <ul class="unlocks" id="unlocks">
+        <li data-at="0.550">0.550 Taps and clean water</li>
+        <li data-at="0.620">0.620 A school</li>
+        <li data-at="0.700">0.700 A health clinic</li>
+        <li data-at="0.780">0.780 Electricity</li>
+      </ul>
+      <div class="stats">
+        <div><b id="sCorrect">0</b>correct</div>
+        <div><b id="sStreak" class="streak">0</b>streak</div>
+        <div><b id="sLeft">38</b>left</div>
+      </div>
+      <div class="badges" id="badges"></div>
+    </aside>
+
+    <main class="panel" id="game">
+      <!-- start screen -->
+      <section id="start">
+        <p><b>Your village starts at an HDI of 0.500.</b> Every right answer adds to it. Get five in a row and each answer counts double. A wrong answer costs a little. Can you push it past 0.700, high human development?</p>
+        <div class="intro-cards">
+          <div class="ic"><b>Round 1: Rapid recall</b><small>Lessons 1 to 7</small></div>
+          <div class="ic"><b>Round 2: Who's who?</b><small>Government, NGO or international organisation</small></div>
+          <div class="ic"><b>Round 3: Figure file</b><small>Match the number to the fact</small></div>
+          <div class="ic"><b>Round 4: Name the tool</b><small>Fund, deliver, change rules or measure</small></div>
+        </div>
+        <label for="name"><b>Your name</b> (for the certificate)</label>
+        <input id="name" class="name" maxlength="40" placeholder="First name and last initial" autocomplete="off">
+        <button class="btn" id="go">Start</button>
+        <p style="color:var(--grey);font-size:.85rem;margin-top:12px">Tip: press A, B, C or D to answer, and Enter for the next question.</p>
+      </section>
+
+      <!-- round intro -->
+      <section id="roundIntro" class="hidden">
+        <span class="roundtag" id="riTag"></span>
+        <h2 id="riTitle" style="margin:10px 0 4px"></h2>
+        <p id="riText"></p>
+        <button class="btn" id="riGo">Let's go</button>
+      </section>
+
+      <!-- question -->
+      <section id="play" class="hidden">
+        <span class="roundtag" id="tag"></span>
+        <div class="progress"><span id="prog"></span></div>
+        <div class="q" id="qText"></div>
+        <div class="opts" id="opts"></div>
+        <div class="fb" id="fb" role="status"></div>
+        <div class="actions"><button class="btn hidden" id="next">Next</button></div>
+      </section>
+
+      <!-- end -->
+      <section id="end" class="hidden">
+        <h2 style="margin-top:0">Village report</h2>
+        <p id="endText"></p>
+        <div class="actions">
+          <button class="btn" id="printCert">Print certificate</button>
+          <button class="btn alt" id="again">Play again</button>
+        </div>
+        <div class="review" id="review"></div>
+        <div class="cert" id="cert">
+          <div style="letter-spacing:.15em;font-size:.8rem;color:var(--grey)">YEAR 10 GEOGRAPHY | HUMAN WELLBEING</div>
+          <h2>Certificate of Development</h2>
+          <p>This certifies that</p>
+          <div class="big" id="cName"></div>
+          <p id="cLine"></p>
+          <p id="cBadges" style="color:var(--grey)"></p>
+          <p style="font-size:.8rem;color:var(--grey)" id="cDate"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+var GOV="Government", NGO="NGO", INTL="International organisation";
+var TOOLS=["Fund","Deliver","Change rules","Measure"];
+
+var ROUNDS=[
+ {name:"Round 1: Rapid recall", color:"#2E4A7D", text:"Eight quick ones from Lessons 1 to 7.", qs:[
+  {q:"The HDI measures health, education and ...", a:"Income (GNI per person)", w:["Happiness","Population size","Rainfall"], e:"HDI uses life expectancy, years of schooling and GNI per person."},
+  {q:"India's HDI is 0.685. Which category is that?", a:"Medium human development", w:["Low human development","High human development","Very high human development"], e:"Medium runs from 0.550 to 0.699. India ranked 130 of 193 in the 2025 report."},
+  {q:"Closing the Gap aims to reduce the wellbeing gap between ...", a:"Aboriginal and Torres Strait Islander people and other Australians", w:["Cities and farms","Australia and India","Rich and poor countries"], e:"It is the Australian Government's national agreement, from Lesson 3."},
+  {q:"Which of these is NOT an economic indicator?", a:"Literacy rate", w:["GDP","GNI per person","Value of exports"], e:"Literacy measures education, not money. That was Lesson 4, beyond the numbers."},
+  {q:"An NGO is ...", a:"A not-for-profit group not run by any government", w:["A government department","A group of countries","A business that makes a profit"], e:"NGO stands for non-government organisation."},
+  {q:"Which one is an international organisation?", a:"The World Health Organization (WHO)", w:["Akshaya Patra","The Government of India","Rotary"], e:"WHO's members are countries. Akshaya Patra and Rotary are NGOs."},
+  {q:"The Sustainable Development Goals are due by ...", a:"2030", w:["2025","2040","2050"], e:"17 goals and 169 targets, agreed in 2015, due in 2030."},
+  {q:"An HDI of 0.700 or more means ...", a:"High human development", w:["Low human development","Medium human development","Very high human development"], e:"High is 0.700 to 0.799. Very high starts at 0.800."}
+ ]},
+ {name:"Round 2: Who's who?", color:"#C9741A", text:"Ten organisations or programs. Is each one run by a government, an NGO or an international organisation?", fixed:[GOV,NGO,INTL], qs:[
+  {q:"Jal Jeevan Mission, putting taps in rural Indian homes", a:GOV, e:"Run by the national Government of India since 2019."},
+  {q:"Akshaya Patra Foundation", a:NGO, e:"A not-for-profit that cooks school lunches."},
+  {q:"UNICEF", a:INTL, e:"Part of the United Nations, so its members are countries."},
+  {q:"Australia's $5.2 billion aid program", a:GOV, e:"Paid for by the Australian Government from taxes."},
+  {q:"Rotary International volunteers", a:NGO, e:"Trick question. It works internationally, but it is a volunteer group, not a group of countries."},
+  {q:"The World Bank", a:INTL, e:"Owned by its member countries."},
+  {q:"Australian Red Cross", a:NGO, e:"A not-for-profit humanitarian group run by members and volunteers."},
+  {q:"The Victorian Department of Education", a:GOV, e:"Part of the Victorian state government."},
+  {q:"The World Health Organization", a:INTL, e:"A UN agency with countries as members."},
+  {q:"The Fred Hollows Foundation, restoring eyesight overseas", a:NGO, e:"An Australian not-for-profit that relies on donations."}
+ ]},
+ {name:"Round 3: Figure file", color:"#1F7A72", text:"Ten figures from today. Pick the right number.", qs:[
+  {q:"Share of rural Indian homes with tap water in 2019", a:"About 17%", w:["About 82%","About 50%","About 36%"], e:"16.7% when Jal Jeevan Mission started."},
+  {q:"Share of rural Indian homes with tap water in 2026", a:"About 82%", w:["About 17%","About 50%","100%"], e:"About 159 million homes, but the target date slipped to 2028."},
+  {q:"Kids Akshaya Patra fed when it started in 2000", a:"1,500", w:["15,000","150","1.5 million"], e:"1,500 kids in five Bengaluru schools."},
+  {q:"Kids Akshaya Patra feeds now", a:"2.35 million", w:["1,500","110 million","235,000"], e:"2.35 million kids in 16 states and 3 territories."},
+  {q:"Polio cases in India in 2009", a:"741", w:["1","42","150,000"], e:"741 in 2009, 42 in 2010, 1 in 2011."},
+  {q:"Year of India's last polio case", a:"2011", w:["1995","2009","2014"], e:"13 January 2011. WHO certified India polio-free in 2014."},
+  {q:"Australia's aid budget for 2026-27", a:"$5.2 billion", w:["$2.2 billion","$742 million","$52 billion"], e:"$2.2 billion of it goes to the Pacific."},
+  {q:"Share of SDG targets on track or making moderate progress (2026)", a:"36%", w:["15%","49%","82%"], e:"49% are too slow and 15% have gone backwards."},
+  {q:"How much global aid fell in 2025", a:"23%", w:["2%","36%","63%"], e:"A record fall, which makes the SDGs harder to reach."},
+  {q:"India's HDI rank in the 2025 report", a:"130 of 193", w:["13 of 193","89 of 193","181 of 193"], e:"Up from 133. Sri Lanka is 89."}
+ ]},
+ {name:"Round 4: Name the tool", color:"#B4453F", text:"Fund, deliver, change rules or measure? Name the tool being used.", fixed:TOOLS, qs:[
+  {q:"Australia gives $2.2 billion to Pacific countries", a:"Fund", e:"Giving money is funding."},
+  {q:"Akshaya Patra trucks hot lunches to schools", a:"Deliver", e:"It provides the service directly."},
+  {q:"India makes a free school meal a legal right for children in Classes 1 to 8", a:"Change rules", e:"A new law or right is changing the rules."},
+  {q:"The UN publishes a report tracking 139 SDG targets", a:"Measure", e:"Tracking progress with data is measuring."},
+  {q:"WHO tests sewage to check whether poliovirus is still around", a:"Measure", e:"Surveillance is collecting data."},
+  {q:"Volunteers give polio drops door to door", a:"Deliver", e:"Handing out the vaccine is delivering a service."},
+  {q:"The Australian Government gives $150 million to Australian NGOs", a:"Fund", e:"Government money, NGO hands."},
+  {q:"UNDP ranks every country by HDI each year", a:"Measure", e:"Ranking with an index is measuring."},
+  {q:"A country bans children working in factories", a:"Change rules", e:"A ban is a law, so it is changing the rules."},
+  {q:"Workers lay pipes and fit a tap in a village home", a:"Deliver", e:"They provide the water service directly."}
+ ]}
+];
+
+var BADGES=[
+ {id:"first",name:"First Steps",test:function(s){return s.correct>=1;}},
+ {id:"roll",name:"On a Roll (5 streak)",test:function(s){return s.bestStreak>=5;}},
+ {id:"med",name:"Medium HD",test:function(s){return s.hdi>=0.55;}},
+ {id:"high",name:"High HD",test:function(s){return s.hdi>=0.70;}},
+ {id:"vhigh",name:"Very High HD",test:function(s){return s.hdi>=0.80;}},
+ {id:"clean",name:"Clean Round",test:function(s){return s.cleanRound;}}
+];
+
+var START=0.5, STEP=0.006, PENALTY=0.003, MIN=0.4, MAX=0.9;
+var st, flat, order;
+var $=function(id){return document.getElementById(id);};
+var LETTERS=["A","B","C","D"];
+
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+function reset(){
+  st={hdi:START,correct:0,streak:0,bestStreak:0,cleanRound:false,got:{},mistakes:[],round:-1,qi:0,roundWrong:0,answered:false};
+  flat=0;
+  renderMeter();renderBadges();
+}
+
+function category(h){
+  if(h>=0.8) return ["Very high human development","#1F7A72"];
+  if(h>=0.7) return ["High human development","#2E4A7D"];
+  if(h>=0.55) return ["Medium human development","#C9741A"];
+  return ["Low human development","#B4453F"];
+}
+function renderMeter(){
+  $("hdi").textContent=st.hdi.toFixed(3);
+  var c=category(st.hdi); $("cat").textContent=c[0]; $("cat").style.background=c[1];
+  $("fill").style.width=Math.max(0,Math.min(100,(st.hdi-0.4)/0.4*100))+"%";
+  [["v-water",0.55],["v-school",0.62],["v-clinic",0.70],["v-power",0.78]].forEach(function(p){
+    $(p[0]).setAttribute("class", st.hdi>=p[1]?"v-on":"v-off");
+  });
+  Array.prototype.forEach.call($("unlocks").children,function(li){li.className = st.hdi>=parseFloat(li.dataset.at)?"got":"";});
+  $("sCorrect").textContent=st.correct; $("sStreak").textContent=st.streak; $("sLeft").textContent=38-flat;
+}
+function renderBadges(){
+  var box=$("badges"); box.innerHTML="";
+  BADGES.forEach(function(b){var s=document.createElement("span");s.className="badge"+(st.got[b.id]?" got":"");s.textContent=b.name;box.appendChild(s);});
+}
+function checkBadges(){
+  BADGES.forEach(function(b){ if(!st.got[b.id] && b.test(st)){ st.got[b.id]=true; toast("Badge unlocked: "+b.name); }});
+  renderBadges();
+}
+var tt;
+function toast(msg){var t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("show");},1800);}
+
+function show(id){["start","roundIntro","play","end"].forEach(function(s){$(s).classList.toggle("hidden",s!==id);});}
+
+function startRound(r){
+  st.round=r; st.qi=0; st.roundWrong=0; st.cleanRound=false;
+  var R=ROUNDS[r];
+  order=shuffle(R.qs);
+  $("riTag").textContent="Round "+(r+1)+" of 4"; $("riTag").style.background=R.color;
+  $("riTitle").textContent=R.name; $("riText").textContent=R.text;
+  show("roundIntro"); $("riGo").focus();
+}
+
+function ask(){
+  var R=ROUNDS[st.round], Q=order[st.qi];
+  st.answered=false;
+  $("tag").textContent=R.name+"  |  "+(st.qi+1)+"/"+order.length; $("tag").style.background=R.color;
+  $("prog").style.width=(flat/38*100)+"%";
+  $("qText").textContent=Q.q;
+  var options = R.fixed ? R.fixed.slice() : shuffle([Q.a].concat(Q.w));
+  var box=$("opts"); box.innerHTML="";
+  options.forEach(function(o,i){
+    var b=document.createElement("button"); b.className="opt"; b.type="button";
+    b.innerHTML='<span class="k">'+LETTERS[i]+'</span><span></span>';
+    b.lastChild.textContent=o; b.dataset.v=o;
+    b.addEventListener("click",function(){answer(b);});
+    box.appendChild(b);
+  });
+  $("fb").className="fb"; $("fb").innerHTML="";
+  $("next").classList.add("hidden");
+  show("play");
+}
+
+function answer(btn){
+  if(st.answered) return; st.answered=true;
+  var Q=order[st.qi], ok=btn.dataset.v===Q.a;
+  Array.prototype.forEach.call($("opts").children,function(b){b.disabled=true; if(b.dataset.v===Q.a) b.classList.add("right");});
+  var fb=$("fb");
+  if(ok){
+    st.correct++; st.streak++; st.bestStreak=Math.max(st.bestStreak,st.streak);
+    var gain = st.streak>=5 ? STEP*2 : STEP;
+    st.hdi=Math.min(MAX, st.hdi+gain);
+    fb.className="fb show good";
+    fb.innerHTML="<b>"+(st.streak>=5?"Correct, and doubled! +"+gain.toFixed(3):"Correct. +"+gain.toFixed(3))+"</b>";
+  } else {
+    btn.classList.add("wrong"); st.streak=0; st.roundWrong++;
+    st.hdi=Math.max(MIN, st.hdi-PENALTY);
+    st.mistakes.push({q:Q.q, mine:btn.dataset.v, a:Q.a, e:Q.e});
+    fb.className="fb show badfb";
+    fb.innerHTML="<b>Not quite. The answer is "+escapeHtml(Q.a)+". -"+PENALTY.toFixed(3)+"</b>";
+  }
+  var e=document.createElement("span"); e.textContent=Q.e; fb.appendChild(e);
+  flat++;
+  if(st.qi===order.length-1 && st.roundWrong===0){ st.cleanRound=true; }
+  renderMeter(); checkBadges();
+  var n=$("next"); n.classList.remove("hidden");
+  n.textContent = (st.qi===order.length-1) ? (st.round===3?"See my village report":"Next round") : "Next";
+  n.focus();
+}
+
+function next(){
+  if(st.qi<order.length-1){ st.qi++; ask(); }
+  else if(st.round<3){ startRound(st.round+1); }
+  else finish();
+}
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+
+function finish(){
+  $("prog").style.width="100%";
+  var c=category(st.hdi);
+  $("endText").innerHTML="You got <b>"+st.correct+" out of 38</b>. Your village finished on an HDI of <b>"+st.hdi.toFixed(3)+"</b>: "+c[0].toLowerCase()+". Best streak: "+st.bestStreak+".";
+  var rv=$("review"); rv.innerHTML="";
+  if(st.mistakes.length){
+    var h=document.createElement("h3"); h.textContent="Mistake review ("+st.mistakes.length+")"; rv.appendChild(h);
+    st.mistakes.forEach(function(m){
+      var d=document.createElement("div"); d.className="item";
+      d.innerHTML="<div><b></b></div><div>You said: <span class='mine'></span></div><div class='ans'></div><div class='ex' style='color:var(--grey)'></div>";
+      d.querySelector("b").textContent=m.q; d.querySelector(".mine").textContent=m.mine;
+      d.querySelector(".ans").textContent="Answer: "+m.a; d.querySelector(".ex").textContent=m.e;
+      rv.appendChild(d);
+    });
+  } else {
+    var p=document.createElement("p"); p.innerHTML="<b>No mistakes at all. Legend.</b>"; rv.appendChild(p);
+  }
+  var nm=($("name").value||"").trim()||"A Year 10 geographer";
+  $("cName").textContent=nm;
+  $("cLine").textContent="scored "+st.correct+"/38 in Who Helps? and raised a village HDI from 0.500 to "+st.hdi.toFixed(3)+" ("+c[0].toLowerCase()+").";
+  var gotNames=BADGES.filter(function(b){return st.got[b.id];}).map(function(b){return b.name;});
+  $("cBadges").textContent=gotNames.length?"Badges: "+gotNames.join(", "):"";
+  $("cDate").textContent=new Date().toLocaleDateString("en-AU",{day:"numeric",month:"long",year:"numeric"});
+  $("cert").style.display="block";
+  show("end");
+}
+
+$("go").addEventListener("click",function(){reset();startRound(0);});
+$("riGo").addEventListener("click",function(){ask();});
+$("next").addEventListener("click",next);
+$("again").addEventListener("click",function(){$("cert").style.display="none";reset();show("start");$("go").focus();});
+$("printCert").addEventListener("click",function(){window.print();});
+document.addEventListener("keydown",function(e){
+  if(e.target && e.target.tagName==="INPUT"){ if(e.key==="Enter"){$("go").click();} return; }
+  if(!$("play").classList.contains("hidden")){
+    var i=LETTERS.indexOf(e.key.toUpperCase());
+    var opts=$("opts").children;
+    if(i>-1 && i<opts.length && !st.answered){ opts[i].click(); }
+  }
+});
+reset();
+})();
+</script>
+</body>
+</html>
